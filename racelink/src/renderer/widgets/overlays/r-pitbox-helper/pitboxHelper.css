@@ -1,0 +1,437 @@
+/* R-Pitbox Helper */
+.PitboxHelperOverlay {
+  min-width: 14.2857142857em !important;
+  width: 14.2857142857em !important;
+  max-width: 14.2857142857em !important;
+}
+.PitboxHelperOverlay.Opacity_0 {
+  box-shadow: none !important;
+}
+.PitboxHelperOverlay.hideInVr {
+  opacity: 0 !important;
+}
+.PitboxHelperOverlay .PitboxHelperOverlayContent .PitboxHelperInnerContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0.1428571429em;
+}
+.PitboxHelperOverlay
+  .PitboxHelperOverlayContent
+  .PitboxHelperInnerContent
+  .PitBoxHelperDistanceAndSpeedConttainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.7142857143em;
+}
+.PitboxHelperOverlay
+  .PitboxHelperOverlayContent
+  .PitboxHelperInnerContent
+  .PitBoxHelperDistanceAndSpeedConttainer.noTireDataToShow {
+  margin-bottom: 0;
+}
+.PitboxHelperOverlay
+  .PitboxHelperOverlayContent
+  .PitboxHelperInnerContent
+  .PitBoxHelperDistanceAndSpeedConttainer
+  .pitDistanceStatus {
+  margin-bottom: 0.1428571429em;
+}
+@keyframes PitDistanceAnim {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 9%;
+  }
+}
+.pitDistanceStatus {
+  width: 100%;
+  height: 1.7142857143em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.pitDistanceStatus .pitDistanceBar {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  background: #212121;
+  box-sizing: border-box;
+  padding: 0.1428571429em;
+  padding-right: 0;
+}
+.pitDistanceStatus .pitDistanceBar .pitDistanceBarInner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.pitDistanceStatus .pitDistanceBar .pitDistanceBarInner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: polygon(0 0, var(--pitDistanceInPct) 0, var(--pitDistanceInPct) 100%, 0% 100%);
+  background: url('./assets/pit-distance.png');
+  transition: all 0.2s linear;
+  background-size: contain;
+  animation: PitDistanceAnim 0.4s infinite linear;
+}
+.pitDistanceStatus .pitDistanceBarSimple {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  background: #212121;
+  box-sizing: border-box;
+  padding: 0.1428571429em;
+}
+.pitDistanceStatus .pitDistanceBarSimple .pitDistanceBarInnerSimple {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.pitDistanceStatus .pitDistanceBarSimple .pitDistanceBarInnerSimple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  background: #1da0ff;
+  transition: all 0.1s linear;
+}
+.pitDistanceStatus span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+  color: #fff;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes PitLimiterIsOnAnim {
+  0% {
+    background: #09b61a;
+    border: 0.2857142857em solid #058a12;
+  }
+  50% {
+    background: #058a12;
+    border: 0.2857142857em solid #09b61a;
+  }
+  100% {
+    background: #09b61a;
+    border: 0.2857142857em solid #058a12;
+  }
+}
+@keyframes PitLimiterIsOffAnim {
+  0% {
+    background: #b70500;
+    border: 0.2857142857em solid #760300;
+  }
+  50% {
+    background: #760300;
+    border: 0.2857142857em solid #b70500;
+  }
+  100% {
+    background: #b70500;
+    border: 0.2857142857em solid #760300;
+  }
+}
+@keyframes PitLimiterIsOnWhenOnRoad {
+  0% {
+    background: #d8af0f;
+    border: 0.2857142857em solid #8e740e;
+  }
+  50% {
+    background: #8e740e;
+    border: 0.2857142857em solid #d8af0f;
+  }
+  100% {
+    background: #d8af0f;
+    border: 0.2857142857em solid #8e740e;
+  }
+}
+.pitLimiterStatus {
+  height: 2.8571428571em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.2s linear;
+}
+.pitLimiterStatus.pitLimiterIsOn {
+  background: #09b61a;
+  border: 0.2857142857em solid #058a12;
+  animation: PitLimiterIsOnAnim 1s infinite;
+}
+.pitLimiterStatus.pitLimiterIsOnWhenOnRoad {
+  background: #d8af0f;
+  border: 0.2857142857em solid #8e740e;
+  animation: PitLimiterIsOnWhenOnRoad 1s infinite;
+}
+.pitLimiterStatus.pitLimiterIsOff {
+  background: #b70500;
+  border: 0.2857142857em solid #760300;
+  animation: PitLimiterIsOffAnim 1s infinite;
+}
+.pitLimiterStatus.pitLimiterIsNA {
+  background: #bdbdbd;
+  border: 0.2857142857em solid #444;
+}
+.pitLimiterStatus.outlap {
+  background: #212121;
+  border: 0.2857142857em solid #212121;
+}
+.pitLimiterStatus span {
+  font-size: 1.2857142857em;
+}
+.iRacing .pitLimiterStatus span {
+  font-size: 1.1428571429em;
+}
+.pitSingleTireStatus {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 6.1428571429em;
+  width: 6.1428571429em;
+}
+.pitSingleTireStatus .topTireMetrics,
+.pitSingleTireStatus .bottomTireMetrics,
+.pitSingleTireStatus .middleTireMetrics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.0714285714em;
+}
+.pitSingleTireStatus .topTireMetrics .aTireMetric,
+.pitSingleTireStatus .bottomTireMetrics .aTireMetric,
+.pitSingleTireStatus .middleTireMetrics .aTireMetric {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.pitSingleTireStatus .topTireMetrics .aTireMetric.hundredPercent span,
+.pitSingleTireStatus .bottomTireMetrics .aTireMetric.hundredPercent span,
+.pitSingleTireStatus .middleTireMetrics .aTireMetric.hundredPercent span {
+  font-size: 0.7142857143em;
+}
+.pitSingleTireStatus .topTireMetrics .aTireMetric span,
+.pitSingleTireStatus .bottomTireMetrics .aTireMetric span,
+.pitSingleTireStatus .middleTireMetrics .aTireMetric span {
+  font-size: 0.7857142857em;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+.pitSingleTireStatus .middleTireMetrics.reversed {
+  flex-direction: row-reverse;
+}
+.pitSingleTireStatus .middleTireMetrics .aTireMetric span {
+  color: #828282;
+}
+.pitSingleTireStatus .middleTireMetrics svg {
+  width: 2.5714285714em;
+  height: 3.5714285714em;
+}
+.pitSingleTireStatus .middleTireMetrics.hideTireWear svg #tireLeftSide,
+.pitSingleTireStatus .middleTireMetrics.hideTireWear svg #tireMiddle,
+.pitSingleTireStatus .middleTireMetrics.hideTireWear svg #tireRightSide {
+  opacity: 1 im !important;
+  clip-path: none !important;
+  fill: #fff !important;
+}
+.pitSingleTireStatus .middleTireMetrics.OPACITY svg #tireLeftSide {
+  opacity: var(--tireLeftSideWear);
+}
+.pitSingleTireStatus .middleTireMetrics.OPACITY svg #tireMiddle {
+  opacity: var(--tireMiddleWear);
+}
+.pitSingleTireStatus .middleTireMetrics.OPACITY svg #tireRightSide {
+  opacity: var(--tireRightSideWear);
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED_AND_SIZED svg #tireLeftSide {
+  clip-path: polygon(
+    0 var(--tireLeftSideWearInvert),
+    100% var(--tireLeftSideWearInvert),
+    100% 100%,
+    0% 100%
+  );
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED_AND_SIZED svg #tireMiddle {
+  clip-path: polygon(
+    0 var(--tireMiddleWearInvert),
+    100% var(--tireMiddleWearInvert),
+    100% 100%,
+    0% 100%
+  );
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED_AND_SIZED svg #tireRightSide {
+  clip-path: polygon(
+    0 var(--tireRightSideWearInvert),
+    100% var(--tireRightSideWearInvert),
+    100% 100%,
+    0% 100%
+  );
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED_AND_SIZED svg #tireLeftSide {
+  fill: var(--tireLeftSideWearColor);
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED_AND_SIZED svg #tireMiddle {
+  fill: var(--tireMiddleWearColor);
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED_AND_SIZED svg #tireRightSide {
+  fill: var(--tireRightSideWearColor);
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED svg #tireLeftSide {
+  fill: var(--tireLeftSideWearColor);
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED svg #tireMiddle {
+  fill: var(--tireMiddleWearColor);
+}
+.pitSingleTireStatus .middleTireMetrics.COLORED svg #tireRightSide {
+  fill: var(--tireRightSideWearColor);
+}
+.pitSingleTireStatus .middleTireMetrics.SIZED svg #tireLeftSide {
+  clip-path: polygon(
+    0 var(--tireLeftSideWearInvert),
+    100% var(--tireLeftSideWearInvert),
+    100% 100%,
+    0% 100%
+  );
+}
+.pitSingleTireStatus .middleTireMetrics.SIZED svg #tireMiddle {
+  clip-path: polygon(
+    0 var(--tireMiddleWearInvert),
+    100% var(--tireMiddleWearInvert),
+    100% 100%,
+    0% 100%
+  );
+}
+.pitSingleTireStatus .middleTireMetrics.SIZED svg #tireRightSide {
+  clip-path: polygon(
+    0 var(--tireRightSideWearInvert),
+    100% var(--tireRightSideWearInvert),
+    100% 100%,
+    0% 100%
+  );
+}
+.pitSingleTireStatus .bottomTireMetrics .aTireMetric span {
+  color: #828282;
+}
+.pitSingleTireStatus .aTireChangeIconContainer svg {
+  width: 1.2857142857em;
+  height: 1.2857142857em;
+}
+.pitSingleTireStatus.isShowingPreviousTireState .topTireMetrics .aTireMetric span {
+  color: #828282;
+  font-weight: bold;
+}
+.pitSingleTireStatus.isShowingPreviousTireState .middleTireMetrics .aTireMetric span,
+.pitSingleTireStatus.isShowingPreviousTireState .bottomTireMetrics .aTireMetric span {
+  color: #828282;
+  font-weight: bold;
+}
+.iRacing .pitSingleTireStatus .aTireMetric.hundredPercent span {
+  font-size: 0.6428571429em;
+}
+.iRacing .pitSingleTireStatus .aTireMetric span {
+  font-size: 0.7142857143em;
+}
+.pitSpeedStatus {
+  width: 100%;
+  height: 1.7142857143em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.pitSpeedStatus .pitSpeedBarLeft,
+.pitSpeedStatus .pitSpeedBarRight {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  background: #212121;
+  box-sizing: border-box;
+  padding: 0.1428571429em;
+}
+.pitSpeedStatus .pitSpeedBarLeft .pitSpeedBarInner,
+.pitSpeedStatus .pitSpeedBarRight .pitSpeedBarInner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.pitSpeedStatus .pitSpeedBarLeft .pitSpeedBarInner.driverIsOnRoad span,
+.pitSpeedStatus .pitSpeedBarRight .pitSpeedBarInner.driverIsOnRoad span {
+  opacity: 0;
+}
+.pitSpeedStatus .pitSpeedBarLeft .pitSpeedBarInner span,
+.pitSpeedStatus .pitSpeedBarRight .pitSpeedBarInner span {
+  font-weight: bold;
+  font-size: 1em;
+  z-index: 1;
+  text-transform: uppercase;
+  padding: 0 0.1428571429em;
+  font-variant-numeric: tabular-nums;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+.pitSpeedStatus .pitSpeedBarLeft .pitSpeedBarInner::before,
+.pitSpeedStatus .pitSpeedBarRight .pitSpeedBarInner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  transition: all 0.1s linear;
+}
+.pitSpeedStatus .pitSpeedBarLeft {
+  margin-right: 0.0714285714em;
+}
+.pitSpeedStatus .pitSpeedBarLeft .pitSpeedBarInner {
+  justify-content: flex-end;
+}
+.pitSpeedStatus .pitSpeedBarLeft .pitSpeedBarInner::before {
+  right: 0;
+  background: #1c4d50;
+  width: var(--negativeDeltaBarPct);
+}
+.pitSpeedStatus .pitSpeedBarRight {
+  margin-left: 0.0714285714em;
+}
+.pitSpeedStatus .pitSpeedBarRight .pitSpeedBarInner {
+  justify-content: flex-start;
+}
+.pitSpeedStatus .pitSpeedBarRight .pitSpeedBarInner::before {
+  left: 0;
+  background: #760300;
+  width: var(--positiveDeltaBarPct);
+}
+.pitTireStatus {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+  margin-top: 0.1428571429em;
+}
+.pitTireStatus .pitSingleTireStatus {
+  margin: 0.0714285714em;
+  margin-bottom: 0.5714285714em;
+}

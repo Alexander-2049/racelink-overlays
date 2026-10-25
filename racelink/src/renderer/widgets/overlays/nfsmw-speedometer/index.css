@@ -1,0 +1,13 @@
+/* The speedometer keeps its proportions and fills its window. */
+.nfsmwSpeedometer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nfsmwSpeedometer canvas {
+  display: block;
+}

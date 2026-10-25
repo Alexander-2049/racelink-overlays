@@ -1,0 +1,9 @@
+@import '../r-common/container.css';
+@import '../r-common/fit.css';
+@import './boostBox.css';
+
+/* The overlay fills its window: the font size follows the window height
+   (useFitFont) and the bars take the spare width. */
+.BoostBoxOverlay {
+  width: 100%;
+}

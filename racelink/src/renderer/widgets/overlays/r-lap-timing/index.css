@@ -1,0 +1,13 @@
+@import '../r-common/container.css';
+@import '../r-common/fit.css';
+@import './lapTiming.css';
+
+/* The overlay fills its window: the font size follows the window height
+   (useFitFont), shrinking when the blocks do not fit the width, and the
+   blocks share the spare width. */
+.LapTimingOverlay {
+  width: 100%;
+}
+.LapTimingOverlay .LapTimingEntities.layoutFormat_row > .LapTimingComponentOuter {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "racelink-overlays",
+  "private": true,
+  "description": "Racelink overlays in the R- and NFSMW- styles, each a standalone Racelink overlay project.",
+  "type": "module",
+  "workspaces": [
+    "overlays/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "install-overlays": "node scripts/install-builds.mjs",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

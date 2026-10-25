@@ -1,0 +1,361 @@
+@import '../r-common/container.css';
+
+.DigiFlagOverlay {
+  overflow: visible !important;
+}
+
+@keyframes HideShowFlagAnim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  51% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* The flag in the middle of its window, which it fills (App.tsx works out the size). */
+.digiflagFit {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  place-items: center;
+}
+
+.DigiFlagOverlay .digiflaginner {
+  display: flex;
+  flex-direction: row;
+  gap: var(--digiFlagStripDistance, 0);
+}
+
+.DigiFlagOverlay .flagMixer {
+  position: relative;
+}
+
+.DigiFlagOverlay.flagtype_big .SafetyCarFlagB,
+.DigiFlagOverlay.flagtype_big .SafetyCarFlagA,
+.DigiFlagOverlay.flagtype_big .CheckeredFlagB,
+.DigiFlagOverlay.flagtype_big .CheckeredFlagA,
+.DigiFlagOverlay.flagtype_big .BlackAndWhiteFlagB,
+.DigiFlagOverlay.flagtype_big .BlackAndWhiteFlagA,
+.DigiFlagOverlay.flagtype_big .DebrisFlagB,
+.DigiFlagOverlay.flagtype_big .DebrisFlagA,
+.DigiFlagOverlay.flagtype_big .YellowFlagB,
+.DigiFlagOverlay.flagtype_big .YellowFlagA,
+.DigiFlagOverlay.flagtype_big .MeatballFlag,
+.DigiFlagOverlay.flagtype_big .RedFlag,
+.DigiFlagOverlay.flagtype_big .GreenFlag,
+.DigiFlagOverlay.flagtype_big .BlueFlag,
+.DigiFlagOverlay.flagtype_big .WhiteFlag,
+.DigiFlagOverlay.flagtype_big .BlackFlag,
+.DigiFlagOverlay.flagtype_big .BaseFlag {
+  width: 10.7142857143em;
+  height: 10.7142857143em;
+}
+
+.DigiFlagOverlay.flagtype_big .BlackFlag,
+.DigiFlagOverlay.flagtype_big .WhiteFlag,
+.DigiFlagOverlay.flagtype_big .BlueFlag,
+.DigiFlagOverlay.flagtype_big .GreenFlag,
+.DigiFlagOverlay.flagtype_big .RedFlag,
+.DigiFlagOverlay.flagtype_big .MeatballFlag,
+.DigiFlagOverlay.flagtype_big .YellowFlagB,
+.DigiFlagOverlay.flagtype_big .DebrisFlagB,
+.DigiFlagOverlay.flagtype_big .BlackAndWhiteFlagB,
+.DigiFlagOverlay.flagtype_big .CheckeredFlagB,
+.DigiFlagOverlay.flagtype_big .SafetyCarFlagB {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: HideShowFlagAnim 0.5s alternate infinite;
+}
+
+.DigiFlagOverlay.flagtype_small .SafetyCarFlagB,
+.DigiFlagOverlay.flagtype_small .SafetyCarFlagA,
+.DigiFlagOverlay.flagtype_small .CheckeredFlagB,
+.DigiFlagOverlay.flagtype_small .CheckeredFlagA,
+.DigiFlagOverlay.flagtype_small .BlackAndWhiteFlagB,
+.DigiFlagOverlay.flagtype_small .BlackAndWhiteFlagA,
+.DigiFlagOverlay.flagtype_small .DebrisFlagB,
+.DigiFlagOverlay.flagtype_small .DebrisFlagA,
+.DigiFlagOverlay.flagtype_small .YellowFlagB,
+.DigiFlagOverlay.flagtype_small .YellowFlagA,
+.DigiFlagOverlay.flagtype_small .MeatballFlag,
+.DigiFlagOverlay.flagtype_small .RedFlag,
+.DigiFlagOverlay.flagtype_small .GreenFlag,
+.DigiFlagOverlay.flagtype_small .BlueFlag,
+.DigiFlagOverlay.flagtype_small .WhiteFlag,
+.DigiFlagOverlay.flagtype_small .BlackFlag,
+.DigiFlagOverlay.flagtype_small .BaseFlag {
+  width: 6.2857142857em;
+  height: 6.2857142857em;
+}
+
+.DigiFlagOverlay.flagtype_small .BlackFlag,
+.DigiFlagOverlay.flagtype_small .WhiteFlag,
+.DigiFlagOverlay.flagtype_small .BlueFlag,
+.DigiFlagOverlay.flagtype_small .GreenFlag,
+.DigiFlagOverlay.flagtype_small .RedFlag,
+.DigiFlagOverlay.flagtype_small .MeatballFlag,
+.DigiFlagOverlay.flagtype_small .YellowFlagB,
+.DigiFlagOverlay.flagtype_small .DebrisFlagB,
+.DigiFlagOverlay.flagtype_small .BlackAndWhiteFlagB,
+.DigiFlagOverlay.flagtype_small .CheckeredFlagB,
+.DigiFlagOverlay.flagtype_small .SafetyCarFlagB {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: HideShowFlagAnim 0.5s alternate infinite;
+}
+
+.DigiFlagOverlay.flagtype_doublestrip .SafetyCarFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .SafetyCarFlagA,
+.DigiFlagOverlay.flagtype_doublestrip .CheckeredFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .CheckeredFlagA,
+.DigiFlagOverlay.flagtype_doublestrip .BlackAndWhiteFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .BlackAndWhiteFlagA,
+.DigiFlagOverlay.flagtype_doublestrip .DebrisFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .DebrisFlagA,
+.DigiFlagOverlay.flagtype_doublestrip .YellowFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .YellowFlagA,
+.DigiFlagOverlay.flagtype_doublestrip .MeatballFlag,
+.DigiFlagOverlay.flagtype_doublestrip .RedFlag,
+.DigiFlagOverlay.flagtype_doublestrip .GreenFlag,
+.DigiFlagOverlay.flagtype_doublestrip .BlueFlag,
+.DigiFlagOverlay.flagtype_doublestrip .WhiteFlag,
+.DigiFlagOverlay.flagtype_doublestrip .BlackFlag,
+.DigiFlagOverlay.flagtype_doublestrip .BaseFlag {
+  width: 2.8571428571em;
+  height: 10.4285714286em;
+}
+
+.DigiFlagOverlay.flagtype_doublestrip .BlackFlag,
+.DigiFlagOverlay.flagtype_doublestrip .WhiteFlag,
+.DigiFlagOverlay.flagtype_doublestrip .BlueFlag,
+.DigiFlagOverlay.flagtype_doublestrip .GreenFlag,
+.DigiFlagOverlay.flagtype_doublestrip .RedFlag,
+.DigiFlagOverlay.flagtype_doublestrip .MeatballFlag,
+.DigiFlagOverlay.flagtype_doublestrip .YellowFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .DebrisFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .BlackAndWhiteFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .CheckeredFlagB,
+.DigiFlagOverlay.flagtype_doublestrip .SafetyCarFlagB {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: HideShowFlagAnim 0.5s alternate infinite;
+}
+
+.DigiFlagOverlay.flagtype_doublestrip .reversed {
+  animation-direction: alternate-reverse;
+}
+
+.DigiFlagOverlay.flagtype_small .BaseFlag {
+  background: url('./flags/small-BaseFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .BlackFlag {
+  background: url('./flags/small-BlackFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .WhiteFlag {
+  background: url('./flags/small-WhiteFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .BlueFlag {
+  background: url('./flags/small-BlueFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .GreenFlag {
+  background: url('./flags/small-GreenFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .RedFlag {
+  background: url('./flags/small-RedFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .MeatballFlag {
+  background: url('./flags/small-MeatballFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .YellowFlagA {
+  background: url('./flags/small-YellowFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .YellowFlagB {
+  background: url('./flags/small-YellowFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .DebrisFlagA {
+  background: url('./flags/small-DebrisFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .DebrisFlagB {
+  background: url('./flags/small-DebrisFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .BlackAndWhiteFlagA {
+  background: url('./flags/small-BlackAndWhiteFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .BlackAndWhiteFlagB {
+  background: url('./flags/small-BlackAndWhiteFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .CheckeredFlagA {
+  background: url('./flags/small-CheckeredFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .CheckeredFlagB {
+  background: url('./flags/small-CheckeredFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .SafetyCarFlagA {
+  background: url('./flags/small-SafetyCarFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_small .SafetyCarFlagB {
+  background: url('./flags/small-SafetyCarFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .BaseFlag {
+  background: url('./flags/big-BaseFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .BlackFlag {
+  background: url('./flags/big-BlackFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .WhiteFlag {
+  background: url('./flags/big-WhiteFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .BlueFlag {
+  background: url('./flags/big-BlueFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .GreenFlag {
+  background: url('./flags/big-GreenFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .RedFlag {
+  background: url('./flags/big-RedFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .MeatballFlag {
+  background: url('./flags/big-MeatballFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .YellowFlagA {
+  background: url('./flags/big-YellowFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .YellowFlagB {
+  background: url('./flags/big-YellowFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .DebrisFlagA {
+  background: url('./flags/big-DebrisFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .DebrisFlagB {
+  background: url('./flags/big-DebrisFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .BlackAndWhiteFlagA {
+  background: url('./flags/big-BlackAndWhiteFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .BlackAndWhiteFlagB {
+  background: url('./flags/big-BlackAndWhiteFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .CheckeredFlagA {
+  background: url('./flags/big-CheckeredFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .CheckeredFlagB {
+  background: url('./flags/big-CheckeredFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .SafetyCarFlagA {
+  background: url('./flags/big-SafetyCarFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_big .SafetyCarFlagB {
+  background: url('./flags/big-SafetyCarFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .BaseFlag {
+  background: url('./flags/doublestrip-BaseFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .BlackFlag {
+  background: url('./flags/doublestrip-BlackFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .WhiteFlag {
+  background: url('./flags/doublestrip-WhiteFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .BlueFlag {
+  background: url('./flags/doublestrip-BlueFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .GreenFlag {
+  background: url('./flags/doublestrip-GreenFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .RedFlag {
+  background: url('./flags/doublestrip-RedFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .MeatballFlag {
+  background: url('./flags/doublestrip-MeatballFlag.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .YellowFlagA {
+  background: url('./flags/doublestrip-YellowFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .YellowFlagB {
+  background: url('./flags/doublestrip-YellowFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .DebrisFlagA {
+  background: url('./flags/doublestrip-DebrisFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .DebrisFlagB {
+  background: url('./flags/doublestrip-DebrisFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .BlackAndWhiteFlagA {
+  background: url('./flags/doublestrip-BlackAndWhiteFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .BlackAndWhiteFlagB {
+  background: url('./flags/doublestrip-BlackAndWhiteFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .CheckeredFlagA {
+  background: url('./flags/doublestrip-CheckeredFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .CheckeredFlagB {
+  background: url('./flags/doublestrip-CheckeredFlagB.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .SafetyCarFlagA {
+  background: url('./flags/doublestrip-SafetyCarFlagA.png') no-repeat;
+  background-size: cover;
+}
+.DigiFlagOverlay.flagtype_doublestrip .SafetyCarFlagB {
+  background: url('./flags/doublestrip-SafetyCarFlagB.png') no-repeat;
+  background-size: cover;
+}

@@ -1,0 +1,20 @@
+/** The side columns, in their fixed order. */
+export const sideColumnKeys = [
+  'ShowPositionsChanged',
+  'ShowTireCompounds',
+  'ShowCurrentStint',
+  'ShowCompletedStint',
+  'ShowIntervalDistance',
+  'ShowGap',
+  'ShowDriverOfftracks',
+  'ShowRelativeTimeDistance',
+  'ShowLapNumber',
+  'ShowPushToPass',
+  'ShowFastestLapTime',
+  'ShowLastLapTime',
+  'ShowLast5LapTimeAvg',
+  'ShowLast10LapTimeAvg',
+  'ShowLapDelta',
+  'ShowJokerLap',
+  'ShowVirtualEnergy',
+] as const;

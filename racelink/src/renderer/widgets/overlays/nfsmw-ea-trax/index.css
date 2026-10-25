@@ -1,0 +1,13 @@
+/* The chyron keeps its proportions and fills its window from the left. */
+.nfsmwEaTrax {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.nfsmwEaTrax canvas {
+  display: block;
+}

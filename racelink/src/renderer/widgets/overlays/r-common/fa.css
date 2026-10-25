@@ -1,0 +1,35 @@
+/* The Font Awesome 4.7 glyphs the R- overlays use (font: SIL OFL 1.1, css: MIT). */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./fonts/fontawesome.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fa-angle-up::before {
+  content: '\f106';
+}
+
+.fa-angle-down::before {
+  content: '\f107';
+}
+
+.fa-times::before {
+  content: '\f00d';
+}
+
+.fa-clock-o::before {
+  content: '\f017';
+}
+
+.fa-exclamation-triangle::before {
+  content: '\f071';
+}

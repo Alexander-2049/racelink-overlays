@@ -1,0 +1,444 @@
+/* R-G-Force Meter */
+.gmeter_gforce_g {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  gap: 0.6em;
+  margin-bottom: 0.5em;
+  font-size: 0.8571428571em;
+}
+.gmeter_gforce_g .gmeter_gforce_g_peak {
+  color: #8a8a8a;
+  line-height: 1em;
+}
+.gmeter_gforce_g .gmeter_gforce_g_curr {
+  font-weight: bold;
+  color: var(--gforce-curr, '#aebbff');
+  line-height: 1em;
+}
+.GForceMeterSimple {
+  border-radius: 50%;
+  border: 0.1428571429em solid rgba(255, 255, 255, 0.1);
+  background: #000;
+  position: relative;
+}
+.GForceMeterSimple::after {
+  content: ' ';
+  width: 0.1428571429em;
+  height: 90%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 0.1;
+  background: #fff;
+  border-radius: 0.1428571429em;
+}
+.GForceMeterSimple::before {
+  content: ' ';
+  width: 90%;
+  height: 0.1428571429em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 0.1;
+  background: #fff;
+  border-radius: 0.1428571429em;
+}
+.GForceMeterOverlay .GForceMeterOverlay_inner {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.GForceMeterOverlay .GForceMeterOverlayCleanContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.GForceMeterOverlay .GForceMeterOverlayCleanContainer .GForceMeterOverlayCleanBotContainer {
+  position: relative;
+  top: -1px;
+  border-bottom-left-radius: 0.5714285714em;
+  border-bottom-right-radius: 0.5714285714em;
+  overflow: hidden;
+}
+.GForceMeterOverlay
+  .GForceMeterOverlayCleanContainer
+  .GForceMeterOverlayCleanBotContainer.roundedCorners {
+  border-radius: 0.5714285714em;
+}
+.GForceMeterCleanBotWidgets {
+  position: relative;
+  height: 2.2857142857em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5714285714em;
+  padding: 0.4285714286em 0.7142857143em;
+  max-width: var(--clean-bot-wid-width);
+  width: var(--clean-bot-wid-width);
+}
+.GForceMeterCleanComparisonPanel .ComparisonPanelRow {
+  position: relative;
+  height: 2.1428571429em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5714285714em;
+  padding: 0.4285714286em 0.7142857143em;
+}
+.GForceMeterCleanComparisonPanel svg {
+  height: 1.5714285714em;
+  width: auto;
+}
+.GForceMeterCleanComparisonPanel svg path {
+  fill: rgba(255, 255, 255, 0.6);
+}
+.GForceMeterCleanComparisonPanel div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4285714286em;
+}
+.GForceMeterCleanComparisonPanel div span {
+  line-height: 1em;
+  color: rgba(255, 255, 255, 0.8);
+}
+.GForceMeterCleanComparisonPanel .comparisonLabelDot {
+  width: 0.4285714286em;
+  height: 0.4285714286em;
+  border-radius: 50%;
+  background: var(--compColor, #14b8a6);
+  display: inline-block;
+}
+.GForceMeterCleanComparisonPanel .compComp {
+  background: linear-gradient(90deg, transparent 0%, var(--compStatColorBg) 100%);
+}
+.GForceMeterCleanComparisonPanel .compComp .smlabel {
+  font-size: 0.8571428571em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.GForceMeterCleanComparisonPanel .compComp .smvalue {
+  color: rgba(255, 255, 255, 0.8);
+}
+.GForceMeterCleanComparisonPanel .compComp .smvalue.smvalueavg {
+  font-variant-numeric: tabular-nums;
+}
+.GForceMeterCleanComparisonPanel .compComp .smvalue.smvaluemax {
+  font-variant-numeric: tabular-nums;
+}
+.GForceMeterCleanComparisonPanel .compComp svg {
+  color: var(--compStatColor, #14b8a6) !important;
+  fill: var(--compStatColor, #14b8a6) !important;
+}
+.GForceMeterCleanComparisonPanel .compComp svg path {
+  color: var(--compStatColor, #14b8a6) !important;
+  fill: var(--compStatColor, #14b8a6) !important;
+}
+.GForceMeterClean {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.GForceMeterClean canvas {
+  z-index: 1;
+}
+.GForceMeterCleanRectangularShape .gcanvasCont,
+.GForceMeterCleanCircleShape .gcanvasCont {
+  position: relative;
+}
+.GForceMeterCleanRectangularShape .gcanvasCrossair,
+.GForceMeterCleanCircleShape .gcanvasCrossair {
+  position: absolute;
+  top: 0;
+  width: var(--gMeterCanvasSize);
+  height: var(--gMeterCanvasSize);
+  border-radius: 50%;
+  z-index: 2;
+  --step: 18%;
+  background: radial-gradient(
+    circle,
+    transparent 0,
+    transparent calc(var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) var(--step),
+    transparent var(--step),
+    transparent calc(2 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(2 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(2 * var(--step)),
+    transparent calc(2 * var(--step)),
+    transparent calc(3 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(3 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(3 * var(--step)),
+    transparent calc(3 * var(--step)),
+    transparent 100%
+  );
+}
+.GForceMeterCleanCircleShape {
+  position: relative;
+  min-height: var(--gMeterCanvasSize);
+  width: var(--gMeterCanvasSize);
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+.GForceMeterCleanCircleShape.axisLines .gcanvasCont::after {
+  content: '';
+  background: var(--ring-color, #4f4f4f);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(var(--ring-size, 2) / 14 * 1em);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.GForceMeterCleanCircleShape.axisLines .gcanvasCont::before {
+  content: '';
+  background: var(--ring-color, #4f4f4f);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: calc(var(--ring-size, 2) / 14 * 1em);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.GForceMeterCleanCircleShape::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: var(--gMeterCanvasSize);
+  height: var(--gMeterCanvasSize);
+  border-radius: 50%;
+  z-index: 1;
+  background-color: var(--gforce-bgcolor);
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame {
+  margin-top: 0.4285714286em;
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.7142857143em;
+  color: rgba(255, 255, 255, 0.5647058824);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue div {
+  position: relative;
+  color: var(--gforce-curr, '#aebbff');
+  z-index: 2;
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue div span {
+  font-size: 0.8em;
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue svg {
+  position: absolute;
+  height: 1.7142857143em;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  z-index: 1;
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue svg.gstatusbar {
+  width: 7.1428571429em;
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue div.notcurr {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.5647058824);
+}
+.GForceMeterCleanCircleShape .GForceMeterCleanFrame .botValue div.botseparator {
+  display: inline-block;
+  color: #767676;
+  font-size: 1.4285714286em;
+  line-height: 1em;
+  padding: 0 0.0714285714em;
+}
+.GForceMeterCleanRectangularShape .gcanvasCont,
+.GForceMeterCleanCircleShape .gcanvasCont {
+  position: relative;
+}
+.GForceMeterCleanRectangularShape .gcanvasCrossair,
+.GForceMeterCleanCircleShape .gcanvasCrossair {
+  position: absolute;
+  top: 0;
+  width: var(--gMeterCanvasSize);
+  height: var(--gMeterCanvasSize);
+  border-radius: 50%;
+  z-index: 2;
+  --step: 18%;
+  background: radial-gradient(
+    circle,
+    transparent 0,
+    transparent calc(var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) var(--step),
+    transparent var(--step),
+    transparent calc(2 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(2 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(2 * var(--step)),
+    transparent calc(2 * var(--step)),
+    transparent calc(3 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(3 * var(--step) - var(--ring-size) / 14 * 1em),
+    var(--ring-color, #4f4f4f) calc(3 * var(--step)),
+    transparent calc(3 * var(--step)),
+    transparent 100%
+  );
+}
+.GForceMeterCleanRectangularShape {
+  height: calc(var(--gMeterCanvasSize) + 4em);
+  width: calc(var(--gMeterCanvasSize) + 4em);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gforce-bgcolor);
+  border: 0.1428571429em solid rgba(10, 10, 11, var(--borderOpacity, 1));
+  border-radius: 0.5em;
+}
+.GForceMeterCleanRectangularShape.flatBottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.GForceMeterCleanRectangularShape.axisLines .GForceMeterCleanFrame::after {
+  content: '';
+  background: rgba(10, 10, 11, var(--crossairOpacity, 1));
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0.1428571429em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.GForceMeterCleanRectangularShape.axisLines .GForceMeterCleanFrame::before {
+  content: '';
+  background: rgba(10, 10, 11, var(--crossairOpacity, 1));
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 0.1428571429em;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame {
+  background-color: rgba(32, 32, 36, var(--borderOpacity, 1));
+  opacity: var(--borderOpacity, 1);
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue {
+  position: absolute;
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.5647058824);
+  z-index: 2;
+  font-variant-numeric: tabular-nums;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue div,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue div,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue div,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue div {
+  position: relative;
+  z-index: 2;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue div span,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue div span,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue div span,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue div span {
+  font-size: 0.8em;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue svg,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue svg,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue svg,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue svg {
+  height: 1.5em;
+  width: auto;
+  position: absolute;
+  z-index: 1;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue,
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue {
+  color: rgba(255, 255, 255, 0.5647058824);
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue {
+  height: 1.5em;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .topValue svg {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue {
+  height: 1.6428571429em;
+  left: 0;
+  right: 0;
+  bottom: -0.0714285714em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue div {
+  color: var(--gforce-curr, '#aebbff');
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue svg {
+  height: 1.6428571429em;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue div.notcurr {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.5647058824);
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .botValue div.botseparator {
+  display: inline-block;
+  color: #767676;
+  font-size: 1.4285714286em;
+  line-height: 1em;
+  padding: 0 0.0714285714em;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue {
+  height: 1.5em;
+  width: 100%;
+  text-align: center;
+  transform-origin: left top;
+  transform: rotate(270deg) translateX(-100%);
+  left: 0;
+  top: 0;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .leftValue svg {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue {
+  height: 1.5em;
+  width: 100%;
+  text-align: center;
+  transform-origin: right top;
+  transform: rotate(90deg) translateX(100%);
+  right: 0;
+  top: 0;
+}
+.GForceMeterCleanRectangularShape .GForceMeterCleanFrame .rightValue svg {
+  left: 50%;
+  transform: translateX(-50%);
+}

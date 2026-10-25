@@ -1,0 +1,286 @@
+@import '../r-common/fonts.css';
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+* {
+  box-sizing: border-box;
+}
+.FlagsOverlay {
+  font-size: 13px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  color: #fff;
+  min-width: 14em;
+  border-radius: 0 0.6em 0.6em 0;
+}
+@keyframes showFlag {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes hideFlag {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+@keyframes slideRight {
+  from {
+    margin-left: -500px;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+@keyframes flashingText {
+  0% {
+    opacity: 0.2;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+.FlagsOverlay.hide {
+  display: none;
+}
+.FlagsOverlay .show {
+  display: flex;
+}
+.FlagsOverlay.animationEnabled.showAnimation {
+  display: flex;
+  animation-name: showFlag;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.FlagsOverlay.animationEnabled.showAnimation .headerText {
+  position: relative;
+  margin-left: -500px;
+  animation-name: slideRight;
+  animation-duration: 0.5s;
+  animation-delay: 0.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.FlagsOverlay.animationEnabled.hideAnimation {
+  display: flex;
+  animation-name: hideFlag;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.FlagsOverlay.Opacity_0 {
+  box-shadow: none !important;
+}
+.FlagsOverlay .fa-flag-white {
+  background-image: url(./images/flag-white.png);
+  width: 1.4em;
+  height: 1em;
+  font-size: 1.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 4px;
+  margin-right: 0.5em;
+}
+.FlagsOverlay .fa-flag-black {
+  background-image: url(./images/flag-black.png);
+  width: 1.4em;
+  height: 1em;
+  font-size: 1.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 4px;
+  margin-right: 0.5em;
+}
+.FlagsOverlay .fa-lights-empty {
+  background-image: url(./images/lights-empty.png);
+  width: 1.4em;
+  height: 1em;
+  font-size: 1.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 3px;
+  margin-right: 0.5em;
+}
+.FlagsOverlay .fa-lights-green {
+  background-image: url(./images/lights-green.png);
+  width: 1.4em;
+  height: 1em;
+  font-size: 1.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 3px;
+  margin-right: 0.5em;
+}
+.FlagsOverlay .flags.header {
+  text-transform: uppercase;
+  padding: 0.5em 2em 0.5em 0.7em;
+}
+.FlagsOverlay .flags.footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 0.9em;
+  color: #181818;
+  padding: 0.1em 2em 0.1em 0.7em;
+}
+.FlagsOverlay .flags.Yellow.header,
+.FlagsOverlay .flags.Caution.header,
+.FlagsOverlay .flags.Crossed.header,
+.FlagsOverlay .flags.RandomWaving.header {
+  color: #fad715;
+}
+.FlagsOverlay .flags.Yellow.footer,
+.FlagsOverlay .flags.Caution.footer,
+.FlagsOverlay .flags.Crossed.footer,
+.FlagsOverlay .flags.RandomWaving.footer {
+  background: #fad715;
+}
+.FlagsOverlay .flags.Debris.header {
+  color: #fad715;
+}
+.FlagsOverlay .flags.Debris.footer {
+  background-color: #fad715;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 0, 0, 0.3019607843) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 0, 0, 0.3019607843) 50%,
+    rgba(255, 0, 0, 0.3019607843) 75%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 28.28px 28.28px;
+}
+.FlagsOverlay .flags.Red.header {
+  color: #ff4747;
+}
+.FlagsOverlay .flags.Red.footer {
+  background: #ff4747;
+}
+.FlagsOverlay .flags.White.header {
+  color: #fff;
+}
+.FlagsOverlay .flags.White.footer {
+  background: #fff;
+}
+.FlagsOverlay .flags.Green.header,
+.FlagsOverlay .flags.FiveToGo.header,
+.FlagsOverlay .flags.OneLapToGreen.header,
+.FlagsOverlay .flags.TenToGo.header {
+  color: #4eb025;
+}
+.FlagsOverlay .flags.Green.footer,
+.FlagsOverlay .flags.FiveToGo.footer,
+.FlagsOverlay .flags.OneLapToGreen.footer,
+.FlagsOverlay .flags.TenToGo.footer {
+  background: #4eb025;
+}
+.FlagsOverlay .flags.StartGo.header,
+.FlagsOverlay .flags.StartSet.header,
+.FlagsOverlay .flags.StartReady.header,
+.FlagsOverlay .flags.StartHidden.header {
+  color: #ffda97;
+}
+.FlagsOverlay .flags.StartGo.footer,
+.FlagsOverlay .flags.StartSet.footer,
+.FlagsOverlay .flags.StartReady.footer,
+.FlagsOverlay .flags.StartHidden.footer {
+  background: #ffda97;
+}
+.FlagsOverlay .flags.Blue.header {
+  color: #5ea8cd;
+}
+.FlagsOverlay .flags.Blue.footer {
+  background: #5ea8cd;
+}
+.FlagsOverlay .flags.Checkered.header {
+  color: #f0f0f0;
+  background: #181e22;
+}
+.FlagsOverlay .flags.Checkered.footer {
+  color: #0e0e0e;
+  background-image: url(./images/checkered.png);
+  background-size: contain;
+  position: relative;
+}
+.FlagsOverlay .flags.Checkered.footer::after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgb(255, 255, 255) 50%,
+    rgb(255, 255, 255) 100%
+  );
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  content: '';
+  position: absolute;
+}
+.FlagsOverlay .flags.Checkered.footer span,
+.FlagsOverlay .flags.Checkered.footer i {
+  z-index: 1;
+}
+.FlagsOverlay .flags.Black.header,
+.FlagsOverlay .flags.BlackAndWhite.header,
+.FlagsOverlay .flags.Furled.header,
+.FlagsOverlay .flags.Repair.header,
+.FlagsOverlay .flags.DriveThroughPenalty.header,
+.FlagsOverlay .flags.StopGoPenalty.header {
+  color: #ddd;
+  background: #000;
+}
+.FlagsOverlay .flags.Black.footer,
+.FlagsOverlay .flags.BlackAndWhite.footer,
+.FlagsOverlay .flags.Furled.footer,
+.FlagsOverlay .flags.Repair.footer,
+.FlagsOverlay .flags.DriveThroughPenalty.footer,
+.FlagsOverlay .flags.StopGoPenalty.footer {
+  background: #585858;
+  color: #000;
+}
+.FlagsOverlay .flags.BlackAndWhite.header {
+  color: #ddd;
+  background: #000;
+}
+.FlagsOverlay .flags.BlackAndWhite.footer {
+  background: #fff;
+  color: #000;
+}
+.FlagsOverlay.hAlignment_RIGHT {
+  border-radius: 0.6em 0 0 0.6em;
+}

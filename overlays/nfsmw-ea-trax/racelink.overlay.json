@@ -1,0 +1,60 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "nfsmw-ea-trax",
+  "version": "1.0.0",
+  "name": "NFSMW-EA Trax",
+  "category": "other",
+  "description": "NFSMW-EA Trax, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-rally"
+  ],
+  "size": {
+    "default": [
+      856,
+      152
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      3424,
+      608
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "delaySeconds",
+                "label": "Задержка после смены трека (сек)",
+                "type": "number",
+                "default": 3,
+                "min": 0,
+                "max": 15,
+                "step": 0.5,
+                "description": "Через сколько секунд после начала трека появляется плашка. Трек берётся из системных медиа-элементов управления (Настройки → Интеграции)."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

@@ -1,0 +1,11 @@
+/* The measured box of an overlay that fills its window (useFitFont.ts): it
+   takes the window width and grows with the font size in height. */
+.rFit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.rFit > .overlay {
+  position: relative;
+  flex: 0 0 auto;
+}

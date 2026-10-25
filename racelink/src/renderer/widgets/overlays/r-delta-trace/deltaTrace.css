@@ -1,0 +1,565 @@
+/* R-Delta Trace */
+.rankIconSvg {
+  transform-origin: center;
+  overflow: visible;
+}
+@keyframes rankIconLevelUp {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(255, 206, 84, 0));
+  }
+  30% {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+  }
+  60% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(255, 206, 84, 0));
+  }
+}
+@keyframes rankIconLevelDown {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(125, 185, 255, 0));
+  }
+  35% {
+    transform: scale(0.8);
+    filter: drop-shadow(0 0 4px rgba(125, 185, 255, 0.75));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(125, 185, 255, 0));
+  }
+}
+.rankIconLevelUp {
+  animation: rankIconLevelUp 0.6s ease-out;
+}
+.rankIconLevelDown {
+  animation: rankIconLevelDown 0.45s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rankIconLevelUp,
+  .rankIconLevelDown {
+    animation: none;
+  }
+}
+.DeltaTraceOverlay .DeltaTraceContainer {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+  flex-direction: column;
+  gap: 0.2857142857em;
+}
+.DeltaTraceOverlay .DeltaTraceWidgetsRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5714285714em;
+}
+.DeltaTraceOverlay .topInfoBar,
+.DeltaTraceOverlay .bottomInfoBar {
+  padding: 0.1428571429em 0.4285714286em;
+}
+.DeltaTraceOverlay .histogramBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.2857142857em;
+}
+.DeltaTraceOverlay .histogramBlock.weakSpotTop,
+.DeltaTraceOverlay .histogramBlock.weakSpotBottom {
+  flex-direction: column;
+}
+.DeltaTraceOverlay .histogramBlock.weakSpotTop.weakSpotAlignLeft > .WeakSpotPanel,
+.DeltaTraceOverlay .histogramBlock.weakSpotBottom.weakSpotAlignLeft > .WeakSpotPanel {
+  align-self: flex-start;
+}
+.DeltaTraceOverlay .histogramBlock.weakSpotTop.weakSpotAlignCenter > .WeakSpotPanel,
+.DeltaTraceOverlay .histogramBlock.weakSpotBottom.weakSpotAlignCenter > .WeakSpotPanel {
+  align-self: center;
+}
+.DeltaTraceOverlay .histogramBlock.weakSpotTop.weakSpotAlignRight > .WeakSpotPanel,
+.DeltaTraceOverlay .histogramBlock.weakSpotBottom.weakSpotAlignRight > .WeakSpotPanel {
+  align-self: flex-end;
+}
+.DeltaTraceOverlay .histogramBlock.weakSpotTop.weakSpotAlignStretch > .WeakSpotPanel,
+.DeltaTraceOverlay .histogramBlock.weakSpotBottom.weakSpotAlignStretch > .WeakSpotPanel {
+  align-self: stretch;
+}
+.DeltaTraceOverlay .histogramMainWithPanel {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+}
+.DeltaTraceOverlay .histogramMainWithPanel > .WeakSpotPanel {
+  border-radius: 0;
+  box-shadow: none;
+}
+.DeltaTraceOverlay .histogramMain {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+}
+.DeltaTraceOverlay .modeMeta {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.1428571429em;
+  pointer-events: none;
+  line-height: 1;
+  padding: 0.5em;
+}
+.DeltaTraceOverlay .modeMetaDot {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.7857142857em;
+  line-height: 1;
+}
+.DeltaTraceOverlay .modeBadge {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  letter-spacing: 0.0714285714em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  line-height: 1em;
+}
+.DeltaTraceOverlay .modeBadgeSep {
+  font-size: 1em;
+  opacity: 0.25;
+  margin: 0 0.1428571429em;
+}
+.DeltaTraceOverlay .modeMeta > .SimpleLapTime {
+  font-size: 1.5em;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+  min-width: 0;
+  margin-left: 0.2857142857em;
+}
+.DeltaTraceOverlay .modeMeta > .SimpleLapTime.referenceLapTimeRefreshing {
+  animation: deltaTraceRefreshPulse 1.4s ease-in-out infinite;
+}
+.DeltaTraceOverlay .referenceLapTimeIcon {
+  width: auto;
+  height: 1em;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+.DeltaTraceOverlay .deltaValueBadge {
+  position: absolute;
+  top: 0.3571428571em;
+  right: 0.1428571429em;
+  font-size: 1.5em;
+  font-variant-numeric: tabular-nums;
+  font-weight: normal;
+  text-shadow: 0 0 0.1428571429em rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+.DeltaTraceOverlay .deltaValueBadge.delta_positive {
+  color: #ff4747;
+}
+.DeltaTraceOverlay .deltaValueBadge.delta_negative {
+  color: #81ff61;
+}
+.DeltaTraceOverlay .deltaValueBadge.delta_zero {
+  color: rgba(255, 255, 255, 0.8);
+}
+.DeltaTraceOverlay.themeLumina .DeltaTraceContainer {
+  gap: 0em;
+  padding: 0.2857142857em;
+  border-radius: 0.5714285714em;
+  border: 0.0714285714em solid rgba(0, 0, 0, calc(var(--bgOpacity, 1) * 0.5));
+  box-shadow: inset 0 0 0 0.0714285714em rgba(255, 255, 255, 0.1);
+}
+.DeltaTraceOverlay.themeLumina .histogramBlock > .histogramMain,
+.DeltaTraceOverlay.themeLumina .histogramBlock > .WeakSpotPanel,
+.DeltaTraceOverlay.themeLumina .histogramBlock > .histogramMainWithPanel {
+  border-radius: 0.2857142857em;
+  border: 0.0714285714em solid rgba(255, 255, 255, 0.1);
+}
+.DeltaTraceOverlay.themeLumina .topInfoBar,
+.DeltaTraceOverlay.themeLumina .bottomInfoBar {
+  padding: 0em 0.4285714286em;
+}
+.DeltaTraceOverlay.themeLumina.topAndBottomEmpty .DeltaTraceContainer {
+  background: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.DeltaTraceOverlay.themeLumina.topAndBottomEmpty .histogramBlock > .histogramMain,
+.DeltaTraceOverlay.themeLumina.topAndBottomEmpty .histogramBlock > .WeakSpotPanel,
+.DeltaTraceOverlay.themeLumina.topAndBottomEmpty .histogramBlock > .histogramMainWithPanel {
+  border-radius: 0.4285714286em;
+  border: 0.0714285714em solid rgba(0, 0, 0, calc(var(--bgOpacity, 1) * 0.5));
+  box-shadow: inset 0 0 0 0.0714285714em rgba(255, 255, 255, 0.1);
+}
+.DeltaTraceOverlay.themeClassic .DeltaTraceContainer {
+  gap: 0.1428571429em;
+  padding: 0.1428571429em;
+}
+.DeltaTraceOverlay.themeClassic .DeltaTraceWidgetsRow {
+  gap: 0.1428571429em;
+}
+.DeltaTraceOverlay.themeClassic.topAndBottomEmpty .DeltaTraceContainer {
+  background: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  padding: 0 !important;
+}
+.DeltaTraceOverlay.themeClassic.topAndBottomEmpty .histogramBlock > .histogramMain,
+.DeltaTraceOverlay.themeClassic.topAndBottomEmpty .histogramBlock > .WeakSpotPanel,
+.DeltaTraceOverlay.themeClassic.topAndBottomEmpty .histogramBlock > .histogramMainWithPanel {
+  border-radius: 0.1428571429em;
+  border: 0.0714285714em solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0.0714285714em 0.2142857143em rgba(0, 0, 0, 0.5);
+}
+@keyframes deltaTraceRefreshPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+.DeltaTrace {
+  display: flex;
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+.DeltaTrace canvas {
+  display: block;
+  width: 100%;
+}
+.CurrentSectionView {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex: 1;
+  padding-top: 0.4285714286em;
+}
+.CurrentSectionView .currentSectionViewNumberBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  align-self: center;
+  margin: auto 0;
+}
+.CurrentSectionView .currentSectionViewLabel {
+  font-size: 1.0714285714em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ws-text-mid);
+  text-shadow: 0.0714285714em 0.0714285714em 0 #000;
+  /* Corner names stand in for the label and can be long. */
+  max-width: 8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.CurrentSectionView .currentSectionViewNumber {
+  font-size: 4.5714285714em;
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--ws-text-high);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0.0357142857em 0.0357142857em 0 #000;
+}
+.CurrentSectionView .currentSectionViewFullLabel {
+  font-size: 2em;
+  font-weight: 700;
+  color: var(--ws-text-high);
+  text-shadow: 0 0.1428571429em 0.2857142857em rgba(0, 0, 0, 0.5);
+  line-height: 1;
+}
+.CurrentSectionView .currentSectionViewBadges {
+  display: inline-flex;
+  flex-direction: row;
+  align-self: flex-start;
+  margin-bottom: 0.2857142857em;
+  align-self: center;
+}
+.DeltaBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0.0714285714em 0.0714285714em 0 #000;
+  width: 9ch;
+  transform: skewX(-7deg);
+}
+.DeltaBadge > span {
+  display: inline-block;
+  transform: skewX(7deg);
+}
+.DeltaBadge.deltaBadgeRed {
+  background: var(--ws-red-bg);
+  color: var(--ws-red-fg);
+}
+.DeltaBadge.deltaBadgeGreen {
+  background: var(--ws-green-bg);
+  color: var(--ws-green-fg);
+}
+.DeltaBadge.deltaBadgeMuted {
+  background: var(--ws-muted-bg);
+  color: var(--ws-muted-fg);
+  letter-spacing: 0.05em;
+}
+.DeltaBadge.deltaBadgeLarge {
+  height: 1.7142857143em;
+}
+.DeltaBadge.deltaBadgeLarge span {
+  font-size: 1.1428571429em;
+}
+.DeltaBadge.deltaBadgeSmall {
+  height: 1.2857142857em;
+}
+.DeltaBadge.deltaBadgeSmall span {
+  font-size: 0.9285714286em;
+}
+.SectionListView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  gap: var(--ws-row-gap);
+  padding-top: 0.4285714286em;
+  padding-left: 0.5714285714em;
+  padding-right: 0.5714285714em;
+}
+.SectionRow {
+  display: grid;
+  grid-template-columns: 2.2142857143em auto auto;
+  align-items: center;
+  gap: 0.5714285714em;
+}
+.SectionRow .sectionRowNum {
+  font-size: 1.4285714286em;
+  line-height: 1em;
+  font-weight: 700;
+  color: var(--ws-text-high);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0.0714285714em 0.1428571429em rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+.SectionRow .sectionRowBadges {
+  display: inline-flex;
+  flex-direction: row;
+  grid-column: 2 / span 2;
+}
+.TrackMapPanel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.TrackMapPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4.2857142857em;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 53.37%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+.TrackMapPanel svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0.1428571429em 0.1428571429em rgba(0, 0, 0, 0.6));
+}
+.TrackMapPanel svg path {
+  stroke-linecap: butt;
+}
+.TrackMapPanel .trackMapPanelPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 5.7142857143em;
+}
+.weakSpotHeaderBar {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.weakSpotHeaderBarCell {
+  fill: var(--ws-text-low);
+}
+.weakSpotHeaderBarCell.filled {
+  fill: var(--ws-text-high);
+}
+.WeakSpotHeader {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-self: flex-start;
+  height: 1.7142857143em;
+  border-radius: 0.1428571429em;
+  overflow: hidden;
+  line-height: 1;
+  color: var(--ws-text-high);
+  white-space: nowrap;
+}
+.WeakSpotHeader .weakSpotHeaderSegment {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2857142857em;
+  padding: 0 0.4285714286em;
+}
+.WeakSpotHeader .weakSpotHeaderSegment.weakSpotHeaderSegmentDark {
+  background: var(--ws-header-dark);
+}
+.WeakSpotHeader .weakSpotHeaderSegment.weakSpotHeaderSegmentGray {
+  background: var(--ws-header-gray);
+}
+.WeakSpotHeader .weakSpotHeaderSegment .weakSpotHeaderLapTime {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.1428571429em;
+}
+.WeakSpotHeader .weakSpotHeaderIcon {
+  width: 1.1428571429em;
+  height: 1.1428571429em;
+  flex-shrink: 0;
+  opacity: 0.85;
+  color: var(--ws-text-mid);
+  fill: var(--ws-text-mid);
+}
+.WeakSpotHeader .weakSpotHeaderStrong {
+  font-size: 1em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+}
+.WeakSpotHeader .weakSpotHeaderFallbackMark {
+  margin-left: 0.1em;
+  font-size: 0.6em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: super;
+  opacity: 0.7;
+}
+.WeakSpotHeader .weakSpotHeaderSep {
+  font-size: 1em;
+  color: var(--ws-text-low);
+  margin: 0 0em;
+  opacity: 0.25;
+}
+.WeakSpotHeader .SimplePercentile {
+  color: var(--ws-text-mid);
+}
+.WeakSpotHeader .weakSpotHeaderLapTime {
+  font-size: 1em;
+}
+.WeakSpotHeader .SimpleLapTime {
+  font-size: 1em;
+  color: var(--ws-text-high);
+  min-width: 0;
+}
+.WeakSpotPanel {
+  --ws-radius: 0.7142857143em;
+  --ws-pad: 0.4285714286em;
+  --ws-row-gap: 0.4285714286em;
+  --ws-divider: rgba(255, 255, 255, 0.06);
+  --ws-map-bg-from: rgba(14, 18, 26, 0);
+  --ws-map-bg-to: rgba(0, 0, 0, 0.45);
+  --ws-header-dark: #0c0e12;
+  --ws-header-gray: #202024;
+  --ws-text-high: rgba(255, 255, 255, 0.95);
+  --ws-text-mid: rgba(255, 255, 255, 0.7);
+  --ws-text-low: rgba(255, 255, 255, 0.4);
+  --ws-red-bg: #450a0a;
+  --ws-red-fg: #fe171f;
+  --ws-green-bg: #121215;
+  --ws-green-fg: #2ff436;
+  --ws-muted-bg: #1a1d24;
+  --ws-muted-fg: rgba(255, 255, 255, 0.45);
+  --ws-skew: 0.2142857143em;
+  --ws-floating-bg: rgba(20, 24, 32, 0.92);
+  --ws-floating-accent-bg: rgba(40, 60, 95, 0.95);
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: var(--weakSpotPanelBackground, rgba(20, 26, 36, 0.92));
+  border-radius: var(--ws-radius);
+  overflow: hidden;
+  box-shadow:
+    0 0.1428571429em 0.7142857143em rgba(0, 0, 0, 0.4),
+    inset 0 0 0 0.0714285714em rgba(255, 255, 255, 0.04);
+}
+.WeakSpotPanel .weakSpotPanelLeft {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--ws-pad);
+}
+.WeakSpotPanel .weakSpotPanelRight {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--ws-map-bg-from), var(--ws-map-bg-to));
+  box-shadow: inset 0.0714285714em 0 0 var(--ws-divider);
+  overflow: hidden;
+}
+.WeakSpotPanel.weakSpotPanelPerSection .weakSpotSectionModule {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+}
+.WeakSpotPanel.weakSpotPanelPerSection .weakSpotSectionModule:not(:last-child) {
+  box-shadow: inset -0.0714285714em 0 0 var(--ws-divider);
+}
+.WeakSpotPanel.weakSpotPanelPerSection .weakSpotSectionModuleInfo {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--ws-pad);
+}
+.WeakSpotPanel.weakSpotPanelPerSection .weakSpotSectionModuleMap {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--ws-map-bg-from), var(--ws-map-bg-to));
+  box-shadow: inset 0.0714285714em 0 0 var(--ws-divider);
+  overflow: hidden;
+}

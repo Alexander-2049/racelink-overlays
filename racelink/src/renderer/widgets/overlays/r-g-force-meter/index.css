@@ -1,0 +1,10 @@
+@import '../r-common/container.css';
+@import '../r-common/driver.css';
+@import '../r-common/fit.css';
+@import './gForceMeter.css';
+
+/* The meter keeps its proportions and scales to fit its window
+   (useFitFont, contain); the meter is 15 em wide. */
+.rFit {
+  align-items: flex-start;
+}

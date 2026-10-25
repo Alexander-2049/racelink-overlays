@@ -1,0 +1,13 @@
+/* The messages keep their proportions and stay in the middle of the window. */
+.nfsmwLapTime {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nfsmwLapTime canvas {
+  display: block;
+}

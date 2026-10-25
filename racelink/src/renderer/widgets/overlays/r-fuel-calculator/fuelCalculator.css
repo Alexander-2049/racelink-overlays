@@ -1,0 +1,436 @@
+/* R-Fuel Calculator */
+.FuelCalculatorOverlay {
+  overflow: visible !important;
+  border-top: none !important;
+}
+.FuelCalculatorOverlay .FuelCalculatorOverlayInner {
+  display: flex;
+  flex-direction: row;
+}
+.FuelCalculatorOverlay.Opacity_0 {
+  box-shadow: none !important;
+}
+.FuelCalculatorOverlay.Opacity_0 .leftContent {
+  box-shadow: none;
+}
+.FuelCalculatorOverlay.dark .fuelTile {
+  color: #eee !important;
+  background: rgba(62, 62, 62, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+.FuelCalculatorOverlay.dark .fuelTile .bottomPart {
+  color: #eee;
+}
+.FuelCalculatorOverlay.dark .progressbar .progress {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+.FuelCalculatorOverlay .percentageMarker {
+  font-size: 0.7857142857em;
+}
+.FuelCalculatorOverlay .fuelUsedHistoryContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+.FuelCalculatorOverlay .fuelUsedHistoryContainer span {
+  font-size: 1em;
+}
+.FuelCalculatorOverlay .headerColumn {
+  margin-bottom: 0.7142857143em;
+}
+.FuelCalculatorOverlay .headerColumn span {
+  text-transform: uppercase;
+  font-size: 0.7857142857em;
+  font-weight: bold;
+}
+.FuelCalculatorOverlay .fuelcalc_content {
+  flex: 1;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer {
+  display: flex;
+  flex-direction: column;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle,
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricStrategy {
+  display: flex;
+  flex-direction: row;
+  height: 1.7142857143em;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle.odd .fuelStrategyMetrics,
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricStrategy.odd .fuelStrategyMetrics {
+  background: rgba(255, 255, 255, 0.1);
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle .fuelMetricStrategyLabel,
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricStrategy .fuelMetricStrategyLabel {
+  text-transform: uppercase;
+  width: 2.5714285714em;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle .fuelMetricStrategyLabel span,
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricStrategy .fuelMetricStrategyLabel span {
+  font-size: 0.7857142857em;
+  font-weight: bold;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle .fuelStrategyMetrics,
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricStrategy .fuelStrategyMetrics {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding-left: 0.8571428571em;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle .fuelMetricStrategyValue,
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricStrategy .fuelMetricStrategyValue {
+  font-variant-numeric: tabular-nums;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: 4.3571428571em;
+}
+.FuelCalculatorOverlay .fuelMetricsContainer .fuelMetricTitle span {
+  font-size: 0.7857142857em;
+  text-transform: uppercase;
+}
+.FuelCalculatorOverlay.showTitle .leftContent {
+  padding-top: 0;
+  border-top: 0.35em solid rgba(0, 0, 0, 0);
+}
+.FuelCalculatorOverlay.showTitle .fuelcalc_content {
+  margin-top: 0.1428571429em !important;
+}
+.FuelCalculatorOverlay .leftContent {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 0.2857142857em;
+  min-width: 25.7142857143em;
+  box-shadow: 0.02em 0.02em 0.15em #000;
+}
+.FuelCalculatorOverlay .rightContent {
+  margin-top: 2.2857142857em;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  display: none;
+  width: 12.5714285714em;
+  padding: 0.5714285714em 1.1428571429em;
+}
+.FuelCalculatorOverlay .rightContent.show {
+  display: flex;
+}
+.FuelCalculatorOverlay .fuelAndPitWindowStatusContainer {
+  display: flex;
+  flex-direction: row;
+}
+.FuelCalculatorOverlay .fuelAndPitWindowStatusContainer .gap8px {
+  width: 0.5714285714em;
+  height: 1px;
+}
+.FuelCalculatorOverlay .timeRemainingUntilEmptyContainer {
+  padding-top: 0.2857142857em;
+}
+.fuelLapBar {
+  width: 0.3928571429em;
+  height: 0.7142857143em;
+  border-radius: 0.0714285714em;
+  transition: all 0.3s linear;
+}
+.fuelLapBar.DEFAULT {
+  background: #333;
+}
+.fuelLapBar.CURRENT {
+  height: 1em;
+  background: #d8af0f;
+  box-shadow: 0px 0px 3px rgba(216, 175, 15, 0.5);
+}
+.fuelLapBar.PIT {
+  height: 1em;
+  background: linear-gradient(180deg, #3d9b41 0%, #1a6f1d 100%);
+}
+.fuelLapBar.CURRENT_PIT {
+  position: relative;
+  height: 1em;
+  background: linear-gradient(180deg, #3d9b41 0%, #1a6f1d 100%);
+  display: flex;
+  align-items: center;
+}
+.fuelLapBar.CURRENT_PIT::after {
+  position: absolute;
+  top: -0.2857142857em;
+  content: '';
+  background: #d8af0f;
+  box-shadow: 0px 0px 3px rgba(216, 175, 15, 0.5);
+  width: 100%;
+  height: 0.2142857143em;
+  border-radius: 0.0714285714em;
+}
+.fuelLapBar.EMPTY {
+  height: 0.7142857143em;
+  background: rgba(0, 0, 0, 0.1);
+}
+.fuellevelComponent {
+  margin-bottom: 1em;
+  margin-top: 0.4285714286em;
+  flex: 1;
+}
+.fuellevelComponent .fuellevel_title {
+  font-size: 1.2em;
+}
+.fuellevelComponent .fuelLevelBarContainer {
+  position: relative;
+  display: none;
+}
+.fuellevelComponent .fuelLevelBarContainer.show {
+  display: block;
+}
+.fuellevelComponent .fuelLevelBarContainer .rightFuelValue {
+  text-align: center;
+  font-size: 1.4em;
+  font-variant-numeric: tabular-nums;
+}
+.fuellevelComponent .fuelLevelBarContainer .bracketContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.fuellevelComponent .fuelLevelBarContainer .bracketContainer .progressbar .progress {
+  color: #fff;
+  background: #fff;
+  border-radius: 0em;
+  transition: width 500ms ease-in-out;
+  transition-delay: 500ms;
+  height: 100%;
+}
+.fuellevelComponent .fuelLevelBarContainer .bracketContainer .progressbar {
+  width: 100%;
+  height: 1.2857142857em;
+  border-radius: 0em;
+  background-color: #222;
+  border: 0.1428571429em solid #333;
+  display: flex;
+  flex-direction: row;
+}
+.fuellevelComponent .fuelLevelBarContainer .bracketContainer .currentFuelValue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1.2142857143em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.fuellevelComponent .fuelLevelBarContainer .currentFuelValue {
+  text-align: center;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+.fuellevelComponent .fuelLevelBarContainer .fuelpercentages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 0.2142857143em;
+}
+.fuelUsedHistoryEntry {
+  display: flex;
+  flex-direction: row;
+}
+.fuelUsedHistoryEntry.pastsession .colValue {
+  color: #909090;
+}
+.fuelUsedHistoryEntry.invalid-lap {
+  opacity: 0.5;
+}
+.fuelUsedHistoryEntry .invalid-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-left: 0.2857142857em;
+  background: #ffc800;
+  border-radius: 50%;
+}
+.fuelUsedHistoryEntry .colValue {
+  height: 1.7142857143em;
+  flex: 1;
+  text-shadow: 0em 0em 0.05em #161616;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.fuelUsedHistoryEntry .colValue.leftAlign {
+  text-align: left;
+  justify-content: flex-start;
+}
+.fuelUsedHistoryEntry .colValue.centerAlign {
+  text-align: center;
+  justify-content: center;
+}
+.fuelUsedHistoryEntry .colValue.rightAlign {
+  text-align: right;
+  justify-self: flex-end;
+}
+.fuelUsedHistoryEntry .fuelUsedHistoryEntry_lap {
+  font-variant-numeric: tabular-nums;
+}
+.fuelUsedHistoryEntry .fuelUsedHistoryEntry_fuelused {
+  font-variant-numeric: tabular-nums;
+}
+.fuelUsedHistoryEntry .fuelUsedHistoryEntry_fuelused .less {
+  color: #90ee90;
+}
+.fuelUsedHistoryEntry .fuelUsedHistoryEntry_fuelused .more {
+  color: #ff2424;
+}
+.fuelWindowLapVisualizer {
+  display: flex;
+  flex-direction: row;
+  height: 1.7142857143em;
+}
+.fuelWindowLapVisualizer .fuelWindoWTitle {
+  text-transform: uppercase;
+  width: 2.5714285714em;
+  align-items: center;
+  display: flex;
+}
+.fuelWindowLapVisualizer .fuelWindoWTitle span {
+  font-size: 0.7857142857em;
+  font-weight: bold;
+}
+.fuelWindowLapVisualizer .fuelWindoWLapBars {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+.fuelWindowLapVisualizer .fuelWindoWLapBars > * {
+  margin-right: 0.1428571429em;
+}
+.pitWindowStatus {
+  display: flex;
+  margin-top: 0.4285714286em;
+  height: 2.2857142857em;
+  width: 11.5714285714em;
+  overflow: hidden;
+}
+.pitWindowStatus.fuelwindow_NA .pitWindowStatusIndicator {
+  background: #333;
+}
+.pitWindowStatus.fuelwindow_NA .pitWindowRefuelIndicator {
+  border-color: #333;
+}
+.pitWindowStatus.fuelwindow_CLOSED .pitWindowStatusIndicator {
+  background: #333;
+}
+.pitWindowStatus.fuelwindow_CLOSED .pitWindowRefuelIndicator {
+  border-color: #333;
+}
+.pitWindowStatus.fuelwindow_OPEN .pitWindowStatusIndicator {
+  background: #09b61a;
+}
+.pitWindowStatus.fuelwindow_OPEN .pitWindowRefuelIndicator {
+  border-color: #09b61a;
+}
+.pitWindowStatus.fuelwindow_PITTED .pitWindowStatusIndicator {
+  background: #333;
+}
+.pitWindowStatus.fuelwindow_PITTED .pitWindowRefuelIndicator {
+  color: #828282;
+  border-color: #333;
+  text-transform: uppercase;
+}
+.pitWindowStatus.fuelwindow_SOON .pitWindowStatusIndicator {
+  background: #207479;
+}
+.pitWindowStatus.fuelwindow_SOON .pitWindowRefuelIndicator {
+  border-color: #207479;
+}
+.pitWindowStatus .pitWindowStatusIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  width: 4.8571428571em;
+}
+.pitWindowStatus .pitWindowStatusIndicator .pitStatusLabel {
+  font-size: 1em;
+  line-height: 1em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: none;
+  font-weight: bold;
+}
+.pitWindowStatus .pitWindowStatusIndicator .lapToPit {
+  font-size: 0.7857142857em;
+  line-height: 1em;
+  font-weight: normal;
+  font-variant-numeric: tabular-nums;
+  text-shadow: none;
+  font-weight: bold;
+}
+.pitWindowStatus .pitWindowRefuelIndicator {
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  width: 6.8571428571em;
+  border: 0.1428571429em solid rgba(0, 0, 0, 0);
+}
+.pitWindowStatus .pitWindowRefuelIndicator span {
+  font-size: 1.2857142857em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.timeRemainingWithFuel {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5714285714em;
+  padding: 0.1428571429em 0.5714285714em;
+  justify-content: space-between;
+}
+.timeRemainingWithFuel.highlightedBorderStyle {
+  border-radius: 0.2142857143em;
+  margin: 0 0em;
+  border: 0.0714285714em solid #2ff436;
+}
+.timeRemainingWithFuel.highlightedBorderStyle.lessThanTwoLapsRemaining {
+  border-color: #fe171f;
+}
+.timeRemainingWithFuel .title {
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 0.8571428571em;
+}
+.timeRemainingWithFuel .target-value {
+  font-variant-numeric: tabular-nums;
+}
+.timeRemainingWithFuel .target-value.positive {
+  color: #2ff436;
+}
+.timeRemainingWithFuel .target-value.negative {
+  color: #fe171f;
+}
+.timeRemainingWithFuel .target-value.neutral {
+  color: gray;
+}
+.timeRemainingWithFuel .value {
+  font-size: 1.7142857143em;
+  line-height: 1em;
+}
+.timeRemainingWithFuel .value span {
+  color: #fff;
+  font-family: 'DS-Digital' !important;
+  letter-spacing: 0.0714285714em;
+}
+.timeRemainingWithFuel .lapsvalue {
+  font-size: 1.3571428571em;
+  line-height: 1em;
+}
+.timeRemainingWithFuel .lapsvalue span {
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}

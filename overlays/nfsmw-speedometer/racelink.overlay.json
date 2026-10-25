@@ -1,0 +1,359 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "nfsmw-speedometer",
+  "version": "1.0.0",
+  "name": "NFSMW-Speedometer",
+  "category": "driving",
+  "description": "NFSMW-Speedometer, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-rally"
+  ],
+  "size": {
+    "default": [
+      372,
+      374
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      1488,
+      1496
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "label": "Оформление",
+            "settings": [
+              {
+                "key": "hudStyle",
+                "label": "Стиль шкалы",
+                "type": "select",
+                "default": "0",
+                "options": [
+                  {
+                    "value": "0",
+                    "label": "Стиль 1"
+                  },
+                  {
+                    "value": "1",
+                    "label": "Стиль 2"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Стиль 3"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Стиль 4"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Стиль 5"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Стиль 6"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Стиль 7"
+                  },
+                  {
+                    "value": "7",
+                    "label": "Стиль 8"
+                  },
+                  {
+                    "value": "8",
+                    "label": "Стиль 9"
+                  },
+                  {
+                    "value": "9",
+                    "label": "Стиль 10"
+                  },
+                  {
+                    "value": "10",
+                    "label": "Стиль 11"
+                  }
+                ]
+              },
+              {
+                "key": "gaugeFacePalette",
+                "label": "Цвет циферблата",
+                "type": "select",
+                "default": "3",
+                "options": [
+                  {
+                    "value": "1",
+                    "label": "Белый"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Серый"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Оранжевый"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Красный"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Розовый"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Голубой"
+                  },
+                  {
+                    "value": "7",
+                    "label": "Салатовый"
+                  },
+                  {
+                    "value": "8",
+                    "label": "Бирюзовый"
+                  },
+                  {
+                    "value": "9",
+                    "label": "Синий"
+                  },
+                  {
+                    "value": "10",
+                    "label": "Сиреневый"
+                  },
+                  {
+                    "value": "custom",
+                    "label": "Свой цвет"
+                  }
+                ]
+              },
+              {
+                "key": "gaugeFaceColor",
+                "label": "Свой цвет циферблата",
+                "type": "color",
+                "default": "#FDC172",
+                "visibleIf": {
+                  "gaugeFacePalette": "custom"
+                }
+              },
+              {
+                "key": "needlePalette",
+                "label": "Цвет стрелок",
+                "type": "select",
+                "default": "3",
+                "options": [
+                  {
+                    "value": "1",
+                    "label": "Белый"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Серый"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Оранжевый"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Красный"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Розовый"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Голубой"
+                  },
+                  {
+                    "value": "7",
+                    "label": "Салатовый"
+                  },
+                  {
+                    "value": "8",
+                    "label": "Бирюзовый"
+                  },
+                  {
+                    "value": "9",
+                    "label": "Синий"
+                  },
+                  {
+                    "value": "10",
+                    "label": "Сиреневый"
+                  },
+                  {
+                    "value": "custom",
+                    "label": "Свой цвет"
+                  }
+                ]
+              },
+              {
+                "key": "needleColor",
+                "label": "Свой цвет стрелок",
+                "type": "color",
+                "default": "#FDC172",
+                "visibleIf": {
+                  "needlePalette": "custom"
+                }
+              },
+              {
+                "key": "letteringPalette",
+                "label": "Цвет разметки",
+                "type": "select",
+                "default": "1",
+                "options": [
+                  {
+                    "value": "1",
+                    "label": "Белый"
+                  },
+                  {
+                    "value": "2",
+                    "label": "Серый"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Оранжевый"
+                  },
+                  {
+                    "value": "4",
+                    "label": "Красный"
+                  },
+                  {
+                    "value": "5",
+                    "label": "Розовый"
+                  },
+                  {
+                    "value": "6",
+                    "label": "Голубой"
+                  },
+                  {
+                    "value": "7",
+                    "label": "Салатовый"
+                  },
+                  {
+                    "value": "8",
+                    "label": "Бирюзовый"
+                  },
+                  {
+                    "value": "9",
+                    "label": "Синий"
+                  },
+                  {
+                    "value": "10",
+                    "label": "Сиреневый"
+                  },
+                  {
+                    "value": "custom",
+                    "label": "Свой цвет"
+                  }
+                ]
+              },
+              {
+                "key": "letteringColor",
+                "label": "Свой цвет разметки",
+                "type": "color",
+                "default": "#FDFDFD",
+                "visibleIf": {
+                  "letteringPalette": "custom"
+                }
+              }
+            ]
+          },
+          {
+            "label": "Показания",
+            "settings": [
+              {
+                "key": "units",
+                "label": "Единицы скорости",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "label": "Как в игре"
+                  },
+                  {
+                    "value": "kmh",
+                    "label": "км/ч"
+                  },
+                  {
+                    "value": "mph",
+                    "label": "mph"
+                  }
+                ]
+              },
+              {
+                "key": "showTurbo",
+                "label": "Шкала наддува",
+                "type": "boolean",
+                "default": true,
+                "description": "Видна, когда игра сообщает давление наддува."
+              },
+              {
+                "key": "nitrousSource",
+                "label": "Левая шкала (закись)",
+                "type": "select",
+                "default": "fuel",
+                "options": [
+                  {
+                    "value": "fuel",
+                    "label": "Топливо"
+                  },
+                  {
+                    "value": "battery",
+                    "label": "Заряд батареи"
+                  },
+                  {
+                    "value": "none",
+                    "label": "Нет"
+                  }
+                ],
+                "description": "Значок закиси пульсирует, пока батарея отдаёт энергию."
+              },
+              {
+                "key": "breakerSource",
+                "label": "Правая шкала (speedbreaker)",
+                "type": "select",
+                "default": "battery",
+                "options": [
+                  {
+                    "value": "fuel",
+                    "label": "Топливо"
+                  },
+                  {
+                    "value": "battery",
+                    "label": "Заряд батареи"
+                  },
+                  {
+                    "value": "none",
+                    "label": "Нет"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

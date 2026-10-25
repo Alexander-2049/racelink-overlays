@@ -1,0 +1,9 @@
+@import '../r-common/container.css';
+@import '../r-common/fit.css';
+@import './pitboxHelper.css';
+
+/* The overlay keeps its proportions and scales to fit its window
+   (useFitFont, contain). */
+.rFit {
+  align-items: flex-start;
+}

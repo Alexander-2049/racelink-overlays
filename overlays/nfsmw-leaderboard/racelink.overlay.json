@@ -1,0 +1,107 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "nfsmw-leaderboard",
+  "version": "1.0.0",
+  "name": "NFSMW-Leaderboard",
+  "category": "race",
+  "description": "NFSMW-Leaderboard, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      450,
+      324
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      1800,
+      1296
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "positionMode",
+                "label": "Позиция",
+                "type": "select",
+                "default": "overall",
+                "options": [
+                  {
+                    "value": "overall",
+                    "label": "Общая"
+                  },
+                  {
+                    "value": "class",
+                    "label": "В классе"
+                  }
+                ],
+                "description": "В классе — позиции и соперники только своего класса."
+              },
+              {
+                "key": "nameFormat",
+                "label": "Имя гонщика",
+                "type": "select",
+                "default": "last",
+                "options": [
+                  {
+                    "value": "last",
+                    "label": "Фамилия"
+                  },
+                  {
+                    "value": "first",
+                    "label": "Имя"
+                  },
+                  {
+                    "value": "full",
+                    "label": "Полностью"
+                  }
+                ]
+              },
+              {
+                "key": "units",
+                "label": "Расстояние до соперников",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "label": "Как в игре"
+                  },
+                  {
+                    "value": "metric",
+                    "label": "Метры"
+                  },
+                  {
+                    "value": "imperial",
+                    "label": "Футы"
+                  }
+                ],
+                "description": "Строки по очереди показывают имена и расстояние до них."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

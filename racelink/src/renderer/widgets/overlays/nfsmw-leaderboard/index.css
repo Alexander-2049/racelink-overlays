@@ -1,0 +1,13 @@
+/* The board keeps its proportions and fills its window from the right. */
+.nfsmwLeaderboard {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.nfsmwLeaderboard canvas {
+  display: block;
+}

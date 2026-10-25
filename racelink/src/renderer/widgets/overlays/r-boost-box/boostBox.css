@@ -1,0 +1,199 @@
+/* R-Boost Box */
+.BoostBoxOverlay {
+  box-shadow: 0.02em 0.02em 0.15em #000;
+  min-width: 7.8571428571em !important;
+}
+.BoostBoxOverlay .energyIcon,
+.BoostBoxOverlay .deployIcon {
+  width: 1em;
+  height: 1em;
+  z-index: 3;
+  margin-top: 0.2em;
+}
+.BoostBoxOverlay .overlay_content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+  position: relative;
+  margin: 0.3em 0.3em 0.3em 0em;
+}
+.BoostBoxOverlay .overlay_content_lastLap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.2117647059);
+  padding: 0 0.1em;
+  overflow: visible;
+  width: 1.6em;
+  position: relative;
+}
+.BoostBoxOverlay .overlay_content_lastLap .lastLapTitle {
+  transform: rotate(-90deg);
+  font-size: 0.7em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform-origin: 90% 99%;
+  position: relative;
+}
+.BoostBoxOverlay .overlay_content_lastLapValues {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0.2em 0.3em 0.3em 0em;
+  width: 3.1em;
+  padding-left: 0.05em;
+}
+.BoostBoxOverlay .overlay_content_lastLapValues .deployIcon,
+.BoostBoxOverlay .overlay_content_lastLapValues .energyIcon {
+  margin-top: 0.3em;
+}
+.BoostBoxOverlay .overlay_content_lastLapValues .lastLapDeploy,
+.BoostBoxOverlay .overlay_content_lastLapValues .lastLapEnergy {
+  display: flex;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-size: 0.9em;
+}
+.BoostBoxOverlay .glow {
+  opacity: 0;
+  align-items: center;
+  position: absolute;
+  height: 1.3em;
+  top: 0.22em;
+  left: 0.1em;
+  right: 0.1em;
+  width: 0;
+  max-width: 100%;
+  transition: all 0.2s linear;
+  z-index: 2;
+  box-shadow: 0 0 0.7em #1da0ff;
+}
+.BoostBoxOverlay .glow.active {
+  opacity: 1;
+}
+.BoostBoxOverlay .glowEnergy {
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 1.3em;
+  top: 2.22em;
+  left: 0.1em;
+  right: 0.1em;
+  max-width: 100%;
+  transition: all 0.2s linear;
+  z-index: 2;
+  box-shadow: 0 0 0.7em #a86500;
+}
+.BoostBoxOverlay .glowEnergy.active {
+  opacity: 1;
+}
+.BoostBoxOverlay .deployContainer,
+.BoostBoxOverlay .energyContainer {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  border: 0.08em solid #000;
+  border-radius: 0.05em;
+  background: #222;
+  height: 1.7em;
+}
+.BoostBoxOverlay .deployContainer .deployPercentage,
+.BoostBoxOverlay .deployContainer .energyPercentage,
+.BoostBoxOverlay .energyContainer .deployPercentage,
+.BoostBoxOverlay .energyContainer .energyPercentage {
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  line-height: 1.3em;
+  flex: 1;
+  font-variant-numeric: tabular-nums;
+}
+.BoostBoxOverlay .deployContainer .lastLapDeployLine,
+.BoostBoxOverlay .deployContainer .lastLapEnergyLine,
+.BoostBoxOverlay .energyContainer .lastLapDeployLine,
+.BoostBoxOverlay .energyContainer .lastLapEnergyLine {
+  position: absolute;
+  left: -11.4%;
+  bottom: 0;
+  width: 0%;
+  height: 0.2em;
+  z-index: 2;
+  transform: skew(-17deg);
+  transition: width 0.4s linear;
+  background-size: 0.72em 6.616em;
+  right: 0;
+}
+.BoostBoxOverlay .deployContainer .lastLapDeployLine,
+.BoostBoxOverlay .energyContainer .lastLapDeployLine {
+  background: #0069b5;
+}
+.BoostBoxOverlay .deployContainer .lastLapEnergyLine,
+.BoostBoxOverlay .energyContainer .lastLapEnergyLine {
+  background: #a86500;
+}
+.BoostBoxOverlay .deployContainer .progressBarActive,
+.BoostBoxOverlay .deployContainer .progressBar,
+.BoostBoxOverlay .energyContainer .progressBarActive,
+.BoostBoxOverlay .energyContainer .progressBar {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: -10%;
+  right: 0;
+  text-align: center;
+  height: 87%;
+  transform: skew(-17deg);
+  z-index: 1;
+}
+.BoostBoxOverlay .deployContainer .progressBar,
+.BoostBoxOverlay .energyContainer .progressBar {
+  transition: width 0.2s linear;
+}
+.BoostBoxOverlay .deployContainer .progressBarActive,
+.BoostBoxOverlay .energyContainer .progressBarActive {
+  z-index: 2;
+}
+.BoostBoxOverlay .deployContainer .progressBarActive.active,
+.BoostBoxOverlay .energyContainer .progressBarActive.active {
+  opacity: 1;
+}
+@keyframes mymove {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: 35px;
+  }
+}
+.BoostBoxOverlay .deployContainer .progressBar {
+  box-shadow: 0 0 0.1em #1da0ff;
+  background: #1da0ff;
+  transition: width 0.2s linear;
+}
+.BoostBoxOverlay .deployContainer .progressBarActive {
+  background-size: 0.72em 6.616em;
+  background-position: 0px;
+  animation: mymove 0.3s infinite linear;
+  transition: all 0.2s linear;
+  opacity: 0;
+  background-image: linear-gradient(90deg, #3aa9ff 38%, #1da0ff 38%, #1da0ff 100%);
+  box-shadow: 0 0 0.1em #1da0ff;
+}
+.BoostBoxOverlay .energyContainer .progressBar {
+  background: #f39b17;
+  box-shadow: 0 0 0.1em #f39b17;
+}
+.BoostBoxOverlay .energyContainer .progressBarActive {
+  background-size: 0.72em 6.616em;
+  background-position: 0px;
+  animation: mymove 0.3s infinite linear;
+  transition: all 0.2s linear;
+  opacity: 0;
+  background-image: linear-gradient(90deg, #ea8c15 38%, #f39b17 38%, #f39b17 100%);
+  box-shadow: 0 0 0.1em #f39b17;
+}
+.BoostBoxOverlay.Opacity_0 {
+  box-shadow: none !important;
+}

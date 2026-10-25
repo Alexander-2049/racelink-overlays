@@ -1,0 +1,755 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "r-flags",
+  "version": "1.0.0",
+  "name": "R-Flags",
+  "category": "race",
+  "description": "R-Flags, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      200,
+      56
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      800,
+      300
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "FontSize",
+                "label": "Размер",
+                "type": "number",
+                "default": 14,
+                "min": 6,
+                "max": 60,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "Opacity",
+                "label": "Непрозрачность фона",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "FontFamily",
+                "label": "Шрифт",
+                "type": "select",
+                "default": "Montserrat",
+                "options": [
+                  {
+                    "value": "Montserrat",
+                    "label": "Montserrat"
+                  },
+                  {
+                    "value": "Roboto",
+                    "label": "Roboto"
+                  },
+                  {
+                    "value": "RobotoMono",
+                    "label": "Roboto Mono"
+                  },
+                  {
+                    "value": "TitilliumWeb",
+                    "label": "Titillium Web"
+                  },
+                  {
+                    "value": "Exo2",
+                    "label": "Exo 2"
+                  },
+                  {
+                    "value": "BarlowCondensed",
+                    "label": "Barlow Condensed"
+                  },
+                  {
+                    "value": "JetBrainsMono",
+                    "label": "JetBrains Mono"
+                  },
+                  {
+                    "value": "Geist",
+                    "label": "Geist"
+                  }
+                ]
+              },
+              {
+                "key": "FontWeight",
+                "label": "Толщина",
+                "type": "select",
+                "default": "Semibold",
+                "options": [
+                  {
+                    "value": "Regular",
+                    "label": "Обычный"
+                  },
+                  {
+                    "value": "Medium",
+                    "label": "Средний"
+                  },
+                  {
+                    "value": "Semibold",
+                    "label": "Полужирный"
+                  },
+                  {
+                    "value": "Bold",
+                    "label": "Жирный"
+                  },
+                  {
+                    "value": "Extra",
+                    "label": "Сверхжирный"
+                  }
+                ]
+              },
+              {
+                "key": "ShowTitle",
+                "label": "Заголовок оверлея",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "EnableAnimation",
+                "label": "Анимация",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "ShowFlagInPreview",
+                "label": "Флаг в предпросмотре",
+                "description": "Какой флаг показывать в демо-режиме и при настройке расположения.",
+                "type": "select",
+                "default": "green",
+                "options": [
+                  {
+                    "value": "checkered",
+                    "label": "Клетчатый"
+                  },
+                  {
+                    "value": "white",
+                    "label": "Белый"
+                  },
+                  {
+                    "value": "green",
+                    "label": "Зелёный"
+                  },
+                  {
+                    "value": "yellow",
+                    "label": "Жёлтый"
+                  },
+                  {
+                    "value": "red",
+                    "label": "Красный"
+                  },
+                  {
+                    "value": "blue",
+                    "label": "Синий"
+                  },
+                  {
+                    "value": "debris",
+                    "label": "Мусор на трассе"
+                  },
+                  {
+                    "value": "crossed",
+                    "label": "Скрещённые"
+                  },
+                  {
+                    "value": "oneLapToGreen",
+                    "label": "Круг до зелёного"
+                  },
+                  {
+                    "value": "tenToGo",
+                    "label": "10 кругов до финиша"
+                  },
+                  {
+                    "value": "fiveToGo",
+                    "label": "5 кругов до финиша"
+                  },
+                  {
+                    "value": "randomWaving",
+                    "label": "Случайный"
+                  },
+                  {
+                    "value": "caution",
+                    "label": "Нейтрализация"
+                  },
+                  {
+                    "value": "black",
+                    "label": "Чёрный"
+                  },
+                  {
+                    "value": "disqualify",
+                    "label": "Дисквалификация"
+                  },
+                  {
+                    "value": "furled",
+                    "label": "Срезка трассы"
+                  },
+                  {
+                    "value": "repair",
+                    "label": "Обязательный ремонт"
+                  },
+                  {
+                    "value": "startReady",
+                    "label": "Старт: готовность"
+                  },
+                  {
+                    "value": "startSet",
+                    "label": "Старт: внимание"
+                  },
+                  {
+                    "value": "startGo",
+                    "label": "Старт: go"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "global",
+        "label": "Основные флаги",
+        "groups": [
+          {
+            "label": "Клетчатый",
+            "settings": [
+              {
+                "key": "Flags.Checkered.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Checkered.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "session is over",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Checkered.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "checkered flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Белый",
+            "settings": [
+              {
+                "key": "Flags.White.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.White.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "one more lap",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.White.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "white flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Зелёный",
+            "settings": [
+              {
+                "key": "Flags.Green.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Green.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "resume racing",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Green.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "green flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Жёлтый",
+            "settings": [
+              {
+                "key": "Flags.Yellow.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Yellow.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "accident ahead",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Yellow.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "yellow flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Красный",
+            "settings": [
+              {
+                "key": "Flags.Red.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Red.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "session is suspended",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Red.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "red flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Синий",
+            "settings": [
+              {
+                "key": "Flags.Blue.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Blue.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "let others by",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Blue.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "blue flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Мусор на трассе",
+            "settings": [
+              {
+                "key": "Flags.Debris.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Debris.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "debris on track",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Debris.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "debris",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Скрещённые",
+            "settings": [
+              {
+                "key": "Flags.Crossed.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Crossed.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Crossed",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Crossed.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "crossed",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Круг до зелёного",
+            "settings": [
+              {
+                "key": "Flags.OneLapToGreen.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "Flags.OneLapToGreen.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "One lap to green",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.OneLapToGreen.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "session flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "10 кругов до финиша",
+            "settings": [
+              {
+                "key": "Flags.TenToGo.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.TenToGo.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "10 laps to go",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.TenToGo.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "session flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "5 кругов до финиша",
+            "settings": [
+              {
+                "key": "Flags.FiveToGo.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.FiveToGo.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "5 laps to go",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.FiveToGo.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "session flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Случайный",
+            "settings": [
+              {
+                "key": "Flags.RandomWaving.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.RandomWaving.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Random flag",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.RandomWaving.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "random flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Нейтрализация",
+            "settings": [
+              {
+                "key": "Flags.Caution.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Caution.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Caution",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Caution.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "caution flag",
+                "maxLength": 60
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "black",
+        "label": "Чёрные флаги",
+        "groups": [
+          {
+            "label": "Чёрный",
+            "settings": [
+              {
+                "key": "Flags.Black.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Black.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Penalty",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Black.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "black flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Дисквалификация",
+            "settings": [
+              {
+                "key": "Flags.Disqualify.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Disqualify.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "You got disqualified",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Disqualify.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "black flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Срезка трассы",
+            "settings": [
+              {
+                "key": "Flags.Furled.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Furled.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "You cut the track",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Furled.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "black flag",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Обязательный ремонт",
+            "settings": [
+              {
+                "key": "Flags.Repair.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.Repair.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Required repair",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.Repair.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "black flag",
+                "maxLength": 60
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "start",
+        "label": "Стартовые флаги",
+        "groups": [
+          {
+            "label": "Старт: готовность",
+            "settings": [
+              {
+                "key": "Flags.StartReady.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.StartReady.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Get ready",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.StartReady.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "start lights",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Старт: внимание",
+            "settings": [
+              {
+                "key": "Flags.StartSet.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.StartSet.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Get ready",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.StartSet.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "start lights",
+                "maxLength": 60
+              }
+            ]
+          },
+          {
+            "label": "Старт: go",
+            "settings": [
+              {
+                "key": "Flags.StartGo.enabled",
+                "label": "Включить",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "Flags.StartGo.headerText",
+                "label": "Заголовок",
+                "type": "text",
+                "default": "Go!",
+                "maxLength": 60
+              },
+              {
+                "key": "Flags.StartGo.flagText",
+                "label": "Текст флага",
+                "type": "text",
+                "default": "start lights",
+                "maxLength": 60
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

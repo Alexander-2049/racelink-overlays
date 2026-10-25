@@ -1,0 +1,203 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "r-laptime-graph",
+  "version": "1.0.0",
+  "name": "R-LapTime Graph",
+  "category": "timing",
+  "description": "R-LapTime Graph, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      450,
+      300
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      1800,
+      1200
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "Opacity",
+                "label": "Непрозрачность фона",
+                "type": "number",
+                "default": 0.75,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "FontFamily",
+                "label": "Шрифт",
+                "type": "select",
+                "default": "Montserrat",
+                "options": [
+                  {
+                    "value": "Montserrat",
+                    "label": "Montserrat"
+                  },
+                  {
+                    "value": "Roboto",
+                    "label": "Roboto"
+                  },
+                  {
+                    "value": "RobotoMono",
+                    "label": "Roboto Mono"
+                  },
+                  {
+                    "value": "TitilliumWeb",
+                    "label": "Titillium Web"
+                  },
+                  {
+                    "value": "Exo2",
+                    "label": "Exo 2"
+                  },
+                  {
+                    "value": "BarlowCondensed",
+                    "label": "Barlow Condensed"
+                  },
+                  {
+                    "value": "JetBrainsMono",
+                    "label": "JetBrains Mono"
+                  },
+                  {
+                    "value": "Geist",
+                    "label": "Geist"
+                  }
+                ]
+              },
+              {
+                "key": "FontWeight",
+                "label": "Толщина",
+                "type": "select",
+                "default": "Semibold",
+                "options": [
+                  {
+                    "value": "Regular",
+                    "label": "Обычный"
+                  },
+                  {
+                    "value": "Medium",
+                    "label": "Средний"
+                  },
+                  {
+                    "value": "Semibold",
+                    "label": "Полужирный"
+                  },
+                  {
+                    "value": "Bold",
+                    "label": "Жирный"
+                  },
+                  {
+                    "value": "Extra",
+                    "label": "Сверхжирный"
+                  }
+                ]
+              },
+              {
+                "key": "ShowTitle",
+                "label": "Заголовок оверлея",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "OverlayTitleColor",
+                "label": "Цвет заголовка",
+                "type": "color",
+                "default": "#d10404",
+                "visibleIf": {
+                  "ShowTitle": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "filters",
+        "label": "Фильтры времени круга",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "LimitLapCount",
+                "label": "Ограничить количество кругов",
+                "type": "boolean",
+                "default": true,
+                "description": "Ограничивает количество кругов на графике."
+              },
+              {
+                "key": "LapCount",
+                "label": "Количество кругов для отображения",
+                "type": "number",
+                "default": 20,
+                "min": 2,
+                "max": 100,
+                "step": 1,
+                "visibleIf": {
+                  "LimitLapCount": true
+                }
+              },
+              {
+                "key": "IsFilterOn",
+                "label": "Фильтр времени круга",
+                "type": "boolean",
+                "default": false,
+                "description": "Убирает с графика лишние круги: первые, с пит-стопом, круги выезда."
+              },
+              {
+                "key": "FilterOutLower",
+                "label": "Фильтр ниже (сек)",
+                "type": "number",
+                "default": 5,
+                "min": 0,
+                "max": 60,
+                "step": 0.5,
+                "visibleIf": {
+                  "IsFilterOn": true
+                },
+                "description": "Убирает круги быстрее медианы больше чем на это число секунд."
+              },
+              {
+                "key": "FilterOutHigher",
+                "label": "Фильтр выше (сек)",
+                "type": "number",
+                "default": 5,
+                "min": 0,
+                "max": 60,
+                "step": 0.5,
+                "visibleIf": {
+                  "IsFilterOn": true
+                },
+                "description": "Убирает круги медленнее медианы больше чем на это число секунд."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

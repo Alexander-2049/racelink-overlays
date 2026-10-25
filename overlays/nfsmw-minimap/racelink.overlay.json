@@ -1,0 +1,76 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "nfsmw-minimap",
+  "version": "1.0.0",
+  "name": "NFSMW-Minimap",
+  "category": "awareness",
+  "description": "NFSMW-Minimap, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing"
+  ],
+  "size": {
+    "default": [
+      372,
+      374
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      1488,
+      1496
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "visibleRadiusMeters",
+                "label": "Радиус карты",
+                "type": "number",
+                "default": 250,
+                "min": 50,
+                "max": 1000,
+                "step": 10,
+                "unit": "м"
+              },
+              {
+                "key": "showTerrain",
+                "label": "Местность вокруг трассы",
+                "type": "boolean",
+                "default": true,
+                "description": "Асфальт и вода с карты трассы, в цветах карты игры."
+              },
+              {
+                "key": "showOpponents",
+                "label": "Соперники",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showStartLine",
+                "label": "Линия старта",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

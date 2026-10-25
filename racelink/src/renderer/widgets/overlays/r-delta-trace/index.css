@@ -1,0 +1,35 @@
+@import '../r-common/container.css';
+@import '../r-common/driver.css';
+@import './deltaTrace.css';
+
+/* The overlay fills its window: the trace takes the width and the height
+   the widget bars leave; the font follows the window height. */
+.DeltaTraceOverlay {
+  box-sizing: border-box;
+}
+.DeltaTraceOverlay .DeltaTraceContainer {
+  min-height: 0;
+}
+.DeltaTraceOverlay .histogramBlock {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.DeltaTraceOverlay .histogramBlock > .histogramMain,
+.DeltaTraceOverlay .histogramMainWithPanel {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+.DeltaTraceOverlay .histogramMainWithPanel > .histogramMain {
+  flex: 1 1 auto;
+}
+.DeltaTraceOverlay .histogramMain > .DeltaTrace {
+  height: 100%;
+  position: relative;
+}
+.DeltaTraceOverlay .histogramMain > .DeltaTrace canvas {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: calc(100% - 8px);
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "nfsmw-lap-time",
+  "version": "1.0.0",
+  "name": "NFSMW-Lap Time",
+  "category": "timing",
+  "description": "NFSMW-Lap Time, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      900,
+      338
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      3600,
+      1352
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "lapTime",
+        "label": "LAP TIME",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showLapTime",
+                "label": "Показывать LAP TIME",
+                "type": "boolean",
+                "default": true,
+                "description": "Время круга, когда машина пересекает линию."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "splitTime",
+        "label": "SPLIT TIME",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "splitMode",
+                "label": "SPLIT TIME",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "label": "Как в игре"
+                  },
+                  {
+                    "value": "leader",
+                    "label": "Отрыв от второго / отставание от лидера"
+                  },
+                  {
+                    "value": "best",
+                    "label": "Дельта к лучшему кругу"
+                  },
+                  {
+                    "value": "off",
+                    "label": "Не показывать"
+                  }
+                ],
+                "description": "Как в игре: в гонке — отрыв от второго места или отставание от лидера класса, в остальных сессиях — дельта к своему лучшему кругу."
+              },
+              {
+                "key": "splitsPerLap",
+                "label": "Отсечек SPLIT TIME за круг",
+                "type": "number",
+                "default": 3,
+                "min": 1,
+                "max": 6,
+                "step": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "r-lap-timing",
+  "version": "1.0.0",
+  "name": "R-Lap Timing",
+  "category": "timing",
+  "description": "R-Lap Timing, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      520,
+      70
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      2080,
+      300
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Тема",
+                "type": "select",
+                "default": "CLEAN",
+                "options": [
+                  {
+                    "value": "CLEAN",
+                    "label": "Clean"
+                  },
+                  {
+                    "value": "ARROW",
+                    "label": "Arrow"
+                  },
+                  {
+                    "value": "GLOW",
+                    "label": "Glow"
+                  },
+                  {
+                    "value": "BUBBLES",
+                    "label": "Bubbles"
+                  },
+                  {
+                    "value": "POPUP",
+                    "label": "Popup"
+                  },
+                  {
+                    "value": "DIAL",
+                    "label": "Dial"
+                  }
+                ]
+              },
+              {
+                "key": "backgroundIsStriped",
+                "label": "Фон в полоску",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "layoutFormat",
+                "label": "Макет оверлея",
+                "type": "select",
+                "default": "row",
+                "options": [
+                  {
+                    "value": "row",
+                    "label": "Строка"
+                  },
+                  {
+                    "value": "column",
+                    "label": "Столбец"
+                  }
+                ]
+              },
+              {
+                "key": "referenceType",
+                "label": "Режим сравнения",
+                "type": "select",
+                "default": "personalBestLap",
+                "options": [
+                  {
+                    "value": "personalBestLap",
+                    "label": "Личный лучший"
+                  },
+                  {
+                    "value": "personalSessionBestLap",
+                    "label": "Лучший в сессии"
+                  },
+                  {
+                    "value": "personalLastLap",
+                    "label": "Последний круг"
+                  }
+                ]
+              },
+              {
+                "key": "Opacity",
+                "label": "Непрозрачность фона",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "FontFamily",
+                "label": "Шрифт",
+                "type": "select",
+                "default": "Montserrat",
+                "options": [
+                  {
+                    "value": "Montserrat",
+                    "label": "Montserrat"
+                  },
+                  {
+                    "value": "Roboto",
+                    "label": "Roboto"
+                  },
+                  {
+                    "value": "RobotoMono",
+                    "label": "Roboto Mono"
+                  },
+                  {
+                    "value": "TitilliumWeb",
+                    "label": "Titillium Web"
+                  },
+                  {
+                    "value": "Exo2",
+                    "label": "Exo 2"
+                  },
+                  {
+                    "value": "BarlowCondensed",
+                    "label": "Barlow Condensed"
+                  },
+                  {
+                    "value": "JetBrainsMono",
+                    "label": "JetBrains Mono"
+                  },
+                  {
+                    "value": "Geist",
+                    "label": "Geist"
+                  }
+                ]
+              },
+              {
+                "key": "FontWeight",
+                "label": "Толщина",
+                "type": "select",
+                "default": "Semibold",
+                "options": [
+                  {
+                    "value": "Regular",
+                    "label": "Обычный"
+                  },
+                  {
+                    "value": "Medium",
+                    "label": "Средний"
+                  },
+                  {
+                    "value": "Semibold",
+                    "label": "Полужирный"
+                  },
+                  {
+                    "value": "Bold",
+                    "label": "Жирный"
+                  },
+                  {
+                    "value": "Extra",
+                    "label": "Сверхжирный"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blocks",
+        "label": "Блоки",
+        "groups": [
+          {
+            "label": "Блок #1",
+            "settings": [
+              {
+                "key": "entities.0.type",
+                "label": "Тип",
+                "type": "select",
+                "default": "personalSessionBestLap",
+                "options": [
+                  {
+                    "value": "NONE",
+                    "label": "Нет"
+                  },
+                  {
+                    "value": "CURRENT",
+                    "label": "Текущий круг"
+                  },
+                  {
+                    "value": "PREDICTED",
+                    "label": "Прогноз круга"
+                  },
+                  {
+                    "value": "personalBestLap",
+                    "label": "Личный лучший"
+                  },
+                  {
+                    "value": "personalSessionBestLap",
+                    "label": "Лучший в сессии"
+                  },
+                  {
+                    "value": "personalLastLap",
+                    "label": "Последний круг"
+                  }
+                ]
+              },
+              {
+                "key": "entities.0.showDelta",
+                "label": "Показать дельту",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "entities.0.showLastLapAfterFinish",
+                "label": "Показывать время завершённого круга",
+                "type": "boolean",
+                "default": false,
+                "description": "После пересечения линии старт/финиш 5 секунд показывает последний круг, затем возвращает выбранный режим."
+              }
+            ]
+          },
+          {
+            "label": "Блок #2",
+            "settings": [
+              {
+                "key": "entities.1.type",
+                "label": "Тип",
+                "type": "select",
+                "default": "NONE",
+                "options": [
+                  {
+                    "value": "NONE",
+                    "label": "Нет"
+                  },
+                  {
+                    "value": "CURRENT",
+                    "label": "Текущий круг"
+                  },
+                  {
+                    "value": "PREDICTED",
+                    "label": "Прогноз круга"
+                  },
+                  {
+                    "value": "personalBestLap",
+                    "label": "Личный лучший"
+                  },
+                  {
+                    "value": "personalSessionBestLap",
+                    "label": "Лучший в сессии"
+                  },
+                  {
+                    "value": "personalLastLap",
+                    "label": "Последний круг"
+                  }
+                ]
+              },
+              {
+                "key": "entities.1.showDelta",
+                "label": "Показать дельту",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "entities.1.showLastLapAfterFinish",
+                "label": "Показывать время завершённого круга",
+                "type": "boolean",
+                "default": false,
+                "description": "После пересечения линии старт/финиш 5 секунд показывает последний круг, затем возвращает выбранный режим."
+              }
+            ]
+          },
+          {
+            "label": "Блок #3",
+            "settings": [
+              {
+                "key": "entities.2.type",
+                "label": "Тип",
+                "type": "select",
+                "default": "NONE",
+                "options": [
+                  {
+                    "value": "NONE",
+                    "label": "Нет"
+                  },
+                  {
+                    "value": "CURRENT",
+                    "label": "Текущий круг"
+                  },
+                  {
+                    "value": "PREDICTED",
+                    "label": "Прогноз круга"
+                  },
+                  {
+                    "value": "personalBestLap",
+                    "label": "Личный лучший"
+                  },
+                  {
+                    "value": "personalSessionBestLap",
+                    "label": "Лучший в сессии"
+                  },
+                  {
+                    "value": "personalLastLap",
+                    "label": "Последний круг"
+                  }
+                ]
+              },
+              {
+                "key": "entities.2.showDelta",
+                "label": "Показать дельту",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "entities.2.showLastLapAfterFinish",
+                "label": "Показывать время завершённого круга",
+                "type": "boolean",
+                "default": false,
+                "description": "После пересечения линии старт/финиш 5 секунд показывает последний круг, затем возвращает выбранный режим."
+              }
+            ]
+          },
+          {
+            "label": "Блок #4",
+            "settings": [
+              {
+                "key": "entities.3.type",
+                "label": "Тип",
+                "type": "select",
+                "default": "NONE",
+                "options": [
+                  {
+                    "value": "NONE",
+                    "label": "Нет"
+                  },
+                  {
+                    "value": "CURRENT",
+                    "label": "Текущий круг"
+                  },
+                  {
+                    "value": "PREDICTED",
+                    "label": "Прогноз круга"
+                  },
+                  {
+                    "value": "personalBestLap",
+                    "label": "Личный лучший"
+                  },
+                  {
+                    "value": "personalSessionBestLap",
+                    "label": "Лучший в сессии"
+                  },
+                  {
+                    "value": "personalLastLap",
+                    "label": "Последний круг"
+                  }
+                ]
+              },
+              {
+                "key": "entities.3.showDelta",
+                "label": "Показать дельту",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "entities.3.showLastLapAfterFinish",
+                "label": "Показывать время завершённого круга",
+                "type": "boolean",
+                "default": false,
+                "description": "После пересечения линии старт/финиш 5 секунд показывает последний круг, затем возвращает выбранный режим."
+              }
+            ]
+          },
+          {
+            "label": "Блок #5",
+            "settings": [
+              {
+                "key": "entities.4.type",
+                "label": "Тип",
+                "type": "select",
+                "default": "NONE",
+                "options": [
+                  {
+                    "value": "NONE",
+                    "label": "Нет"
+                  },
+                  {
+                    "value": "CURRENT",
+                    "label": "Текущий круг"
+                  },
+                  {
+                    "value": "PREDICTED",
+                    "label": "Прогноз круга"
+                  },
+                  {
+                    "value": "personalBestLap",
+                    "label": "Личный лучший"
+                  },
+                  {
+                    "value": "personalSessionBestLap",
+                    "label": "Лучший в сессии"
+                  },
+                  {
+                    "value": "personalLastLap",
+                    "label": "Последний круг"
+                  }
+                ]
+              },
+              {
+                "key": "entities.4.showDelta",
+                "label": "Показать дельту",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "entities.4.showLastLapAfterFinish",
+                "label": "Показывать время завершённого круга",
+                "type": "boolean",
+                "default": false,
+                "description": "После пересечения линии старт/финиш 5 секунд показывает последний круг, затем возвращает выбранный режим."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}

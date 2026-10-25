@@ -1,0 +1,313 @@
+@import './fonts.css';
+@import './fa.css';
+
+/* The page every R- overlay renders into: transparent, no scroll. */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.carbon-element-top {
+  --backgroundColor: trasparent;
+  --leftStripeColor: #00000050;
+  --rightStripeColor: #ffffff20;
+}
+.carbon-element-top::after {
+  background-color: var(--backgroundColor);
+  background-image: linear-gradient(
+    -45deg,
+    var(--leftStripeColor) 16.67%,
+    transparent 16.67%,
+    transparent 50%,
+    var(--leftStripeColor) 50%,
+    var(--leftStripeColor) 66.67%,
+    transparent 66.67%,
+    transparent 100%
+  );
+  background-size: 4.24px 4.24px;
+}
+.carbon-element-top::before {
+  background-color: var(--backgroundColor);
+  background-image: linear-gradient(
+    45deg,
+    var(--rightStripeColor) 16.67%,
+    transparent 16.67%,
+    transparent 50%,
+    var(--rightStripeColor) 50%,
+    var(--rightStripeColor) 66.67%,
+    transparent 66.67%,
+    transparent 100%
+  );
+  background-size: 4.24px 4.24px;
+}
+.carbon-element-top::before,
+.carbon-element-top::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 75%;
+  width: 100%;
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 0.5)),
+    to(rgba(0, 0, 0, 0))
+  );
+}
+@keyframes OverlayContainerAnim {
+  0% {
+    opacity: 0;
+    left: 50px;
+  }
+  60% {
+    opacity: 0;
+    left: 50px;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+@keyframes bgPositionAnim {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 85px;
+  }
+}
+.overlayContainer.vrMode,
+.InputTelemetryOverlay.vrMode,
+.FlagsOverlay.vrMode {
+  margin: 1em;
+  margin-top: calc(1em + 20px);
+  box-shadow: none !important;
+}
+.overlayContainer.vrTransformationModePosition,
+.InputTelemetryOverlay.vrTransformationModePosition,
+.FlagsOverlay.vrTransformationModePosition {
+  --vrbackgroundColor: transparent;
+  --vrstripeColor: #1ba5ff;
+  --vrlabel: 'TRANSFORM POSITION';
+}
+.overlayContainer.vrTransformationModeAdjust,
+.InputTelemetryOverlay.vrTransformationModeAdjust,
+.FlagsOverlay.vrTransformationModeAdjust {
+  --vrbackgroundColor: transparent;
+  --vrstripeColor: #ffbc00;
+  --vrlabel: 'TRANSFORM ADJUST';
+}
+.overlayContainer.vrEditMode,
+.InputTelemetryOverlay.vrEditMode,
+.FlagsOverlay.vrEditMode {
+  overflow: visible !important;
+}
+.overlayContainer.vrEditMode::before,
+.InputTelemetryOverlay.vrEditMode::before,
+.FlagsOverlay.vrEditMode::before {
+  font-family: 'MontserratSemibold';
+  font-size: 16px;
+  content: var(--vrlabel);
+  display: inline;
+  position: absolute;
+  background-color: var(--vrstripeColor);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 50px;
+  max-width: 100%;
+  height: 35px;
+  line-height: 35px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) translateY(-100%);
+  padding: 0 8px;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  text-transform: uppercase;
+  z-index: 10000;
+}
+.overlayContainer.vrEditMode::after,
+.InputTelemetryOverlay.vrEditMode::after,
+.FlagsOverlay.vrEditMode::after {
+  content: '';
+  font-size: 16px;
+  position: absolute;
+  left: -1em;
+  right: -1em;
+  bottom: -1em;
+  top: -1em;
+  background-color: var(--vrbackgroundColor);
+  background-image: linear-gradient(
+    -45deg,
+    var(--vrstripeColor) 16.67%,
+    transparent 16.67%,
+    transparent 50%,
+    var(--vrstripeColor) 50%,
+    var(--vrstripeColor) 66.67%,
+    transparent 66.67%,
+    transparent 100%
+  );
+  background-size: 8.49px 8.49px;
+  animation: bgPositionAnim 2000ms linear infinite;
+  clip-path: polygon(
+    0% 0%,
+    0% 100%,
+    1em 100%,
+    1em 1em,
+    calc(100% - 1em) 1em,
+    calc(100% - 1em) calc(100% - 1em),
+    1em calc(100% - 1em),
+    1em 100%,
+    100% 100%,
+    100% 0%
+  );
+  z-index: -1;
+}
+.overlayContainer {
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--text-color);
+  transition: opacity 0.3s linear;
+  animation: OverlayContainerAnim 1.5s;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.overlayContainer.disableDrag {
+  -webkit-app-region: no-drag;
+}
+.overlayContainer.disableAnim {
+  animation: none;
+}
+.overlayContainer.vrMode {
+  animation: OverlayContainerAnim 0.1s;
+}
+.widgetContainer {
+  -webkit-app-region: drag;
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+.overlayContainer,
+.widgetContainer {
+  font-family: MontserratSemibold;
+  display: flex;
+  flex-direction: row;
+  color: var(--text-color);
+}
+.overlayContainer.disabledBgColor,
+.widgetContainer.disabledBgColor {
+  padding-left: 0;
+}
+.overlayContainer.hiddenOverlay,
+.widgetContainer.hiddenOverlay {
+  opacity: 0 !important;
+}
+.overlayContainer.titlePlacement_left.showTitle,
+.widgetContainer.titlePlacement_left.showTitle {
+  padding-left: 0;
+  border-left: 0.35em solid rgba(0, 0, 0, 0);
+}
+.overlayContainer.titlePlacement_left.showTitle .overlay_title,
+.widgetContainer.titlePlacement_left.showTitle .overlay_title {
+  display: flex;
+  justify-content: center;
+  font-size: 0.1em;
+}
+.overlayContainer.titlePlacement_left.showTitle .overlay_title span,
+.widgetContainer.titlePlacement_left.showTitle .overlay_title span {
+  font-size: 7.8em;
+}
+.overlayContainer.titlePlacement_left .overlay_title,
+.widgetContainer.titlePlacement_left .overlay_title {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 0.2em;
+  display: none;
+  align-items: flex-end;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+.overlayContainer.titlePlacement_top,
+.overlayContainer.titlePlacement_topNoText,
+.widgetContainer.titlePlacement_top,
+.widgetContainer.titlePlacement_topNoText {
+  flex-direction: column;
+}
+.overlayContainer.titlePlacement_top.showTitle,
+.overlayContainer.titlePlacement_topNoText.showTitle,
+.widgetContainer.titlePlacement_top.showTitle,
+.widgetContainer.titlePlacement_topNoText.showTitle {
+  padding-top: 0;
+  border-top: 0.35em solid rgba(0, 0, 0, 0);
+}
+.overlayContainer.titlePlacement_top.showTitle .overlay_title,
+.overlayContainer.titlePlacement_topNoText.showTitle .overlay_title,
+.widgetContainer.titlePlacement_top.showTitle .overlay_title,
+.widgetContainer.titlePlacement_topNoText.showTitle .overlay_title {
+  display: flex;
+  justify-content: center;
+  font-size: 0.1em;
+}
+.overlayContainer.titlePlacement_top.showTitle .overlay_title span,
+.overlayContainer.titlePlacement_topNoText.showTitle .overlay_title span,
+.widgetContainer.titlePlacement_top.showTitle .overlay_title span,
+.widgetContainer.titlePlacement_topNoText.showTitle .overlay_title span {
+  font-size: 7.8em;
+}
+.overlayContainer.titlePlacement_top .overlay_title,
+.overlayContainer.titlePlacement_topNoText .overlay_title,
+.widgetContainer.titlePlacement_top .overlay_title,
+.widgetContainer.titlePlacement_topNoText .overlay_title {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 2.6em 0.2em;
+  display: none;
+}
+.overlayContainer.titlePlacement_topNoText .overlay_title,
+.widgetContainer.titlePlacement_topNoText .overlay_title {
+  padding: 0em 0.2em;
+}
+[data-theme='theme-light'] {
+  --text-color: #ffffff;
+  --driver-position-bg: #ffffff;
+  --driver-position-color: #000000;
+}
+[data-theme='theme-dark'] {
+  --text-color: #ffffffee;
+  --driver-position-bg: #111111;
+  --driver-position-color: #e0e0e0;
+}
+.hAlignment_LEFT {
+  right: auto !important;
+  left: 0 !important;
+}
+.hAlignment_RIGHT {
+  left: auto !important;
+  right: 0 !important;
+}
+.vAlignment_TOP {
+  top: 0 !important;
+  bottom: auto !important;
+}
+.vAlignment_BOTTOM {
+  bottom: 0 !important;
+  top: auto !important;
+}

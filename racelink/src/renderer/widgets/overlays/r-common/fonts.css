@@ -1,0 +1,783 @@
+/* R- overlay fonts (Montserrat, Roboto, Roboto Mono, Titillium Web, Exo 2, Barlow Condensed, JetBrains Mono, Geist: SIL OFL). */
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Medium.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'RobotoRegular';
+  src: url('./fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoRegular';
+  src: url('./fonts/Roboto-Medium.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'RobotoMedium';
+  src: url('./fonts/Roboto-Medium.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMedium';
+  src: url('./fonts/Roboto-Bold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'RobotoSemibold';
+  src: url('./fonts/Roboto-Medium.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoSemibold';
+  src: url('./fonts/Roboto-Bold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'RobotoBold';
+  src: url('./fonts/Roboto-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoBold';
+  src: url('./fonts/Roboto-Black.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'RobotoExtra';
+  src: url('./fonts/Roboto-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoExtra';
+  src: url('./fonts/Roboto-Black.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'RobotoXxxbold';
+  src: url('./fonts/Roboto-Black.ttf');
+}
+
+@font-face {
+  font-family: 'MontserratCockpit';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratCockpit';
+  src: url('./fonts/Montserrat-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratCockpit';
+  src: url('./fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat-Medium.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'MontserratRegular';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratRegular';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratRegular';
+  src: url('./fonts/Montserrat-Medium.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'MontserratMedium';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratMedium';
+  src: url('./fonts/Montserrat-Regular.ttf');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MontserratMedium';
+  src: url('./fonts/Montserrat-Medium.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratMedium';
+  src: url('./fonts/Montserrat-SemiBold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'MontserratSemibold';
+  src: url('./fonts/Montserrat-Medium.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratSemibold';
+  src: url('./fonts/Montserrat-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratSemibold';
+  src: url('./fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('./fonts/Montserrat-SemiBold.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('./fonts/Montserrat-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('./fonts/Montserrat-ExtraBold.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'MontserratExtra';
+  src: url('./fonts/Montserrat-Bold.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratExtra';
+  src: url('./fonts/Montserrat-ExtraBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MontserratExtra';
+  src: url('./fonts/Montserrat-Black.ttf');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'MontserratXxxbold';
+  src: url('./fonts/Montserrat-Black.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  src: url('./fonts/TitilliumWeb-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  src: url('./fonts/TitilliumWeb-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebRegular';
+  src: url('./fonts/TitilliumWeb-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebRegular';
+  src: url('./fonts/TitilliumWeb-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebMedium';
+  src: url('./fonts/TitilliumWeb-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebMedium';
+  src: url('./fonts/TitilliumWeb-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebSemibold';
+  src: url('./fonts/TitilliumWeb-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebSemibold';
+  src: url('./fonts/TitilliumWeb-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebBold';
+  src: url('./fonts/TitilliumWeb-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebBold';
+  src: url('./fonts/TitilliumWeb-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebExtra';
+  src: url('./fonts/TitilliumWeb-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebExtra';
+  src: url('./fonts/TitilliumWeb-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitilliumWebXxxbold';
+  src: url('./fonts/TitilliumWeb-Black.ttf');
+}
+
+@font-face {
+  font-family: 'BarlowCondensed';
+  src: url('./fonts/BarlowCondensed-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensed';
+  src: url('./fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedRegular';
+  src: url('./fonts/BarlowCondensed-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedRegular';
+  src: url('./fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedMedium';
+  src: url('./fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedMedium';
+  src: url('./fonts/BarlowCondensed-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedSemibold';
+  src: url('./fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedSemibold';
+  src: url('./fonts/BarlowCondensed-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedBold';
+  src: url('./fonts/BarlowCondensed-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedBold';
+  src: url('./fonts/BarlowCondensed-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedExtra';
+  src: url('./fonts/BarlowCondensed-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedExtra';
+  src: url('./fonts/BarlowCondensed-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BarlowCondensedXxxbold';
+  src: url('./fonts/BarlowCondensed-Black.ttf');
+}
+
+@font-face {
+  font-family: 'Exo2';
+  src: url('./fonts/Exo2-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2';
+  src: url('./fonts/Exo2-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Regular';
+  src: url('./fonts/Exo2-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Regular';
+  src: url('./fonts/Exo2-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Medium';
+  src: url('./fonts/Exo2-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Medium';
+  src: url('./fonts/Exo2-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Semibold';
+  src: url('./fonts/Exo2-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Semibold';
+  src: url('./fonts/Exo2-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Bold';
+  src: url('./fonts/Exo2-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Bold';
+  src: url('./fonts/Exo2-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Extra';
+  src: url('./fonts/Exo2-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Extra';
+  src: url('./fonts/Exo2-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo2Xxxbold';
+  src: url('./fonts/Exo2-Black.ttf');
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('./fonts/RobotoMono-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('./fonts/RobotoMono-Medium.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoRegular';
+  src: url('./fonts/RobotoMono-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoRegular';
+  src: url('./fonts/RobotoMono-Medium.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoMedium';
+  src: url('./fonts/RobotoMono-Medium.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoMedium';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoSemibold';
+  src: url('./fonts/RobotoMono-Medium.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoSemibold';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoBold';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoBold';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoExtra';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoExtra';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoMonoXxxbold';
+  src: url('./fonts/RobotoMono-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url('./fonts/JetBrainsMono-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url('./fonts/JetBrainsMono-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoRegular';
+  src: url('./fonts/JetBrainsMono-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoRegular';
+  src: url('./fonts/JetBrainsMono-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoMedium';
+  src: url('./fonts/JetBrainsMono-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoMedium';
+  src: url('./fonts/JetBrainsMono-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoSemibold';
+  src: url('./fonts/JetBrainsMono-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoSemibold';
+  src: url('./fonts/JetBrainsMono-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoBold';
+  src: url('./fonts/JetBrainsMono-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoBold';
+  src: url('./fonts/JetBrainsMono-ExtraBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoExtra';
+  src: url('./fonts/JetBrainsMono-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoExtra';
+  src: url('./fonts/JetBrainsMono-ExtraBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrainsMonoXxxbold';
+  src: url('./fonts/JetBrainsMono-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistRegular';
+  src: url('./fonts/Geist-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistRegular';
+  src: url('./fonts/Geist-SemiBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistMedium';
+  src: url('./fonts/Geist-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistMedium';
+  src: url('./fonts/Geist-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistSemibold';
+  src: url('./fonts/Geist-SemiBold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistSemibold';
+  src: url('./fonts/Geist-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistBold';
+  src: url('./fonts/Geist-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistBold';
+  src: url('./fonts/Geist-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistExtra';
+  src: url('./fonts/Geist-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistExtra';
+  src: url('./fonts/Geist-Black.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistXxxbold';
+  src: url('./fonts/Geist-Black.ttf');
+}

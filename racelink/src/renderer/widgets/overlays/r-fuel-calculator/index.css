@@ -1,0 +1,12 @@
+@import '../r-common/container.css';
+@import '../r-common/fit.css';
+@import './fuelCalculator.css';
+
+/* The overlay fills its window: the font size follows the window height
+   (useFitFont) and the left panel takes the spare width. */
+.FuelCalculatorOverlay {
+  width: 100%;
+}
+.FuelCalculatorOverlay .rightContent {
+  flex-shrink: 0;
+}

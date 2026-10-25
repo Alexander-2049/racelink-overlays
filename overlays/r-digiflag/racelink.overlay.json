@@ -1,0 +1,289 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "r-digiflag",
+  "version": "1.0.0",
+  "name": "R-Digiflag",
+  "category": "race",
+  "description": "R-Digiflag, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      210,
+      210
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      840,
+      840
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "Основное",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "Type",
+                "label": "Тип",
+                "type": "select",
+                "default": "big",
+                "options": [
+                  {
+                    "value": "big",
+                    "label": "Большой"
+                  },
+                  {
+                    "value": "small",
+                    "label": "Малый"
+                  },
+                  {
+                    "value": "doublestrip",
+                    "label": "Две полосы"
+                  }
+                ]
+              },
+              {
+                "key": "HideWhenNoFlag",
+                "label": "Скрывать, когда не активен",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "ShowFlagInPreview",
+                "label": "Флаг в предпросмотре",
+                "description": "Какой флаг показывать в демо-режиме и при настройке расположения.",
+                "type": "select",
+                "default": "green",
+                "options": [
+                  {
+                    "value": "checkered",
+                    "label": "Клетчатый"
+                  },
+                  {
+                    "value": "white",
+                    "label": "Белый"
+                  },
+                  {
+                    "value": "green",
+                    "label": "Зелёный"
+                  },
+                  {
+                    "value": "yellow",
+                    "label": "Жёлтый"
+                  },
+                  {
+                    "value": "red",
+                    "label": "Красный"
+                  },
+                  {
+                    "value": "blue",
+                    "label": "Синий"
+                  },
+                  {
+                    "value": "debris",
+                    "label": "Мусор на трассе"
+                  },
+                  {
+                    "value": "crossed",
+                    "label": "Скрещённые"
+                  },
+                  {
+                    "value": "oneLapToGreen",
+                    "label": "Круг до зелёного"
+                  },
+                  {
+                    "value": "tenToGo",
+                    "label": "10 кругов до финиша"
+                  },
+                  {
+                    "value": "fiveToGo",
+                    "label": "5 кругов до финиша"
+                  },
+                  {
+                    "value": "randomWaving",
+                    "label": "Случайный"
+                  },
+                  {
+                    "value": "caution",
+                    "label": "Нейтрализация"
+                  },
+                  {
+                    "value": "black",
+                    "label": "Чёрный"
+                  },
+                  {
+                    "value": "disqualify",
+                    "label": "Дисквалификация"
+                  },
+                  {
+                    "value": "furled",
+                    "label": "Срезка трассы"
+                  },
+                  {
+                    "value": "repair",
+                    "label": "Обязательный ремонт"
+                  },
+                  {
+                    "value": "startReady",
+                    "label": "Старт: готовность"
+                  },
+                  {
+                    "value": "startSet",
+                    "label": "Старт: внимание"
+                  },
+                  {
+                    "value": "startGo",
+                    "label": "Старт: go"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Настройки полос",
+            "settings": [
+              {
+                "key": "DoubleStripDistance",
+                "label": "Дистанция между",
+                "type": "number",
+                "default": 200,
+                "min": 0,
+                "max": 1000,
+                "step": 1,
+                "unit": "px",
+                "visibleIf": {
+                  "Type": "doublestrip"
+                }
+              }
+            ]
+          },
+          {
+            "label": "Вид",
+            "settings": [
+              {
+                "key": "FontSize",
+                "label": "Размер",
+                "type": "number",
+                "default": 14,
+                "min": 6,
+                "max": 60,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "Opacity",
+                "label": "Непрозрачность фона",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "FontFamily",
+                "label": "Шрифт",
+                "type": "select",
+                "default": "Montserrat",
+                "options": [
+                  {
+                    "value": "Montserrat",
+                    "label": "Montserrat"
+                  },
+                  {
+                    "value": "Roboto",
+                    "label": "Roboto"
+                  },
+                  {
+                    "value": "RobotoMono",
+                    "label": "Roboto Mono"
+                  },
+                  {
+                    "value": "TitilliumWeb",
+                    "label": "Titillium Web"
+                  },
+                  {
+                    "value": "Exo2",
+                    "label": "Exo 2"
+                  },
+                  {
+                    "value": "BarlowCondensed",
+                    "label": "Barlow Condensed"
+                  },
+                  {
+                    "value": "JetBrainsMono",
+                    "label": "JetBrains Mono"
+                  },
+                  {
+                    "value": "Geist",
+                    "label": "Geist"
+                  }
+                ]
+              },
+              {
+                "key": "FontWeight",
+                "label": "Толщина",
+                "type": "select",
+                "default": "Semibold",
+                "options": [
+                  {
+                    "value": "Regular",
+                    "label": "Обычный"
+                  },
+                  {
+                    "value": "Medium",
+                    "label": "Средний"
+                  },
+                  {
+                    "value": "Semibold",
+                    "label": "Полужирный"
+                  },
+                  {
+                    "value": "Bold",
+                    "label": "Жирный"
+                  },
+                  {
+                    "value": "Extra",
+                    "label": "Сверхжирный"
+                  }
+                ]
+              },
+              {
+                "key": "ShowTitle",
+                "label": "Заголовок оверлея",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "OverlayTitleColor",
+                "label": "Цвет заголовка",
+                "type": "color",
+                "default": "#d10404",
+                "visibleIf": {
+                  "ShowTitle": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Inputs"
+    ],
+    "visibility": "public"
+  }
+}
