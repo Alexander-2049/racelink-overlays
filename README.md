@@ -12,7 +12,7 @@ racelink/             the overlays' code, shared by the projects, at the paths i
                       imports as it did there; model/useRacingOverlay.ts and
                       shared/api/racelink-runtime/ are the app's overlay runtime on
                       the public SDK (@racelink/overlay)
-scripts/              install-builds.mjs
+scripts/              install-builds.mjs, gen-previews.mjs
 ```
 
 | Overlay | id |
@@ -46,7 +46,12 @@ and the shared folders next to it (`r-common/`, `nfsmw-common/`).
 npm run build                     # every overlay → overlays/<id>/dist/
 npm run install-overlays          # into %APPDATA%/Racelink/overlays (Racelink sees them at once)
 npm run install-overlays -- <dir> # into another custom overlays folder
+npm run previews                  # preview/preview.png of each overlay from demo data
 ```
+
+`npm run previews` renders each built overlay with demo data in headless Edge or
+Chrome and saves a square 1024 px image (the Workshop preview) in its
+`preview/` folder; build again afterwards so `dist/` carries it.
 
 Publish an overlay to the Steam Workshop from Racelink Studio (add its
 project folder there).
