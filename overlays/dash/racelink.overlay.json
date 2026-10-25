@@ -1,0 +1,85 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "dash",
+  "version": "1.0.0",
+  "name": "Dash",
+  "category": "driving",
+  "description": "Dash, the Racelink overlay, as a standalone overlay.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      582,
+      230
+    ],
+    "min": [
+      60,
+      30
+    ],
+    "max": [
+      2328,
+      920
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "visibility",
+        "label": "Visibility",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showGreen",
+                "label": "Show green",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showYellow",
+                "label": "Show yellow",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showOrange",
+                "label": "Show orange",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showRed",
+                "label": "Show red",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "appearance",
+        "label": "Appearance",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "backgroundOpacity",
+                "label": "Background transparency",
+                "type": "number",
+                "default": 60,
+                "min": 0,
+                "max": 100,
+                "step": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

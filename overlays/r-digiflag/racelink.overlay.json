@@ -30,133 +30,133 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "Type",
-                "label": "Тип",
+                "label": "Type",
                 "type": "select",
                 "default": "big",
                 "options": [
                   {
                     "value": "big",
-                    "label": "Большой"
+                    "label": "Large"
                   },
                   {
                     "value": "small",
-                    "label": "Малый"
+                    "label": "Small"
                   },
                   {
                     "value": "doublestrip",
-                    "label": "Две полосы"
+                    "label": "Two bars"
                   }
                 ]
               },
               {
                 "key": "HideWhenNoFlag",
-                "label": "Скрывать, когда не активен",
+                "label": "Hide when inactive",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "ShowFlagInPreview",
-                "label": "Флаг в предпросмотре",
-                "description": "Какой флаг показывать в демо-режиме и при настройке расположения.",
+                "label": "Preview flag",
+                "description": "The flag shown in demo mode and while arranging overlays.",
                 "type": "select",
                 "default": "green",
                 "options": [
                   {
                     "value": "checkered",
-                    "label": "Клетчатый"
+                    "label": "Chequered"
                   },
                   {
                     "value": "white",
-                    "label": "Белый"
+                    "label": "White"
                   },
                   {
                     "value": "green",
-                    "label": "Зелёный"
+                    "label": "Green"
                   },
                   {
                     "value": "yellow",
-                    "label": "Жёлтый"
+                    "label": "Yellow"
                   },
                   {
                     "value": "red",
-                    "label": "Красный"
+                    "label": "Red"
                   },
                   {
                     "value": "blue",
-                    "label": "Синий"
+                    "label": "Blue"
                   },
                   {
                     "value": "debris",
-                    "label": "Мусор на трассе"
+                    "label": "Debris"
                   },
                   {
                     "value": "crossed",
-                    "label": "Скрещённые"
+                    "label": "Crossed"
                   },
                   {
                     "value": "oneLapToGreen",
-                    "label": "Круг до зелёного"
+                    "label": "One lap to green"
                   },
                   {
                     "value": "tenToGo",
-                    "label": "10 кругов до финиша"
+                    "label": "10 laps to go"
                   },
                   {
                     "value": "fiveToGo",
-                    "label": "5 кругов до финиша"
+                    "label": "5 laps to go"
                   },
                   {
                     "value": "randomWaving",
-                    "label": "Случайный"
+                    "label": "Random"
                   },
                   {
                     "value": "caution",
-                    "label": "Нейтрализация"
+                    "label": "Caution"
                   },
                   {
                     "value": "black",
-                    "label": "Чёрный"
+                    "label": "Black"
                   },
                   {
                     "value": "disqualify",
-                    "label": "Дисквалификация"
+                    "label": "Disqualification"
                   },
                   {
                     "value": "furled",
-                    "label": "Срезка трассы"
+                    "label": "Cut track"
                   },
                   {
                     "value": "repair",
-                    "label": "Обязательный ремонт"
+                    "label": "Mandatory repair"
                   },
                   {
                     "value": "startReady",
-                    "label": "Старт: готовность"
+                    "label": "Start: get ready"
                   },
                   {
                     "value": "startSet",
-                    "label": "Старт: внимание"
+                    "label": "Start: set"
                   },
                   {
                     "value": "startGo",
-                    "label": "Старт: go"
+                    "label": "Start: go"
                   }
                 ]
               }
             ]
           },
           {
-            "label": "Настройки полос",
+            "label": "Bar settings",
             "settings": [
               {
                 "key": "DoubleStripDistance",
-                "label": "Дистанция между",
+                "label": "Spacing",
                 "type": "number",
                 "default": 200,
                 "min": 0,
@@ -170,11 +170,11 @@
             ]
           },
           {
-            "label": "Вид",
+            "label": "Look",
             "settings": [
               {
                 "key": "FontSize",
-                "label": "Размер",
+                "label": "Size",
                 "type": "number",
                 "default": 14,
                 "min": 6,
@@ -184,7 +184,7 @@
               },
               {
                 "key": "Opacity",
-                "label": "Непрозрачность фона",
+                "label": "Background opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -193,7 +193,7 @@
               },
               {
                 "key": "FontFamily",
-                "label": "Шрифт",
+                "label": "Font",
                 "type": "select",
                 "default": "Montserrat",
                 "options": [
@@ -233,41 +233,41 @@
               },
               {
                 "key": "FontWeight",
-                "label": "Толщина",
+                "label": "Weight",
                 "type": "select",
                 "default": "Semibold",
                 "options": [
                   {
                     "value": "Regular",
-                    "label": "Обычный"
+                    "label": "Regular"
                   },
                   {
                     "value": "Medium",
-                    "label": "Средний"
+                    "label": "Medium"
                   },
                   {
                     "value": "Semibold",
-                    "label": "Полужирный"
+                    "label": "Semibold"
                   },
                   {
                     "value": "Bold",
-                    "label": "Жирный"
+                    "label": "Bold"
                   },
                   {
                     "value": "Extra",
-                    "label": "Сверхжирный"
+                    "label": "Extra bold"
                   }
                 ]
               },
               {
                 "key": "ShowTitle",
-                "label": "Заголовок оверлея",
+                "label": "Overlay header",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "OverlayTitleColor",
-                "label": "Цвет заголовка",
+                "label": "Header colour",
                 "type": "color",
                 "default": "#d10404",
                 "visibleIf": {

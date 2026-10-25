@@ -30,67 +30,67 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "positionMode",
-                "label": "Позиция",
+                "label": "Position",
                 "type": "select",
                 "default": "overall",
                 "options": [
                   {
                     "value": "overall",
-                    "label": "Общая"
+                    "label": "Overall"
                   },
                   {
                     "value": "class",
-                    "label": "В классе"
+                    "label": "In class"
                   }
                 ],
-                "description": "В классе — позиции и соперники только своего класса."
+                "description": "In class: positions and opponents of your class only."
               },
               {
                 "key": "nameFormat",
-                "label": "Имя гонщика",
+                "label": "Driver name",
                 "type": "select",
                 "default": "last",
                 "options": [
                   {
                     "value": "last",
-                    "label": "Фамилия"
+                    "label": "Last name"
                   },
                   {
                     "value": "first",
-                    "label": "Имя"
+                    "label": "First name"
                   },
                   {
                     "value": "full",
-                    "label": "Полностью"
+                    "label": "In full"
                   }
                 ]
               },
               {
                 "key": "units",
-                "label": "Расстояние до соперников",
+                "label": "Distance to opponents",
                 "type": "select",
                 "default": "auto",
                 "options": [
                   {
                     "value": "auto",
-                    "label": "Как в игре"
+                    "label": "As in the game"
                   },
                   {
                     "value": "metric",
-                    "label": "Метры"
+                    "label": "Metres"
                   },
                   {
                     "value": "imperial",
-                    "label": "Футы"
+                    "label": "Feet"
                   }
                 ],
-                "description": "Строки по очереди показывают имена и расстояние до них."
+                "description": "Rows take turns showing names and the distance to them."
               }
             ]
           }

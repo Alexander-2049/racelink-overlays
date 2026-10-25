@@ -1,18 +1,18 @@
 # Racelink Overlays
 
-The R- and NFSMW- overlays of Racelink, each a standalone Racelink overlay
+The R- and NFSMW- overlays and Dash, formerly built into Racelink, each a standalone Racelink overlay
 project made with `npm create @racelink/overlay@latest` (React + TypeScript).
 They install like any community overlay: from the Steam Workshop, a zip
 archive or a folder dropped on Racelink, or the custom overlays folder.
 
 ```text
 overlays/<id>/        one project per overlay: manifest, entry, build output in dist/
-racelink/             the overlays' code, shared by the projects, at the paths it has
+racelink/             the overlays' code, shared by the projects, at the paths it had
                       in the Racelink app (src/renderer/widgets/overlays/…), so it
-                      imports as it does there
-shims/                the app's overlay runtime on the public SDK (@racelink/overlay):
-                      useRacingOverlay, demoHistory, the page frame
-scripts/              import-from-app.mjs, install-builds.mjs
+                      imports as it did there; model/useRacingOverlay.ts and
+                      shared/api/racelink-runtime/ are the app's overlay runtime on
+                      the public SDK (@racelink/overlay)
+scripts/              install-builds.mjs
 ```
 
 | Overlay | id |
@@ -21,6 +21,12 @@ scripts/              import-from-app.mjs, install-builds.mjs
 | R-Boost Box, R-Lap Timing, R-LapTime Graph, R-Pitbox Helper | `r-boost-box`, `r-lap-timing`, `r-laptime-graph`, `r-pitbox-helper` |
 | R-Fuel Calculator, R-G-Force Meter, R-Delta Trace | `r-fuel-calculator`, `r-g-force-meter`, `r-delta-trace` |
 | NFSMW-Speedometer, NFSMW-EA Trax, NFSMW-Minimap, NFSMW-Leaderboard, NFSMW-Lap Time | `nfsmw-speedometer`, `nfsmw-ea-trax`, `nfsmw-minimap`, `nfsmw-leaderboard`, `nfsmw-lap-time` |
+| Dash | `dash` |
+
+Layouts made while these overlays were built in keep them: Racelink turns a
+built-in `r-standings` into the package `local:r-standings` (and so on), so
+they show again, with their settings, once the overlay is installed in the
+custom overlays folder.
 
 ## Work on an overlay
 
@@ -52,16 +58,3 @@ The projects use the SDK from the Racelink sources
 `@racelink/overlay@2.3.0` predates the `ready` event, `demoHistory` and
 `?demo=<game>` the overlays need. After the next SDK release on npm, set the
 dependency of each project back to `^<version>`.
-
-## Importing again
-
-`scripts/import-from-app.mjs` copies the overlays from the Racelink app and
-writes each manifest from the app's catalog (id, name, category, size, games,
-settings, so layouts and settings carry over):
-
-```bash
-cd ../Racelink-Tauri && npx tsx ../Racelink-Overlays/scripts/import-from-app.mjs
-```
-
-It overwrites `racelink/`, the manifests and `src/main.tsx` of each project.
-Once the overlays are maintained here, edit them here instead.

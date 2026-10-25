@@ -30,13 +30,13 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "Opacity",
-                "label": "Непрозрачность фона",
+                "label": "Background opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -45,7 +45,7 @@
               },
               {
                 "key": "FontFamily",
-                "label": "Шрифт",
+                "label": "Font",
                 "type": "select",
                 "default": "Montserrat",
                 "options": [
@@ -85,41 +85,41 @@
               },
               {
                 "key": "FontWeight",
-                "label": "Толщина",
+                "label": "Weight",
                 "type": "select",
                 "default": "Semibold",
                 "options": [
                   {
                     "value": "Regular",
-                    "label": "Обычный"
+                    "label": "Regular"
                   },
                   {
                     "value": "Medium",
-                    "label": "Средний"
+                    "label": "Medium"
                   },
                   {
                     "value": "Semibold",
-                    "label": "Полужирный"
+                    "label": "Semibold"
                   },
                   {
                     "value": "Bold",
-                    "label": "Жирный"
+                    "label": "Bold"
                   },
                   {
                     "value": "Extra",
-                    "label": "Сверхжирный"
+                    "label": "Extra bold"
                   }
                 ]
               },
               {
                 "key": "ShowTitle",
-                "label": "Заголовок оверлея",
+                "label": "Overlay header",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "OverlayTitleColor",
-                "label": "Цвет заголовка",
+                "label": "Header colour",
                 "type": "color",
                 "default": "#d10404",
                 "visibleIf": {
@@ -128,7 +128,7 @@
               },
               {
                 "key": "ShowLastLapInfoBox",
-                "label": "Время последнего круга",
+                "label": "Last lap time",
                 "type": "boolean",
                 "default": true
               }

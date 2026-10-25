@@ -29,13 +29,13 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "Opacity",
-                "label": "Непрозрачность фона",
+                "label": "Background opacity",
                 "type": "number",
                 "default": 0.6,
                 "min": 0,
@@ -44,7 +44,7 @@
               },
               {
                 "key": "FontFamily",
-                "label": "Шрифт",
+                "label": "Font",
                 "type": "select",
                 "default": "Montserrat",
                 "options": [
@@ -84,41 +84,41 @@
               },
               {
                 "key": "FontWeight",
-                "label": "Толщина",
+                "label": "Weight",
                 "type": "select",
                 "default": "Semibold",
                 "options": [
                   {
                     "value": "Regular",
-                    "label": "Обычный"
+                    "label": "Regular"
                   },
                   {
                     "value": "Medium",
-                    "label": "Средний"
+                    "label": "Medium"
                   },
                   {
                     "value": "Semibold",
-                    "label": "Полужирный"
+                    "label": "Semibold"
                   },
                   {
                     "value": "Bold",
-                    "label": "Жирный"
+                    "label": "Bold"
                   },
                   {
                     "value": "Extra",
-                    "label": "Сверхжирный"
+                    "label": "Extra bold"
                   }
                 ]
               },
               {
                 "key": "ShowTitle",
-                "label": "Заголовок оверлея",
+                "label": "Overlay header",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "OverlayTitleColor",
-                "label": "Цвет заголовка",
+                "label": "Header colour",
                 "type": "color",
                 "default": "#d10404",
                 "visibleIf": {
@@ -127,13 +127,13 @@
               },
               {
                 "key": "AlwaysShow",
-                "label": "Всегда показывать",
+                "label": "Always show",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "ShowDurationAfterLeavingPits",
-                "label": "Время отображения после выезда из боксов (в сек.)",
+                "label": "Display time after leaving the pits (s)",
                 "type": "number",
                 "default": 15,
                 "min": 0,
@@ -142,32 +142,32 @@
               },
               {
                 "key": "ShowPitLimiter",
-                "label": "Показывать ограничитель скорости",
+                "label": "Show the pit limiter",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowPitSpeedDelta",
-                "label": "Показывать дельту скорости",
+                "label": "Show the speed delta",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowPitStallDistance",
-                "label": "Показывать дистанцию до пит-столла",
+                "label": "Show the distance to the pit stall",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "PitBoxDetectionRange",
-                "label": "Дальность до детекции пит-столла",
+                "label": "Pit stall detection range",
                 "type": "number",
                 "default": 200,
                 "min": 20,
                 "max": 1000,
                 "step": 10,
-                "unit": "м",
-                "description": "С какого расстояния до пит-столла начинает заполняться индикатор дистанции.",
+                "unit": "m",
+                "description": "The distance to the pit stall at which the distance indicator starts filling.",
                 "visibleIf": {
                   "ShowPitStallDistance": true
                 }
@@ -178,43 +178,43 @@
       },
       {
         "id": "tires",
-        "label": "Износ шин",
+        "label": "Tyre wear",
         "groups": [
           {
             "settings": [
               {
                 "key": "ShowTireTemp",
-                "label": "Показывать температуру шин",
+                "label": "Show tyre temperature",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowTireWear",
-                "label": "Показывать износ шин",
+                "label": "Show tyre wear",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "PitTireWearVersion",
-                "label": "Визуализация износа шин",
+                "label": "Tyre wear display",
                 "type": "select",
                 "default": "OPACITY",
                 "options": [
                   {
                     "value": "OPACITY",
-                    "label": "Оттенки серого"
+                    "label": "Greyscale"
                   },
                   {
                     "value": "SIZED",
-                    "label": "График"
+                    "label": "Chart"
                   },
                   {
                     "value": "COLORED",
-                    "label": "Цвет"
+                    "label": "Colour"
                   },
                   {
                     "value": "COLORED_AND_SIZED",
-                    "label": "Цвет и график"
+                    "label": "Colour and chart"
                   }
                 ],
                 "visibleIf": {

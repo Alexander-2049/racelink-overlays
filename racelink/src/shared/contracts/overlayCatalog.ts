@@ -2757,19 +2757,19 @@ const plainCatalog: Readonly<
       pages: [
         {
           id: 'general',
-          label: 'ÐžÐ±Ñ‰ÐµÐµ',
+          label: 'Общее',
           groups: [
             {
               settings: [
                 {
                   key: 'enableTurnNames',
-                  label: 'Ð’ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ñ Ð¿Ð¾Ð²Ð¾Ñ€Ð¾Ñ‚Ð¾Ð²',
+                  label: 'Включить названия поворотов',
                   type: 'boolean',
                   default: false,
                 },
                 {
                   key: 'showCarNumbers',
-                  label: 'ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ñ‚ÑŒ Ð½Ð¾Ð¼ÐµÑ€Ð° Ð¼Ð°ÑˆÐ¸Ð½',
+                  label: 'Показывать номера машин',
                   type: 'boolean',
                   default: true,
                 },
@@ -2781,17 +2781,17 @@ const plainCatalog: Readonly<
                 },
                 {
                   key: 'displayMode',
-                  label: 'Ð ÐµÐ¶Ð¸Ð¼ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ',
+                  label: 'Режим отображения',
                   type: 'select',
                   default: 'carNumber',
                   options: [
                     {
                       value: 'carNumber',
-                      label: 'ÐÐ¾Ð¼ÐµÑ€ Ð¼Ð°ÑˆÐ¸Ð½Ñ‹',
+                      label: 'Номер машины',
                     },
                     {
                       value: 'sessionPosition',
-                      label: 'ÐŸÐ¾Ð·Ð¸Ñ†Ð¸Ñ Ð² ÑÐµÑÑÐ¸Ð¸',
+                      label: 'Позиция в сессии',
                     },
                   ],
                 },
@@ -2801,13 +2801,13 @@ const plainCatalog: Readonly<
         },
         {
           id: 'markers',
-          label: 'ÐœÐ°Ñ€ÐºÐµÑ€Ñ‹',
+          label: 'Маркеры',
           groups: [
             {
               settings: [
                 {
                   key: 'driverCircleSize',
-                  label: 'Ð Ð°Ð·Ð¼ÐµÑ€ ÐºÑ€ÑƒÐ¶ÐºÐ¾Ð² Ð¿Ð¸Ð»Ð¾Ñ‚Ð¾Ð²',
+                  label: 'Размер кружков пилотов',
                   type: 'number',
                   default: 44,
                   min: 10,
@@ -2816,7 +2816,7 @@ const plainCatalog: Readonly<
                 },
                 {
                   key: 'playerCircleSize',
-                  label: 'Ð Ð°Ð·Ð¼ÐµÑ€ ÐºÑ€ÑƒÐ³Ð° Ð¸Ð³Ñ€Ð¾ÐºÐ°',
+                  label: 'Размер круга игрока',
                   type: 'number',
                   default: 43,
                   min: 10,
@@ -2829,19 +2829,19 @@ const plainCatalog: Readonly<
         },
         {
           id: 'track',
-          label: 'Ð¢Ñ€Ð°ÑÑÐ°',
+          label: 'Трасса',
           groups: [
             {
               settings: [
                 {
                   key: 'invertTrackColors',
-                  label: 'Ð˜Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ†Ð²ÐµÑ‚Ð° Ñ‚Ñ€Ð°ÑÑÑ‹',
+                  label: 'Инвертировать цвета трассы',
                   type: 'boolean',
                   default: false,
                 },
                 {
                   key: 'trackOutlineWidth',
-                  label: 'Ð¨Ð¸Ñ€Ð¸Ð½Ð° ÐºÐ¾Ð½Ñ‚ÑƒÑ€Ð° Ñ‚Ñ€Ð°ÑÑÑ‹',
+                  label: 'Ширина контура трассы',
                   type: 'number',
                   default: 25,
                   min: 1,

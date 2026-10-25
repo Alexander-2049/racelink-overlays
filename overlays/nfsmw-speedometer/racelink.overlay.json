@@ -31,118 +31,118 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
-            "label": "Оформление",
+            "label": "Appearance",
             "settings": [
               {
                 "key": "hudStyle",
-                "label": "Стиль шкалы",
+                "label": "Gauge style",
                 "type": "select",
                 "default": "0",
                 "options": [
                   {
                     "value": "0",
-                    "label": "Стиль 1"
+                    "label": "Style 1"
                   },
                   {
                     "value": "1",
-                    "label": "Стиль 2"
+                    "label": "Style 2"
                   },
                   {
                     "value": "2",
-                    "label": "Стиль 3"
+                    "label": "Style 3"
                   },
                   {
                     "value": "3",
-                    "label": "Стиль 4"
+                    "label": "Style 4"
                   },
                   {
                     "value": "4",
-                    "label": "Стиль 5"
+                    "label": "Style 5"
                   },
                   {
                     "value": "5",
-                    "label": "Стиль 6"
+                    "label": "Style 6"
                   },
                   {
                     "value": "6",
-                    "label": "Стиль 7"
+                    "label": "Style 7"
                   },
                   {
                     "value": "7",
-                    "label": "Стиль 8"
+                    "label": "Style 8"
                   },
                   {
                     "value": "8",
-                    "label": "Стиль 9"
+                    "label": "Style 9"
                   },
                   {
                     "value": "9",
-                    "label": "Стиль 10"
+                    "label": "Style 10"
                   },
                   {
                     "value": "10",
-                    "label": "Стиль 11"
+                    "label": "Style 11"
                   }
                 ]
               },
               {
                 "key": "gaugeFacePalette",
-                "label": "Цвет циферблата",
+                "label": "Dial colour",
                 "type": "select",
                 "default": "3",
                 "options": [
                   {
                     "value": "1",
-                    "label": "Белый"
+                    "label": "White"
                   },
                   {
                     "value": "2",
-                    "label": "Серый"
+                    "label": "Grey"
                   },
                   {
                     "value": "3",
-                    "label": "Оранжевый"
+                    "label": "Orange"
                   },
                   {
                     "value": "4",
-                    "label": "Красный"
+                    "label": "Red"
                   },
                   {
                     "value": "5",
-                    "label": "Розовый"
+                    "label": "Pink"
                   },
                   {
                     "value": "6",
-                    "label": "Голубой"
+                    "label": "Light blue"
                   },
                   {
                     "value": "7",
-                    "label": "Салатовый"
+                    "label": "Lime"
                   },
                   {
                     "value": "8",
-                    "label": "Бирюзовый"
+                    "label": "Turquoise"
                   },
                   {
                     "value": "9",
-                    "label": "Синий"
+                    "label": "Blue"
                   },
                   {
                     "value": "10",
-                    "label": "Сиреневый"
+                    "label": "Lilac"
                   },
                   {
                     "value": "custom",
-                    "label": "Свой цвет"
+                    "label": "Custom colour"
                   }
                 ]
               },
               {
                 "key": "gaugeFaceColor",
-                "label": "Свой цвет циферблата",
+                "label": "Custom dial colour",
                 "type": "color",
                 "default": "#FDC172",
                 "visibleIf": {
@@ -151,59 +151,59 @@
               },
               {
                 "key": "needlePalette",
-                "label": "Цвет стрелок",
+                "label": "Needle colour",
                 "type": "select",
                 "default": "3",
                 "options": [
                   {
                     "value": "1",
-                    "label": "Белый"
+                    "label": "White"
                   },
                   {
                     "value": "2",
-                    "label": "Серый"
+                    "label": "Grey"
                   },
                   {
                     "value": "3",
-                    "label": "Оранжевый"
+                    "label": "Orange"
                   },
                   {
                     "value": "4",
-                    "label": "Красный"
+                    "label": "Red"
                   },
                   {
                     "value": "5",
-                    "label": "Розовый"
+                    "label": "Pink"
                   },
                   {
                     "value": "6",
-                    "label": "Голубой"
+                    "label": "Light blue"
                   },
                   {
                     "value": "7",
-                    "label": "Салатовый"
+                    "label": "Lime"
                   },
                   {
                     "value": "8",
-                    "label": "Бирюзовый"
+                    "label": "Turquoise"
                   },
                   {
                     "value": "9",
-                    "label": "Синий"
+                    "label": "Blue"
                   },
                   {
                     "value": "10",
-                    "label": "Сиреневый"
+                    "label": "Lilac"
                   },
                   {
                     "value": "custom",
-                    "label": "Свой цвет"
+                    "label": "Custom colour"
                   }
                 ]
               },
               {
                 "key": "needleColor",
-                "label": "Свой цвет стрелок",
+                "label": "Custom needle colour",
                 "type": "color",
                 "default": "#FDC172",
                 "visibleIf": {
@@ -212,59 +212,59 @@
               },
               {
                 "key": "letteringPalette",
-                "label": "Цвет разметки",
+                "label": "Marking colour",
                 "type": "select",
                 "default": "1",
                 "options": [
                   {
                     "value": "1",
-                    "label": "Белый"
+                    "label": "White"
                   },
                   {
                     "value": "2",
-                    "label": "Серый"
+                    "label": "Grey"
                   },
                   {
                     "value": "3",
-                    "label": "Оранжевый"
+                    "label": "Orange"
                   },
                   {
                     "value": "4",
-                    "label": "Красный"
+                    "label": "Red"
                   },
                   {
                     "value": "5",
-                    "label": "Розовый"
+                    "label": "Pink"
                   },
                   {
                     "value": "6",
-                    "label": "Голубой"
+                    "label": "Light blue"
                   },
                   {
                     "value": "7",
-                    "label": "Салатовый"
+                    "label": "Lime"
                   },
                   {
                     "value": "8",
-                    "label": "Бирюзовый"
+                    "label": "Turquoise"
                   },
                   {
                     "value": "9",
-                    "label": "Синий"
+                    "label": "Blue"
                   },
                   {
                     "value": "10",
-                    "label": "Сиреневый"
+                    "label": "Lilac"
                   },
                   {
                     "value": "custom",
-                    "label": "Свой цвет"
+                    "label": "Custom colour"
                   }
                 ]
               },
               {
                 "key": "letteringColor",
-                "label": "Свой цвет разметки",
+                "label": "Custom marking colour",
                 "type": "color",
                 "default": "#FDFDFD",
                 "visibleIf": {
@@ -274,21 +274,21 @@
             ]
           },
           {
-            "label": "Показания",
+            "label": "Readings",
             "settings": [
               {
                 "key": "units",
-                "label": "Единицы скорости",
+                "label": "Speed units",
                 "type": "select",
                 "default": "auto",
                 "options": [
                   {
                     "value": "auto",
-                    "label": "Как в игре"
+                    "label": "As in the game"
                   },
                   {
                     "value": "kmh",
-                    "label": "км/ч"
+                    "label": "km/h"
                   },
                   {
                     "value": "mph",
@@ -298,49 +298,49 @@
               },
               {
                 "key": "showTurbo",
-                "label": "Шкала наддува",
+                "label": "Boost gauge",
                 "type": "boolean",
                 "default": true,
-                "description": "Видна, когда игра сообщает давление наддува."
+                "description": "Visible when the game reports boost pressure."
               },
               {
                 "key": "nitrousSource",
-                "label": "Левая шкала (закись)",
+                "label": "Left gauge (nitrous)",
                 "type": "select",
                 "default": "fuel",
                 "options": [
                   {
                     "value": "fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "battery",
-                    "label": "Заряд батареи"
+                    "label": "Battery charge"
                   },
                   {
                     "value": "none",
-                    "label": "Нет"
+                    "label": "None"
                   }
                 ],
-                "description": "Значок закиси пульсирует, пока батарея отдаёт энергию."
+                "description": "The nitrous icon pulses while the battery gives out energy."
               },
               {
                 "key": "breakerSource",
-                "label": "Правая шкала (speedbreaker)",
+                "label": "Right gauge (speedbreaker)",
                 "type": "select",
                 "default": "battery",
                 "options": [
                   {
                     "value": "fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "battery",
-                    "label": "Заряд батареи"
+                    "label": "Battery charge"
                   },
                   {
                     "value": "none",
-                    "label": "Нет"
+                    "label": "None"
                   }
                 ]
               }

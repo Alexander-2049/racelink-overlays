@@ -28,36 +28,36 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "visibleRadiusMeters",
-                "label": "Радиус карты",
+                "label": "Map radius",
                 "type": "number",
                 "default": 250,
                 "min": 50,
                 "max": 1000,
                 "step": 10,
-                "unit": "м"
+                "unit": "m"
               },
               {
                 "key": "showTerrain",
-                "label": "Местность вокруг трассы",
+                "label": "Terrain around the track",
                 "type": "boolean",
                 "default": true,
-                "description": "Асфальт и вода с карты трассы, в цветах карты игры."
+                "description": "Tarmac and water from the track map, in the game map colours."
               },
               {
                 "key": "showOpponents",
-                "label": "Соперники",
+                "label": "Opponents",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "showStartLine",
-                "label": "Линия старта",
+                "label": "Start line",
                 "type": "boolean",
                 "default": true
               }

@@ -30,13 +30,13 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "Opacity",
-                "label": "Непрозрачность фона",
+                "label": "Background opacity",
                 "type": "number",
                 "default": 0.75,
                 "min": 0,
@@ -45,7 +45,7 @@
               },
               {
                 "key": "FontFamily",
-                "label": "Шрифт",
+                "label": "Font",
                 "type": "select",
                 "default": "Montserrat",
                 "options": [
@@ -85,41 +85,41 @@
               },
               {
                 "key": "FontWeight",
-                "label": "Толщина",
+                "label": "Weight",
                 "type": "select",
                 "default": "Semibold",
                 "options": [
                   {
                     "value": "Regular",
-                    "label": "Обычный"
+                    "label": "Regular"
                   },
                   {
                     "value": "Medium",
-                    "label": "Средний"
+                    "label": "Medium"
                   },
                   {
                     "value": "Semibold",
-                    "label": "Полужирный"
+                    "label": "Semibold"
                   },
                   {
                     "value": "Bold",
-                    "label": "Жирный"
+                    "label": "Bold"
                   },
                   {
                     "value": "Extra",
-                    "label": "Сверхжирный"
+                    "label": "Extra bold"
                   }
                 ]
               },
               {
                 "key": "ShowTitle",
-                "label": "Заголовок оверлея",
+                "label": "Overlay header",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "OverlayTitleColor",
-                "label": "Цвет заголовка",
+                "label": "Header colour",
                 "type": "color",
                 "default": "#d10404",
                 "visibleIf": {
@@ -132,20 +132,20 @@
       },
       {
         "id": "filters",
-        "label": "Фильтры времени круга",
+        "label": "Lap time filters",
         "groups": [
           {
             "settings": [
               {
                 "key": "LimitLapCount",
-                "label": "Ограничить количество кругов",
+                "label": "Limit the number of laps",
                 "type": "boolean",
                 "default": true,
-                "description": "Ограничивает количество кругов на графике."
+                "description": "Limits the number of laps on the chart."
               },
               {
                 "key": "LapCount",
-                "label": "Количество кругов для отображения",
+                "label": "Laps to show",
                 "type": "number",
                 "default": 20,
                 "min": 2,
@@ -157,14 +157,14 @@
               },
               {
                 "key": "IsFilterOn",
-                "label": "Фильтр времени круга",
+                "label": "Lap time filter",
                 "type": "boolean",
                 "default": false,
-                "description": "Убирает с графика лишние круги: первые, с пит-стопом, круги выезда."
+                "description": "Removes extra laps from the chart: first laps, pit laps, out laps."
               },
               {
                 "key": "FilterOutLower",
-                "label": "Фильтр ниже (сек)",
+                "label": "Filter below (s)",
                 "type": "number",
                 "default": 5,
                 "min": 0,
@@ -173,11 +173,11 @@
                 "visibleIf": {
                   "IsFilterOn": true
                 },
-                "description": "Убирает круги быстрее медианы больше чем на это число секунд."
+                "description": "Removes laps faster than the median by more than this many seconds."
               },
               {
                 "key": "FilterOutHigher",
-                "label": "Фильтр выше (сек)",
+                "label": "Filter above (s)",
                 "type": "number",
                 "default": 5,
                 "min": 0,
@@ -186,7 +186,7 @@
                 "visibleIf": {
                   "IsFilterOn": true
                 },
-                "description": "Убирает круги медленнее медианы больше чем на это число секунд."
+                "description": "Removes laps slower than the median by more than this many seconds."
               }
             ]
           }

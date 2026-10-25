@@ -75,6 +75,8 @@ type Snapshot = Readonly<{
   editMode: boolean;
   gameId: string | null;
   sampledAt: Readonly<Partial<Record<TelemetryTopic, number>>>;
+  /** Some telemetry has arrived. */
+  isReady: boolean;
 }>;
 
 const snapshot = (current: RacelinkOverlay<Settings>, settings: OverlaySettingsView): Snapshot => ({
@@ -84,6 +86,7 @@ const snapshot = (current: RacelinkOverlay<Settings>, settings: OverlaySettingsV
   editMode: current.editMode,
   gameId: current.game,
   sampledAt: current.sampledAt,
+  isReady: Object.keys(current.sampledAt).length > 0,
 });
 
 /**

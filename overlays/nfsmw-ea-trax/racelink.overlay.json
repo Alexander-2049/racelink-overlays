@@ -31,19 +31,19 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "delaySeconds",
-                "label": "Задержка после смены трека (сек)",
+                "label": "Delay after a track change (s)",
                 "type": "number",
                 "default": 3,
                 "min": 0,
                 "max": 15,
                 "step": 0.5,
-                "description": "Через сколько секунд после начала трека появляется плашка. Трек берётся из системных медиа-элементов управления (Настройки → Интеграции)."
+                "description": "How many seconds after a track starts the card appears. The track comes from the system media controls (Settings → Integrations)."
               }
             ]
           }

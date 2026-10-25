@@ -211,30 +211,24 @@ export type GameApi = Readonly<{
 export type GameAvailability =
   | Readonly<{ state: 'available' }>
   /** Works under Proton once the Racelink shared-memory bridge runs next to the game. */
-  | Readonly<{ state: 'needs-bridge'; hint: string }>
-  | Readonly<{ state: 'unsupported'; reason: string }>;
-
-const bridgeHint =
-  'На Linux игра запускается через Proton: данные читаются через мост разделяемой памяти Racelink.';
+  | Readonly<{ state: 'needs-bridge' }>
+  /** The interface names the reason in its language. */
+  | Readonly<{ state: 'unsupported'; reason: 'anti-cheat' | 'platform' }>;
 
 export const gameAvailability = (gameId: GameId, platform: DesktopPlatform): GameAvailability => {
   if (platform === 'win32') return { state: 'available' };
   if (platform === 'linux') {
-    if (gameId === 'iracing')
-      return {
-        state: 'unsupported',
-        reason: 'iRacing не запускается под Proton: его анти-чит не работает на Linux.',
-      };
+    if (gameId === 'iracing') return { state: 'unsupported', reason: 'anti-cheat' };
     if (
       gameId === 'le-mans-ultimate' ||
       gameId === 'assetto-corsa' ||
       gameId === 'assetto-corsa-rally'
     )
-      return { state: 'needs-bridge', hint: bridgeHint };
+      return { state: 'needs-bridge' };
     return { state: 'available' };
   }
   return getGameDefinition(gameId).capabilities.telemetry
-    ? { state: 'unsupported', reason: 'Эта система пока не поддерживается.' }
+    ? { state: 'unsupported', reason: 'platform' }
     : { state: 'available' };
 };
 

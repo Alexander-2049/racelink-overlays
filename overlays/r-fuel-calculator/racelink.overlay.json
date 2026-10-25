@@ -30,13 +30,13 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "Opacity",
-                "label": "Непрозрачность фона",
+                "label": "Background opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -45,7 +45,7 @@
               },
               {
                 "key": "FontFamily",
-                "label": "Шрифт",
+                "label": "Font",
                 "type": "select",
                 "default": "Montserrat",
                 "options": [
@@ -85,41 +85,41 @@
               },
               {
                 "key": "FontWeight",
-                "label": "Толщина",
+                "label": "Weight",
                 "type": "select",
                 "default": "Semibold",
                 "options": [
                   {
                     "value": "Regular",
-                    "label": "Обычный"
+                    "label": "Regular"
                   },
                   {
                     "value": "Medium",
-                    "label": "Средний"
+                    "label": "Medium"
                   },
                   {
                     "value": "Semibold",
-                    "label": "Полужирный"
+                    "label": "Semibold"
                   },
                   {
                     "value": "Bold",
-                    "label": "Жирный"
+                    "label": "Bold"
                   },
                   {
                     "value": "Extra",
-                    "label": "Сверхжирный"
+                    "label": "Extra bold"
                   }
                 ]
               },
               {
                 "key": "ShowTitle",
-                "label": "Заголовок оверлея",
+                "label": "Overlay header",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "OverlayTitleColor",
-                "label": "Цвет заголовка",
+                "label": "Header colour",
                 "type": "color",
                 "default": "#d10404",
                 "visibleIf": {
@@ -128,7 +128,7 @@
               },
               {
                 "key": "DecimalCount",
-                "label": "Цифр после запятой",
+                "label": "Decimal places",
                 "type": "number",
                 "default": 1,
                 "min": 0,
@@ -137,25 +137,25 @@
               },
               {
                 "key": "ShowFuelBar",
-                "label": "Топливный индикатор",
+                "label": "Fuel gauge",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowFuel",
-                "label": "Количество топлива",
+                "label": "Fuel amount",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowFuelHistory",
-                "label": "История расхода",
+                "label": "Consumption history",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "FuelHistoryOpacity",
-                "label": "Непрозрачность топливной истории",
+                "label": "Fuel history opacity",
                 "type": "number",
                 "default": 0.5,
                 "min": 0,
@@ -167,30 +167,30 @@
               },
               {
                 "key": "ShowTimeRemainingUntilEmpty",
-                "label": "Время с топливом",
+                "label": "Time on fuel",
                 "type": "boolean",
                 "default": false,
-                "description": "Сколько времени хватит топлива в баке."
+                "description": "How long the fuel in the tank lasts."
               },
               {
                 "key": "ShowTimeRemainingUntilEmptyTarget",
-                "label": "Целевое время с топливом",
+                "label": "Target time on fuel",
                 "type": "boolean",
                 "default": true,
-                "description": "Запас или нехватка времени на топливе до конца сессии: плюс — топлива хватит с запасом, минус — не хватит.",
+                "description": "Fuel time surplus or shortfall to the end of the session: plus means enough fuel to spare, minus means not enough.",
                 "visibleIf": {
                   "ShowTimeRemainingUntilEmpty": true
                 }
               },
               {
                 "key": "ShowLapsRemainingUntilEmpty",
-                "label": "Кругов до пустого бака",
+                "label": "Laps to empty",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "ShowLapsRemainingUntilEmptyTarget",
-                "label": "Цель по кругам",
+                "label": "Lap target",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
@@ -203,21 +203,21 @@
       },
       {
         "id": "strategies",
-        "label": "Стратегии дозаправки",
+        "label": "Refuel strategies",
         "groups": [
           {
-            "label": "Ряды расхода",
+            "label": "Consumption rows",
             "settings": [
               {
                 "key": "ShowAllLapsAverage",
-                "label": "Средний расход всех кругов",
+                "label": "Average consumption of all laps",
                 "type": "boolean",
                 "default": true,
-                "description": "Расход по среднему всех кругов сессии."
+                "description": "Consumption by the average of all session laps."
               },
               {
                 "key": "AllLapsAverageColor",
-                "label": "Цвет: Avg",
+                "label": "Colour: Avg",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -226,14 +226,14 @@
               },
               {
                 "key": "ShowHighestLap",
-                "label": "Наибольший расход",
+                "label": "Highest consumption",
                 "type": "boolean",
                 "default": true,
-                "description": "Расход по кругу с наибольшим расходом в сессии."
+                "description": "Consumption of the session lap that used the most."
               },
               {
                 "key": "HighestLapColor",
-                "label": "Цвет: Max",
+                "label": "Colour: Max",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -242,14 +242,14 @@
               },
               {
                 "key": "ShowLowestLap",
-                "label": "Наименьший расход",
+                "label": "Lowest consumption",
                 "type": "boolean",
                 "default": true,
-                "description": "Расход по кругу с наименьшим расходом в сессии."
+                "description": "Consumption of the session lap that used the least."
               },
               {
                 "key": "LowestLapColor",
-                "label": "Цвет: Min",
+                "label": "Colour: Min",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -258,14 +258,14 @@
               },
               {
                 "key": "ShowLastLap",
-                "label": "Последний круг",
+                "label": "Last lap",
                 "type": "boolean",
                 "default": false,
-                "description": "Расход по последнему кругу сессии."
+                "description": "Consumption of the last session lap."
               },
               {
                 "key": "LastLapColor",
-                "label": "Цвет: Last",
+                "label": "Colour: Last",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -274,14 +274,14 @@
               },
               {
                 "key": "ShowLast5Average",
-                "label": "Ср. последних 5 кругов",
+                "label": "Avg. of the last 5 laps",
                 "type": "boolean",
                 "default": false,
-                "description": "Расход по среднему последних 5 кругов сессии."
+                "description": "Consumption by the average of the last 5 session laps."
               },
               {
                 "key": "Last5AverageColor",
-                "label": "Цвет: L5",
+                "label": "Colour: L5",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -290,14 +290,14 @@
               },
               {
                 "key": "ShowLast10Average",
-                "label": "Ср. последних 10 кругов",
+                "label": "Avg. of the last 10 laps",
                 "type": "boolean",
                 "default": false,
-                "description": "Расход по среднему последних 10 кругов сессии."
+                "description": "Consumption by the average of the last 10 session laps."
               },
               {
                 "key": "Last10AverageColor",
-                "label": "Цвет: L10",
+                "label": "Colour: L10",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -310,43 +310,43 @@
       },
       {
         "id": "columns",
-        "label": "Столбцы расхода",
+        "label": "Consumption columns",
         "groups": [
           {
             "settings": [
               {
                 "key": "ShowAverageFuel",
-                "label": "Расход",
+                "label": "Consumption",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowLaps",
-                "label": "Кругов осталось",
+                "label": "Laps left",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowTotalPitstops",
-                "label": "Всего питстопов",
+                "label": "Total pit stops",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "ShowRefuel",
-                "label": "Количество для дозаправки",
+                "label": "Amount to refuel",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "ShowTotalRefuel",
-                "label": "Полное количество топлива к дозаправке",
+                "label": "Total fuel to add",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "ShowFuelAtEnd",
-                "label": "Топлива на финише",
+                "label": "Fuel at the finish",
                 "type": "boolean",
                 "default": true
               }
@@ -356,65 +356,65 @@
       },
       {
         "id": "refueling",
-        "label": "Дозаправка",
+        "label": "Refuel",
         "groups": [
           {
             "settings": [
               {
                 "key": "RefuelingStrategy",
-                "label": "Используемая стратегия дозаправки",
+                "label": "Refuel strategy in use",
                 "type": "select",
                 "default": "Last10Average",
                 "options": [
                   {
                     "value": "AllLapsAverage",
-                    "label": "Средний расход всех кругов"
+                    "label": "Average consumption of all laps"
                   },
                   {
                     "value": "HighestLap",
-                    "label": "Наибольший расход"
+                    "label": "Highest consumption"
                   },
                   {
                     "value": "LowestLap",
-                    "label": "Наименьший расход"
+                    "label": "Lowest consumption"
                   },
                   {
                     "value": "LastLap",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "Last5Average",
-                    "label": "Ср. последних 5 кругов"
+                    "label": "Avg. of the last 5 laps"
                   },
                   {
                     "value": "Last10Average",
-                    "label": "Ср. последних 10 кругов"
+                    "label": "Avg. of the last 10 laps"
                   }
                 ]
               },
               {
                 "key": "RefuelAdditionalFuelInLaps",
-                "label": "Дополнительное топливо (на круг)",
+                "label": "Extra fuel (per lap)",
                 "type": "number",
                 "default": 1.2,
                 "min": 0,
                 "max": 5,
                 "step": 0.1,
-                "description": "Запас к дозаправке, в кругах расхода."
+                "description": "Refuel margin, in laps of consumption."
               },
               {
                 "key": "ShowFuelWindowBar",
-                "label": "Окно дозаправки",
+                "label": "Refuel window",
                 "type": "boolean",
                 "default": false,
-                "description": "Полоса предстоящих кругов гонки: каждая черта — круг, зелёные — круги, на которых можно заехать на дозаправку, жёлтая — текущий."
+                "description": "A strip of the race laps ahead: each tick is a lap, green ones are laps when you can pit to refuel, yellow is the current one."
               },
               {
                 "key": "ShowFuelWindowStatus",
-                "label": "Статус окна дозаправки",
+                "label": "Refuel window status",
                 "type": "boolean",
                 "default": false,
-                "description": "Статус окна дозаправки по выбранной стратегии."
+                "description": "Refuel window status for the chosen strategy."
               }
             ]
           }

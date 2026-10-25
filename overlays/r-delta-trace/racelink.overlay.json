@@ -30,13 +30,13 @@
     "pages": [
       {
         "id": "general",
-        "label": "Основное",
+        "label": "General",
         "groups": [
           {
             "settings": [
               {
                 "key": "Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "LUMINA",
                 "options": [
@@ -52,7 +52,7 @@
               },
               {
                 "key": "Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -61,7 +61,7 @@
               },
               {
                 "key": "FontFamily",
-                "label": "Шрифт",
+                "label": "Font",
                 "type": "select",
                 "default": "Montserrat",
                 "options": [
@@ -101,29 +101,29 @@
               },
               {
                 "key": "FontWeight",
-                "label": "Толщина",
+                "label": "Weight",
                 "type": "select",
                 "default": "Semibold",
                 "options": [
                   {
                     "value": "Regular",
-                    "label": "Обычный"
+                    "label": "Regular"
                   },
                   {
                     "value": "Medium",
-                    "label": "Средний"
+                    "label": "Medium"
                   },
                   {
                     "value": "Semibold",
-                    "label": "Полужирный"
+                    "label": "Semibold"
                   },
                   {
                     "value": "Bold",
-                    "label": "Жирный"
+                    "label": "Bold"
                   },
                   {
                     "value": "Extra",
-                    "label": "Сверхжирный"
+                    "label": "Extra bold"
                   }
                 ]
               }
@@ -139,24 +139,24 @@
             "settings": [
               {
                 "key": "targetMode",
-                "label": "Режим",
+                "label": "Mode",
                 "type": "select",
                 "default": "personalBestLap",
                 "options": [
                   {
                     "value": "personalBestLap",
-                    "label": "Личный лучший"
+                    "label": "Personal best"
                   },
                   {
                     "value": "personalSessionBestLap",
-                    "label": "Лучший в сессии"
+                    "label": "Session best"
                   },
                   {
                     "value": "personalLastLap",
-                    "label": "Прошлый круг"
+                    "label": "Previous lap"
                   }
                 ],
-                "description": "Целевой круг, с которым сравнивается текущий по всей длине круга."
+                "description": "The target lap the current one is compared with along the whole lap."
               }
             ]
           }
@@ -167,11 +167,11 @@
         "label": "Live Trace",
         "groups": [
           {
-            "label": "Индикаторы",
+            "label": "Indicators",
             "settings": [
               {
                 "key": "showDeltaValue",
-                "label": "Значение дельты",
+                "label": "Delta value",
                 "type": "boolean",
                 "default": true
               },
@@ -183,65 +183,65 @@
               },
               {
                 "key": "showReferenceLapTime",
-                "label": "Время целевого круга",
+                "label": "Target lap time",
                 "type": "boolean",
                 "default": true
               }
             ]
           },
           {
-            "label": "Границы следа",
+            "label": "Trace limits",
             "settings": [
               {
                 "key": "histogramMinSpread",
-                "label": "Минимальный диапазон (сек)",
+                "label": "Minimum range (s)",
                 "type": "number",
                 "default": 1,
                 "min": 0.1,
                 "max": 10,
                 "step": 0.1,
-                "description": "Минимальный вертикальный диапазон следа в секундах."
+                "description": "The minimum vertical range of the trace, in seconds."
               },
               {
                 "key": "histogramMaxSpread",
-                "label": "Максимальный диапазон (сек)",
+                "label": "Maximum range (s)",
                 "type": "number",
                 "default": 10,
                 "min": 0.5,
                 "max": 30,
                 "step": 0.5,
-                "description": "Максимальный вертикальный диапазон следа в секундах."
+                "description": "The maximum vertical range of the trace, in seconds."
               },
               {
                 "key": "lapResetDelaySeconds",
-                "label": "Задержка сброса круга (сек)",
+                "label": "Lap reset delay (s)",
                 "type": "number",
                 "default": 3,
                 "min": 0,
                 "max": 15,
                 "step": 0.5,
-                "description": "Сколько секунд после пересечения линии старт/финиш держать след завершённого круга."
+                "description": "How many seconds after the start/finish line the completed lap trace stays."
               },
               {
                 "key": "histogramBackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000"
               }
             ]
           },
           {
-            "label": "Линия следа",
+            "label": "Trace line",
             "settings": [
               {
                 "key": "histogramAreaFill",
-                "label": "Заливка области",
+                "label": "Area fill",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "histogramLineWidth",
-                "label": "Толщина линии (px)",
+                "label": "Line width (px)",
                 "type": "number",
                 "default": 1,
                 "min": 0.5,
@@ -250,87 +250,87 @@
               },
               {
                 "key": "histogramLineColorPositive",
-                "label": "Цвет потерь",
+                "label": "Loss colour",
                 "type": "color",
                 "default": "#D40000"
               },
               {
                 "key": "histogramLineColorNegative",
-                "label": "Цвет прироста",
+                "label": "Gain colour",
                 "type": "color",
                 "default": "#09B61A"
               }
             ]
           },
           {
-            "label": "Нулевая ось",
+            "label": "Zero axis",
             "settings": [
               {
                 "key": "histogramZeroAxisStyle",
-                "label": "Стиль нулевой оси",
+                "label": "Zero axis style",
                 "type": "select",
                 "default": "SOLID",
                 "options": [
                   {
                     "value": "SOLID",
-                    "label": "Сплошная"
+                    "label": "Solid"
                   },
                   {
                     "value": "DASHED",
-                    "label": "Штрихи"
+                    "label": "Dashes"
                   },
                   {
                     "value": "DOTTED",
-                    "label": "Точки"
+                    "label": "Dots"
                   },
                   {
                     "value": "NONE",
-                    "label": "Нет"
+                    "label": "None"
                   }
                 ]
               },
               {
                 "key": "histogramZeroAxisColor",
-                "label": "Цвет",
+                "label": "Colour",
                 "type": "color",
                 "default": "#ffffff28"
               }
             ]
           },
           {
-            "label": "Курсор позиции машины",
+            "label": "Car position cursor",
             "settings": [
               {
                 "key": "showPositionCursor",
-                "label": "Курсор позиции машины",
+                "label": "Car position cursor",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "cursorStyle",
-                "label": "Стиль курсора",
+                "label": "Cursor style",
                 "type": "select",
                 "default": "LINE",
                 "options": [
                   {
                     "value": "LINE",
-                    "label": "Линия"
+                    "label": "Line"
                   },
                   {
                     "value": "DOT",
-                    "label": "Точка"
+                    "label": "Dot"
                   },
                   {
                     "value": "PLAYHEAD",
-                    "label": "Указатель"
+                    "label": "Pointer"
                   },
                   {
                     "value": "CHEVRON",
-                    "label": "Шеврон"
+                    "label": "Chevron"
                   },
                   {
                     "value": "CROSSHAIR",
-                    "label": "Перекрестие"
+                    "label": "Crosshair"
                   }
                 ],
                 "visibleIf": {
@@ -339,7 +339,7 @@
               },
               {
                 "key": "positionCursorColor",
-                "label": "Цвет курсора",
+                "label": "Cursor colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -358,24 +358,24 @@
             "settings": [
               {
                 "key": "ghostMode",
-                "label": "Источник",
+                "label": "Source",
                 "type": "select",
                 "default": "PERSONAL_LAST",
                 "options": [
                   {
                     "value": "NONE",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "PERSONAL_LAST",
-                    "label": "Прошлый круг"
+                    "label": "Previous lap"
                   }
                 ],
-                "description": "След прошлого круга поверх гистограммы, измеренный относительно того же целевого круга."
+                "description": "The previous lap trace over the histogram, measured against the same target lap."
               },
               {
                 "key": "ghostColor",
-                "label": "Цвет",
+                "label": "Colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -384,21 +384,21 @@
               },
               {
                 "key": "ghostLineStyle",
-                "label": "Стиль линии",
+                "label": "Line style",
                 "type": "select",
                 "default": "DASHED",
                 "options": [
                   {
                     "value": "SOLID",
-                    "label": "Сплошная"
+                    "label": "Solid"
                   },
                   {
                     "value": "DASHED",
-                    "label": "Штрихи"
+                    "label": "Dashes"
                   },
                   {
                     "value": "DOTTED",
-                    "label": "Точки"
+                    "label": "Dots"
                   }
                 ],
                 "visibleIf": {
@@ -407,7 +407,7 @@
               },
               {
                 "key": "showGhostLine",
-                "label": "Линия Ghost",
+                "label": "Ghost line",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
@@ -416,7 +416,7 @@
               },
               {
                 "key": "ghostLineOpacity",
-                "label": "Непрозрачность линии",
+                "label": "Line opacity",
                 "type": "number",
                 "default": 0.35,
                 "min": 0,
@@ -428,7 +428,7 @@
               },
               {
                 "key": "showGhostAreaFill",
-                "label": "Заливка области",
+                "label": "Area fill",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
@@ -437,7 +437,7 @@
               },
               {
                 "key": "showGhostSectionDeltas",
-                "label": "Показывать дельту участков Ghost",
+                "label": "Show Ghost segment delta",
                 "type": "boolean",
                 "default": false,
                 "visibleIf": {
@@ -450,21 +450,21 @@
       },
       {
         "id": "turns",
-        "label": "Номера поворотов",
+        "label": "Corner numbers",
         "groups": [
           {
-            "label": "Номера и границы поворотов",
+            "label": "Corner numbers and limits",
             "settings": [
               {
                 "key": "showTurnMarkers",
-                "label": "Показывать номера поворотов",
+                "label": "Show corner numbers",
                 "type": "boolean",
                 "default": true,
-                "description": "Добавляет на след маркеры и подписи поворотов, чтобы было видно, где на трассе каждый поворот. Если повороты трассы неизвестны, вместо них показываются секторы."
+                "description": "Adds corner markers and labels to the trace so you can see where each corner is. When the track corners are unknown, sectors are shown instead."
               },
               {
                 "key": "turnNumberStyle",
-                "label": "Стиль",
+                "label": "Style",
                 "type": "select",
                 "default": "PLAIN",
                 "options": [
@@ -478,7 +478,7 @@
                   },
                   {
                     "value": "BIG",
-                    "label": "Крупные"
+                    "label": "Large"
                   }
                 ],
                 "visibleIf": {
@@ -487,7 +487,7 @@
               },
               {
                 "key": "turnNumberColor",
-                "label": "Цвет номеров",
+                "label": "Number colour",
                 "type": "color",
                 "default": "#bdbdbd",
                 "visibleIf": {
@@ -496,43 +496,43 @@
               },
               {
                 "key": "showTurnLimits",
-                "label": "Показывать границы поворотов",
+                "label": "Show corner limits",
                 "type": "boolean",
                 "default": true
               },
               {
                 "key": "turnLineStyle",
-                "label": "Визуализация",
+                "label": "Display",
                 "type": "select",
                 "default": "REGIONS",
                 "options": [
                   {
                     "value": "REGIONS",
-                    "label": "Области"
+                    "label": "Areas"
                   },
                   {
                     "value": "GRADIENT_REGIONS",
-                    "label": "Области с градиентом"
+                    "label": "Gradient areas"
                   },
                   {
                     "value": "LINES",
-                    "label": "Линии"
+                    "label": "Lines"
                   },
                   {
                     "value": "TOP_TICKS",
-                    "label": "Риски сверху"
+                    "label": "Ticks on top"
                   },
                   {
                     "value": "BOTTOM_TICKS",
-                    "label": "Риски снизу"
+                    "label": "Ticks at the bottom"
                   },
                   {
                     "value": "UNDERLINES",
-                    "label": "Черта снизу"
+                    "label": "Bottom line"
                   },
                   {
                     "value": "UPPERLINES",
-                    "label": "Черта сверху"
+                    "label": "Top line"
                   }
                 ],
                 "visibleIf": {
@@ -541,31 +541,31 @@
               },
               {
                 "key": "turnMarkerStyle",
-                "label": "Маркеры",
+                "label": "Markers",
                 "type": "select",
                 "default": "MIDDLE",
                 "options": [
                   {
                     "value": "MIDDLE",
-                    "label": "Середина"
+                    "label": "Middle"
                   },
                   {
                     "value": "START_END",
-                    "label": "Начало и конец"
+                    "label": "Start and end"
                   },
                   {
                     "value": "START_MIDDLE_END",
-                    "label": "Начало, середина и конец"
+                    "label": "Start, middle and end"
                   }
                 ],
                 "visibleIf": {
                   "showTurnLimits": true
                 },
-                "description": "Для визуализации линиями и рисками."
+                "description": "For the line and tick display."
               },
               {
                 "key": "turnColor",
-                "label": "Цвет поворотов",
+                "label": "Corner colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -578,31 +578,31 @@
       },
       {
         "id": "sectors",
-        "label": "Секторы трассы",
+        "label": "Track sectors",
         "groups": [
           {
             "settings": [
               {
                 "key": "showSectorMarkers",
-                "label": "Показывать маркеры секторов",
+                "label": "Show sector markers",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "showSectorNumbers",
-                "label": "Показывать номера секторов",
+                "label": "Show sector numbers",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "sectorColor",
-                "label": "Цвет секторов",
+                "label": "Sector colour",
                 "type": "color",
                 "default": "#ffffff"
               },
               {
                 "key": "sectorNumberColor",
-                "label": "Цвет номеров",
+                "label": "Number colour",
                 "type": "color",
                 "default": "#bdbdbd"
               }
@@ -612,70 +612,70 @@
       },
       {
         "id": "sections",
-        "label": "Участки следа",
+        "label": "Trace segments",
         "groups": [
           {
             "settings": [
               {
                 "key": "showSectionDeltas",
-                "label": "Показывать дельту участков",
+                "label": "Show segment delta",
                 "type": "boolean",
                 "default": true,
-                "description": "Делит круг на повороты и прямые и показывает дельту каждого участка цветной полосой: красный — потеря, зелёный — выигрыш."
+                "description": "Splits the lap into corners and straights and shows each segment’s delta as a coloured bar: red is a loss, green a gain."
               },
               {
                 "key": "sectionDeltaMode",
-                "label": "Режим хронометража",
+                "label": "Timing mode",
                 "type": "select",
                 "default": "TURN_AND_STRAIGHT",
                 "options": [
                   {
                     "value": "TURN_AND_STRAIGHT",
-                    "label": "Поворот с прямой после него"
+                    "label": "Corner with the straight after it"
                   },
                   {
                     "value": "TURNS_ONLY",
-                    "label": "Только повороты"
+                    "label": "Corners only"
                   },
                   {
                     "value": "PER_SEGMENT",
-                    "label": "Повороты и прямые отдельно"
+                    "label": "Corners and straights apart"
                   },
                   {
                     "value": "SECTORS",
-                    "label": "Секторы"
+                    "label": "Sectors"
                   }
                 ],
                 "visibleIf": {
                   "showSectionDeltas": true
                 },
-                "description": "Если повороты трассы неизвестны, участками служат секторы."
+                "description": "When the track corners are unknown, sectors serve as segments."
               },
               {
                 "key": "sectionBarTheme",
-                "label": "Стиль",
+                "label": "Style",
                 "type": "select",
                 "default": "SIMPLE",
                 "options": [
                   {
                     "value": "GRADIENT",
-                    "label": "Градиент"
+                    "label": "Gradient"
                   },
                   {
                     "value": "SIMPLE",
-                    "label": "Простой"
+                    "label": "Simple"
                   },
                   {
                     "value": "BARS",
-                    "label": "Столбцы"
+                    "label": "Bars"
                   },
                   {
                     "value": "HEATMAP",
-                    "label": "Тепловая карта"
+                    "label": "Heat map"
                   },
                   {
                     "value": "MINIMAL",
-                    "label": "Минимальный"
+                    "label": "Minimal"
                   }
                 ],
                 "visibleIf": {
@@ -684,7 +684,7 @@
               },
               {
                 "key": "showSectionDeltaNumbers",
-                "label": "Значения дельты",
+                "label": "Delta values",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
@@ -693,7 +693,7 @@
               },
               {
                 "key": "sectionDeltaDecimals",
-                "label": "Десятичные знаки",
+                "label": "Decimal places",
                 "type": "number",
                 "default": 1,
                 "min": 1,
@@ -705,7 +705,7 @@
               },
               {
                 "key": "showSectionDeltaSigns",
-                "label": "Показывать знаки +/-",
+                "label": "Show +/- signs",
                 "type": "boolean",
                 "default": false,
                 "visibleIf": {
@@ -724,14 +724,14 @@
             "settings": [
               {
                 "key": "showWeakSpot",
-                "label": "Показывать панель Weak Spot",
+                "label": "Show the Weak Spot panel",
                 "type": "boolean",
                 "default": true,
-                "description": "Участок с наибольшей потерью времени на прошлом круге: улучшив его, вы выиграете больше всего."
+                "description": "The segment where you lost the most time on the previous lap: improving it gains the most."
               },
               {
                 "key": "weakSpotSectionCount",
-                "label": "Количество участков",
+                "label": "Number of segments",
                 "type": "number",
                 "default": 1,
                 "min": 1,
@@ -743,25 +743,25 @@
               },
               {
                 "key": "weakSpotPanelPosition",
-                "label": "Позиция",
+                "label": "Position",
                 "type": "select",
                 "default": "RIGHT",
                 "options": [
                   {
                     "value": "RIGHT",
-                    "label": "Справа"
+                    "label": "Right"
                   },
                   {
                     "value": "LEFT",
-                    "label": "Слева"
+                    "label": "Left"
                   },
                   {
                     "value": "TOP",
-                    "label": "Сверху"
+                    "label": "Top"
                   },
                   {
                     "value": "BOTTOM",
-                    "label": "Снизу"
+                    "label": "Bottom"
                   }
                 ],
                 "visibleIf": {
@@ -770,7 +770,7 @@
               },
               {
                 "key": "highlightWeakSpotInSectionBar",
-                "label": "Отметить на полосе участков",
+                "label": "Mark on the segment bar",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
@@ -779,17 +779,17 @@
               },
               {
                 "key": "showWeakSpotMiniMap",
-                "label": "Карта участка",
+                "label": "Segment map",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
                   "showWeakSpot": true
                 },
-                "description": "Участок на карте трассы. Нужна геометрия трассы (iRacing)."
+                "description": "The segment on the track map. Needs the track geometry (iRacing)."
               },
               {
                 "key": "showPerSectionWeakSpotMap",
-                "label": "Карта у каждого участка",
+                "label": "A map for each segment",
                 "type": "boolean",
                 "default": false,
                 "visibleIf": {
@@ -799,17 +799,17 @@
               },
               {
                 "key": "weakSpotHighlightStyle",
-                "label": "Выделение на карте",
+                "label": "Map highlight",
                 "type": "select",
                 "default": "SOLID",
                 "options": [
                   {
                     "value": "SOLID",
-                    "label": "Сплошное"
+                    "label": "Solid"
                   },
                   {
                     "value": "DELTA_GRADIENT",
-                    "label": "По дельте"
+                    "label": "By delta"
                   }
                 ],
                 "visibleIf": {
@@ -819,7 +819,7 @@
               },
               {
                 "key": "weakSpotHighlightColor",
-                "label": "Цвет выделения",
+                "label": "Highlight colour",
                 "type": "color",
                 "default": "#FE171F",
                 "visibleIf": {
@@ -828,7 +828,7 @@
               },
               {
                 "key": "weakSpotHighlightLineWidth",
-                "label": "Толщина выделения",
+                "label": "Highlight width",
                 "type": "number",
                 "default": 25,
                 "min": 1,
@@ -841,7 +841,7 @@
               },
               {
                 "key": "weakSpotBaseTrackColor",
-                "label": "Цвет трассы",
+                "label": "Track colour",
                 "type": "color",
                 "default": "#D9D9E1",
                 "visibleIf": {
@@ -851,7 +851,7 @@
               },
               {
                 "key": "weakSpotBaseTrackLineWidth",
-                "label": "Толщина трассы",
+                "label": "Track width",
                 "type": "number",
                 "default": 25,
                 "min": 1,
@@ -864,17 +864,17 @@
               },
               {
                 "key": "showLiveWeakSpotDelta",
-                "label": "Показывать дельту в реальном времени",
+                "label": "Show the live delta",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
                   "showWeakSpot": true
                 },
-                "description": "Ваша текущая дельта на этом участке: стало ли лучше."
+                "description": "Your current delta on this segment: whether it got better."
               },
               {
                 "key": "showWeakSpotLapTime",
-                "label": "Показывать время круга",
+                "label": "Show the lap time",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
@@ -883,13 +883,13 @@
               },
               {
                 "key": "showHistogramCanvas",
-                "label": "Показывать панель Delta Trace",
+                "label": "Show the Delta Trace panel",
                 "type": "boolean",
                 "default": true,
                 "visibleIf": {
                   "showWeakSpot": true
                 },
-                "description": "Если выключено, видна только панель Weak Spot."
+                "description": "When off, only the Weak Spot panel shows."
               }
             ]
           }
@@ -897,56 +897,56 @@
       },
       {
         "id": "widgets",
-        "label": "Виджеты",
+        "label": "Widgets",
         "groups": [
           {
-            "label": "Верхняя панель, виджет 1",
+            "label": "Top bar, widget 1",
             "settings": [
               {
                 "key": "TopWidget1.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -954,63 +954,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -1018,15 +1018,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -1034,19 +1034,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -1054,47 +1054,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "TopWidget1.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -1102,33 +1102,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "TopWidget1.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "TopWidget1.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -1137,13 +1137,13 @@
               },
               {
                 "key": "TopWidget1.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget1.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -1152,13 +1152,13 @@
               },
               {
                 "key": "TopWidget1.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget1.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -1167,13 +1167,13 @@
               },
               {
                 "key": "TopWidget1.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget1.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -1182,19 +1182,19 @@
               },
               {
                 "key": "TopWidget1.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget1.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget1.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -1208,53 +1208,53 @@
             ]
           },
           {
-            "label": "Верхняя панель, виджет 2",
+            "label": "Top bar, widget 2",
             "settings": [
               {
                 "key": "TopWidget2.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -1262,63 +1262,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -1326,15 +1326,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -1342,19 +1342,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -1362,47 +1362,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "TopWidget2.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -1410,33 +1410,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "TopWidget2.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "TopWidget2.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -1445,13 +1445,13 @@
               },
               {
                 "key": "TopWidget2.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget2.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -1460,13 +1460,13 @@
               },
               {
                 "key": "TopWidget2.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget2.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -1475,13 +1475,13 @@
               },
               {
                 "key": "TopWidget2.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget2.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -1490,19 +1490,19 @@
               },
               {
                 "key": "TopWidget2.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget2.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget2.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -1516,53 +1516,53 @@
             ]
           },
           {
-            "label": "Верхняя панель, виджет 3",
+            "label": "Top bar, widget 3",
             "settings": [
               {
                 "key": "TopWidget3.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -1570,63 +1570,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -1634,15 +1634,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -1650,19 +1650,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -1670,47 +1670,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "TopWidget3.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -1718,33 +1718,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "TopWidget3.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "TopWidget3.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -1753,13 +1753,13 @@
               },
               {
                 "key": "TopWidget3.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget3.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -1768,13 +1768,13 @@
               },
               {
                 "key": "TopWidget3.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget3.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -1783,13 +1783,13 @@
               },
               {
                 "key": "TopWidget3.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget3.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -1798,19 +1798,19 @@
               },
               {
                 "key": "TopWidget3.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget3.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget3.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -1824,53 +1824,53 @@
             ]
           },
           {
-            "label": "Верхняя панель, виджет 4",
+            "label": "Top bar, widget 4",
             "settings": [
               {
                 "key": "TopWidget4.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -1878,63 +1878,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -1942,15 +1942,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -1958,19 +1958,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -1978,47 +1978,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "TopWidget4.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -2026,33 +2026,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "TopWidget4.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "TopWidget4.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -2061,13 +2061,13 @@
               },
               {
                 "key": "TopWidget4.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget4.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -2076,13 +2076,13 @@
               },
               {
                 "key": "TopWidget4.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget4.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -2091,13 +2091,13 @@
               },
               {
                 "key": "TopWidget4.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget4.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -2106,19 +2106,19 @@
               },
               {
                 "key": "TopWidget4.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget4.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "TopWidget4.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -2132,53 +2132,53 @@
             ]
           },
           {
-            "label": "Нижняя панель, виджет 1",
+            "label": "Bottom bar, widget 1",
             "settings": [
               {
                 "key": "BottomWidget1.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -2186,63 +2186,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -2250,15 +2250,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -2266,19 +2266,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -2286,47 +2286,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "BottomWidget1.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -2334,33 +2334,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "BottomWidget1.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "BottomWidget1.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -2369,13 +2369,13 @@
               },
               {
                 "key": "BottomWidget1.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget1.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -2384,13 +2384,13 @@
               },
               {
                 "key": "BottomWidget1.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget1.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -2399,13 +2399,13 @@
               },
               {
                 "key": "BottomWidget1.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget1.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -2414,19 +2414,19 @@
               },
               {
                 "key": "BottomWidget1.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget1.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget1.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -2440,53 +2440,53 @@
             ]
           },
           {
-            "label": "Нижняя панель, виджет 2",
+            "label": "Bottom bar, widget 2",
             "settings": [
               {
                 "key": "BottomWidget2.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -2494,63 +2494,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -2558,15 +2558,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -2574,19 +2574,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -2594,47 +2594,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "BottomWidget2.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -2642,33 +2642,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "BottomWidget2.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "BottomWidget2.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -2677,13 +2677,13 @@
               },
               {
                 "key": "BottomWidget2.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget2.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -2692,13 +2692,13 @@
               },
               {
                 "key": "BottomWidget2.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget2.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -2707,13 +2707,13 @@
               },
               {
                 "key": "BottomWidget2.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget2.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -2722,19 +2722,19 @@
               },
               {
                 "key": "BottomWidget2.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget2.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget2.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -2748,53 +2748,53 @@
             ]
           },
           {
-            "label": "Нижняя панель, виджет 3",
+            "label": "Bottom bar, widget 3",
             "settings": [
               {
                 "key": "BottomWidget3.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -2802,63 +2802,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -2866,15 +2866,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -2882,19 +2882,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -2902,47 +2902,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "BottomWidget3.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -2950,33 +2950,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "BottomWidget3.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "BottomWidget3.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -2985,13 +2985,13 @@
               },
               {
                 "key": "BottomWidget3.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget3.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -3000,13 +3000,13 @@
               },
               {
                 "key": "BottomWidget3.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget3.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -3015,13 +3015,13 @@
               },
               {
                 "key": "BottomWidget3.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget3.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -3030,19 +3030,19 @@
               },
               {
                 "key": "BottomWidget3.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget3.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget3.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,
@@ -3056,53 +3056,53 @@
             ]
           },
           {
-            "label": "Нижняя панель, виджет 4",
+            "label": "Bottom bar, widget 4",
             "settings": [
               {
                 "key": "BottomWidget4.Widget",
-                "label": "Виджет",
+                "label": "Widget",
                 "type": "select",
                 "default": "None",
                 "options": [
                   {
                     "value": "None",
-                    "label": "Нет"
+                    "label": "None"
                   },
                   {
                     "value": "CurrentPosition",
-                    "label": "Позиция"
+                    "label": "Position"
                   },
                   {
                     "value": "Speed",
-                    "label": "Скорость"
+                    "label": "Speed"
                   },
                   {
                     "value": "Rpm",
-                    "label": "Обороты"
+                    "label": "RPM"
                   },
                   {
                     "value": "Gear",
-                    "label": "Передача"
+                    "label": "Gear"
                   },
                   {
                     "value": "TrackTemp",
-                    "label": "Температура трассы"
+                    "label": "Track temperature"
                   },
                   {
                     "value": "AirTemp",
-                    "label": "Температура воздуха"
+                    "label": "Air temperature"
                   },
                   {
                     "value": "WindSpeed",
-                    "label": "Скорость ветра"
+                    "label": "Wind speed"
                   },
                   {
                     "value": "RelativeHumidity",
-                    "label": "Влажность"
+                    "label": "Humidity"
                   },
                   {
                     "value": "TrackWetDryStatus",
-                    "label": "Состояние трассы"
+                    "label": "Track state"
                   },
                   {
                     "value": "Sof",
@@ -3110,63 +3110,63 @@
                   },
                   {
                     "value": "Incidents",
-                    "label": "Инциденты"
+                    "label": "Incidents"
                   },
                   {
                     "value": "SessionTimer",
-                    "label": "Таймер сессии"
+                    "label": "Session timer"
                   },
                   {
                     "value": "RemainingSessionTime",
-                    "label": "Осталось времени"
+                    "label": "Time left"
                   },
                   {
                     "value": "LapCounter",
-                    "label": "Счётчик кругов"
+                    "label": "Lap counter"
                   },
                   {
                     "value": "CurrentLapNumber",
-                    "label": "Номер круга"
+                    "label": "Lap number"
                   },
                   {
                     "value": "RemainingLaps",
-                    "label": "Осталось кругов"
+                    "label": "Laps left"
                   },
                   {
                     "value": "TrackTime",
-                    "label": "Время в игре"
+                    "label": "In-game time"
                   },
                   {
                     "value": "LocalPCTime",
-                    "label": "Время ПК (24 ч)"
+                    "label": "PC time (24 h)"
                   },
                   {
                     "value": "LocalPCTime12h",
-                    "label": "Время ПК (12 ч)"
+                    "label": "PC time (12 h)"
                   },
                   {
                     "value": "LastLapTime",
-                    "label": "Последний круг"
+                    "label": "Last lap"
                   },
                   {
                     "value": "FastestLapTime",
-                    "label": "Лучший круг"
+                    "label": "Best lap"
                   },
                   {
                     "value": "CurrentLapTime",
-                    "label": "Текущий круг"
+                    "label": "Current lap"
                   },
                   {
                     "value": "BrakeBias",
-                    "label": "Баланс тормозов"
+                    "label": "Brake bias"
                   },
                   {
                     "value": "WaterTemp",
-                    "label": "Температура воды"
+                    "label": "Water temperature"
                   },
                   {
                     "value": "OilTemp",
-                    "label": "Температура масла"
+                    "label": "Oil temperature"
                   },
                   {
                     "value": "Abs",
@@ -3174,15 +3174,15 @@
                   },
                   {
                     "value": "TractionControl",
-                    "label": "Контроль тяги"
+                    "label": "Traction control"
                   },
                   {
                     "value": "Fuel",
-                    "label": "Топливо"
+                    "label": "Fuel"
                   },
                   {
                     "value": "RemainingFuelLaps",
-                    "label": "Кругов на топливе"
+                    "label": "Laps of fuel"
                   },
                   {
                     "value": "PushToPass",
@@ -3190,19 +3190,19 @@
                   },
                   {
                     "value": "SessionType",
-                    "label": "Тип сессии"
+                    "label": "Session type"
                   },
                   {
                     "value": "TrackName",
-                    "label": "Трасса"
+                    "label": "Track"
                   },
                   {
                     "value": "CarName",
-                    "label": "Машина"
+                    "label": "Car"
                   },
                   {
                     "value": "CarNumber",
-                    "label": "Номер машины"
+                    "label": "Car number"
                   },
                   {
                     "value": "iRating",
@@ -3210,47 +3210,47 @@
                   },
                   {
                     "value": "PositionGained",
-                    "label": "Набранные позиции"
+                    "label": "Positions gained"
                   },
                   {
                     "value": "TotalNumberOfDrivers",
-                    "label": "Число пилотов"
+                    "label": "Driver count"
                   },
                   {
                     "value": "TotalNumberOfClassDrivers",
-                    "label": "Пилотов в классе"
+                    "label": "Drivers in class"
                   }
                 ]
               },
               {
                 "key": "BottomWidget4.Theme",
-                "label": "Тема",
+                "label": "Theme",
                 "type": "select",
                 "default": "transparent",
                 "options": [
                   {
                     "value": "transparent",
-                    "label": "Прозрачная"
+                    "label": "Transparent"
                   },
                   {
                     "value": "default",
-                    "label": "Стандартная"
+                    "label": "Standard"
                   },
                   {
                     "value": "carbon",
-                    "label": "Карбон"
+                    "label": "Carbon"
                   },
                   {
                     "value": "glass",
-                    "label": "Стекло"
+                    "label": "Glass"
                   },
                   {
                     "value": "hex",
-                    "label": "Шестиугольник"
+                    "label": "Hexagon"
                   },
                   {
                     "value": "slider",
-                    "label": "Слайдер"
+                    "label": "Slider"
                   },
                   {
                     "value": "lcd",
@@ -3258,33 +3258,33 @@
                   },
                   {
                     "value": "stripe",
-                    "label": "Полоса"
+                    "label": "Bar"
                   }
                 ]
               },
               {
                 "key": "BottomWidget4.IconType",
-                "label": "Заголовок виджета",
+                "label": "Widget title",
                 "type": "select",
                 "default": "ICON",
                 "options": [
                   {
                     "value": "ICON",
-                    "label": "Иконка"
+                    "label": "Icon"
                   },
                   {
                     "value": "TEXT",
-                    "label": "Текст"
+                    "label": "Text"
                   },
                   {
                     "value": "NONE",
-                    "label": "Ничего"
+                    "label": "Nothing"
                   }
                 ]
               },
               {
                 "key": "BottomWidget4.Opacity",
-                "label": "Непрозрачность",
+                "label": "Opacity",
                 "type": "number",
                 "default": 0.8,
                 "min": 0,
@@ -3293,13 +3293,13 @@
               },
               {
                 "key": "BottomWidget4.BackgroundColorEnabled",
-                "label": "Свой цвет фона",
+                "label": "Custom background colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget4.BackgroundColor",
-                "label": "Цвет фона",
+                "label": "Background colour",
                 "type": "color",
                 "default": "#000000",
                 "visibleIf": {
@@ -3308,13 +3308,13 @@
               },
               {
                 "key": "BottomWidget4.IconColorEnabled",
-                "label": "Свой цвет иконки",
+                "label": "Custom icon colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget4.OverlayLabelOrIconColor",
-                "label": "Цвет иконки",
+                "label": "Icon colour",
                 "type": "color",
                 "default": "#444444",
                 "visibleIf": {
@@ -3323,13 +3323,13 @@
               },
               {
                 "key": "BottomWidget4.ValueColorEnabled",
-                "label": "Свой цвет значения",
+                "label": "Custom value colour",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget4.ValueColor",
-                "label": "Цвет значения",
+                "label": "Value colour",
                 "type": "color",
                 "default": "#ffffff",
                 "visibleIf": {
@@ -3338,19 +3338,19 @@
               },
               {
                 "key": "BottomWidget4.ScrollTextEnabled",
-                "label": "Бегущий текст",
+                "label": "Scrolling text",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget4.FixedWidth",
-                "label": "Фиксированная ширина",
+                "label": "Fixed width",
                 "type": "boolean",
                 "default": false
               },
               {
                 "key": "BottomWidget4.Width",
-                "label": "Ширина",
+                "label": "Width",
                 "type": "number",
                 "default": 120,
                 "min": 40,

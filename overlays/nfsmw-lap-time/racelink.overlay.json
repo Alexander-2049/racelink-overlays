@@ -36,10 +36,10 @@
             "settings": [
               {
                 "key": "showLapTime",
-                "label": "Показывать LAP TIME",
+                "label": "Show LAP TIME",
                 "type": "boolean",
                 "default": true,
-                "description": "Время круга, когда машина пересекает линию."
+                "description": "The lap time when the car crosses the line."
               }
             ]
           }
@@ -59,26 +59,26 @@
                 "options": [
                   {
                     "value": "auto",
-                    "label": "Как в игре"
+                    "label": "As in the game"
                   },
                   {
                     "value": "leader",
-                    "label": "Отрыв от второго / отставание от лидера"
+                    "label": "Lead over second / gap to leader"
                   },
                   {
                     "value": "best",
-                    "label": "Дельта к лучшему кругу"
+                    "label": "Delta to the best lap"
                   },
                   {
                     "value": "off",
-                    "label": "Не показывать"
+                    "label": "Hide"
                   }
                 ],
-                "description": "Как в игре: в гонке — отрыв от второго места или отставание от лидера класса, в остальных сессиях — дельта к своему лучшему кругу."
+                "description": "As in the game: in a race, the lead over second place or the gap to the class leader; in other sessions, the delta to your best lap."
               },
               {
                 "key": "splitsPerLap",
-                "label": "Отсечек SPLIT TIME за круг",
+                "label": "SPLIT TIME checkpoints per lap",
                 "type": "number",
                 "default": 3,
                 "min": 1,
