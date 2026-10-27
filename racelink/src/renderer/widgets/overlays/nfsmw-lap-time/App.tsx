@@ -36,6 +36,16 @@ interface Message {
 const lapSample: Message = { kind: 'lap', text: 'LAP TIME\n1:13.41', startedAt: 0 };
 const editElapsedMs = 1000;
 
+/**
+ * In demo mode the sample message repeats on a beat, on the page's clock. Studio's
+ * Workshop preview starts recording about 2.5 s after it opens the page and records
+ * about 3 s, so the first message starts just after the recording does and the GIF
+ * loops on the beat.
+ */
+const demoFirstMs = 2400;
+const demoCycleMs = 3000;
+const demoGapMs = 400;
+
 /** A SPLIT TIME message as the split mode shows it, for a changed setting. */
 const splitSample = (mode: string, startedAt: number): Message =>
   mode === 'best'
@@ -61,8 +71,10 @@ export default function App() {
 
   // Which message the edit mode holds open: the one whose settings changed last.
   const editSample = useRef<Message | null>(lapSample);
+  const demo = useRef(false);
   useEffect(() => {
     editing.current = overlay.editMode;
+    demo.current = overlay.demoMode;
   });
 
   // In demo and edit mode a changed setting shows its message at once, so the
@@ -87,7 +99,8 @@ export default function App() {
   }, [lapKey, splitKey, previewing, showLapTime, splitMode, splitsPerLap]);
 
   useEffect(() => {
-    if (!followed) {
+    // Demo data crosses the line at its own times; the demo beat shows the messages.
+    if (!followed || overlay.demoMode) {
       seen.current = null;
       return;
     }
@@ -164,11 +177,20 @@ export default function App() {
       current = null;
     }
     const sample = editSample.current;
+    const beating = demo.current && !editing.current;
     if (!current && editing.current && sample) {
       current = sample;
       elapsed = editElapsedMs;
     }
-    if (!current) return false;
+    if (!current && beating && sample) {
+      const cycle = Math.max(demoCycleMs, durationMs[sample.kind] + demoGapMs);
+      const phase = (((now - demoFirstMs) % cycle) + cycle) % cycle;
+      if (phase < durationMs[sample.kind]) {
+        current = sample;
+        elapsed = phase;
+      }
+    }
+    if (!current) return beating && sample !== null;
     const shown = current;
     const running = (name: string): Running | null => {
       if (name === 'messageBody')
@@ -184,8 +206,8 @@ export default function App() {
       textureOf: (name) => (name === 'messageIcon' ? 'timer_icon' : null),
       text: (name) => (name === 'messageText' || name === 'messageShadow' ? shown.text : null),
     });
-    // A message plays on; the sample of the edit mode stands still.
-    return shown !== sample;
+    // A message and the demo beat play on; the sample of the edit mode stands still.
+    return beating || shown !== sample;
   });
 
   return (

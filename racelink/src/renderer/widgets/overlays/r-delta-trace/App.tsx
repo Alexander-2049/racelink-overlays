@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { demoHistory } from '../../../shared/api/racelink-runtime';
 import { deltaTraceTargets } from '../../../../shared/contracts/rCatalog/delta-trace';
 import type { TelemetryTopic, TelemetryTopics } from '../../../../shared/overlay-api/telemetry';
+import { useMapTrack } from '../model/useMapTrack';
 import { useRacingOverlay } from '../model/useRacingOverlay';
 import { cx } from '../r-common/driver/cx';
 import { hexToRgba } from '../r-common/driver/format';
@@ -455,7 +456,7 @@ export default function App() {
       .sort((a, b) => a.startPct - b.startPct);
   }, [showWeakSpot, ghost, sections, sectionMarkers, bySectors, weakCount, pct]);
   // The map of the weak spot, from the track's geometry.
-  const track = overlay.telemetry.track;
+  const track = useMapTrack(overlay.telemetry.track, overlay.demoMode);
   const mapPoints = useMemo(() => mapPointsOf(track), [track]);
   const gradientOn = str(values, 'weakSpotHighlightStyle', 'SOLID') === 'DELTA_GRADIENT';
   const gradients = useMemo(() => {

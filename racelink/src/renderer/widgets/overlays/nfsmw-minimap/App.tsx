@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { TrackGeometry } from '../../../../shared/contracts/track';
 import type { TelemetryTopic } from '../../../../shared/overlay-api/telemetry';
 import { ProgressPredictor } from '../model/progressPredictor';
+import { useMapTrack } from '../model/useMapTrack';
 import { useRacingOverlay } from '../model/useRacingOverlay';
 import { bool, num } from '../r-common/rSettings';
 import { drawFeng } from '../nfsmw-common/feng';
@@ -81,7 +82,8 @@ const drawStartLine = (context: CanvasRenderingContext2D) => {
 export default function App() {
   const overlay = useRacingOverlay(topics);
   const { values } = overlay.settings;
-  const { drivers, track } = overlay.telemetry;
+  const { drivers } = overlay.telemetry;
+  const track = useMapTrack(overlay.telemetry.track, overlay.demoMode);
   const radiusMeters = Math.min(1000, Math.max(50, num(values, 'visibleRadiusMeters', 250)));
   const showTerrain = bool(values, 'showTerrain', true);
   const showOpponents = bool(values, 'showOpponents', true);
