@@ -291,7 +291,7 @@ const referenceOf = (lap: DeltaLap | null, target: Target) =>
         : lap.lastLap;
 
 /** Demo history that fills the trace on start: two demo laps, sampled 8 times a second. */
-const demoHistorySeconds = 42;
+const demoHistorySeconds = 21;
 const demoHistoryHz = 8;
 
 /** Delta Trace: the live delta along the lap against a target lap, with the last lap as a ghost. */
