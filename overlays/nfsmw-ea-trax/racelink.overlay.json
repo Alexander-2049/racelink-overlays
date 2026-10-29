@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "id": "nfsmw-ea-trax",
   "version": "1.0.0",
-  "name": "NFSMW-EA Trax",
+  "name": "NFSMW-EA Trax / replica from NFS:MW 2005",
   "category": "other",
   "description": "NFSMW-EA Trax, the Racelink overlay, as a standalone overlay.",
   "entry": "index.html",
@@ -55,6 +55,7 @@
     "tags": [
       "Inputs"
     ],
-    "visibility": "public"
+    "visibility": "public",
+    "publishedFileId": "3828275851"
   }
 }

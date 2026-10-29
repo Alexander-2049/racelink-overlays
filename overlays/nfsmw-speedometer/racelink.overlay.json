@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "id": "nfsmw-speedometer",
   "version": "1.0.0",
-  "name": "NFSMW-Speedometer",
+  "name": "NFSMW-Speedometer /replica from NFS:MW 2005",
   "category": "driving",
   "description": "NFSMW-Speedometer, the Racelink overlay, as a standalone overlay.",
   "entry": "index.html",
@@ -354,6 +354,7 @@
     "tags": [
       "Inputs"
     ],
-    "visibility": "public"
+    "visibility": "public",
+    "publishedFileId": "3828276785"
   }
 }

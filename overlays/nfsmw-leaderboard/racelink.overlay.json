@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "id": "nfsmw-leaderboard",
   "version": "1.0.0",
-  "name": "NFSMW-Leaderboard",
+  "name": "NFSMW-Leaderboard /replica from NFS:MW 2005",
   "category": "race",
   "description": "NFSMW-Leaderboard, the Racelink overlay, as a standalone overlay.",
   "entry": "index.html",
@@ -102,6 +102,7 @@
     "tags": [
       "Inputs"
     ],
-    "visibility": "public"
+    "visibility": "public",
+    "publishedFileId": "3828276264"
   }
 }

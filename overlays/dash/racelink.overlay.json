@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "id": "dash",
   "version": "1.0.0",
-  "name": "Dash",
+  "name": "Dash Overlay / replica from github/bo2-official-overlays",
   "category": "driving",
   "description": "Dash, the Racelink overlay, as a standalone overlay.",
   "entry": "index.html",
@@ -81,5 +81,10 @@
         ]
       }
     ]
+  },
+  "workshop": {
+    "publishedFileId": "3828275452",
+    "tags": [],
+    "visibility": "public"
   }
 }

@@ -22,6 +22,7 @@ scripts/              install-builds.mjs, gen-previews.mjs
 | R-Fuel Calculator, R-G-Force Meter, R-Delta Trace | `r-fuel-calculator`, `r-g-force-meter`, `r-delta-trace` |
 | NFSMW-Speedometer, NFSMW-EA Trax, NFSMW-Minimap, NFSMW-Leaderboard, NFSMW-Lap Time | `nfsmw-speedometer`, `nfsmw-ea-trax`, `nfsmw-minimap`, `nfsmw-leaderboard`, `nfsmw-lap-time` |
 | Dash | `dash` |
+| Anime Relatives (new; its code is in `overlays/anime-relatives/src/`) | `anime-relatives` |
 
 Layouts made while these overlays were built in keep them: Racelink turns a
 built-in `r-standings` into the package `local:r-standings` (and so on), so

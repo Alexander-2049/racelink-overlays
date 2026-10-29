@@ -129,7 +129,8 @@ const aliases: Readonly<Record<string, string>> = {
 
 const normalize = (manufacturer: string): string => {
   const key = manufacturer.trim().toLowerCase();
-  const aliased = aliases[key] ?? key.replace(/[\s_-]+/g, '');
+  const joined = key.replace(/[\s_-]+/g, '');
+  const aliased = aliases[key] ?? aliases[joined] ?? joined;
   return knownBrands.has(aliased) ? aliased : 'n_a';
 };
 

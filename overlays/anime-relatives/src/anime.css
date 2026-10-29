@@ -1,0 +1,1217 @@
+/* Anime Relatives. Fonts: Bangers and Dela Gothic One (subset), SIL OFL 1.1
+   (fonts/*-OFL.txt); Montserrat from the R- overlays (SIL OFL). */
+@font-face {
+  font-family: 'AnimeSfx';
+  src: url('./fonts/bangers.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'AnimeJp';
+  src: url('./fonts/dela-gothic-one-subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'AnimeBody';
+  src: url('../../../racelink/src/renderer/widgets/overlays/r-common/fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'AnimeBody';
+  src: url('../../../racelink/src/renderer/widgets/overlays/r-common/fonts/Montserrat-ExtraBold.ttf');
+  font-weight: 800;
+}
+
+/* ---------- themes ---------- */
+
+/*
+ * The board carries the theme itself, not only through the root: WebView2
+ * restores an animated element's style from its previous animation, and the
+ * shaken board (and everything on it) got an earlier theme back.
+ */
+.anime,
+.board {
+  --panel: 26, 10, 32;
+  --rowA: rgba(78, 26, 74, 0.55);
+  --rowB: rgba(58, 18, 56, 0.55);
+  --text: #ffffff;
+  --muted: #f3c4dc;
+  --accent: #ff5fa2;
+  --accent2: #ffe3f0;
+  --refA: #ff4f9a;
+  --refB: #a855f7;
+  --refText: #ffffff;
+  --lapping: #ff8a6b;
+  --lapped: #8fd0ff;
+  --ink: #2a0b25;
+  --petal: #ffc1dc;
+  --pattern: radial-gradient(rgba(255, 255, 255, 0.05) 0.08em, transparent 0.1em) 0 0 / 0.6em 0.6em;
+}
+.anime.theme-neon,
+.board.theme-neon {
+  --panel: 6, 6, 24;
+  --rowA: rgba(20, 30, 70, 0.55);
+  --rowB: rgba(14, 22, 54, 0.55);
+  --muted: #a6e9ff;
+  --accent: #00f0ff;
+  --accent2: #ff2bd6;
+  --refA: #00b7ff;
+  --refB: #ff2bd6;
+  --lapping: #ff5c8a;
+  --lapped: #8d9bff;
+  --ink: #05051a;
+  --petal: #ff8ef0;
+  --pattern: repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 0.25em);
+}
+.anime.theme-shonen,
+.board.theme-shonen {
+  --panel: 20, 14, 10;
+  --rowA: rgba(60, 34, 18, 0.6);
+  --rowB: rgba(44, 26, 14, 0.6);
+  --muted: #ffd7a1;
+  --accent: #ff7a00;
+  --accent2: #ffd400;
+  --refA: #ff4d00;
+  --refB: #ffb300;
+  --lapping: #ff4b4b;
+  --lapped: #6cc3ff;
+  --ink: #1a0c00;
+  --petal: #ffb070;
+  --pattern: radial-gradient(rgba(255, 170, 60, 0.09) 0.1em, transparent 0.12em) 0 0 / 0.45em 0.45em;
+}
+.anime.theme-manga,
+.board.theme-manga {
+  --panel: 250, 248, 240;
+  --rowA: rgba(255, 255, 255, 0.9);
+  --rowB: rgba(236, 234, 226, 0.9);
+  --text: #111111;
+  --muted: #555555;
+  --accent: #e60012;
+  --accent2: #111111;
+  --refA: #111111;
+  --refB: #3a3a3a;
+  --refText: #ffffff;
+  --lapping: #e60012;
+  --lapped: #1f5fd6;
+  --ink: #111111;
+  --petal: #ffb3c7;
+  --pattern: radial-gradient(rgba(0, 0, 0, 0.09) 0.08em, transparent 0.1em) 0 0 / 0.4em 0.4em;
+}
+
+/* ---------- layout ---------- */
+
+.anime {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  padding: 0.3em;
+  gap: 0.2em;
+  overflow: hidden;
+  color: var(--text);
+  font-family: 'AnimeBody', 'Segoe UI', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  user-select: none;
+}
+.anime.noRows {
+  visibility: hidden;
+}
+.boardSlot {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.board {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  container-type: inline-size;
+}
+/* A narrow board keeps the name and the gap: the extras go first. */
+@container (max-width: 30em) {
+  .c-rating,
+  .c-ratingChange,
+  .c-lastLap,
+  .c-tags,
+  .c-flag {
+    display: none;
+  }
+}
+@container (max-width: 21em) {
+  .c-licence,
+  .c-brand,
+  .c-number,
+  .chips {
+    display: none;
+  }
+}
+.boardBg {
+  position: absolute;
+  inset: 0;
+  background: var(--pattern), rgba(var(--panel), var(--opacity));
+  clip-path: polygon(0.9em 0, 100% 0, 100% calc(100% - 0.9em), calc(100% - 0.9em) 100%, 0 100%, 0 0.9em);
+}
+.boardBg::before,
+.boardBg::after {
+  content: '';
+  position: absolute;
+  height: 0.16em;
+  width: 38%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.boardBg::before {
+  top: 0;
+  left: 0.9em;
+}
+.boardBg::after {
+  bottom: 0;
+  right: 0.9em;
+  background: linear-gradient(270deg, var(--accent), var(--accent2));
+}
+
+/* ---------- header ---------- */
+
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 1.7em;
+  padding: 0.35em 0.6em 0.1em 0.7em;
+  overflow: hidden;
+}
+.title {
+  flex: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+  padding: 0.12em 0.7em;
+  background: linear-gradient(100deg, var(--accent), var(--accent2));
+  color: var(--ink);
+  transform: skewX(-14deg);
+  box-shadow: 0.18em 0.18em 0 var(--ink);
+}
+.title > * {
+  transform: skewX(14deg);
+}
+.titleKanji {
+  font-family: 'AnimeJp', 'Yu Gothic', sans-serif;
+  font-size: 0.95em;
+  letter-spacing: 0.04em;
+}
+.titleText {
+  font-family: 'AnimeSfx', 'AnimeBody', sans-serif;
+  font-size: 1.05em;
+  letter-spacing: 0.08em;
+}
+.theme-manga .title {
+  color: #ffffff;
+  background: #111111;
+  box-shadow: 0.18em 0.18em 0 var(--accent);
+}
+.chips {
+  display: flex;
+  gap: 0.35em;
+  min-width: 0;
+  overflow: hidden;
+}
+.chip {
+  flex: none;
+  padding: 0.12em 0.55em;
+  font-size: 0.72em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  border: 0.1em solid var(--accent);
+  border-radius: 0.2em;
+  transform: skewX(-14deg);
+  color: var(--text);
+  background: rgba(var(--panel), 0.6);
+}
+
+/* ---------- rows ---------- */
+
+.rows {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em 0.55em 0.45em;
+  overflow: hidden;
+}
+.row {
+  position: relative;
+  flex: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  height: 1.9em;
+  padding: 0.15em 0.55em;
+  white-space: nowrap;
+}
+.row > :not(.rowBg) {
+  position: relative;
+}
+.rowBg {
+  position: absolute;
+  inset: 0.12em 0;
+  overflow: hidden;
+  background: var(--rowA);
+  border-radius: 0.2em;
+  transform: skewX(-12deg);
+}
+.row:nth-child(even) .rowBg {
+  background: var(--rowB);
+}
+.theme-manga .rowBg {
+  box-shadow: inset 0 0 0 0.08em #111111;
+}
+.row.empty .rowBg {
+  opacity: 0.3;
+}
+.row.inPit {
+  opacity: 0.55;
+}
+
+.row.reference {
+  color: var(--refText);
+  z-index: 2;
+}
+.row.reference .rowBg {
+  background: linear-gradient(100deg, var(--refA), var(--refB));
+  box-shadow:
+    0 0 0.9em color-mix(in srgb, var(--accent) 70%, transparent),
+    inset 0 0 0 0.09em rgba(255, 255, 255, 0.45);
+}
+.row.reference .rowBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.55) 45%, transparent 60%);
+  transform: translateX(-120%);
+  animation: shine 3.2s ease-in-out infinite;
+}
+@keyframes shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+.speedLines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 2.2em, rgba(255, 255, 255, 0.7) 2.2em 3.6em, transparent 3.6em 5em) 0 22% / 5em 0.08em no-repeat repeat-x,
+    repeating-linear-gradient(90deg, transparent 0 1.1em, rgba(255, 255, 255, 0.6) 1.1em 3em, transparent 3em 4.4em) 0 58% / 4.4em 0.07em repeat-x,
+    repeating-linear-gradient(90deg, transparent 0 3em, rgba(255, 255, 255, 0.55) 3em 4.1em, transparent 4.1em 6em) 0 84% / 6em 0.06em repeat-x;
+  animation: speedLines 0.45s linear infinite;
+}
+@keyframes speedLines {
+  to {
+    background-position-x: -5em, -4.4em, -6em;
+  }
+}
+
+.row.battle .rowBg {
+  box-shadow:
+    inset 0 0 0 0.11em #ff4a1c,
+    0 0 0.8em rgba(255, 90, 20, 0.85);
+  animation: battlePulse 0.7s ease-in-out infinite alternate;
+}
+.row.battle .rowBg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(255, 80, 0, 0.55), transparent 70%),
+    repeating-linear-gradient(100deg, rgba(255, 200, 0, 0.18) 0 0.4em, transparent 0.4em 1em);
+  background-size: 100% 100%, 2em 100%;
+  animation: flames 0.6s linear infinite;
+}
+@keyframes battlePulse {
+  to {
+    box-shadow:
+      inset 0 0 0 0.11em #ffd000,
+      0 0 1.3em rgba(255, 40, 0, 0.95);
+  }
+}
+@keyframes flames {
+  to {
+    background-position: 0 0, 2em 0;
+  }
+}
+.battleTag {
+  position: absolute !important;
+  z-index: 3;
+  top: -0.5em;
+  right: 3.4em;
+  padding: 0 0.4em;
+  font-family: 'AnimeJp', 'AnimeSfx', sans-serif;
+  font-size: 0.62em;
+  line-height: 1.4;
+  color: #ffffff;
+  background: #ff2a4d;
+  border: 0.12em solid var(--ink);
+  transform: rotate(-6deg) skewX(-10deg);
+  animation: tagBeat 0.5s ease-in-out infinite alternate;
+}
+@keyframes tagBeat {
+  to {
+    transform: rotate(-3deg) skewX(-10deg) scale(1.12);
+  }
+}
+
+.row.lapping .c-name,
+.row.lapping .c-gap,
+.row.lapping .c-number {
+  color: var(--lapping);
+}
+.row.lapped .c-name,
+.row.lapped .c-gap,
+.row.lapped .c-number {
+  color: var(--lapped);
+}
+
+/* ---------- columns ---------- */
+
+.c-position {
+  flex: none;
+  width: 1.9em;
+  display: flex;
+  justify-content: center;
+}
+.c-position > span {
+  min-width: 1.6em;
+  padding: 0 0.15em;
+  text-align: center;
+  font-family: 'AnimeSfx', 'AnimeBody', sans-serif;
+  font-size: 1.12em;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  background: var(--accent2);
+  transform: skewX(-12deg);
+  box-shadow: 0.12em 0.12em 0 var(--ink);
+}
+.row.empty .c-position > span {
+  visibility: hidden;
+}
+.theme-manga .c-position > span {
+  color: #ffffff;
+  background: #111111;
+  box-shadow: 0.12em 0.12em 0 var(--accent);
+}
+.row.reference .c-position > span {
+  color: var(--refA);
+  background: #ffffff;
+}
+.c-classStripe {
+  flex: none;
+  width: 0.28em;
+  height: 1.25em;
+  background: var(--class);
+  border-radius: 0.1em;
+  transform: skewX(-12deg);
+}
+.c-number {
+  flex: none;
+  width: 2.7em;
+  font-size: 0.82em;
+  text-align: center;
+  border: 0.1em solid var(--class);
+  border-radius: 0.9em;
+  line-height: 1.25;
+}
+.row.empty .c-number {
+  border-color: transparent;
+}
+.c-brand {
+  flex: none;
+  width: 1.3em;
+  height: 1.3em;
+}
+.c-brand img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.1em rgba(0, 0, 0, 0.6));
+}
+.c-flag {
+  flex: none;
+  width: 1.35em;
+}
+.c-flag img {
+  display: block;
+  width: 100%;
+  height: 1em;
+  object-fit: cover;
+  border-radius: 0.15em;
+}
+.c-name {
+  flex: 1 1 auto;
+  min-width: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-shadow: 0.06em 0.06em 0 rgba(0, 0, 0, 0.35);
+}
+.theme-manga .c-name {
+  text-shadow: none;
+}
+.theme-manga .row.reference .c-name {
+  color: #ffffff;
+}
+.c-tags {
+  flex: none;
+  display: flex;
+  gap: 0.25em;
+}
+.c-tags i {
+  width: 0.5em;
+  height: 0.5em;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 0.08em var(--ink);
+}
+.c-licence {
+  flex: none;
+  width: 3.4em;
+  display: flex;
+  justify-content: center;
+}
+.c-licence > span {
+  padding: 0.08em 0.45em;
+  font-size: 0.66em;
+  font-weight: 800;
+  border-radius: 0.9em;
+  box-shadow: 0 0 0 0.1em rgba(0, 0, 0, 0.35);
+}
+.c-rating {
+  flex: none;
+  width: 2.5em;
+  text-align: right;
+  font-size: 0.82em;
+  color: var(--muted);
+}
+.row.reference .c-rating {
+  color: var(--refText);
+}
+.c-ratingChange {
+  flex: none;
+  width: 2.3em;
+  text-align: right;
+  font-size: 0.78em;
+}
+.c-ratingChange.up {
+  color: #5dff9e;
+}
+.c-ratingChange.down {
+  color: #ff6b7d;
+}
+.theme-manga .c-ratingChange.up {
+  color: #0b8f3e;
+}
+.c-pit {
+  flex: none;
+  width: 2.1em;
+  display: flex;
+  justify-content: center;
+}
+.c-pit > span {
+  padding: 0 0.35em;
+  font-size: 0.62em;
+  font-weight: 800;
+  color: #111111;
+  background: #ffd23f;
+  transform: skewX(-12deg);
+}
+.c-pit > span.out {
+  background: #3ddc97;
+}
+.c-lastLap {
+  flex: none;
+  width: 4.3em;
+  text-align: right;
+  font-size: 0.82em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+/* Gaps change many times a second: plain wide digits read at a glance. */
+.c-gap {
+  flex: none;
+  width: 3.7em;
+  text-align: right;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+.c-gap b {
+  font-family: 'AnimeSfx', 'AnimeBody', sans-serif;
+  font-size: 1.15em;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  color: var(--accent2);
+  text-shadow: 0.08em 0.08em 0 var(--ink);
+}
+.theme-manga .c-gap b {
+  color: #ffffff;
+  text-shadow: 0.08em 0.08em 0 var(--accent);
+}
+
+/* ---------- petals ---------- */
+
+.petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.petals i {
+  position: absolute;
+  top: -1.2em;
+  width: var(--size);
+  height: calc(var(--size) * 0.75);
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, var(--petal) 55%, color-mix(in srgb, var(--petal) 70%, #ff3d8b) 100%);
+  border-radius: 100% 0 100% 0;
+  opacity: 0.6;
+  animation: petalFall var(--fall) linear var(--delay) infinite;
+}
+@keyframes petalFall {
+  0% {
+    transform: translate(0, 0) rotate3d(1, 0.4, 0.2, 0deg);
+  }
+  50% {
+    transform: translate(calc(var(--drift) * 0.5), 55vh) rotate3d(1, 0.4, 0.2, 360deg);
+  }
+  100% {
+    transform: translate(var(--drift), calc(100vh + 2em)) rotate3d(1, 0.4, 0.2, 720deg);
+  }
+}
+
+/* ---------- effects ---------- */
+
+.fxLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.flash {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  opacity: 0;
+  pointer-events: none;
+}
+.burst {
+  position: absolute;
+  width: 0;
+  height: 0;
+  font-size: calc(1em * var(--scale));
+}
+.burst > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.flashBall {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #fff6a0 28%, rgba(255, 140, 0, 0.6) 52%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: flashBall 0.55s ease-out forwards;
+}
+.burst-passed .flashBall {
+  background: radial-gradient(circle, #ffffff 0%, #a8d8ff 28%, rgba(120, 60, 255, 0.6) 52%, transparent 70%);
+}
+.burst-best .flashBall {
+  background: radial-gradient(circle, #ffffff 0%, #fff0b3 28%, rgba(200, 140, 255, 0.6) 52%, transparent 70%);
+}
+@keyframes flashBall {
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.7);
+    opacity: 0;
+  }
+}
+.shockwave {
+  width: 3em;
+  height: 3em;
+  box-sizing: border-box;
+  border: 0.22em solid #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: shockwave 0.65s ease-out forwards;
+}
+.shockwave.late {
+  border-color: var(--accent);
+  animation-delay: 0.12s;
+  opacity: 0;
+}
+@keyframes shockwave {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+.starburst {
+  width: 6.4em;
+  height: 6.4em;
+  overflow: visible;
+  transform: translate(-50%, -50%) scale(0);
+  animation: starPop 1.15s cubic-bezier(0.2, 1.2, 0.4, 1) forwards;
+}
+.starburst .outer {
+  fill: #fff35c;
+  stroke: #111111;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.starburst .inner {
+  fill: #ff3d6e;
+}
+.burst-passed .starburst .outer {
+  fill: #8fd6ff;
+}
+.burst-passed .starburst .inner {
+  fill: #6a2cff;
+}
+.burst-best .starburst .outer {
+  fill: #ffffff;
+}
+.burst-best .starburst .inner {
+  fill: #b77bff;
+}
+@keyframes starPop {
+  0% {
+    transform: translate(-50%, -50%) scale(0) rotate(-25deg);
+  }
+  16% {
+    transform: translate(-50%, -50%) scale(1.18) rotate(5deg);
+  }
+  26% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  72% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04) rotate(2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2) rotate(6deg);
+  }
+}
+.spark {
+  width: var(--size);
+  height: var(--size);
+  transform: translate(-50%, -50%);
+  clip-path: polygon(50% 0, 100% 100%, 0 70%);
+  animation: sparkFly 0.85s cubic-bezier(0.1, 0.8, 0.3, 1) var(--delay) forwards;
+}
+.spark.star {
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+@keyframes sparkFly {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--spin)) scale(0.3);
+  }
+}
+.sfx {
+  transform: translate(-50%, -50%) rotate(-8deg);
+  white-space: nowrap;
+  color: #ffffff;
+  -webkit-text-stroke: 0.14em #111111;
+  paint-order: stroke fill;
+  text-shadow: 0.09em 0.09em 0 #ff3d6e;
+  animation: sfxPop 1.4s cubic-bezier(0.2, 1.3, 0.4, 1) forwards;
+}
+.sfx.en {
+  font-family: 'AnimeSfx', sans-serif;
+  font-size: 2em;
+  letter-spacing: 0.05em;
+}
+.sfx.jp {
+  font-family: 'AnimeJp', 'Yu Gothic', sans-serif;
+  font-size: 1.65em;
+}
+.burst-passed .sfx {
+  text-shadow: 0.09em 0.09em 0 #3b6bff;
+  animation-name: sfxShaky;
+}
+.burst-best .sfx {
+  color: #fff6a8;
+  text-shadow: 0.09em 0.09em 0 #9b4dff;
+}
+@keyframes sfxPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(0.2);
+  }
+  14% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1.35);
+  }
+  26% {
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1);
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -110%) rotate(-10deg) scale(1.05);
+  }
+}
+@keyframes sfxShaky {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(6deg) scale(1.8);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(6deg) scale(1);
+  }
+  18% {
+    transform: translate(-56%, -50%) rotate(4deg);
+  }
+  24% {
+    transform: translate(-44%, -50%) rotate(8deg);
+  }
+  30% {
+    transform: translate(-53%, -50%) rotate(5deg);
+  }
+  36%,
+  78% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20%) rotate(9deg) scale(0.9);
+  }
+}
+.menace {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.menace span {
+  position: absolute;
+  left: calc(var(--i) * 0.95em);
+  top: 0;
+  font-size: 1.35em;
+  color: #b06cff;
+  -webkit-text-stroke: 0.12em #1a0030;
+  paint-order: stroke fill;
+  opacity: 0;
+  animation: menace 2.1s ease-out calc(var(--i) * 0.22s) forwards;
+}
+.menace span.jp {
+  font-family: 'AnimeJp', 'Yu Gothic', sans-serif;
+}
+.menace span.en {
+  font-family: 'AnimeSfx', sans-serif;
+  letter-spacing: 0.06em;
+}
+@keyframes menace {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%) skewX(-12deg) scale(0.6);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -70%) skewX(-12deg) scale(1.1);
+  }
+  35% {
+    transform: translate(-46%, -80%) skewX(-8deg) scale(1);
+  }
+  50% {
+    transform: translate(-54%, -90%) skewX(-14deg);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -150%) skewX(-12deg);
+  }
+}
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.confetti i {
+  position: absolute;
+  top: -1em;
+  width: 0.42em;
+  height: 0.7em;
+  animation: confetti var(--fall) linear var(--delay) forwards;
+}
+@keyframes confetti {
+  100% {
+    transform: translate(var(--drift), calc(100vh + 2em)) rotate3d(0.4, 1, 0.2, var(--spin));
+  }
+}
+.confetti .finishText {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  font-size: 2.2em;
+  animation-duration: 3.4s;
+}
+
+/* ---------- mascot ---------- */
+
+/* A bust-up sprite: she stands on the window's bottom edge, cut off by it. */
+.mascotSlot {
+  /* Never more than 40 % of the window's width: the board comes first. */
+  --mascotHeight: min(100vh, 15em * var(--mascotScale), 40vw / var(--mascotAspect));
+  position: relative;
+  z-index: 20;
+  flex: none;
+  align-self: flex-end;
+  width: calc(var(--mascotHeight) * var(--mascotAspect));
+  height: var(--mascotHeight);
+  margin-bottom: -0.3em;
+  pointer-events: none;
+}
+.mascotSlot.popup {
+  position: absolute;
+  bottom: 0;
+  right: 0.3em;
+  margin: 0;
+  transition:
+    transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1),
+    opacity 0.3s ease;
+}
+.mascotSlot.popup.left {
+  right: auto;
+  left: 0.3em;
+}
+.mascotSlot.popup.hidden {
+  transform: translateY(105%);
+  opacity: 0;
+}
+/* She stands this much below the window's edge: her highest jump (a 9 % hop,
+   a sway tilting a bottom corner up by 3 %) never lifts the sprite's cut-off
+   bottom into view. */
+.mascot {
+  --sink: 10%;
+  position: relative;
+  top: var(--sink);
+  width: 100%;
+  height: 100%;
+}
+.mascotMotion {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 0.35em rgba(0, 0, 0, 0.45));
+  animation: breathe 3.2s ease-in-out infinite;
+}
+.girlLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.girlLayer.face {
+  opacity: 0;
+}
+.girlLayer.face.on {
+  opacity: 1;
+}
+.gloom {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(30, 40, 140, 0.55) 0 0.08em, transparent 0.08em 0.5em) 0 0 / 100% 34% no-repeat,
+    linear-gradient(180deg, rgba(40, 60, 220, 0.6), rgba(40, 60, 220, 0) 42%);
+  -webkit-mask: var(--bodyMask) center / contain no-repeat;
+  mask: var(--bodyMask) center / contain no-repeat;
+  animation: gloom 0.5s ease-out both;
+}
+@keyframes gloom {
+  from {
+    opacity: 0;
+  }
+}
+
+.mood-celebrate .mascotMotion {
+  animation: hop 0.52s ease-in-out infinite;
+}
+.mood-shocked .mascotMotion {
+  animation:
+    recoil 0.35s cubic-bezier(0.2, 1.6, 0.4, 1) both,
+    jolt 0.12s linear 0.35s 6,
+    slump 0.6s ease-out 1.1s forwards;
+}
+.mood-cheer .mascotMotion {
+  animation: pumpUp 0.46s ease-in-out infinite;
+}
+.mood-dance .mascotMotion {
+  animation: sway 0.86s ease-in-out infinite alternate;
+}
+@keyframes breathe {
+  50% {
+    transform: translateY(0.6%) scale(1.006, 0.994);
+  }
+}
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.03, 0.97);
+  }
+  45% {
+    transform: translateY(-9%) scale(0.98, 1.02);
+  }
+}
+@keyframes recoil {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: translateY(-4%) scale(1.1);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+@keyframes jolt {
+  0%,
+  100% {
+    transform: translateX(0) scale(1.04);
+  }
+  50% {
+    transform: translateX(2.5%) scale(1.04);
+  }
+}
+@keyframes slump {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: translateY(4%) rotate(-2deg);
+  }
+}
+@keyframes pumpUp {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  40% {
+    transform: translateY(-5%) rotate(1.5deg) scale(1.02);
+  }
+}
+@keyframes sway {
+  from {
+    transform: translateX(-3%) rotate(-4deg);
+  }
+  to {
+    transform: translateX(3%) rotate(4deg);
+  }
+}
+
+/* Manga marks around the mascot. */
+.marks {
+  position: absolute;
+  inset: 0;
+}
+.marks i {
+  position: absolute;
+  font-style: normal;
+  line-height: 1;
+}
+.sparkle {
+  color: #fff27a;
+  font-size: 1.3em;
+  text-shadow: 0 0 0.3em #ffffff;
+  animation: twinkle 0.6s ease-in-out infinite alternate;
+}
+.sparkle.s1 {
+  left: 2%;
+  top: 8%;
+}
+.sparkle.s2 {
+  right: 0;
+  top: 22%;
+  animation-delay: -0.3s;
+  font-size: 1em;
+}
+.sparkle.s3 {
+  left: 16%;
+  top: 46%;
+  animation-delay: -0.15s;
+  font-size: 0.8em;
+}
+@keyframes twinkle {
+  from {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1.15) rotate(45deg);
+    opacity: 1;
+  }
+}
+.shock,
+.pump {
+  right: 4%;
+  top: 2%;
+  font-family: 'AnimeSfx', sans-serif;
+  font-size: 1.6em;
+  color: #ff2a4d;
+  -webkit-text-stroke: 0.1em #ffffff;
+  paint-order: stroke fill;
+  animation: markShake 0.13s linear infinite;
+}
+@keyframes markShake {
+  50% {
+    transform: translateX(0.12em) rotate(6deg);
+  }
+}
+.pump {
+  color: #ffd400;
+  -webkit-text-stroke-color: #111111;
+}
+.vein {
+  left: 22%;
+  top: 6%;
+  font-size: 1.2em;
+  animation: twinkle 0.35s ease-in-out infinite alternate;
+}
+/* A sweat drop sliding down her temple. */
+.sweat {
+  left: 26%;
+  top: 22%;
+  width: 0.5em;
+  height: 0.75em;
+  background: linear-gradient(160deg, #ffffff, #8fd0ff 55%, #3c8be0);
+  border: 0.07em solid #1d4f8f;
+  border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  clip-path: polygon(50% 0, 100% 62%, 92% 88%, 50% 100%, 8% 88%, 0 62%);
+  animation: sweat 1s ease-in infinite;
+}
+@keyframes sweat {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(1.2em);
+    opacity: 0;
+  }
+}
+.note {
+  color: var(--accent);
+  font-size: 1.3em;
+  -webkit-text-stroke: 0.06em #ffffff;
+  paint-order: stroke fill;
+  animation: note 1.6s ease-out infinite;
+}
+.note.n1 {
+  left: 0;
+  top: 30%;
+}
+.note.n2 {
+  right: 2%;
+  top: 18%;
+  animation-delay: -0.55s;
+}
+.note.n3 {
+  left: 30%;
+  top: 4%;
+  animation-delay: -1.1s;
+}
+@keyframes note {
+  0% {
+    transform: translateY(0.6em) rotate(-10deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1.4em) rotate(14deg);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  padding: 0.25em 0.65em;
+  white-space: nowrap;
+  font-size: 1.25em;
+  color: #111111;
+  background: #ffffff;
+  border: 0.13em solid #111111;
+  border-radius: 1em;
+  box-shadow: 0.16em 0.16em 0 var(--accent);
+  animation: bubble 0.4s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+.bubble.en {
+  font-family: 'AnimeSfx', sans-serif;
+  letter-spacing: 0.05em;
+}
+.bubble.jp {
+  font-family: 'AnimeJp', 'Yu Gothic', sans-serif;
+  font-size: 0.9em;
+}
+.right .bubble {
+  right: 55%;
+  transform-origin: 100% 100%;
+}
+.left .bubble {
+  left: 55%;
+  transform-origin: 0 100%;
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -0.55em;
+  width: 0.7em;
+  height: 0.7em;
+  background: #ffffff;
+  border: solid #111111;
+  border-width: 0 0.13em 0.13em 0;
+}
+.right .bubble::after {
+  right: 0.7em;
+  transform: rotate(30deg) skewX(20deg);
+}
+.left .bubble::after {
+  left: 0.7em;
+  transform: rotate(60deg) skewX(-20deg);
+}
+@keyframes bubble {
+  from {
+    transform: scale(0) rotate(-8deg);
+  }
+  to {
+    transform: scale(1) rotate(-3deg);
+  }
+}

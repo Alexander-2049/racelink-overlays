@@ -1,0 +1,705 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anime-relatives",
+  "version": "1.1.0",
+  "name": "Anime Relatives",
+  "category": "race",
+  "description": "The cars around you, anime style: the board shakes and explodes when you overtake or get overtaken, battles burn, and a mascot girl cheers you on.\n\nCredits\n- Mascot artwork: \"Female Character Sprite for Visual Novel\" by sutemo, https://sutemo.itch.io/female-character (free for personal and commercial projects). The overlay uses the layers of its PSD unchanged; the five girls and \"My own\" are combinations of them.\n- Fonts: Bangers by The Bangers Project Authors (https://github.com/googlefonts/bangers) and Dela Gothic One by The Dela Gothic Project Authors (https://github.com/syakuzen/DelaGothic), SIL Open Font License 1.1; Montserrat, SIL Open Font License 1.1.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      640,
+      330
+    ],
+    "min": [
+      200,
+      90
+    ],
+    "max": [
+      1720,
+      1360
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Board",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "SAKURA",
+                "options": [
+                  {
+                    "value": "SAKURA",
+                    "label": "Sakura (pink night)"
+                  },
+                  {
+                    "value": "NEON",
+                    "label": "Neon Tokyo"
+                  },
+                  {
+                    "value": "SHONEN",
+                    "label": "Shonen (orange fire)"
+                  },
+                  {
+                    "value": "MANGA",
+                    "label": "Manga (ink on paper)"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 14,
+                "min": 8,
+                "max": 40,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.85,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "nameFormat",
+                "label": "Driver name",
+                "type": "select",
+                "default": "0",
+                "options": [
+                  {
+                    "value": "0",
+                    "label": "First Last"
+                  },
+                  {
+                    "value": "2",
+                    "label": "F. Last"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Last F."
+                  },
+                  {
+                    "value": "1",
+                    "label": "Last First"
+                  },
+                  {
+                    "value": "4",
+                    "label": "First L."
+                  }
+                ]
+              },
+              {
+                "key": "excludePit",
+                "label": "Hide cars in the pit lane",
+                "type": "boolean",
+                "default": false
+              }
+            ]
+          },
+          {
+            "label": "Header",
+            "settings": [
+              {
+                "key": "showHeader",
+                "label": "Header",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "headerItems",
+                "label": "Header items",
+                "type": "order",
+                "hideable": true,
+                "visibleIf": {
+                  "showHeader": true
+                },
+                "items": [
+                  {
+                    "value": "session",
+                    "label": "Session"
+                  },
+                  {
+                    "value": "remaining",
+                    "label": "Laps or time left"
+                  },
+                  {
+                    "value": "sof",
+                    "label": "Strength of field"
+                  },
+                  {
+                    "value": "incidents",
+                    "label": "Incidents"
+                  },
+                  {
+                    "value": "trackTemp",
+                    "label": "Track temperature"
+                  }
+                ],
+                "default": [
+                  "session",
+                  "remaining",
+                  "sof",
+                  "incidents",
+                  {
+                    "id": "trackTemp",
+                    "visible": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "columns",
+        "label": "Columns",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "columns",
+                "label": "Columns",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "position",
+                    "label": "Position"
+                  },
+                  {
+                    "value": "classStripe",
+                    "label": "Class colour"
+                  },
+                  {
+                    "value": "number",
+                    "label": "Car number"
+                  },
+                  {
+                    "value": "brand",
+                    "label": "Car brand"
+                  },
+                  {
+                    "value": "flag",
+                    "label": "Country flag"
+                  },
+                  {
+                    "value": "name",
+                    "label": "Driver name"
+                  },
+                  {
+                    "value": "tags",
+                    "label": "Driver tags"
+                  },
+                  {
+                    "value": "licence",
+                    "label": "Licence"
+                  },
+                  {
+                    "value": "rating",
+                    "label": "iRating"
+                  },
+                  {
+                    "value": "ratingChange",
+                    "label": "iRating change"
+                  },
+                  {
+                    "value": "pit",
+                    "label": "Pit status"
+                  },
+                  {
+                    "value": "lastLap",
+                    "label": "Last lap"
+                  },
+                  {
+                    "value": "gap",
+                    "label": "Gap"
+                  }
+                ],
+                "default": [
+                  "position",
+                  "classStripe",
+                  "number",
+                  "brand",
+                  {
+                    "id": "flag",
+                    "visible": false
+                  },
+                  "name",
+                  "tags",
+                  "licence",
+                  "rating",
+                  {
+                    "id": "ratingChange",
+                    "visible": false
+                  },
+                  "pit",
+                  {
+                    "id": "lastLap",
+                    "visible": false
+                  },
+                  "gap"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "effects",
+        "label": "Effects",
+        "groups": [
+          {
+            "label": "Overtakes",
+            "settings": [
+              {
+                "key": "intensity",
+                "label": "Intensity",
+                "type": "select",
+                "default": "HYPE",
+                "options": [
+                  {
+                    "value": "CHILL",
+                    "label": "Chill"
+                  },
+                  {
+                    "value": "HYPE",
+                    "label": "Hype"
+                  },
+                  {
+                    "value": "MAX",
+                    "label": "Maximum chaos"
+                  }
+                ]
+              },
+              {
+                "key": "shake",
+                "label": "Shake the board",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "explosions",
+                "label": "Explosions",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "sfxText",
+                "label": "Comic sound effects",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "language",
+                "label": "Language of the effects",
+                "type": "select",
+                "default": "MIX",
+                "options": [
+                  {
+                    "value": "MIX",
+                    "label": "Mixed"
+                  },
+                  {
+                    "value": "JP",
+                    "label": "Japanese"
+                  },
+                  {
+                    "value": "EN",
+                    "label": "English (romaji)"
+                  }
+                ]
+              },
+              {
+                "key": "rowSwap",
+                "label": "Rows slide when cars swap places",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "raceOnly",
+                "label": "Only in races",
+                "type": "boolean",
+                "default": false,
+                "description": "Off: overtakes in practice and qualifying explode too."
+              }
+            ]
+          },
+          {
+            "label": "Atmosphere",
+            "settings": [
+              {
+                "key": "battleAura",
+                "label": "Battle aura on close cars",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "battleGap",
+                "label": "Battle gap",
+                "type": "number",
+                "default": 0.5,
+                "min": 0.1,
+                "max": 2,
+                "step": 0.1,
+                "unit": "s",
+                "visibleIf": {
+                  "battleAura": true
+                }
+              },
+              {
+                "key": "speedLines",
+                "label": "Speed lines on your row",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "petals",
+                "label": "Sakura petals",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "mascot",
+        "label": "Mascot",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "mascotEnabled",
+                "label": "Mascot",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "mascot",
+                "label": "Who",
+                "type": "select",
+                "default": "HANA",
+                "options": [
+                  {
+                    "value": "HANA",
+                    "label": "Hana: pink twin tails, hoodie"
+                  },
+                  {
+                    "value": "YUKI",
+                    "label": "Yuki: silver bob, winter coat"
+                  },
+                  {
+                    "value": "RIN",
+                    "label": "Rin: black hime cut, sailor uniform"
+                  },
+                  {
+                    "value": "MIO",
+                    "label": "Mio: long blonde hair, track jacket, glasses"
+                  },
+                  {
+                    "value": "AKANE",
+                    "label": "Akane: short brown hair, summer dress"
+                  },
+                  {
+                    "value": "CUSTOM",
+                    "label": "My own"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "mascotHair",
+                "label": "Hair",
+                "type": "select",
+                "default": "TWIN",
+                "options": [
+                  {
+                    "value": "TWIN",
+                    "label": "Twin tails"
+                  },
+                  {
+                    "value": "SHORT",
+                    "label": "Short"
+                  },
+                  {
+                    "value": "BOB",
+                    "label": "Bob"
+                  },
+                  {
+                    "value": "LONG",
+                    "label": "Long"
+                  },
+                  {
+                    "value": "HIME",
+                    "label": "Hime cut"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true,
+                  "mascot": "CUSTOM"
+                }
+              },
+              {
+                "key": "mascotHairColor",
+                "label": "Hair colour",
+                "type": "select",
+                "default": "PINK",
+                "options": [
+                  {
+                    "value": "PINK",
+                    "label": "Pink"
+                  },
+                  {
+                    "value": "BLONDE",
+                    "label": "Blonde"
+                  },
+                  {
+                    "value": "SILVER",
+                    "label": "Silver"
+                  },
+                  {
+                    "value": "BROWN",
+                    "label": "Brown"
+                  },
+                  {
+                    "value": "DARK",
+                    "label": "Black"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true,
+                  "mascot": "CUSTOM"
+                }
+              },
+              {
+                "key": "mascotOutfit",
+                "label": "Outfit",
+                "type": "select",
+                "default": "HOODIE",
+                "options": [
+                  {
+                    "value": "HOODIE",
+                    "label": "Hoodie"
+                  },
+                  {
+                    "value": "SEIFUKU1",
+                    "label": "Sailor uniform, summer"
+                  },
+                  {
+                    "value": "SEIFUKU2",
+                    "label": "Sailor uniform, navy"
+                  },
+                  {
+                    "value": "PE",
+                    "label": "Track jacket"
+                  },
+                  {
+                    "value": "WINTER",
+                    "label": "Winter coat and scarf"
+                  },
+                  {
+                    "value": "DRESS",
+                    "label": "Summer dress"
+                  },
+                  {
+                    "value": "PAJAMA",
+                    "label": "Pyjamas"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true,
+                  "mascot": "CUSTOM"
+                }
+              },
+              {
+                "key": "mascotGlasses",
+                "label": "Glasses",
+                "type": "select",
+                "default": "NONE",
+                "options": [
+                  {
+                    "value": "NONE",
+                    "label": "None"
+                  },
+                  {
+                    "value": "RED",
+                    "label": "Red"
+                  },
+                  {
+                    "value": "BLACK",
+                    "label": "Black"
+                  },
+                  {
+                    "value": "ROUND",
+                    "label": "Round"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true,
+                  "mascot": "CUSTOM"
+                }
+              },
+              {
+                "key": "mascotFlower",
+                "label": "Flower hair clip",
+                "type": "boolean",
+                "default": false,
+                "visibleIf": {
+                  "mascotEnabled": true,
+                  "mascot": "CUSTOM"
+                }
+              },
+              {
+                "key": "mascotChoker",
+                "label": "Choker",
+                "type": "boolean",
+                "default": false,
+                "visibleIf": {
+                  "mascotEnabled": true,
+                  "mascot": "CUSTOM"
+                }
+              },
+              {
+                "key": "mascotMode",
+                "label": "When she shows",
+                "type": "select",
+                "default": "EVENTS",
+                "options": [
+                  {
+                    "value": "ALWAYS",
+                    "label": "Always, beside the board"
+                  },
+                  {
+                    "value": "EVENTS",
+                    "label": "Only when something happens"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "mascotSide",
+                "label": "Side",
+                "type": "select",
+                "default": "RIGHT",
+                "options": [
+                  {
+                    "value": "RIGHT",
+                    "label": "Right"
+                  },
+                  {
+                    "value": "LEFT",
+                    "label": "Left"
+                  }
+                ],
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "mascotSize",
+                "label": "Size",
+                "type": "number",
+                "default": 100,
+                "min": 50,
+                "max": 200,
+                "step": 5,
+                "unit": "%",
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "mascotBubbles",
+                "label": "Speech bubbles",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              }
+            ]
+          },
+          {
+            "label": "She reacts to",
+            "settings": [
+              {
+                "key": "reactPass",
+                "label": "Your overtakes (she celebrates)",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "reactPassed",
+                "label": "Being overtaken (she is shocked)",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "reactBattle",
+                "label": "Close battles (she cheers)",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "reactBest",
+                "label": "Your best laps (she dances)",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              },
+              {
+                "key": "reactFinish",
+                "label": "The chequered flag (dance party)",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "mascotEnabled": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Race"
+    ],
+    "visibility": "public",
+    "publishedFileId": "3829189275"
+  }
+}

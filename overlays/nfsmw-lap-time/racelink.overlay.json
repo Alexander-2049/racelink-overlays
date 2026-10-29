@@ -3,7 +3,7 @@
   "apiVersion": 2,
   "id": "nfsmw-lap-time",
   "version": "1.0.0",
-  "name": "NFSMW-Lap Time",
+  "name": "NFSMW-Lap Time  / replica from NFS:MW 2005",
   "category": "timing",
   "description": "NFSMW-Lap Time, the Racelink overlay, as a standalone overlay.",
   "entry": "index.html",
@@ -95,6 +95,7 @@
     "tags": [
       "Inputs"
     ],
-    "visibility": "public"
+    "visibility": "public",
+    "publishedFileId": "3828275990"
   }
 }
