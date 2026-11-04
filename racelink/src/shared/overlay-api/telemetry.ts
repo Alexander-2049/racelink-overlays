@@ -5,7 +5,6 @@ import { carNode, type CarTelemetry } from './fields/car.js';
 import { circuitGames, everyGame } from './fields/common.js';
 import { controlsNode, type ControlsTelemetry } from './fields/controls.js';
 import { deltaNode, type DeltaTelemetry } from './fields/delta.js';
-import { dotaNode, type DotaTelemetry } from './fields/dota.js';
 import { driversNode, type DriversTelemetry } from './fields/drivers.js';
 import {
   radarNode,
@@ -83,7 +82,6 @@ export const topicNodes = {
   performance: performanceNode,
   system: systemNode,
   stream: streamNode,
-  dota: dotaNode,
   'race-director': external('RaceDirectorState', isRaceDirectorState, {
     description: 'iRacing replay and camera state used by the Race Director page.',
     games: ['iracing'],
@@ -109,7 +107,6 @@ export interface TelemetryTopics {
   readonly performance: Infer<typeof performanceNode>;
   readonly system: SystemTelemetry;
   readonly stream: StreamTelemetry;
-  readonly dota: DotaTelemetry;
   readonly 'race-director': RaceDirectorState;
 }
 /** Compile-time check that the interface matches the catalog. */
@@ -142,7 +139,6 @@ export const topicIntervalMs: Readonly<Record<TelemetryTopic, number>> = {
   performance: 1000,
   system: 250,
   stream: 250,
-  dota: 50,
   'race-director': 250,
 };
 

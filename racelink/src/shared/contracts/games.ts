@@ -10,7 +10,6 @@ export const gameIds = [
   'assetto-corsa-rally',
   'project-motor-racing',
   'rfactor-2',
-  'dota-2',
 ] as const;
 
 export type GameId = (typeof gameIds)[number];
@@ -28,8 +27,6 @@ export type GameDefinition = Readonly<{
   id: GameId;
   name: string;
   capabilities: GameCapabilities;
-  /** Offered only when Racelink runs in debug mode (`-debug`). */
-  debugOnly?: boolean;
 }>;
 
 export type OverlayCapability = 'telemetry' | 'maps' | 'classes' | 'pits' | 'flags';
@@ -67,7 +64,6 @@ export const overlayCapabilityRequirements: Readonly<
   'nfsmw-minimap': ['telemetry', 'maps'],
   'nfsmw-leaderboard': ['telemetry'],
   'nfsmw-lap-time': ['telemetry'],
-  'dota-invoker-cooldowns': ['telemetry'],
   'track-map': ['telemetry', 'maps', 'classes'],
   weather: ['telemetry'],
   'twitch-chat': [],
@@ -105,7 +101,6 @@ const overlayGameRestrictions: Readonly<Partial<Record<OverlayKind, readonly Gam
   'nfsmw-minimap': ['iracing'],
   'nfsmw-leaderboard': ['iracing', 'le-mans-ultimate', 'assetto-corsa'],
   'nfsmw-lap-time': ['iracing', 'le-mans-ultimate', 'assetto-corsa'],
-  'dota-invoker-cooldowns': ['dota-2'],
   'track-map': ['iracing'],
   weather: ['iracing', 'le-mans-ultimate'],
   wind: ['iracing', 'le-mans-ultimate'],
@@ -176,13 +171,6 @@ export const gameCatalog: readonly GameDefinition[] = [
     capabilities: unavailableCapabilities,
   },
   { id: 'rfactor-2', name: 'rFactor 2', capabilities: unavailableCapabilities },
-  {
-    id: 'dota-2',
-    name: 'Dota 2',
-    // Game State Integration only: no car, track or race data.
-    capabilities: { ...unavailableCapabilities, telemetry: true },
-    debugOnly: true,
-  },
 ];
 
 export const gameChannels = {

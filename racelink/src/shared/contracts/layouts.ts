@@ -32,7 +32,6 @@ export const overlayKinds = [
   'nfsmw-minimap',
   'nfsmw-leaderboard',
   'nfsmw-lap-time',
-  'dota-invoker-cooldowns',
   'track-map',
   'weather',
   'twitch-chat',

@@ -16,9 +16,8 @@ export const telemetryGames = [
   'assetto-corsa-rally',
 ] as const satisfies readonly GameId[];
 
-export const dota = ['dota-2'] as const satisfies readonly GameId[];
-/** Every game Racelink reads, racing or not: for the topics every game fills. */
-export const everyGame = [...telemetryGames, ...dota] as const satisfies readonly GameId[];
+/** Every game Racelink reads: for the topics every game fills. */
+export const everyGame = telemetryGames;
 
 export const iracing = ['iracing'] as const satisfies readonly GameId[];
 export const lmu = ['le-mans-ultimate'] as const satisfies readonly GameId[];

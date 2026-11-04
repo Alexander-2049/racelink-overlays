@@ -2,7 +2,6 @@ import type { OverlayCategory } from '../overlay-api/categories.js';
 import type { SettingsSchema } from '../overlay-api/settings.js';
 import type { OverlayBounds, OverlayKind } from './layouts.js';
 import { buildRelativesPro, buildStandingsPro } from './proBoardCatalog.js';
-import { dotaCatalog, type DotaKind } from './dotaCatalog/index.js';
 import { nfsmwCatalog, type NfsmwKind } from './nfsmwCatalog/index.js';
 import { rCatalog, type RKind } from './rCatalog/index.js';
 
@@ -24,7 +23,7 @@ export type OverlayDefinition = Readonly<{
 type ProKind = 'standings-pro' | 'relatives-pro';
 
 const plainCatalog: Readonly<
-  Record<Exclude<OverlayKind, ProKind | RKind | NfsmwKind | DotaKind>, OverlayDefinition>
+  Record<Exclude<OverlayKind, ProKind | RKind | NfsmwKind>, OverlayDefinition>
 > = {
   'rpm-led': {
     kind: 'rpm-led',
@@ -3259,7 +3258,6 @@ export const overlayCatalog: Readonly<Record<OverlayKind, OverlayDefinition>> = 
   ...plainCatalog,
   ...rCatalog,
   ...nfsmwCatalog,
-  ...dotaCatalog,
   'standings-pro': buildStandingsPro(plainCatalog.standings),
   'relatives-pro': buildRelativesPro(plainCatalog.relatives),
 };

@@ -65,7 +65,6 @@ export const overlayVisibilityDefaults: Record<OverlayKind, OverlayVisibility> =
   'nfsmw-minimap': base({}),
   'nfsmw-leaderboard': base({}),
   'nfsmw-lap-time': base({ showWhenInReplay: false }),
-  'dota-invoker-cooldowns': base({}),
   'track-map': base({ showWhenInGarage: true }),
   weather: base({}),
   // Chat belongs to the stream, not the session: it shows whatever the game does.
