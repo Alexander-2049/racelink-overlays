@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "nfsmw-ea-trax",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "NFSMW-EA Trax / replica from NFS:MW 2005",
   "category": "other",
   "description": "NFSMW-EA Trax, the Racelink overlay, as a standalone overlay.",
@@ -51,6 +51,7 @@
       }
     ]
   },
+  "permissions": { "media": true },
   "workshop": {
     "tags": [
       "Inputs"
