@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { TelemetryTopic } from '@racelink/overlay';
-import { useRacingOverlay } from '../model/useRacingOverlay';
+import { currentOverlay, useRacingOverlay } from '../model/useRacingOverlay';
 import { bool, num } from '../r-common/rSettings';
 import { useCanvasStage } from '../nfsmw-common/stageCanvas';
 import { tint } from '../nfsmw-common/tint';
@@ -20,24 +20,6 @@ import { loadBeep, playBeep } from './sound';
 import { loadRadarTextures, radarTexture, radarTexturesReady } from './textures';
 
 const topics: readonly TelemetryTopic[] = ['connection', 'session'];
-
-/**
- * Whether the overlay may beep here. On the game's screen (and on a stream
- * page) Racelink opens it with `#token=…`; its own previews (the layout list,
- * the inspector, "Add overlay", Studio) add `#demo=<game>`, and the clip
- * player opens it with neither. A browser with `?demo` is overlay
- * development. Everywhere inside Racelink's window the radar stays silent.
- */
-const mayBeep = (() => {
-  try {
-    const fragment = new URLSearchParams(window.location.hash.slice(1));
-    if (fragment.has('demo')) return false;
-    if (fragment.has('token')) return true;
-    return new URLSearchParams(window.location.search).has('demo');
-  } catch {
-    return false;
-  }
-})();
 
 /** While the layout is edited the radar stands lit, so it can be placed. */
 const editSample: Hazard = { distanceMeters: 120, bearingDegrees: 35, direction: 'right' };
@@ -159,8 +141,8 @@ export default function App() {
         if (
           pulse.beep &&
           state.sound &&
-          mayBeep &&
-          !state.editing &&
+          // Over the game, on a stream and in a browser; never in Racelink's window or edit mode.
+          (currentOverlay()?.soundAllowed ?? false) &&
           (!state.demo || state.soundInDemo)
         )
           playBeep(state.volume);

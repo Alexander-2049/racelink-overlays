@@ -13,7 +13,7 @@ export const darkMs = 17;
 /** Then it fills from the dome outwards in this long (measured in the game: 6 frames). */
 export const fillMs = 100;
 /** Time between pulses at the trouble, at the near edge and at the far edge (ms). */
-const touchingMs = 233;
+const touchingMs = 155;
 const nearMs = 600;
 const farMs = 1400;
 /** Brightness of the side away from the trouble. */
