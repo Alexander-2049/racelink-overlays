@@ -21,6 +21,7 @@ scripts/              install-builds.mjs, gen-previews.mjs
 | R-Boost Box, R-Lap Timing, R-LapTime Graph, R-Pitbox Helper | `r-boost-box`, `r-lap-timing`, `r-laptime-graph`, `r-pitbox-helper` |
 | R-Fuel Calculator, R-G-Force Meter, R-Delta Trace | `r-fuel-calculator`, `r-g-force-meter`, `r-delta-trace` |
 | NFSMW-Speedometer, NFSMW-EA Trax, NFSMW-Minimap, NFSMW-Leaderboard, NFSMW-Lap Time | `nfsmw-speedometer`, `nfsmw-ea-trax`, `nfsmw-minimap`, `nfsmw-leaderboard`, `nfsmw-lap-time` |
+| NFSMW-Upper Radar (trouble on the track ahead, with the game's beep) | `nfsmw-upper-radar` |
 | Dash | `dash` |
 | Anime Relatives (new; its code is in `overlays/anime-relatives/src/`) | `anime-relatives` |
 
@@ -48,6 +49,7 @@ npm run build                     # every overlay → overlays/<id>/dist/
 npm run install-overlays          # into %APPDATA%/Racelink/overlays (Racelink sees them at once)
 npm run install-overlays -- <dir> # into another custom overlays folder
 npm run previews                  # preview/preview.png of each overlay from demo data
+npm test                          # unit tests of the overlays' models (node:test)
 ```
 
 `npm run previews` renders each built overlay with demo data in headless Edge or

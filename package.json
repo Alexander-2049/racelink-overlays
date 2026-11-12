@@ -10,7 +10,8 @@
     "build": "npm run build --workspaces",
     "install-overlays": "node scripts/install-builds.mjs",
     "typecheck": "npm run typegen --workspaces && tsc -p tsconfig.json",
-    "previews": "node scripts/gen-previews.mjs"
+    "previews": "node scripts/gen-previews.mjs",
+    "test": "node --experimental-strip-types --test \"racelink/src/**/*.test.ts\""
   },
   "engines": {
     "node": ">=22"

@@ -1,0 +1,13 @@
+/* The radar keeps its proportions and stays in the middle of the window. */
+.nfsmwUpperRadar {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nfsmwUpperRadar canvas {
+  display: block;
+}

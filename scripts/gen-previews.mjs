@@ -51,7 +51,7 @@ if (!browserPath) {
 }
 
 // Serves overlays/<id>/dist at /<id>/.
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.jpg': 'image/jpeg', '.mp3': 'audio/mpeg' };
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.jpg': 'image/jpeg', '.mp3': 'audio/mpeg', '.wav': 'audio/wav' };
 const server = http.createServer((request, response) => {
   const url = new URL(request.url ?? '/', 'http://localhost');
   const [, id, ...rest] = decodeURIComponent(url.pathname).split('/');
@@ -157,6 +157,8 @@ try {
   await send('Page.enable', {}, sessionId);
   await send('Network.enable', {}, sessionId);
   await send('Network.setBlockedURLs', { urls: ['ws://127.0.0.1:32123/*', 'http://127.0.0.1:32123/*', 'ws://localhost:32123/*'] }, sessionId);
+  // Blocked URLs do not stop a WebSocket: without one the SDK makes its demo in the page.
+  await send('Page.addScriptToEvaluateOnNewDocument', { source: 'window.WebSocket = class { constructor() { throw new Error("offline"); } };' }, sessionId);
   for (const id of ids) {
     const manifest = JSON.parse(fs.readFileSync(path.join(overlaysDir, id, 'dist', 'racelink.overlay.json'), 'utf8'));
     const [width, height] = manifest.size.default;

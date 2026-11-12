@@ -1,0 +1,104 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "nfsmw-upper-radar",
+  "version": "1.0.0",
+  "name": "NFSMW-Upper Radar / replica from NFS:MW 2005",
+  "category": "awareness",
+  "description": "The radar detector under the mirror from NFS:MW 2005, warning of trouble on the track ahead: a car stopped, crawling, going backwards or stranded off the track. The closer it is, the more lights burn and the faster they blink and beep; far away they just glow. The arrow points to it.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      441,
+      90
+    ],
+    "min": [
+      98,
+      20
+    ],
+    "max": [
+      1764,
+      360
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "general",
+        "label": "General",
+        "groups": [
+          {
+            "label": "Warning",
+            "settings": [
+              {
+                "key": "nearMeters",
+                "label": "Fast blinking closer than",
+                "type": "number",
+                "default": 250,
+                "min": 50,
+                "max": 900,
+                "step": 25,
+                "unit": "m",
+                "description": "Closer than this the lights blink fast, faster still as the trouble nears."
+              },
+              {
+                "key": "farMeters",
+                "label": "Blinking closer than",
+                "type": "number",
+                "default": 600,
+                "min": 100,
+                "max": 1000,
+                "step": 25,
+                "unit": "m",
+                "description": "Closer than this the lights blink slowly; further away (up to 1000 m) they glow without blinking."
+              },
+              {
+                "key": "showArrow",
+                "label": "Arrow to the trouble",
+                "type": "boolean",
+                "default": true,
+                "description": "The arrow in the dome points to the trouble (iRacing and Le Mans Ultimate); elsewhere it points ahead."
+              }
+            ]
+          },
+          {
+            "label": "Sound",
+            "settings": [
+              {
+                "key": "sound",
+                "label": "Beep",
+                "type": "boolean",
+                "default": true,
+                "description": "The game's radar beep with every blink. Silent while the layout is edited and in demo mode."
+              },
+              {
+                "key": "volume",
+                "label": "Volume",
+                "type": "number",
+                "default": 70,
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "visibleIf": {
+                  "sound": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": [
+      "Awareness"
+    ],
+    "visibility": "public"
+  }
+}
