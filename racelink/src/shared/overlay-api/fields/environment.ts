@@ -38,7 +38,7 @@ export const weatherNode = obj(
         description: 'Precipitation intensity.',
         unit: 'ratio',
         range: [0, 1],
-        games: iracing,
+        games: iracingLmu,
       }),
     ),
     trackWetness: nullable(

@@ -13,6 +13,7 @@ import {
   type WeatherTelemetry,
 } from './fields/environment.js';
 import { sessionNode, type SessionTelemetry } from './fields/session.js';
+import { steamNode, type SteamTelemetry } from './fields/steam.js';
 import { streamNode, type StreamTelemetry } from './fields/stream.js';
 import { systemNode, type SystemTelemetry } from './fields/system.js';
 import { fuelNode, timingNode, type FuelTelemetry, type TimingTelemetry } from './fields/timing.js';
@@ -32,7 +33,7 @@ import {
 /** Major version of the public overlay API. Changes inside a major are additive only. */
 export const overlayApiVersion = 2;
 /** Minor version of the field catalog; bump it when fields are added. */
-export const overlayApiRevision = '2.6';
+export const overlayApiRevision = '2.16';
 
 const connectionNode = obj(
   {
@@ -86,6 +87,7 @@ export const topicNodes = {
     description: 'iRacing replay and camera state used by the Race Director page.',
     games: ['iracing'],
   }),
+  steam: steamNode,
 } as const satisfies Readonly<Record<string, Node>>;
 
 export type TelemetryTopic = keyof typeof topicNodes;
@@ -108,6 +110,7 @@ export interface TelemetryTopics {
   readonly system: SystemTelemetry;
   readonly stream: StreamTelemetry;
   readonly 'race-director': RaceDirectorState;
+  readonly steam: SteamTelemetry;
 }
 /** Compile-time check that the interface matches the catalog. */
 export type TelemetryTopicsMatchCatalog = {
@@ -140,6 +143,7 @@ export const topicIntervalMs: Readonly<Record<TelemetryTopic, number>> = {
   system: 250,
   stream: 250,
   'race-director': 250,
+  steam: 250,
 };
 
 /** Every field of every topic, flattened for docs, `fields.json`, and Data Explorer. */

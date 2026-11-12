@@ -8,7 +8,16 @@ import { error, type Issue } from './issues.js';
  */
 
 export type OrderItem = Readonly<{ id: string; visible: boolean }>;
-export type SettingValue = boolean | number | string | readonly OrderItem[];
+/** A wheel, button box or gamepad button as an overlay sees it: the device's name and the button number, from 1. */
+export type BoundButton = Readonly<{ deviceName: string; button: number }>;
+/**
+ * What the user bound to an overlay action (a `binding` setting): a keyboard
+ * shortcut (`Ctrl+1`), a controller button, both or neither. The overlay
+ * receives the action as a message when it is pressed; the value only tells
+ * what to show.
+ */
+export type BindingValue = Readonly<{ key: string | null; button: BoundButton | null }>;
+export type SettingValue = boolean | number | string | readonly OrderItem[] | BindingValue;
 export type SettingValues = Readonly<Record<string, SettingValue>>;
 /** Show the setting only when every listed setting has the given value. */
 export type VisibleIf = Readonly<Record<string, boolean | number | string>>;
@@ -48,9 +57,21 @@ export type OrderSetting = SettingBase &
     /** Items can be switched off as well as reordered. */
     hideable?: boolean;
   }>;
+/**
+ * An action the user can bind to a key or a controller button. Pressing it
+ * sends the overlay `{ type: 'action', action: key }`; the setting's value is
+ * what is bound, which the user changes in the overlay's «Бинды» tab only.
+ */
+export type BindingSetting = SettingBase & Readonly<{ type: 'binding'; default: BindingValue }>;
 
 export type SettingDefinition =
-  BooleanSetting | NumberSetting | SelectSetting | ColorSetting | TextSetting | OrderSetting;
+  | BooleanSetting
+  | NumberSetting
+  | SelectSetting
+  | ColorSetting
+  | TextSetting
+  | OrderSetting
+  | BindingSetting;
 export type SettingType = SettingDefinition['type'];
 export const settingTypes: readonly SettingType[] = [
   'boolean',
@@ -59,7 +80,11 @@ export const settingTypes: readonly SettingType[] = [
   'color',
   'text',
   'order',
+  'binding',
 ];
+
+/** Nothing bound: the value of every `binding` setting until the user binds it. */
+export const emptyBinding: BindingValue = { key: null, button: null };
 
 export type SettingsGroup = Readonly<{ label?: string; settings: readonly SettingDefinition[] }>;
 export type SettingsPage = Readonly<{
@@ -82,6 +107,19 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 const isOrderItem = (value: unknown): value is OrderItem =>
   isRecord(value) && typeof value.id === 'string' && typeof value.visible === 'boolean';
+
+const isBoundButton = (value: unknown): value is BoundButton =>
+  isRecord(value) &&
+  typeof value.deviceName === 'string' &&
+  typeof value.button === 'number' &&
+  Number.isInteger(value.button) &&
+  value.button >= 1 &&
+  value.button <= 512;
+
+export const isBindingValue = (value: unknown): value is BindingValue =>
+  isRecord(value) &&
+  (value.key === null || (typeof value.key === 'string' && value.key.length <= 40)) &&
+  (value.button === null || isBoundButton(value.button));
 
 /** Checks one value against its definition. */
 export const isValidSettingValue = (setting: SettingDefinition, value: unknown): boolean => {
@@ -108,6 +146,8 @@ export const isValidSettingValue = (setting: SettingDefinition, value: unknown):
         value.length === setting.items.length &&
         setting.items.every((item) => value.some((entry: OrderItem) => entry.id === item.value))
       );
+    case 'binding':
+      return isBindingValue(value);
   }
 };
 
@@ -146,6 +186,10 @@ export const resolveSettings = (schema: SettingsSchema, stored: unknown): Settin
   for (const setting of settingDefinitions(schema)) {
     const value = source[setting.key];
     if (setting.type === 'order') result[setting.key] = resolveOrder(setting, value);
+    else if (setting.type === 'binding')
+      result[setting.key] = isBindingValue(value)
+        ? { key: value.key, button: value.button }
+        : emptyBinding;
     else if (setting.type === 'number' && typeof value === 'number' && Number.isFinite(value))
       result[setting.key] = Math.min(setting.max, Math.max(setting.min, value));
     else
@@ -399,6 +443,11 @@ const readSetting = (reader: Reader, value: unknown, path: string): SettingDefin
         return badDefault('expected every item exactly once, as ids or { id, visible }');
       return { ...setting, default: ordered as OrderItem[] };
     }
+    case 'binding':
+      // The user binds actions; an overlay cannot suggest a key or a button.
+      return value.default === undefined
+        ? { ...base, type: 'binding', default: emptyBinding }
+        : badDefault('binding settings have no default');
   }
 };
 
@@ -459,7 +508,12 @@ export const parseSettingsSchema = (
   for (const setting of settingDefinitions(schema))
     for (const [key, expected] of Object.entries(setting.visibleIf ?? {})) {
       const target = settingDefinitions(schema).find((candidate) => candidate.key === key);
-      if (!target || target.type === 'order' || typeof target.default !== typeof expected)
+      if (
+        !target ||
+        target.type === 'order' ||
+        target.type === 'binding' ||
+        typeof target.default !== typeof expected
+      )
         reader.issues.push(
           error(
             'SETTING_VISIBLE_IF',

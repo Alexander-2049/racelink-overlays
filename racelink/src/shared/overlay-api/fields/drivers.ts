@@ -1,7 +1,11 @@
 import { driverTagKeys } from '../../contracts/driverTags.js';
 import type { GameId } from '../../contracts/games.js';
 import { bool, int, list, nullable, num, obj, oneOf, str, type Infer } from '../schema.js';
-import { flag, iracing, trackSurfaceValues } from './common.js';
+import { flag, iracing, iracingLmu, lmu, trackSurfaceValues } from './common.js';
+
+/** What is wrong with a car right now (`drivers[].hazard.kind`). */
+export const driverHazardValues = ['offTrack', 'stopped', 'slow', 'reverse'] as const;
+export type DriverHazardKind = (typeof driverHazardValues)[number];
 
 const seconds = (meta: string | Readonly<{ description: string; games?: readonly GameId[] }>) =>
   nullable(
@@ -26,7 +30,7 @@ export const driverNode = obj(
     carIdx: int('Stable index of the car for the session; use it as a key.'),
     position: nullable(int('Overall position.')),
     classPosition: nullable(int('Position in class.')),
-    startPosition: nullable(int({ description: 'Overall grid position.', games: iracing })),
+    startPosition: nullable(int({ description: 'Overall grid position.', games: iracingLmu })),
     startClassPosition: nullable(int({ description: 'Grid position in class.', games: iracing })),
     name: str('Full driver name.'),
     firstName: str('First name.'),
@@ -38,7 +42,7 @@ export const driverNode = obj(
     carId: nullable(int({ description: 'Car model identifier.', games: iracing })),
     carName: str('Car model name.'),
     teamId: nullable(int({ description: 'Team identifier.', games: iracing })),
-    teamName: str({ description: 'Team name; empty when unavailable.', games: iracing }),
+    teamName: str({ description: 'Team name; empty when unavailable.', games: iracingLmu }),
     customerId: nullable(
       int({
         description: 'Simulator account id; null for AI or when unavailable.',
@@ -59,7 +63,7 @@ export const driverNode = obj(
     trackSurface: oneOf(trackSurfaceValues, 'Where the car is.'),
     onPitRoad: bool('The car is on pit road.'),
     flag: nullable(flag('Flag shown to this car.')),
-    tyreCompound: nullable(int({ description: 'Tyre compound index.', games: iracing })),
+    tyreCompound: nullable(int({ description: 'Tyre compound index.', games: iracingLmu })),
     gear: nullable(
       int({
         description: 'Selected gear: -1 reverse, 0 neutral, 1+ forward gears.',
@@ -70,6 +74,28 @@ export const driverNode = obj(
       description: 'Times the car left the track since the session started.',
       games: iracing,
     }),
+    hazard: nullable(
+      obj(
+        {
+          kind: oneOf(
+            driverHazardValues,
+            'offTrack: the game says the car is off the track; stopped: under 20 km/h on the track while most of the field races; slow: under half the speed the field drives at this place of the lap; reverse: moving backwards along the lap (a spin).',
+          ),
+          sinceSeconds: num({
+            description: 'How long the hazard has lasted, by the session clock.',
+            unit: 'seconds',
+          }),
+          isDangerous: bool(
+            'The car is on the racing surface, where others may run into it (stopped, slow or reversing; not off the track).',
+          ),
+        },
+        {
+          description:
+            'The car is in trouble now: off the track, stopped, crawling or going backwards; held three seconds after it ends. Not under a safety car, on the formation lap or at the start (only off the track counts then), nor in the pits. Null when the car runs normally.',
+          since: '2.12',
+        },
+      ),
+    ),
     lapHistorySeconds: list(num({ description: 'Lap time.', unit: 'seconds' }), {
       description: 'Times of the last completed laps, oldest first; at most ten.',
       games: iracing,
@@ -85,22 +111,45 @@ export const driverNode = obj(
     ),
     pit: obj(
       {
-        stops: nullable(int('Pit stops this session.')),
-        entrySessionTime: seconds('Session time of the current pit entry.'),
-        timeInPitSeconds: seconds('Time spent on the current pit visit.'),
+        stops: nullable(int({ description: 'Pit stops this session.', games: iracingLmu })),
+        entrySessionTime: seconds(
+          'Session time of the current pit entry. Follows the session clock: it stands still while the game or a recording is paused.',
+        ),
+        timeInPitSeconds: seconds(
+          'Time spent on the current pit visit, by the session clock; draw it as given.',
+        ),
         lapsSinceExit: nullable(
-          int({ description: 'Laps since the last pit exit.', unit: 'laps' }),
+          int({ description: 'Laps since the last pit exit.', unit: 'laps', games: iracing }),
         ),
-        isOnOutLap: bool('The car is on its out lap.'),
+        isOnOutLap: bool({ description: 'The car is on its out lap.', games: iracing }),
         lastStopLap: nullable(
-          int({ description: 'Lap of the last completed pit visit.', unit: 'laps' }),
+          int({
+            description: 'Lap of the last completed pit visit.',
+            unit: 'laps',
+            games: iracing,
+          }),
         ),
-        lastStopSeconds: seconds('Time spent in the pit lane on the last completed pit visit.'),
+        lastStopSeconds: seconds({
+          description: 'Time spent in the pit lane on the last completed pit visit.',
+          games: iracing,
+        }),
         lastStintLaps: nullable(
-          int({ description: 'Laps driven on the stint before the last pit visit.', unit: 'laps' }),
+          int({
+            description: 'Laps driven on the stint before the last pit visit.',
+            unit: 'laps',
+            games: iracing,
+          }),
         ),
       },
-      { description: 'Pit stop tracking.', games: iracing },
+      'Pit stop tracking.',
+    ),
+    virtualEnergyFraction: nullable(
+      num({
+        description: 'Virtual energy the car has left, as the game shows it in its standings.',
+        unit: 'ratio',
+        range: [0, 1],
+        games: lmu,
+      }),
     ),
     gaps: obj(
       {
@@ -115,15 +164,15 @@ export const driverNode = obj(
         toLeaderSeconds: seconds({
           description:
             'Gap to the overall leader, across classes; in a race timed on the reference lap of the class of this car.',
-          games: iracing,
+          games: iracingLmu,
         }),
         toLeaderLaps: nullable(
-          int({ description: 'Laps behind the overall leader.', unit: 'laps', games: iracing }),
+          int({ description: 'Laps behind the overall leader.', unit: 'laps', games: iracingLmu }),
         ),
         relativeSeconds: seconds({
           description:
             'On-track time to the focused car; positive means this car is ahead. Timed on the reference lap of the class of the chasing car.',
-          games: iracing,
+          games: iracingLmu,
         }),
         relativeLaps: nullable(
           int({
@@ -157,7 +206,7 @@ export const driverNode = obj(
       description: 'The driver is transmitting on the radio.',
       games: iracing,
     }),
-    isOut: bool({ description: 'The car retired.', games: iracing }),
+    isOut: bool({ description: 'The car retired.', games: iracingLmu }),
     tags: list(tagNode, {
       description: 'User tags, sorted by priority; tags[0] is the primary tag.',
       games: iracing,

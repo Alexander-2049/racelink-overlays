@@ -1,5 +1,5 @@
 import { bool, int, nullable, num, obj, oneOf, type Infer } from '../schema.js';
-import { iracing, iracingAc, iracingLmu, telemetryGames, withAcRally } from './common.js';
+import { circuitGames, iracingLmu, telemetryGames, withAcRally } from './common.js';
 
 export const spotterValues = [
   'off',
@@ -35,7 +35,7 @@ export const carNode = obj(
       num({
         description: 'Steering wheel angle; positive turns left.',
         unit: 'rad',
-        games: iracing,
+        games: iracingLmu,
       }),
     ),
     fuelLiters: num({ description: 'Fuel in the tank.', unit: 'liters' }),
@@ -52,7 +52,7 @@ export const carNode = obj(
     tractionControlActive: nullable(
       bool({
         description: 'Traction control is intervening right now.',
-        games: withAcRally(iracingAc),
+        games: withAcRally(circuitGames),
       }),
     ),
     pitLimiterActive: nullable(

@@ -310,6 +310,8 @@ export const emptyPosition = (index: number): RPosition => ({
       tyreCompound: null,
       gear: null,
       offTrackCount: 0,
+      hazard: null,
+      virtualEnergyFraction: null,
       lapHistorySeconds: [],
       pushToPass: null,
       pit: {

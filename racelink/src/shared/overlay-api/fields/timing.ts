@@ -84,8 +84,15 @@ const fuelStrategyNode = nullable(
       stops: nullable(
         num({ description: 'Stops still needed: totalRefuelLiters per tank capacity.' }),
       ),
+      litersToFinish: nullable(
+        num({
+          description: 'Fuel the rest of the session needs at this consumption; no safety margin.',
+          unit: 'liters',
+          since: '2.15',
+        }),
+      ),
       litersAtFinish: liters(
-        'Fuel left at the finish without stopping; negative when it runs out.',
+        'Fuel left at the finish without stopping; negative when it runs out. The same amount as targetLaps, in litres.',
       ),
       window: nullable(
         obj(
@@ -123,6 +130,14 @@ const fuelStrategyNode = nullable(
 const fuelCalculatorNode = nullable(
   obj(
     {
+      capacityLiters: nullable(
+        num({
+          description:
+            'Most fuel the car can carry in this session: the tank, or less when the series limits it. Estimates use this.',
+          unit: 'liters',
+          since: '2.15',
+        }),
+      ),
       lapSeconds: seconds(
         'Lap time used for the time estimates: average of the last five clean laps, or the best lap.',
       ),

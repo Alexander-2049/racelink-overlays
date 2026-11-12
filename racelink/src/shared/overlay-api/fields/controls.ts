@@ -1,7 +1,9 @@
 import { bool, int, nullable, num, obj, str, type Infer } from '../schema.js';
-import { iracing, iracingAc, iracingLmu, telemetryGames, withAcRally } from './common.js';
+import type { GameId } from '../../contracts/games.js';
+import { circuitGames, iracing, iracingLmu, telemetryGames, withAcRally } from './common.js';
 
-const setting = (description: string) => nullable(num({ description, games: iracing }));
+const setting = (description: string, games: readonly GameId[] = iracing) =>
+  nullable(num({ description, games }));
 
 /** In-car adjustments the driver can change while driving. Published at ~10 Hz. */
 export const controlsNode = obj(
@@ -14,12 +16,12 @@ export const controlsNode = obj(
         games: telemetryGames,
       }),
     ),
-    brakeBiasMigration: setting('Brake bias migration setting.'),
+    brakeBiasMigration: setting('Brake bias migration setting.', iracingLmu),
     peakBrakeBias: setting('Peak brake bias setting.'),
     brakeValve: setting('Brake valve setting.'),
-    absLevel: nullable(num({ description: 'ABS setting.', games: withAcRally(iracingAc) })),
+    absLevel: nullable(num({ description: 'ABS setting.', games: withAcRally(circuitGames) })),
     tcLevel: nullable(
-      num({ description: 'Traction control setting.', games: withAcRally(iracingAc) }),
+      num({ description: 'Traction control setting.', games: withAcRally(circuitGames) }),
     ),
     tc2Level: setting('Secondary traction control setting.'),
     throttleShapeLevel: setting('Throttle map setting.'),
@@ -30,11 +32,11 @@ export const controlsNode = obj(
     weightJacker: setting('Weight jacker setting.'),
     antiRollBar: obj(
       {
-        frontSetting: setting('Front anti-roll bar setting.'),
+        frontSetting: setting('Front anti-roll bar setting.', iracingLmu),
         frontMode: nullable(
           str({ description: 'Front anti-roll bar mode label.', games: iracing }),
         ),
-        rearSetting: setting('Rear anti-roll bar setting.'),
+        rearSetting: setting('Rear anti-roll bar setting.', iracingLmu),
         rearMode: nullable(str({ description: 'Rear anti-roll bar mode label.', games: iracing })),
       },
       'Anti-roll bar adjustments.',

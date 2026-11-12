@@ -1,5 +1,6 @@
 import { bool, int, list, nullable, num, obj, oneOf, str, type Infer } from '../schema.js';
 import { acRallyNode } from './acRally.js';
+import { driverHazardValues } from './drivers.js';
 import { ac, circuitGames, flag, flagDetail, iracing, iracingLmu, lmu } from './common.js';
 
 export const sessionTypeValues = [
@@ -12,6 +13,10 @@ export const sessionTypeValues = [
   'other',
 ] as const;
 export type SessionType = (typeof sessionTypeValues)[number];
+
+/** Which way the hazard ahead is from the focused car (`session.hazardAhead.direction`). */
+export const hazardDirectionValues = ['ahead', 'left', 'right'] as const;
+export type HazardDirection = (typeof hazardDirectionValues)[number];
 
 /** The running session, track, and race control state. Published at ~4 Hz. */
 export const sessionNode = obj(
@@ -61,6 +66,67 @@ export const sessionNode = obj(
     flagDetail: nullable(
       flagDetail(
         'Most important flag shown to the player, with the session-state flags (debris, crossed, laps to green, furled, repair) the plain `flag` folds together.',
+      ),
+    ),
+    hazardAhead: nullable(
+      obj(
+        {
+          carIdx: int('The nearest car in trouble ahead.'),
+          kind: oneOf(driverHazardValues, 'Its `drivers[].hazard.kind`.'),
+          distanceMeters: num({
+            description: 'How far ahead of the focused car it is along the lap.',
+            unit: 'meters',
+          }),
+          count: int('Cars in trouble within 1000 m ahead.'),
+          lapDistanceFraction: num({
+            description: 'Where on the lap the car in trouble is.',
+            unit: 'ratio',
+            range: [0, 1],
+            since: '2.16',
+          }),
+          turn: nullable(
+            obj(
+              {
+                number: int('Turn number, as `session.turns` numbers it.'),
+                name: nullable(str('Name of the corner; null when it has none.')),
+              },
+              {
+                description:
+                  'The turn the car in trouble is in, from `session.turns`; null on a straight or when the layout is not known.',
+                games: circuitGames,
+                since: '2.16',
+              },
+            ),
+          ),
+          isBeyondTurn: bool({
+            description:
+              'A turn lies between the focused car and the car in trouble, so it is round a corner and out of sight. Worked out from the track centreline (iRacing) or from `session.turns`.',
+            since: '2.16',
+          }),
+          bearingDegrees: nullable(
+            num({
+              description:
+                'Which way the car in trouble is from the focused car: the angle between where the focused car points and the straight line to it. 0 is straight ahead, positive to the right, negative to the left, -180 to 180. iRacing takes the heading of the track at the focused car; Le Mans Ultimate the places of the cars in the world.',
+              unit: 'deg',
+              range: [-180, 180],
+              games: iracingLmu,
+              since: '2.16',
+            }),
+          ),
+          direction: nullable(
+            oneOf(hazardDirectionValues, {
+              description:
+                '`bearingDegrees` in words: `ahead` within 15° of straight ahead, otherwise `left` or `right`.',
+              games: iracingLmu,
+              since: '2.16',
+            }),
+          ),
+        },
+        {
+          description:
+            'The nearest car in trouble within 1000 m ahead of the focused car: stopped, crawling or reversing on the track, or nearly standing off it (`drivers[].hazard`). It works where the game shows no yellow flag. Null when the way ahead is clear or the track length is unknown.',
+          since: '2.12',
+        },
       ),
     ),
     displayUnits: oneOf(['metric', 'imperial'], {
@@ -226,7 +292,13 @@ export const sessionNode = obj(
         ),
         ac: nullable(
           obj(
-            { crewChiefAvailable: bool('The Crew Chief plugin is sharing data.') },
+            {
+              pluginAvailable: bool({
+                description:
+                  "Racelink's app for Assetto Corsa runs in the game and shares the other cars. Without it `drivers` holds no cars.",
+                since: '2.14',
+              }),
+            },
             { description: 'Assetto Corsa-only session data.', games: ac },
           ),
         ),

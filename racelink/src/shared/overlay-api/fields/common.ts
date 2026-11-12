@@ -6,6 +6,7 @@ export const circuitGames = [
   'iracing',
   'le-mans-ultimate',
   'assetto-corsa',
+  'assetto-corsa-evo',
 ] as const satisfies readonly GameId[];
 /**
  * Every game with a telemetry adapter. AC Rally publishes car telemetry only, so
