@@ -74,14 +74,14 @@
                 "label": "Beep",
                 "type": "boolean",
                 "default": true,
-                "description": "The game's radar beep with every pulse. Silent while the layout is edited."
+                "description": "The game's radar beep with every pulse. Silent while the layout is edited and inside Racelink's window (previews, clips)."
               },
               {
                 "key": "soundInDemo",
                 "label": "Sound in demo",
                 "type": "boolean",
                 "default": false,
-                "description": "Beep in demo mode too.",
+                "description": "Beep in demo mode too (on the game's screen or in a browser; Racelink's own window stays silent).",
                 "visibleIf": {
                   "sound": true
                 }
