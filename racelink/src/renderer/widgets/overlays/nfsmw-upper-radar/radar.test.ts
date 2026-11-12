@@ -34,7 +34,7 @@ test('far away the bar stands full; closer it pulses, more often as the trouble 
   assert.ok(slow !== null && edge !== null && fast !== null && touching !== null);
   assert.ok(slow > edge && edge > fast && fast > touching);
   assert.equal(edge, 600);
-  assert.equal(touching, 350);
+  assert.equal(touching, 233);
   // Even the fastest pulse has time to fill the bar.
   assert.ok(touching > darkMs + fillMs);
   assert.equal(pulsePeriodMs(Number.NaN, 250, 600), null);

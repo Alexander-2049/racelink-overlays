@@ -13,7 +13,6 @@ import {
   ledCropX,
   leds,
   stage,
-  warmColor,
   type Placed,
 } from './layout';
 import { approach, approachAngle, Pulser, pulsePeriodMs, sideLevels, type Hazard } from './radar';
@@ -131,8 +130,6 @@ export default function App() {
       let lit = 0;
       let levels = { left: 1, right: 1 };
       let arrowAngle: number | null = null;
-      // Close trouble turns the radar amber, as the game's second colour does.
-      let warm = false;
       if (hazard) {
         memory.distance = approach(memory.distance, hazard.distanceMeters, elapsed, distanceTauMs);
         const target = state.showArrow ? (hazard.bearingDegrees ?? 0) : 0;
@@ -144,7 +141,6 @@ export default function App() {
         if (pulse.beep && state.sound && !state.editing && (!state.demo || state.soundInDemo))
           playBeep(state.volume);
         arrowAngle = memory.angle;
-        warm = memory.distance < Math.min(state.near, state.far);
       } else {
         memory.distance = Number.NaN;
         memory.angle = Number.NaN;
@@ -164,37 +160,23 @@ export default function App() {
       const groupAlpha = (group.alpha * appear) / 255;
       const groupOffset = group.appearOffsetY * (1 - appear);
       if (domeImage)
-        drawPlaced(context, dome, domeImage, warm ? warmColor : dome.color, groupAlpha, {
+        drawPlaced(context, dome, domeImage, dome.color, groupAlpha, {
           offsetY: groupOffset,
         });
       if (ledImage && lit > 0) {
         // Lights burn from the dome outwards.
         const sourceX = ledCropX(lit);
-        drawPlaced(
-          context,
-          leds.left,
-          ledImage,
-          warm ? warmColor : leds.left.color,
-          groupAlpha * levels.left,
-          {
-            offsetY: groupOffset,
-            sourceX,
-          },
-        );
-        drawPlaced(
-          context,
-          leds.right,
-          ledImage,
-          warm ? warmColor : leds.right.color,
-          groupAlpha * levels.right,
-          {
-            offsetY: groupOffset,
-            sourceX,
-          },
-        );
+        drawPlaced(context, leds.left, ledImage, leds.left.color, groupAlpha * levels.left, {
+          offsetY: groupOffset,
+          sourceX,
+        });
+        drawPlaced(context, leds.right, ledImage, leds.right.color, groupAlpha * levels.right, {
+          offsetY: groupOffset,
+          sourceX,
+        });
       }
       if (arrowImage && arrowAngle !== null)
-        drawPlaced(context, arrow, arrowImage, warm ? warmColor : arrow.color, groupAlpha, {
+        drawPlaced(context, arrow, arrowImage, arrow.color, groupAlpha, {
           offsetY: groupOffset,
           rotation: (arrowAngle * Math.PI) / 180,
         });

@@ -44,7 +44,7 @@
                 "max": 900,
                 "step": 25,
                 "unit": "m",
-                "description": "Closer than this the bar pulses often, more often still as the trouble nears, and turns amber."
+                "description": "Closer than this the bar pulses often, more often still as the trouble nears."
               },
               {
                 "key": "farMeters",

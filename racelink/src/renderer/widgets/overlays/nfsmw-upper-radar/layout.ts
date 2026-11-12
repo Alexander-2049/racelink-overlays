@@ -32,8 +32,6 @@ export const group = { alpha: 235, appearOffsetY: -43 } as const;
 
 const green = [194, 242, 66] as const;
 const ledGreen = [195, 242, 66] as const;
-/** The radar's second colour in the package: the dome, the arrow and the lights turn amber. */
-export const warmColor = [255, 174, 64] as const;
 
 /** The dome (Radar_Icon). */
 export const dome: Placed = { x: -1, y: -200, size: [32, 32], color: green };
