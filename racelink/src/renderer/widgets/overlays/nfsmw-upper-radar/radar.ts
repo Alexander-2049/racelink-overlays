@@ -1,16 +1,21 @@
-// What the radar shows for the trouble ahead (`session.hazardAhead`): how many
-// lights burn, how fast they blink, where the arrow points. No DOM here.
+// What the radar shows for the trouble ahead (`session.hazardAhead`), as the
+// game does it: every pulse the bar goes dark for a frame and fills again
+// from the dome outwards, always at the same speed, then stays full until the
+// next pulse. Closer trouble pulses more often; far away the bar just stays
+// full. No DOM here.
 
 /** Light columns on each side of the dome. */
 export const ledColumns = 12;
 /** How far ahead Racelink looks for trouble (`session.hazardAhead`). */
 export const rangeMeters = 1000;
-/** Blink period at the far edge of slow blinking, at the near edge, and at the trouble (ms). */
-const slowestMs = 900;
-const nearMs = 450;
-const fastestMs = 150;
-/** Share of a blink the lights burn. */
-const onShare = 0.6;
+/** The bar is dark this long at the start of a pulse (one frame of the game). */
+export const darkMs = 17;
+/** Then it fills from the dome outwards in this long (measured in the game: 6 frames). */
+export const fillMs = 100;
+/** Time between pulses at the trouble, at the near edge and at the far edge (ms). */
+const touchingMs = 350;
+const nearMs = 600;
+const farMs = 1400;
 /** Brightness of the side away from the trouble. */
 export const farSideLevel = 0.35;
 
@@ -24,19 +29,12 @@ export interface Hazard {
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-/** Light columns that burn on each side: one far away, all of them close. */
-export const litColumns = (distanceMeters: number): number => {
-  if (!Number.isFinite(distanceMeters)) return 0;
-  const share = 1 - clamp(distanceMeters, 0, rangeMeters) / rangeMeters;
-  return clamp(Math.ceil(share * ledColumns), 1, ledColumns);
-};
-
 /**
- * How long one blink takes (ms): fast closer than `near`, slow closer than
- * `far`, both quicker as the trouble nears; null beyond `far`: the lights
- * glow without blinking.
+ * Time between pulses (ms): often closer than `near`, less often closer than
+ * `far`, both more often as the trouble nears; null beyond `far`: the bar
+ * stays full without pulsing.
  */
-export const blinkPeriodMs = (distanceMeters: number, near: number, far: number): number | null => {
+export const pulsePeriodMs = (distanceMeters: number, near: number, far: number): number | null => {
   if (!Number.isFinite(distanceMeters)) return null;
   const farEdge = Math.max(1, far);
   const nearEdge = clamp(near, 0, farEdge);
@@ -45,10 +43,16 @@ export const blinkPeriodMs = (distanceMeters: number, near: number, far: number)
   if (distance >= nearEdge) {
     const span = farEdge - nearEdge;
     const share = span > 0 ? (distance - nearEdge) / span : 0;
-    return nearMs + (slowestMs - nearMs) * share;
+    return nearMs + (farMs - nearMs) * share;
   }
   const share = nearEdge > 0 ? distance / nearEdge : 0;
-  return fastestMs + (nearMs - fastestMs) * share;
+  return touchingMs + (nearMs - touchingMs) * share;
+};
+
+/** Columns lit `elapsed` ms into a pulse: dark, then filling at a steady speed, then full. */
+export const litAt = (elapsedMs: number): number => {
+  if (elapsedMs < darkMs) return 0;
+  return clamp(Math.ceil(((elapsedMs - darkMs) / fillMs) * ledColumns), 0, ledColumns);
 };
 
 /** Brightness of the left and the right lights: the side of the trouble burns brighter. */
@@ -59,34 +63,39 @@ export const sideLevels = (direction: Direction | null): { left: number; right: 
 };
 
 /**
- * The blinking: a phase that runs at the current period, so a period that
- * changes does not jump. `beep` is true on the frame the lights come on.
+ * The pulses: the time into the current one, kept across a period that
+ * changes. `beep` is true on the frame a pulse starts.
  */
-export class Blinker {
-  private phase = 0;
-  private wasOn = false;
+export class Pulser {
+  /** Time into the current pulse; null while the bar stands full without pulsing. */
+  private elapsed: number | null = null;
 
   advance(
     elapsedMs: number,
     periodMs: number | null,
-  ): { readonly on: boolean; readonly beep: boolean } {
+  ): { readonly lit: number; readonly beep: boolean } {
     if (periodMs === null || !(periodMs > 0)) {
-      // Steady glow; the next blinking starts with the lights on and a beep.
-      this.phase = 0;
-      this.wasOn = false;
-      return { on: true, beep: false };
+      // A steady bar; pulsing starts again at once, with a beep.
+      this.elapsed = null;
+      return { lit: ledColumns, beep: false };
     }
     const step = Number.isFinite(elapsedMs) ? clamp(elapsedMs, 0, 1000) : 0;
-    this.phase = (this.phase + step / periodMs) % 1;
-    const on = this.phase < onShare;
-    const beep = on && !this.wasOn;
-    this.wasOn = on;
-    return { on, beep };
+    let beep = false;
+    if (this.elapsed === null) {
+      this.elapsed = 0;
+      beep = true;
+    } else {
+      this.elapsed += step;
+      if (this.elapsed >= periodMs) {
+        this.elapsed %= periodMs;
+        beep = true;
+      }
+    }
+    return { lit: litAt(this.elapsed), beep };
   }
 
   reset(): void {
-    this.phase = 0;
-    this.wasOn = false;
+    this.elapsed = null;
   }
 }
 

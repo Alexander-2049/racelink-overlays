@@ -16,16 +16,7 @@ import {
   warmColor,
   type Placed,
 } from './layout';
-import {
-  approach,
-  approachAngle,
-  blinkPeriodMs,
-  Blinker,
-  litColumns,
-  rangeMeters,
-  sideLevels,
-  type Hazard,
-} from './radar';
+import { approach, approachAngle, Pulser, pulsePeriodMs, sideLevels, type Hazard } from './radar';
 import { loadBeep, playBeep } from './sound';
 import { loadRadarTextures, radarTexture, radarTexturesReady } from './textures';
 
@@ -43,6 +34,7 @@ interface Shown {
   readonly far: number;
   readonly showArrow: boolean;
   readonly sound: boolean;
+  readonly soundInDemo: boolean;
   readonly volume: number;
   readonly editing: boolean;
   readonly demo: boolean;
@@ -109,6 +101,7 @@ export default function App() {
     far: num(values, 'farMeters', 600),
     showArrow: bool(values, 'showArrow', true),
     sound: bool(values, 'sound', true),
+    soundInDemo: bool(values, 'soundInDemo', false),
     volume: Math.min(100, Math.max(0, num(values, 'volume', 70))) / 100,
     editing: overlay.editMode,
     demo: overlay.demoMode,
@@ -116,7 +109,7 @@ export default function App() {
 
   // What is drawn now: smoothed toward the data between updates.
   const drawn = useRef({ distance: Number.NaN, angle: Number.NaN, last: 0, appearedAt: -1 });
-  const blinker = useRef(new Blinker());
+  const pulser = useRef(new Pulser());
 
   useEffect(() => {
     void loadBeep();
@@ -137,7 +130,6 @@ export default function App() {
       const hazard = state.hazard;
       let lit = 0;
       let levels = { left: 1, right: 1 };
-      let lightsOn = false;
       let arrowAngle: number | null = null;
       // Close trouble turns the radar amber, as the game's second colour does.
       let warm = false;
@@ -145,18 +137,18 @@ export default function App() {
         memory.distance = approach(memory.distance, hazard.distanceMeters, elapsed, distanceTauMs);
         const target = state.showArrow ? (hazard.bearingDegrees ?? 0) : 0;
         memory.angle = approachAngle(memory.angle, target, elapsed, arrowTauMs);
-        lit = litColumns(Math.min(rangeMeters, memory.distance));
         if (state.showArrow) levels = sideLevels(hazard.direction);
-        const period = state.editing ? null : blinkPeriodMs(memory.distance, state.near, state.far);
-        const blink = blinker.current.advance(elapsed, period);
-        lightsOn = blink.on;
-        if (blink.beep && state.sound && !state.editing && !state.demo) playBeep(state.volume);
+        const period = state.editing ? null : pulsePeriodMs(memory.distance, state.near, state.far);
+        const pulse = pulser.current.advance(elapsed, period);
+        lit = pulse.lit;
+        if (pulse.beep && state.sound && !state.editing && (!state.demo || state.soundInDemo))
+          playBeep(state.volume);
         arrowAngle = memory.angle;
         warm = memory.distance < Math.min(state.near, state.far);
       } else {
         memory.distance = Number.NaN;
         memory.angle = Number.NaN;
-        blinker.current.reset();
+        pulser.current.reset();
       }
 
       const backingImage = radarTexture('radar_backing');
@@ -175,7 +167,7 @@ export default function App() {
         drawPlaced(context, dome, domeImage, warm ? warmColor : dome.color, groupAlpha, {
           offsetY: groupOffset,
         });
-      if (ledImage && lit > 0 && lightsOn) {
+      if (ledImage && lit > 0) {
         // Lights burn from the dome outwards.
         const sourceX = ledCropX(lit);
         drawPlaced(
@@ -207,16 +199,16 @@ export default function App() {
           rotation: (arrowAngle * Math.PI) / 180,
         });
 
-      // Animate while appearing, blinking or turning; a standing radar draws once.
+      // Animate while appearing, pulsing or turning; a standing radar draws once.
       const settling =
         hazard !== null &&
         (Math.abs(memory.distance - hazard.distanceMeters) > 0.5 ||
           Math.abs((arrowAngle ?? 0) - (state.showArrow ? (hazard.bearingDegrees ?? 0) : 0)) > 0.2);
-      const blinking =
+      const pulsing =
         hazard !== null &&
         !state.editing &&
-        blinkPeriodMs(memory.distance, state.near, state.far) !== null;
-      return !radarTexturesReady() || appear < 1 || blinking || settling;
+        pulsePeriodMs(memory.distance, state.near, state.far) !== null;
+      return !radarTexturesReady() || appear < 1 || pulsing || settling;
     },
     loadRadarTextures,
   );

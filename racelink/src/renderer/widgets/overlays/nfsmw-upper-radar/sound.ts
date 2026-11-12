@@ -49,4 +49,3 @@ export const playBeep = (volume: number): void => {
   source.connect(gain).connect(current.destination);
   source.start();
 };
-

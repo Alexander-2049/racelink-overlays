@@ -14,14 +14,16 @@
 // run `npm run typegen`, do not edit it.
 
 export interface Settings {
-  /** Fast blinking closer than */
+  /** Fast pulses closer than */
   readonly nearMeters: number;
-  /** Blinking closer than */
+  /** Pulses closer than */
   readonly farMeters: number;
   /** Arrow to the trouble */
   readonly showArrow: boolean;
   /** Beep */
   readonly sound: boolean;
+  /** Sound in demo */
+  readonly soundInDemo: boolean;
   /** Volume */
   readonly volume: number;
 }
@@ -31,5 +33,6 @@ export const defaultSettings: Settings = {
   "farMeters": 600,
   "showArrow": true,
   "sound": true,
+  "soundInDemo": false,
   "volume": 70
 };

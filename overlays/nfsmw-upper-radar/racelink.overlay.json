@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "name": "NFSMW-Upper Radar / replica from NFS:MW 2005",
   "category": "awareness",
-  "description": "The radar detector under the mirror from NFS:MW 2005, warning of trouble on the track ahead: a car stopped, crawling, going backwards or stranded off the track. The closer it is, the more lights burn and the faster they blink and beep; far away they just glow. The arrow points to it.",
+  "description": "The radar detector under the mirror from NFS:MW 2005, warning of trouble on the track ahead: a car stopped, crawling, going backwards or stranded off the track. As in the game, every pulse the bar goes dark and fills again from the dome, with a beep; the closer the trouble, the more often it pulses. Far away the bar just glows. The arrow points to it.",
   "entry": "index.html",
   "games": [
     "iracing",
@@ -37,25 +37,25 @@
             "settings": [
               {
                 "key": "nearMeters",
-                "label": "Fast blinking closer than",
+                "label": "Fast pulses closer than",
                 "type": "number",
                 "default": 250,
                 "min": 50,
                 "max": 900,
                 "step": 25,
                 "unit": "m",
-                "description": "Closer than this the lights blink fast, faster still as the trouble nears."
+                "description": "Closer than this the bar pulses often, more often still as the trouble nears, and turns amber."
               },
               {
                 "key": "farMeters",
-                "label": "Blinking closer than",
+                "label": "Pulses closer than",
                 "type": "number",
                 "default": 600,
                 "min": 100,
                 "max": 1000,
                 "step": 25,
                 "unit": "m",
-                "description": "Closer than this the lights blink slowly; further away (up to 1000 m) they glow without blinking."
+                "description": "Closer than this the bar pulses slowly; further away (up to 1000 m) it glows without pulsing."
               },
               {
                 "key": "showArrow",
@@ -74,7 +74,17 @@
                 "label": "Beep",
                 "type": "boolean",
                 "default": true,
-                "description": "The game's radar beep with every blink. Silent while the layout is edited and in demo mode."
+                "description": "The game's radar beep with every pulse. Silent while the layout is edited."
+              },
+              {
+                "key": "soundInDemo",
+                "label": "Sound in demo",
+                "type": "boolean",
+                "default": false,
+                "description": "Beep in demo mode too.",
+                "visibleIf": {
+                  "sound": true
+                }
               },
               {
                 "key": "volume",
@@ -87,7 +97,8 @@
                 "unit": "%",
                 "visibleIf": {
                   "sound": true
-                }
+                },
+                "description": "Loudness of the beep."
               }
             ]
           }
