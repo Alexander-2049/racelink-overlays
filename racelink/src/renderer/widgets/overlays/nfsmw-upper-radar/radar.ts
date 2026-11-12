@@ -13,7 +13,7 @@ export const darkMs = 17;
 /** Then it fills from the dome outwards in this long (measured in the game: 6 frames). */
 export const fillMs = 100;
 /** Time between pulses at the trouble, at the near edge and at the far edge (ms). */
-const touchingMs = 155;
+const touchingMs = 130;
 const nearMs = 600;
 const farMs = 1400;
 /** Brightness of the side away from the trouble. */
@@ -28,6 +28,19 @@ export interface Hazard {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+/** Further round than this from straight ahead the trouble is behind the car (degrees). */
+export const behindDegrees = 90;
+
+/**
+ * The radar warns only of trouble in front: a car further along the lap that
+ * lies behind the car (a hairpin, a car spun back towards it) is left out.
+ * Without a direction (the game gives none) the trouble counts as ahead.
+ */
+export const isInFront = (hazard: Hazard): boolean =>
+  hazard.bearingDegrees === null ||
+  !Number.isFinite(hazard.bearingDegrees) ||
+  Math.abs(hazard.bearingDegrees) <= behindDegrees;
 
 /**
  * Time between pulses (ms): often closer than `near`, less often closer than

@@ -5,6 +5,7 @@ import {
   approachAngle,
   darkMs,
   farSideLevel,
+  isInFront,
   fillMs,
   ledColumns,
   litAt,
@@ -34,7 +35,7 @@ test('far away the bar stands full; closer it pulses, more often as the trouble 
   assert.ok(slow !== null && edge !== null && fast !== null && touching !== null);
   assert.ok(slow > edge && edge > fast && fast > touching);
   assert.equal(edge, 600);
-  assert.equal(touching, 155);
+  assert.equal(touching, 130);
   // Even the fastest pulse has time to fill the bar.
   assert.ok(touching > darkMs + fillMs);
   assert.equal(pulsePeriodMs(Number.NaN, 250, 600), null);
@@ -44,6 +45,20 @@ test('a near edge beyond the far edge still pulses near the trouble', () => {
   const period = pulsePeriodMs(100, 900, 300);
   assert.ok(period !== null && period < 600);
   assert.equal(pulsePeriodMs(400, 900, 300), null);
+});
+
+test('trouble behind the car is left out', () => {
+  const at = (bearingDegrees: number | null) => ({
+    distanceMeters: 200,
+    bearingDegrees,
+    direction: null,
+  });
+  assert.equal(isInFront(at(null)), true);
+  assert.equal(isInFront(at(0)), true);
+  assert.equal(isInFront(at(-90)), true);
+  assert.equal(isInFront(at(120)), false);
+  assert.equal(isInFront(at(-179)), false);
+  assert.equal(isInFront(at(Number.NaN)), true);
 });
 
 test('the side of the trouble burns brighter', () => {

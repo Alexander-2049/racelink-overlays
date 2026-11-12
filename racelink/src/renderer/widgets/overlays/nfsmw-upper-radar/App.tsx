@@ -15,7 +15,15 @@ import {
   stage,
   type Placed,
 } from './layout';
-import { approach, approachAngle, Pulser, pulsePeriodMs, sideLevels, type Hazard } from './radar';
+import {
+  approach,
+  approachAngle,
+  isInFront,
+  Pulser,
+  pulsePeriodMs,
+  sideLevels,
+  type Hazard,
+} from './radar';
 import { loadBeep, playBeep } from './sound';
 import { loadRadarTextures, radarTexture, radarTexturesReady } from './textures';
 
@@ -79,6 +87,9 @@ const drawPlaced = (
   context.restore();
 };
 
+/** The trouble if it is in front of the car; null when it lies behind. */
+const inFront = (hazard: Hazard): Hazard | null => (isInFront(hazard) ? hazard : null);
+
 /** NFSMW-Upper Radar: the game's radar detector, warning of trouble on the track ahead. */
 export default function App() {
   const overlay = useRacingOverlay(topics);
@@ -90,11 +101,11 @@ export default function App() {
     hazard: overlay.editMode
       ? editSample
       : hazardAhead
-        ? {
+        ? inFront({
             distanceMeters: hazardAhead.distanceMeters,
             bearingDegrees: hazardAhead.bearingDegrees ?? null,
             direction: hazardAhead.direction ?? null,
-          }
+          })
         : null,
     near: num(values, 'nearMeters', 250),
     far: num(values, 'farMeters', 600),
