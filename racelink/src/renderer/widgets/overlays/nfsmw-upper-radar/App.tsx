@@ -40,6 +40,7 @@ interface Shown {
   readonly near: number;
   readonly far: number;
   readonly showArrow: boolean;
+  readonly highlightSide: boolean;
   readonly sound: boolean;
   readonly soundInDemo: boolean;
   readonly volume: number;
@@ -110,6 +111,7 @@ export default function App() {
     near: num(values, 'nearMeters', 250),
     far: num(values, 'farMeters', 600),
     showArrow: bool(values, 'showArrow', true),
+    highlightSide: bool(values, 'highlightSide', false),
     sound: bool(values, 'sound', true),
     soundInDemo: bool(values, 'soundInDemo', false),
     volume: Math.min(100, Math.max(0, num(values, 'volume', 70))) / 100,
@@ -145,7 +147,7 @@ export default function App() {
         memory.distance = approach(memory.distance, hazard.distanceMeters, elapsed, distanceTauMs);
         const target = state.showArrow ? (hazard.bearingDegrees ?? 0) : 0;
         memory.angle = approachAngle(memory.angle, target, elapsed, arrowTauMs);
-        if (state.showArrow) levels = sideLevels(hazard.direction);
+        levels = sideLevels(hazard.direction, state.highlightSide);
         const period = state.editing ? null : pulsePeriodMs(memory.distance, state.near, state.far);
         const pulse = pulser.current.advance(elapsed, period);
         lit = pulse.lit;
@@ -203,10 +205,7 @@ export default function App() {
         hazard !== null &&
         (Math.abs(memory.distance - hazard.distanceMeters) > 0.5 ||
           Math.abs((arrowAngle ?? 0) - (state.showArrow ? (hazard.bearingDegrees ?? 0) : 0)) > 0.2);
-      const pulsing =
-        hazard !== null &&
-        !state.editing &&
-        pulsePeriodMs(memory.distance, state.near, state.far) !== null;
+      const pulsing = hazard !== null && !state.editing;
       return !radarTexturesReady() || appear < 1 || pulsing || settling;
     },
     loadRadarTextures,

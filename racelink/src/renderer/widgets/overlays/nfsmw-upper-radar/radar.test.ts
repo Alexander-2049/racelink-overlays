@@ -25,26 +25,32 @@ test('a pulse is dark for a frame, then fills at a steady speed, then stays full
   assert.equal(litAt(5000), ledColumns);
 });
 
-test('far away the bar stands full; closer it pulses, more often as the trouble nears', () => {
-  assert.equal(pulsePeriodMs(800, 250, 600), null);
-  assert.equal(pulsePeriodMs(600, 250, 600), null);
+test('the bar pulses from the moment the trouble shows, more often as it nears', () => {
+  const edgeOfRange = pulsePeriodMs(1000, 250, 600);
+  const distant = pulsePeriodMs(800, 250, 600);
+  const farEdge = pulsePeriodMs(600, 250, 600);
+  assert.equal(edgeOfRange, 2400);
+  assert.equal(farEdge, 1400);
+  assert.ok(edgeOfRange > distant && distant > farEdge);
+  // Beyond the range and with the far edge at the range it still pulses.
+  assert.equal(pulsePeriodMs(5000, 250, 600), 2400);
+  assert.equal(pulsePeriodMs(1000, 250, 1000), 2400);
   const slow = pulsePeriodMs(500, 250, 600);
   const edge = pulsePeriodMs(250, 250, 600);
   const fast = pulsePeriodMs(100, 250, 600);
   const touching = pulsePeriodMs(0, 250, 600);
-  assert.ok(slow !== null && edge !== null && fast !== null && touching !== null);
-  assert.ok(slow > edge && edge > fast && fast > touching);
+  assert.ok(farEdge > slow && slow > edge && edge > fast && fast > touching);
   assert.equal(edge, 600);
   assert.equal(touching, 130);
   // Even the fastest pulse has time to fill the bar.
   assert.ok(touching > darkMs + fillMs);
-  assert.equal(pulsePeriodMs(Number.NaN, 250, 600), null);
+  assert.equal(pulsePeriodMs(Number.NaN, 250, 600), 2400);
 });
 
 test('a near edge beyond the far edge still pulses near the trouble', () => {
   const period = pulsePeriodMs(100, 900, 300);
-  assert.ok(period !== null && period < 600);
-  assert.equal(pulsePeriodMs(400, 900, 300), null);
+  assert.ok(period < 600);
+  assert.ok(pulsePeriodMs(400, 900, 300) > 1400);
 });
 
 test('trouble behind the car is left out', () => {
@@ -61,11 +67,13 @@ test('trouble behind the car is left out', () => {
   assert.equal(isInFront(at(Number.NaN)), true);
 });
 
-test('the side of the trouble burns brighter', () => {
-  assert.deepEqual(sideLevels('left'), { left: 1, right: farSideLevel });
-  assert.deepEqual(sideLevels('right'), { left: farSideLevel, right: 1 });
-  assert.deepEqual(sideLevels('ahead'), { left: 1, right: 1 });
-  assert.deepEqual(sideLevels(null), { left: 1, right: 1 });
+test('both sides burn the same unless the side of the trouble is highlighted', () => {
+  assert.deepEqual(sideLevels('left', false), { left: 1, right: 1 });
+  assert.deepEqual(sideLevels('right', false), { left: 1, right: 1 });
+  assert.deepEqual(sideLevels('left', true), { left: 1, right: farSideLevel });
+  assert.deepEqual(sideLevels('right', true), { left: farSideLevel, right: 1 });
+  assert.deepEqual(sideLevels('ahead', true), { left: 1, right: 1 });
+  assert.deepEqual(sideLevels(null, true), { left: 1, right: 1 });
 });
 
 test('the pulser beeps once a pulse and fills the bar each time', () => {
@@ -83,7 +91,7 @@ test('the pulser beeps once a pulse and fills the bar each time', () => {
   assert.equal(beeps, 4);
   assert.ok(darkFrames >= 4 && darkFrames <= 8, String(darkFrames));
   assert.ok(fullFrames > 80, String(fullFrames));
-  // A steady bar is full and silent; pulsing again starts with a beep, dark.
+  // A steady bar (edit mode) is full and silent; pulsing again starts with a beep, dark.
   assert.deepEqual(pulser.advance(16, null), { lit: ledColumns, beep: false });
   assert.deepEqual(pulser.advance(16, 500), { lit: 0, beep: true });
 });

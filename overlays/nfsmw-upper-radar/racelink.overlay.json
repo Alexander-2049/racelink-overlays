@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "name": "NFSMW-Upper Radar / replica from NFS:MW 2005",
   "category": "awareness",
-  "description": "The radar detector under the mirror from NFS:MW 2005, warning of trouble on the track ahead: a car stopped, crawling, going backwards or stranded off the track. As in the game, every pulse the bar goes dark and fills again from the dome, with a beep; the closer the trouble, the more often it pulses. Far away the bar just glows. The arrow points to it.",
+  "description": "The radar detector under the mirror from NFS:MW 2005, warning of trouble on the track ahead: a car stopped, crawling, going backwards or stranded off the track. As in the game, every pulse the bar goes dark and fills again from the dome, with a beep: seldom while the trouble is far, more often the closer it is. The arrow points to it.",
   "entry": "index.html",
   "games": [
     "iracing",
@@ -55,7 +55,7 @@
                 "max": 1000,
                 "step": 25,
                 "unit": "m",
-                "description": "Closer than this the bar pulses slowly; further away (up to 1000 m) it glows without pulsing."
+                "description": "Closer than this the bar pulses slowly; further away (up to 1000 m) it pulses seldom."
               },
               {
                 "key": "showArrow",
@@ -63,6 +63,13 @@
                 "type": "boolean",
                 "default": true,
                 "description": "The arrow in the dome points to the trouble (iRacing and Le Mans Ultimate); elsewhere it points ahead."
+              },
+              {
+                "key": "highlightSide",
+                "label": "Brighter side of the trouble",
+                "type": "boolean",
+                "default": false,
+                "description": "The lights on the side of the trouble burn brighter than the other side (iRacing and Le Mans Ultimate). Off: both sides burn the same."
               }
             ]
           },

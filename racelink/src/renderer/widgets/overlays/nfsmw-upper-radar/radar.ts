@@ -1,8 +1,8 @@
 // What the radar shows for the trouble ahead (`session.hazardAhead`), as the
 // game does it: every pulse the bar goes dark for a frame and fills again
 // from the dome outwards, always at the same speed, then stays full until the
-// next pulse. Closer trouble pulses more often; far away the bar just stays
-// full. No DOM here.
+// next pulse. It pulses from the moment the trouble shows: seldom far away,
+// more often as the trouble nears. No DOM here.
 
 /** Light columns on each side of the dome. */
 export const ledColumns = 12;
@@ -12,10 +12,11 @@ export const rangeMeters = 1000;
 export const darkMs = 17;
 /** Then it fills from the dome outwards in this long (measured in the game: 6 frames). */
 export const fillMs = 100;
-/** Time between pulses at the trouble, at the near edge and at the far edge (ms). */
+/** Time between pulses at the trouble, at the near edge, at the far edge and at the edge of the range (ms). */
 const touchingMs = 130;
 const nearMs = 600;
 const farMs = 1400;
+const rangeMs = 2400;
 /** Brightness of the side away from the trouble. */
 export const farSideLevel = 0.35;
 
@@ -44,15 +45,20 @@ export const isInFront = (hazard: Hazard): boolean =>
 
 /**
  * Time between pulses (ms): often closer than `near`, less often closer than
- * `far`, both more often as the trouble nears; null beyond `far`: the bar
- * stays full without pulsing.
+ * `far`, seldom beyond it, always more often as the trouble nears. The bar
+ * never stands lit without pulsing; a distance that is not a number pulses as
+ * the edge of the range does.
  */
-export const pulsePeriodMs = (distanceMeters: number, near: number, far: number): number | null => {
-  if (!Number.isFinite(distanceMeters)) return null;
+export const pulsePeriodMs = (distanceMeters: number, near: number, far: number): number => {
+  if (!Number.isFinite(distanceMeters)) return rangeMs;
   const farEdge = Math.max(1, far);
   const nearEdge = clamp(near, 0, farEdge);
   const distance = Math.max(0, distanceMeters);
-  if (distance >= farEdge) return null;
+  if (distance >= farEdge) {
+    const span = rangeMeters - farEdge;
+    const share = span > 0 ? clamp((distance - farEdge) / span, 0, 1) : 1;
+    return farMs + (rangeMs - farMs) * share;
+  }
   if (distance >= nearEdge) {
     const span = farEdge - nearEdge;
     const share = span > 0 ? (distance - nearEdge) / span : 0;
@@ -68,8 +74,15 @@ export const litAt = (elapsedMs: number): number => {
   return clamp(Math.ceil(((elapsedMs - darkMs) / fillMs) * ledColumns), 0, ledColumns);
 };
 
-/** Brightness of the left and the right lights: the side of the trouble burns brighter. */
-export const sideLevels = (direction: Direction | null): { left: number; right: number } => {
+/**
+ * Brightness of the left and the right lights: both the same, or with
+ * `highlight` the side of the trouble burns brighter.
+ */
+export const sideLevels = (
+  direction: Direction | null,
+  highlight: boolean,
+): { left: number; right: number } => {
+  if (!highlight) return { left: 1, right: 1 };
   if (direction === 'left') return { left: 1, right: farSideLevel };
   if (direction === 'right') return { left: farSideLevel, right: 1 };
   return { left: 1, right: 1 };
@@ -88,7 +101,7 @@ export class Pulser {
     periodMs: number | null,
   ): { readonly lit: number; readonly beep: boolean } {
     if (periodMs === null || !(periodMs > 0)) {
-      // A steady bar; pulsing starts again at once, with a beep.
+      // A steady bar (the layout is edited); pulsing starts again at once, with a beep.
       this.elapsed = null;
       return { lit: ledColumns, beep: false };
     }

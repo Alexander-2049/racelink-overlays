@@ -7,20 +7,23 @@ crawling, going backwards or stranded off the track, within 1000 m).
 ## What it shows
 
 - **Pulses, as in the game.** Every pulse the bar goes dark for a frame and
-  fills again from the dome outwards in 100 ms, then stays full. The distance
-  sets only how often it pulses: every 130 ms at the trouble, 600 ms at the
-  near edge (`nearMeters`, 250 m), 1.4 s at the far edge (`farMeters`, 600 m).
-  Further away the bar just glows.
-- **The arrow** in the dome points to the trouble and the lights on its side
-  burn brighter (`bearingDegrees`, `direction`: iRacing and Le Mans Ultimate;
-  elsewhere the arrow points ahead). `showArrow` turns this off.
+  fills again from the dome outwards in 100 ms, then stays full. It pulses
+  from the moment the trouble shows; the distance sets only how often: every
+  130 ms at the trouble, 600 ms at the near edge (`nearMeters`, 250 m), 1.4 s
+  at the far edge (`farMeters`, 600 m), 2.4 s at the edge of the range
+  (1000 m).
+- **The arrow** in the dome points to the trouble (`bearingDegrees`: iRacing
+  and Le Mans Ultimate; elsewhere the arrow points ahead). `showArrow` turns
+  it off.
+- **Both sides burn the same.** With `highlightSide` (off by default) the
+  lights on the side of the trouble burn brighter (`direction`: iRacing and
+  Le Mans Ultimate).
 - **Only trouble in front.** Trouble further along the lap that lies behind
   the car (more than 90° from straight ahead) is left out.
 
 ## Sound
 
-The game's own radar beep (`FX_Radar`) plays at the start of every pulse;
-the steady glow far away is silent.
+The game's own radar beep (`FX_Radar`) plays at the start of every pulse.
 
 | Setting       | Default | What it does                                                          |
 | ------------- | ------- | --------------------------------------------------------------------- |

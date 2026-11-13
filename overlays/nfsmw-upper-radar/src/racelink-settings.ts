@@ -20,6 +20,8 @@ export interface Settings {
   readonly farMeters: number;
   /** Arrow to the trouble */
   readonly showArrow: boolean;
+  /** Brighter side of the trouble */
+  readonly highlightSide: boolean;
   /** Beep */
   readonly sound: boolean;
   /** Sound in demo */
@@ -32,6 +34,7 @@ export const defaultSettings: Settings = {
   "nearMeters": 250,
   "farMeters": 600,
   "showArrow": true,
+  "highlightSide": false,
   "sound": true,
   "soundInDemo": false,
   "volume": 70
