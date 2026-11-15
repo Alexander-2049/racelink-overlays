@@ -1,0 +1,236 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "gt4-gauges",
+  "version": "1.1.0",
+  "name": "GT4 Gauges",
+  "category": "driving",
+  "description": "Twin speedometer and tachometer in the style of a classic console racing game: needles, redline, gear and speed in the middle, pedal and fuel arcs, and a lateral G bar.\n\nThe gear box flashes at the shift point, the speed unit turns into PIT while the pit limiter is on, and the odometer shows the distance the car has driven in all your sessions, or since the overlay opened.\n\nCredits\n- Font: Michroma by The Michroma Project Authors (https://github.com/googlefonts/Michroma-font), SIL Open Font License 1.1.",
+  "entry": "index.html",
+  "games": "*",
+  "size": {
+    "default": [960, 360],
+    "min": [240, 90],
+    "max": [1920, 720]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "display",
+        "label": "Display",
+        "groups": [
+          {
+            "label": "Speed",
+            "settings": [
+              {
+                "key": "speedUnit",
+                "label": "Speed unit",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  { "value": "auto", "label": "As in the game" },
+                  { "value": "kph", "label": "km/h" },
+                  { "value": "mph", "label": "mph" }
+                ]
+              },
+              {
+                "key": "speedScale",
+                "label": "Speedometer scale",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  { "value": "auto", "label": "Automatic (grows with the car)" },
+                  { "value": "160", "label": "0–160" },
+                  { "value": "200", "label": "0–200" },
+                  { "value": "240", "label": "0–240" },
+                  { "value": "280", "label": "0–280" },
+                  { "value": "320", "label": "0–320" },
+                  { "value": "360", "label": "0–360" },
+                  { "value": "400", "label": "0–400" }
+                ],
+                "description": "In the speed unit shown. Automatic starts at 280 km/h (160 mph) and widens when the car goes faster."
+              },
+              {
+                "key": "odometer",
+                "label": "Odometer",
+                "type": "select",
+                "default": "total",
+                "options": [
+                  { "value": "total", "label": "Distance the car has driven" },
+                  { "value": "trip", "label": "Distance since the overlay opened" },
+                  { "value": "off", "label": "Hidden" }
+                ]
+              },
+              {
+                "key": "pitLimiter",
+                "label": "PIT in place of the unit while the pit limiter is on",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          },
+          {
+            "label": "Tachometer",
+            "settings": [
+              {
+                "key": "redline",
+                "label": "Red zone",
+                "type": "select",
+                "default": "shift",
+                "options": [
+                  { "value": "shift", "label": "From the shift point of the car" },
+                  { "value": "limit", "label": "Last 1000 rpm before the limiter" },
+                  { "value": "off", "label": "None" }
+                ]
+              },
+              {
+                "key": "shiftFlash",
+                "label": "Gear flashes at the shift point",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "shiftFlashColor",
+                "label": "Flash colour",
+                "type": "color",
+                "default": "#FF2A22",
+                "visibleIf": { "shiftFlash": true }
+              }
+            ]
+          },
+          {
+            "label": "G-forces",
+            "settings": [
+              {
+                "key": "maxGForce",
+                "label": "Scale",
+                "type": "number",
+                "default": 2,
+                "min": 1,
+                "max": 5,
+                "step": 0.5,
+                "unit": "g"
+              },
+              {
+                "key": "invertGForce",
+                "label": "Ball moves into the corner",
+                "type": "boolean",
+                "default": false,
+                "description": "Off: the ball is pushed out of the corner, as a body feels it."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "layout",
+        "label": "Layout",
+        "groups": [
+          {
+            "label": "Elements",
+            "settings": [
+              { "key": "showSpeedometer", "label": "Speedometer", "type": "boolean", "default": true },
+              { "key": "showRpmDial", "label": "Tachometer", "type": "boolean", "default": true },
+              { "key": "showGear", "label": "Gear", "type": "boolean", "default": true },
+              { "key": "showSpeed", "label": "Speed", "type": "boolean", "default": true },
+              { "key": "showPedals", "label": "Pedals", "type": "boolean", "default": true },
+              {
+                "key": "showFuelIndicator",
+                "label": "Fuel",
+                "type": "boolean",
+                "default": true,
+                "description": "Shown when the game reports the tank capacity."
+              },
+              { "key": "showGForces", "label": "G-forces", "type": "boolean", "default": true }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "colors",
+        "label": "Colours",
+        "groups": [
+          {
+            "label": "Gauges",
+            "settings": [
+              { "key": "needleColor", "label": "Needle", "type": "color", "default": "#FF2A22" },
+              { "key": "gaugeMarkColor", "label": "Numbers and ticks", "type": "color", "default": "#C9C9C9" },
+              { "key": "redlineColor", "label": "Red zone", "type": "color", "default": "#FF1712" },
+              { "key": "odometerColor", "label": "Odometer", "type": "color", "default": "#A9DDFF" },
+              { "key": "throttleColor", "label": "Throttle", "type": "color", "default": "#91B7E4" },
+              { "key": "brakeColor", "label": "Brake", "type": "color", "default": "#D71920" },
+              { "key": "fuelColor", "label": "Fuel", "type": "color", "default": "#91B7E4" },
+              { "key": "fuelTextColor", "label": "Fuel icon and letters", "type": "color", "default": "#A0A0A0" },
+              {
+                "key": "fuelTextOpacity",
+                "label": "Fuel icon and letters opacity",
+                "type": "number",
+                "default": 0.82,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              }
+            ]
+          },
+          {
+            "label": "Centre readout",
+            "settings": [
+              { "key": "gearColor", "label": "Gear", "type": "color", "default": "#000000" },
+              { "key": "gearBackgroundColor", "label": "Gear background", "type": "color", "default": "#8FAED0" },
+              {
+                "key": "gearBackgroundOpacity",
+                "label": "Gear background opacity",
+                "type": "number",
+                "default": 0.86,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              },
+              { "key": "speedReadoutColor", "label": "Speed", "type": "color", "default": "#A9DDFF" },
+              { "key": "speedUnitColor", "label": "Speed unit", "type": "color", "default": "#D8DEE8" },
+              {
+                "key": "speedUnitOpacity",
+                "label": "Speed unit opacity",
+                "type": "number",
+                "default": 0.78,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              },
+              { "key": "gForceBallColor", "label": "G-force ball", "type": "color", "default": "#A9DDFF" }
+            ]
+          },
+          {
+            "label": "Backgrounds",
+            "settings": [
+              { "key": "backgroundGradientColor", "label": "Dials", "type": "color", "default": "#000000" },
+              {
+                "key": "backgroundGradientOpacity",
+                "label": "Dials opacity",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              },
+              { "key": "centerGradientColor", "label": "Centre", "type": "color", "default": "#000000" },
+              {
+                "key": "centerGradientOpacity",
+                "label": "Centre opacity",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.01
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "workshop": {
+    "tags": ["Inputs"],
+    "visibility": "public"
+  }
+}

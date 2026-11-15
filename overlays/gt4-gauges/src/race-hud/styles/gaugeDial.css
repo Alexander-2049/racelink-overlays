@@ -1,0 +1,91 @@
+.gauge-major-tick {
+  stroke-linecap: square;
+  opacity: 0.92;
+}
+
+.gauge-minor-tick {
+  stroke-linecap: square;
+  opacity: 0.9;
+}
+
+.gauge-label {
+  font-family: "Michroma", Arial, Helvetica, sans-serif;
+  font-size: var(--gauge-label-font-size, 18px);
+  font-style: normal;
+  font-weight: 400;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  letter-spacing: 0;
+  paint-order: stroke;
+  stroke-width: var(--gauge-label-stroke-width, 1.7px);
+}
+
+.gauge-odometer {
+  font-family: "Michroma", Arial, Helvetica, sans-serif;
+  font-size: var(--gauge-odometer-font-size, 20px);
+  font-style: normal;
+  font-weight: 400;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  letter-spacing: 0.6px;
+  paint-order: stroke;
+  stroke-width: var(--gauge-odometer-stroke-width, 1.5px);
+}
+
+.g-force-indicator {
+  font-family: "Michroma", Arial, Helvetica, sans-serif;
+}
+
+.g-force-indicator__track {
+  fill: rgba(0, 0, 0, 0.5);
+  stroke: rgba(188, 188, 188, 0.58);
+  stroke-width: 3px;
+}
+
+.g-force-indicator__divider {
+  stroke: rgba(158, 158, 158, 0.55);
+  stroke-width: 3px;
+}
+
+.g-force-indicator__ball {
+  fill: var(--g-force-ball-color, #a9ddff);
+}
+
+.g-force-indicator__label {
+  fill: rgba(232, 232, 238, 0.82);
+  font-size: 28px;
+  font-weight: 400;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  letter-spacing: 0;
+  paint-order: stroke;
+  stroke: rgba(45, 45, 48, 0.9);
+  stroke-width: 1.5px;
+}
+
+.fuel-indicator__segment {
+  transition:
+    fill 1.2s ease-in-out,
+    fill-opacity 1.2s ease-in-out;
+}
+
+.fuel-indicator__mark {
+  fill: var(--fuel-text-color, #a0a0a0);
+  opacity: calc(var(--fuel-text-opacity, 0.82) * 0.49);
+}
+
+.fuel-indicator__icon {
+  fill: var(--fuel-text-color, #a0a0a0);
+  opacity: var(--fuel-text-opacity, 0.82);
+}
+
+.fuel-indicator__label {
+  fill: var(--fuel-text-color, #a0a0a0);
+  opacity: var(--fuel-text-opacity, 0.82);
+  font-family: "Michroma", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  letter-spacing: 0;
+}

@@ -1,0 +1,64 @@
+.center-readout {
+  font-family: "Michroma", Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-anchor: middle;
+}
+
+.center-readout__gear-box {
+  fill: var(--gear-background-color, #8faed0);
+  opacity: var(--gear-background-opacity, 0.86);
+}
+
+.center-readout__gear {
+  font-size: 82px;
+  font-weight: 400;
+  dominant-baseline: alphabetic;
+  paint-order: normal;
+}
+
+.center-readout__speed {
+  fill: var(--speed-readout-color, #a9ddff);
+  font-size: 66px;
+  font-weight: 400;
+  dominant-baseline: middle;
+  text-anchor: start;
+}
+
+.center-readout__unit {
+  fill: var(--speed-unit-color, #d8dee8);
+  opacity: var(--speed-unit-opacity, 0.78);
+  font-size: 27px;
+  font-weight: 400;
+  dominant-baseline: middle;
+}
+
+/* Shift point: the gear box takes the flash colour; past the blink point it blinks. */
+.center-readout__gear-group--shift .center-readout__gear-box,
+.center-readout__gear-group--blink .center-readout__gear-box {
+  fill: var(--shift-flash-color, #ff2a22);
+  opacity: 1;
+}
+
+.center-readout__gear-group--blink .center-readout__gear-box {
+  animation: center-readout-blink 0.16s steps(1, end) infinite;
+}
+
+@keyframes center-readout-blink {
+  50% {
+    fill: var(--gear-background-color, #8faed0);
+    opacity: var(--gear-background-opacity, 0.86);
+  }
+}
+
+/* The pit limiter replaces the speed unit. */
+.center-readout__unit--pit {
+  fill: #ffb000;
+  opacity: 1;
+  animation: center-readout-pit 1s steps(1, end) infinite;
+}
+
+@keyframes center-readout-pit {
+  50% {
+    opacity: 0.35;
+  }
+}
