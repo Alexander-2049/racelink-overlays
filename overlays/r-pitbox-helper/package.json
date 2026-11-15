@@ -10,7 +10,7 @@
     "typegen": "racelink-overlay typegen"
   },
   "dependencies": {
-    "@racelink/overlay": "file:../../../Racelink-Tauri/packages/overlay",
+    "@racelink/overlay": "file:../../../app/packages/overlay",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "lucide-react": "^1.55.0"
