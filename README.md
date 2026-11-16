@@ -24,6 +24,7 @@ scripts/              install-builds.mjs, gen-previews.mjs
 | NFSMW-Upper Radar (trouble on the track ahead, with the game's beep) | `nfsmw-upper-radar` |
 | Dash | `dash` |
 | Anime Relatives (new; its code is in `overlays/anime-relatives/src/`) | `anime-relatives` |
+| GT4 Gauges (new; twin speedometer and tachometer, its code is in `overlays/gt4-gauges/src/`) | `gt4-gauges` |
 
 Layouts made while these overlays were built in keep them: Racelink turns a
 built-in `r-standings` into the package `local:r-standings` (and so on), so
