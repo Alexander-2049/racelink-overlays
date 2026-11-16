@@ -20,6 +20,9 @@ crawling, going backwards or stranded off the track, within 1000 m).
   Le Mans Ultimate).
 - **Only trouble in front.** Trouble further along the lap that lies behind
   the car (more than 90° from straight ahead) is left out.
+- **Only behind the wheel.** In the garage, in a replay and while the game is
+  paused (`car.isOnTrack` is false) the radar is hidden, and slides in again
+  back on track. `onlyWhileDriving` (on by default) off shows it always.
 
 ## Sound
 

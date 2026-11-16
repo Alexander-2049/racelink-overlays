@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "nfsmw-upper-radar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "NFSMW-Upper Radar / replica from NFS:MW 2005",
   "category": "awareness",
   "description": "The radar detector under the mirror from NFS:MW 2005, warning of trouble on the track ahead: a car stopped, crawling, going backwards or stranded off the track. As in the game, every pulse the bar goes dark and fills again from the dome, with a beep: seldom while the trouble is far, more often the closer it is. The arrow points to it.",
@@ -70,6 +70,18 @@
                 "type": "boolean",
                 "default": false,
                 "description": "The lights on the side of the trouble burn brighter than the other side (iRacing and Le Mans Ultimate). Off: both sides burn the same."
+              }
+            ]
+          },
+          {
+            "label": "Visibility",
+            "settings": [
+              {
+                "key": "onlyWhileDriving",
+                "label": "Only while driving",
+                "type": "boolean",
+                "default": true,
+                "description": "Hidden in the garage, in a replay and while the game is paused, as in the game; off: always shown."
               }
             ]
           },

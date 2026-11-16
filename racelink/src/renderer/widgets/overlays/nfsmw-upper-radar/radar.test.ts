@@ -11,6 +11,7 @@ import {
   litAt,
   Pulser,
   pulsePeriodMs,
+  radarHidden,
   sideLevels,
 } from './radar.ts';
 
@@ -100,4 +101,14 @@ test('the arrow turns the short way round', () => {
   const next = approachAngle(170, -170, 1000, 100);
   assert.ok(next > 170 && next < 191, String(next));
   assert.equal(approachAngle(Number.NaN, 30, 16, 100), 30);
+});
+
+test('the radar shows only behind the wheel, unless asked to show always', () => {
+  const driving = { onlyWhileDriving: true, onTrack: true, editing: false, demo: false };
+  assert.equal(radarHidden(driving), false);
+  // A replay, the game paused, the garage: the car is not on track.
+  assert.equal(radarHidden({ ...driving, onTrack: false }), true);
+  assert.equal(radarHidden({ ...driving, onTrack: false, onlyWhileDriving: false }), false);
+  assert.equal(radarHidden({ ...driving, onTrack: false, editing: true }), false);
+  assert.equal(radarHidden({ ...driving, onTrack: false, demo: true }), false);
 });

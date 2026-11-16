@@ -22,6 +22,8 @@ export interface Settings {
   readonly showArrow: boolean;
   /** Brighter side of the trouble */
   readonly highlightSide: boolean;
+  /** Only while driving */
+  readonly onlyWhileDriving: boolean;
   /** Beep */
   readonly sound: boolean;
   /** Sound in demo */
@@ -35,6 +37,7 @@ export const defaultSettings: Settings = {
   "farMeters": 600,
   "showArrow": true,
   "highlightSide": false,
+  "onlyWhileDriving": true,
   "sound": true,
   "soundInDemo": false,
   "volume": 70

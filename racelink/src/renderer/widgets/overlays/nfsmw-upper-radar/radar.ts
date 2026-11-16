@@ -148,3 +148,15 @@ export const approachAngle = (
   const difference = ((((target - current) % 360) + 540) % 360) - 180;
   return approach(current, current + difference, elapsedMs, tauMs);
 };
+
+/**
+ * The radar stands hidden while the player does not drive (the garage, a
+ * replay, the game paused): as in the game, it shows only behind the wheel.
+ * Edit mode and demo always show it.
+ */
+export const radarHidden = (state: {
+  readonly onlyWhileDriving: boolean;
+  readonly onTrack: boolean;
+  readonly editing: boolean;
+  readonly demo: boolean;
+}): boolean => state.onlyWhileDriving && !state.onTrack && !state.editing && !state.demo;

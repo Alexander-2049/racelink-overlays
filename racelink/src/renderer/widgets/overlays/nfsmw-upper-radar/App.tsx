@@ -21,13 +21,14 @@ import {
   isInFront,
   Pulser,
   pulsePeriodMs,
+  radarHidden,
   sideLevels,
   type Hazard,
 } from './radar';
 import { loadBeep, playBeep } from './sound';
 import { loadRadarTextures, radarTexture, radarTexturesReady } from './textures';
 
-const topics: readonly TelemetryTopic[] = ['connection', 'session'];
+const topics: readonly TelemetryTopic[] = ['connection', 'session', 'car'];
 
 /** While the layout is edited the radar stands lit, so it can be placed. */
 const editSample: Hazard = { distanceMeters: 120, bearingDegrees: 35, direction: 'right' };
@@ -36,6 +37,8 @@ const distanceTauMs = 150;
 const arrowTauMs = 120;
 
 interface Shown {
+  /** Not behind the wheel (a replay, the garage, the game paused): nothing is drawn. */
+  readonly hidden: boolean;
   readonly hazard: Hazard | null;
   readonly near: number;
   readonly far: number;
@@ -99,6 +102,12 @@ export default function App() {
 
   const shown = useRef<Shown | null>(null);
   shown.current = {
+    hidden: radarHidden({
+      onlyWhileDriving: bool(values, 'onlyWhileDriving', true),
+      onTrack: overlay.telemetry.car.isOnTrack,
+      editing: overlay.editMode,
+      demo: overlay.demoMode,
+    }),
     hazard: overlay.editMode
       ? editSample
       : hazardAhead
@@ -133,6 +142,15 @@ export default function App() {
       const state = shown.current;
       if (!state) return false;
       const memory = drawn.current;
+      if (state.hidden) {
+        // Back behind the wheel, it slides in again as the game shows it.
+        memory.appearedAt = -1;
+        memory.last = 0;
+        memory.distance = Number.NaN;
+        memory.angle = Number.NaN;
+        pulser.current.reset();
+        return false;
+      }
       if (memory.appearedAt < 0) memory.appearedAt = now;
       const elapsed = memory.last > 0 ? now - memory.last : 0;
       memory.last = now;
