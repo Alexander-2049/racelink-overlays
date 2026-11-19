@@ -25,7 +25,7 @@ scripts/              install-builds.mjs, gen-previews.mjs
 | Dash | `dash` |
 | Anime Relatives (new; its code is in `overlays/anime-relatives/src/`) | `anime-relatives` |
 | GT4 Gauges (new; twin speedometer and tachometer, its code is in `overlays/gt4-gauges/src/`) | `gt4-gauges` |
-| Driver Card (new; flag, full name, the helmet and the car with its livery as iRacing draws them, for the driver you watch; iRacing, needs Racelink with Overlay API 2.19; its code is in `overlays/driver-card/src/`) | `driver-card` |
+| Driver Card (new; flag, full name, the helmet and the car with its livery as iRacing draws them, for the driver you watch, with a spinner while they load and nothing when iRacing cannot draw them; iRacing, needs Racelink with Overlay API 2.19; its code is in `overlays/driver-card/src/`) | `driver-card` |
 
 Layouts made while these overlays were built in keep them: Racelink turns a
 built-in `r-standings` into the package `local:r-standings` (and so on), so

@@ -29,9 +29,53 @@
     0 0 0.4cqh rgb(0 0 0 / 0.9);
 }
 
+/* A picture and the spinner shown while it loads. */
+.dc-picture {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dc-picture > img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.dc-picture.is-loading > img {
+  position: absolute;
+  opacity: 0;
+}
+
+.dc-spinner {
+  width: 30%;
+  max-width: 6cqh;
+  min-width: 2cqh;
+  aspect-ratio: 1;
+  border: 0.6cqh solid rgb(255 255 255 / 0.2);
+  border-top-color: var(--dc-class, #ff7a1a);
+  border-radius: 50%;
+  animation: dc-spin 0.8s linear infinite;
+}
+
+@keyframes dc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-spinner {
+    animation-duration: 2.4s;
+  }
+}
+
 .dc-helmet {
   height: 88cqh;
-  width: auto;
+  aspect-ratio: 1;
   filter: drop-shadow(0 1cqh 2cqh rgb(0 0 0 / 0.45));
 }
 
@@ -54,6 +98,10 @@
 .dc-flag {
   height: 11cqh;
   aspect-ratio: 4 / 3;
+}
+
+.dc-flag > img {
+  width: 100%;
   object-fit: cover;
   box-shadow: 0 0 0 1px rgb(255 255 255 / 0.3);
 }
@@ -74,22 +122,12 @@
 }
 
 /* iRacing's picture of the car, three-quarter view, transparent. */
-.dc-render {
-  height: 74cqh;
-  margin-top: -4cqh;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: left center;
-  align-self: flex-start;
-  filter: drop-shadow(0 1.5cqh 2cqh rgb(0 0 0 / 0.5));
-}
-
 .dc-car {
-  height: 50cqh;
-  width: auto;
-  aspect-ratio: 400 / 112;
+  height: 74cqh;
+  aspect-ratio: 508 / 272;
   max-width: 100%;
+  margin-top: -4cqh;
   align-self: flex-start;
-  filter: drop-shadow(0 1.5cqh 2cqh rgb(0 0 0 / 0.55));
+  justify-content: flex-start;
+  filter: drop-shadow(0 1.5cqh 2cqh rgb(0 0 0 / 0.5));
 }

@@ -2,10 +2,10 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "driver-card",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "name": "Driver Card",
   "category": "race",
-  "description": "The driver you watch: country flag, full name, the helmet and the car with its livery as iRacing itself draws them (Trading Paints or iRacing paints from Documents/iRacing/paint). Without iRacing running it falls back to a Racelink helmet and a car shape in the driver's colours.",
+  "description": "The driver you watch: country flag, full name, the helmet and the car with its livery as iRacing itself draws them (Trading Paints or iRacing paints from Documents/iRacing/paint). A spinner shows while iRacing draws them; without iRacing they are left out. The demo shows the helmet and car of Aleksandrs Ahilcenoks.",
   "entry": "index.html",
   "games": [
     "iracing"
