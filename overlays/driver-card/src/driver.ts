@@ -16,6 +16,9 @@ export type Card = Readonly<{
   car: Design | null;
   carSideUrl: string | null;
   carTemplateUrl: string | null;
+  /** Pictures iRacing draws itself (`ext.iracing.render`, Overlay API 2.19). */
+  renderCarUrl: string | null;
+  renderHelmetUrl: string | null;
 }>;
 
 const isRecord = (value: unknown): value is Readonly<Record<string, unknown>> =>
@@ -52,6 +55,7 @@ export const cardOf = (driver: DriverTelemetry): Card => {
   const ext = isRecord(iracing) ? iracing : {};
   const design = isRecord(ext.design) ? ext.design : {};
   const paint = isRecord(ext.paint) ? ext.paint : {};
+  const render = isRecord(ext.render) ? ext.render : {};
   const flairId = typeof ext.flairId === 'number' ? ext.flairId : null;
   const nationality = nationalityOfFlair(flairId);
   return {
@@ -65,6 +69,8 @@ export const cardOf = (driver: DriverTelemetry): Card => {
     car: designOf(design.car),
     carSideUrl: localPicture(paint.carSideUrl),
     carTemplateUrl: localPicture(paint.carTemplateUrl),
+    renderCarUrl: localPicture(render.carUrl),
+    renderHelmetUrl: localPicture(render.helmetUrl),
   };
 };
 

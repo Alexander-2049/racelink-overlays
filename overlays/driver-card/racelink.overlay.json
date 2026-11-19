@@ -2,13 +2,28 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "driver-card",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "name": "Driver Card",
   "category": "race",
-  "description": "The driver you watch: country flag, full name, helmet in the colours picked in iRacing, and the car's custom paint with its number and decals (from Documents/iRacing/paint: Trading Paints or your own files).",
+  "description": "The driver you watch: country flag, full name, the helmet and the car with its livery as iRacing itself draws them (Trading Paints or iRacing paints from Documents/iRacing/paint). Without iRacing running it falls back to a Racelink helmet and a car shape in the driver's colours.",
   "entry": "index.html",
-  "games": ["iracing"],
-  "size": { "default": [560, 220], "min": [220, 90], "max": [1600, 640] },
+  "games": [
+    "iracing"
+  ],
+  "size": {
+    "default": [
+      720,
+      300
+    ],
+    "min": [
+      240,
+      100
+    ],
+    "max": [
+      1800,
+      750
+    ]
+  },
   "settings": {
     "pages": [
       {
@@ -23,13 +38,41 @@
                 "type": "select",
                 "default": "focused",
                 "options": [
-                  { "value": "focused", "label": "The car the camera follows" },
-                  { "value": "player", "label": "You" }
+                  {
+                    "value": "focused",
+                    "label": "The car the camera follows"
+                  },
+                  {
+                    "value": "player",
+                    "label": "You"
+                  }
                 ]
               },
-              { "key": "showFlag", "label": "Country flag", "type": "boolean", "default": true },
-              { "key": "showHelmet", "label": "Helmet", "type": "boolean", "default": true },
-              { "key": "showCar", "label": "Car", "type": "boolean", "default": true },
+              {
+                "key": "showFlag",
+                "label": "Country flag",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showHelmet",
+                "label": "Helmet",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showCar",
+                "label": "Car",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "plate",
+                "label": "Plate",
+                "description": "A graphite plate behind the card; without it the background is transparent.",
+                "type": "boolean",
+                "default": false
+              },
               {
                 "key": "opacity",
                 "label": "Background opacity",
@@ -37,7 +80,10 @@
                 "default": 0.9,
                 "min": 0,
                 "max": 1,
-                "step": 0.05
+                "step": 0.05,
+                "visibleIf": {
+                  "plate": true
+                }
               }
             ]
           }

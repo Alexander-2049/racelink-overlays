@@ -1,68 +1,95 @@
-/* Driver Card: a graphite plate in the Racelink look. */
+/* Driver Card: the helmet large on the left, the name and the car beside it.
+   Transparent by default; "Plate" puts a graphite plate behind it. */
 
 .dc {
-  --dc-alpha: 0.9;
+  --dc-alpha: 0;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 4cqh;
+  gap: 3cqh;
   width: 100%;
   height: 100%;
-  padding: 6cqh 5cqh;
+  padding: 4cqh;
   container-type: size;
-  border-left: 1.2cqh solid var(--dc-class, #ff7a1a);
-  background: rgb(14 17 20 / var(--dc-alpha));
   color: #f7f5f0;
   font-family: 'Segoe UI', system-ui, sans-serif;
   overflow: hidden;
 }
 
-.dc-helmet {
-  height: 70cqh;
-  width: auto;
-  filter: drop-shadow(0 1cqh 2cqh rgb(0 0 0 / 0.5));
+.dc.has-plate {
+  border-left: 1.2cqh solid var(--dc-class, #ff7a1a);
+  background: rgb(14 17 20 / var(--dc-alpha));
 }
 
-.dc-text {
+/* Over a game without a plate, the text needs its own shadow. */
+.dc:not(.has-plate) .dc-line {
+  text-shadow:
+    0 0.4cqh 1.4cqh rgb(0 0 0 / 0.85),
+    0 0 0.4cqh rgb(0 0 0 / 0.9);
+}
+
+.dc-helmet {
+  height: 88cqh;
+  width: auto;
+  filter: drop-shadow(0 1cqh 2cqh rgb(0 0 0 / 0.45));
+}
+
+.dc-body {
   display: flex;
   flex-direction: column;
-  gap: 3cqh;
+  justify-content: center;
+  gap: 1cqh;
   min-width: 0;
+  height: 100%;
 }
 
 .dc-line {
   display: flex;
   align-items: center;
-  gap: 3cqh;
+  gap: 2.5cqh;
+  min-width: 0;
 }
 
 .dc-flag {
-  height: 13cqh;
+  height: 11cqh;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25);
-}
-
-.dc-number {
-  color: #9aa3ad;
-  font-family: Consolas, ui-monospace, monospace;
-  font-size: 12cqh;
-  font-weight: 600;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.3);
 }
 
 /* The full name: it wraps rather than being cut. */
 .dc-name {
-  font-size: 17cqh;
-  font-weight: 600;
+  font-size: 12cqh;
+  font-weight: 700;
   line-height: 1.1;
   overflow-wrap: anywhere;
 }
 
+.dc-number {
+  color: #ced4da;
+  font-family: Consolas, ui-monospace, monospace;
+  font-size: 10cqh;
+  font-weight: 600;
+}
+
+/* iRacing's picture of the car, three-quarter view, transparent. */
+.dc-render {
+  height: 74cqh;
+  margin-top: -4cqh;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+  align-self: flex-start;
+  filter: drop-shadow(0 1.5cqh 2cqh rgb(0 0 0 / 0.5));
+}
+
 .dc-car {
-  height: 62cqh;
+  height: 50cqh;
   width: auto;
   aspect-ratio: 400 / 112;
-  max-width: 48cqw;
+  max-width: 100%;
+  align-self: flex-start;
   filter: drop-shadow(0 1.5cqh 2cqh rgb(0 0 0 / 0.55));
 }

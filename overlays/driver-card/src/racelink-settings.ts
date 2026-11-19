@@ -22,6 +22,8 @@ export interface Settings {
   readonly showHelmet: boolean;
   /** Car */
   readonly showCar: boolean;
+  /** Plate */
+  readonly plate: boolean;
   /** Background opacity */
   readonly opacity: number;
 }
@@ -31,5 +33,6 @@ export const defaultSettings: Settings = {
   "showFlag": true,
   "showHelmet": true,
   "showCar": true,
+  "plate": false,
   "opacity": 0.9
 };

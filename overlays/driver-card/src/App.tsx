@@ -20,6 +20,31 @@ function Picture({ src, className, alt }: Readonly<{ src: string; className: str
   );
 }
 
+/**
+ * The first of `sources` that loads; the next one when a picture fails (the
+ * pictures iRacing draws need iRacing running), `fallback` after the last.
+ */
+function FirstPicture({
+  sources,
+  className,
+  fallback = null,
+}: Readonly<{ sources: readonly string[]; className: string; fallback?: React.ReactNode }>) {
+  const [failed, setFailed] = useState<readonly string[]>([]);
+  const src = sources.find((source) => !failed.includes(source));
+  if (src === undefined) return <>{fallback}</>;
+  return (
+    <img
+      className={className}
+      src={src}
+      alt=""
+      draggable={false}
+      onError={() => {
+        setFailed((list) => [...list, src]);
+      }}
+    />
+  );
+}
+
 /** A sports car seen from the side, facing right (viewBox 0 0 400 112). */
 const BODY =
   'M8 80C8 68 14 62 30 60L98 53C120 35 152 23 198 21C238 19 264 27 292 43L352 53C376 57 392 65 394 77V87C394 91 390 94 386 94H352A31 31 0 0 0 290 94H120A31 31 0 0 0 58 94H16C10 94 8 90 8 86Z';
@@ -90,16 +115,18 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
   const driver = pickDriver(telemetry.drivers, settings.driver);
   if (!driver) return null;
   const card = cardOf(driver);
-  const opacity = Math.min(1, Math.max(0, settings.opacity));
+  const opacity = settings.plate ? Math.min(1, Math.max(0, settings.opacity)) : 0;
+  const helmets = [card.renderHelmetUrl, helmetUrl(card.helmet)].filter(
+    (url): url is string => url !== null,
+  );
   return (
     <section
-      className="dc"
+      key={card.carIdx}
+      className={`dc${settings.plate ? ' has-plate' : ''}`}
       style={{ '--dc-alpha': String(opacity), '--dc-class': card.classColor } as CSSProperties}
     >
-      {settings.showHelmet && (
-        <Picture className="dc-helmet" src={helmetUrl(card.helmet)} alt="" />
-      )}
-      <div className="dc-text">
+      {settings.showHelmet && <FirstPicture className="dc-helmet" sources={helmets} />}
+      <div className="dc-body">
         <div className="dc-line">
           {settings.showFlag && card.countryCode !== null && (
             <Picture
@@ -109,12 +136,18 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
             />
           )}
           <span className="dc-number">#{card.carNumber}</span>
+          <strong className="dc-name" title={card.name}>
+            {card.name}
+          </strong>
         </div>
-        <strong className="dc-name" title={card.name}>
-          {card.name}
-        </strong>
+        {settings.showCar && (
+          <FirstPicture
+            className="dc-render"
+            sources={card.renderCarUrl ? [card.renderCarUrl] : []}
+            fallback={<Car side={card.carSideUrl} design={card.car} accent={card.classColor} />}
+          />
+        )}
       </div>
-      {settings.showCar && <Car side={card.carSideUrl} design={card.car} accent={card.classColor} />}
     </section>
   );
 }
