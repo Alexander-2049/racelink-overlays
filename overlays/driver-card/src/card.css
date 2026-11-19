@@ -1,0 +1,68 @@
+/* Driver Card: a graphite plate in the Racelink look. */
+
+.dc {
+  --dc-alpha: 0.9;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4cqh;
+  width: 100%;
+  height: 100%;
+  padding: 6cqh 5cqh;
+  container-type: size;
+  border-left: 1.2cqh solid var(--dc-class, #ff7a1a);
+  background: rgb(14 17 20 / var(--dc-alpha));
+  color: #f7f5f0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.dc-helmet {
+  height: 70cqh;
+  width: auto;
+  filter: drop-shadow(0 1cqh 2cqh rgb(0 0 0 / 0.5));
+}
+
+.dc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3cqh;
+  min-width: 0;
+}
+
+.dc-line {
+  display: flex;
+  align-items: center;
+  gap: 3cqh;
+}
+
+.dc-flag {
+  height: 13cqh;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25);
+}
+
+.dc-number {
+  color: #9aa3ad;
+  font-family: Consolas, ui-monospace, monospace;
+  font-size: 12cqh;
+  font-weight: 600;
+}
+
+/* The full name: it wraps rather than being cut. */
+.dc-name {
+  font-size: 17cqh;
+  font-weight: 600;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.dc-car {
+  height: 62cqh;
+  width: auto;
+  aspect-ratio: 400 / 112;
+  max-width: 48cqw;
+  filter: drop-shadow(0 1.5cqh 2cqh rgb(0 0 0 / 0.55));
+}
