@@ -1,0 +1,190 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anastasia-chat",
+  "version": "1.0.0",
+  "name": "Anastasia Chat",
+  "category": "other",
+  "description": "The Twitch chat as a stream panel in the style of twitch.tv/anastasia_striking: a Twitch mark, badges, the name in its colour and the message with emotes. Bots and commands can be hidden, words highlighted and messages faded after a while. The channel is a setting (twitch.tv/anastasia_striking by default). It reads the chat the way the built-in Twitch Chat overlay does, anonymously: Racelink reads a channel only while a built-in Twitch Chat overlay in one of your layouts names it, so add that overlay with the same channel (it can stay hidden). It shows Twitch only; chats of other platforms are not available to overlays.",
+  "entry": "index.html",
+  "games": "*",
+  "size": {
+    "default": [
+      520,
+      360
+    ],
+    "min": [
+      160,
+      60
+    ],
+    "max": [
+      1400,
+      1400
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Look",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ANASTASIA",
+                "options": [
+                  {
+                    "value": "ANASTASIA",
+                    "label": "Anastasia (violet and magenta)"
+                  },
+                  {
+                    "value": "NEUTRAL",
+                    "label": "Neutral dark"
+                  },
+                  {
+                    "value": "MIDNIGHT",
+                    "label": "Midnight blue"
+                  },
+                  {
+                    "value": "ROSE",
+                    "label": "Soft rose"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 15,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "radius",
+                "label": "Corner radius",
+                "type": "number",
+                "default": 6,
+                "min": 0,
+                "max": 24,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "accentLine",
+                "label": "Accent line on top",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showHeader",
+                "label": "Header",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "title",
+                "label": "Header text",
+                "type": "text",
+                "maxLength": 30,
+                "default": "Chat",
+                "visibleIf": {
+                  "showHeader": true
+                }
+              },
+              {
+                "key": "showPlatform",
+                "label": "Twitch mark before each message",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showBadges",
+                "label": "Badges (streamer, moderator, VIP, subscriber)",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showEmotes",
+                "label": "Emotes as pictures",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chat",
+        "label": "Chat",
+        "groups": [
+          {
+            "label": "Which messages",
+            "settings": [
+              {
+                "key": "channel",
+                "label": "Twitch channel",
+                "type": "text",
+                "maxLength": 25,
+                "default": "anastasia_striking"
+              },
+              {
+                "key": "maxMessages",
+                "label": "Messages shown",
+                "type": "number",
+                "default": 12,
+                "min": 1,
+                "max": 50,
+                "step": 1
+              },
+              {
+                "key": "hideAfter",
+                "label": "Hide a message after (0 keeps them)",
+                "type": "number",
+                "default": 0,
+                "min": 0,
+                "max": 600,
+                "step": 5,
+                "unit": "s"
+              },
+              {
+                "key": "hideCommands",
+                "label": "Hide commands (messages starting with !)",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "hiddenUsers",
+                "label": "Hide these users (bots), separated by commas",
+                "type": "text",
+                "maxLength": 200,
+                "default": "nightbot, moobot, streamelements, jeetbot"
+              },
+              {
+                "key": "highlight",
+                "label": "Highlight these words, separated by commas",
+                "type": "text",
+                "maxLength": 200,
+                "default": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

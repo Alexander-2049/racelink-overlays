@@ -147,3 +147,10 @@ export const readableColor = (color: string | null, fallback = '#d8d0e8', minLum
   const mixed = rgb.map((part) => Math.round(part + (255 - part) * t));
   return `#${mixed.map((part) => part.toString(16).padStart(2, '0')).join('')}`;
 };
+
+/** A setting like `a, b ,c` as a list: trimmed, lower-case, without empty parts. */
+export const splitList = (value: string): string[] =>
+  value
+    .split(',')
+    .map((part) => part.trim().toLowerCase())
+    .filter((part) => part !== '');

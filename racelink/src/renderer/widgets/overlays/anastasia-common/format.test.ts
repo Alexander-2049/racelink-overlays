@@ -13,6 +13,7 @@ import {
   formatTotalTime,
   readableColor,
   sessionLetter,
+  splitList,
   textOn,
 } from './format.ts';
 
@@ -118,5 +119,12 @@ describe('readableColor', () => {
   it('falls back when unset or malformed', () => {
     assert.equal(readableColor(null, '#abcdef'), '#abcdef');
     assert.equal(readableColor('red', '#abcdef'), '#abcdef');
+  });
+});
+
+describe('splitList', () => {
+  it('trims, lowers and drops empty parts', () => {
+    assert.deepEqual(splitList(' NightBot, moobot ,, '), ['nightbot', 'moobot']);
+    assert.deepEqual(splitList(''), []);
   });
 });

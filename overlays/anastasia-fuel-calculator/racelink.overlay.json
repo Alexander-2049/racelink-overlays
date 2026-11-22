@@ -1,0 +1,308 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anastasia-fuel-calculator",
+  "version": "1.0.0",
+  "name": "Anastasia Fuel Calculator",
+  "category": "strategy",
+  "description": "The fuel board of twitch.tv/anastasia_striking: the safety margin in laps, the fuel to add at the next stop, the fuel in the tank and the laps it lasts. More rows to add (consumption per lap, laps to drive, fuel at the finish, extra fuel), a choice of what the consumption is taken from (average of the last clean laps, last lap, all laps, lowest, highest or your own figure), litres or gallons, and a warning colour for the last laps of fuel. It only shows: the pit-stop options of her board (auto fuel, tear-off, fast repair) are not in the Overlay API.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      330,
+      190
+    ],
+    "min": [
+      160,
+      60
+    ],
+    "max": [
+      900,
+      700
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Look",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ANASTASIA",
+                "options": [
+                  {
+                    "value": "ANASTASIA",
+                    "label": "Anastasia (violet and magenta)"
+                  },
+                  {
+                    "value": "NEUTRAL",
+                    "label": "Neutral dark"
+                  },
+                  {
+                    "value": "MIDNIGHT",
+                    "label": "Midnight blue"
+                  },
+                  {
+                    "value": "ROSE",
+                    "label": "Soft rose"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 15,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "radius",
+                "label": "Corner radius",
+                "type": "number",
+                "default": 6,
+                "min": 0,
+                "max": 24,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "accentLine",
+                "label": "Accent line on top",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showTitle",
+                "label": "Title line",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "title",
+                "label": "Title",
+                "type": "text",
+                "maxLength": 24,
+                "default": "FUEL",
+                "visibleIf": {
+                  "showTitle": true
+                }
+              },
+              {
+                "key": "subtitle",
+                "label": "Small text next to the title",
+                "type": "text",
+                "maxLength": 40,
+                "default": "Next pit stop",
+                "visibleIf": {
+                  "showTitle": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fuel",
+        "label": "Fuel",
+        "groups": [
+          {
+            "label": "Rows",
+            "settings": [
+              {
+                "key": "rows",
+                "label": "Rows and their order",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "margin",
+                    "label": "Margin (laps)"
+                  },
+                  {
+                    "value": "add",
+                    "label": "Fuel to add"
+                  },
+                  {
+                    "value": "remaining",
+                    "label": "Fuel in the tank"
+                  },
+                  {
+                    "value": "estLaps",
+                    "label": "Laps the fuel lasts"
+                  },
+                  {
+                    "value": "perLap",
+                    "label": "Consumption per lap"
+                  },
+                  {
+                    "value": "lapsLeft",
+                    "label": "Laps to drive"
+                  },
+                  {
+                    "value": "atFinish",
+                    "label": "Fuel at the finish"
+                  },
+                  {
+                    "value": "extra",
+                    "label": "Extra fuel"
+                  }
+                ],
+                "default": [
+                  "margin",
+                  "add",
+                  "remaining",
+                  "estLaps",
+                  {
+                    "id": "perLap",
+                    "visible": false
+                  },
+                  {
+                    "id": "lapsLeft",
+                    "visible": false
+                  },
+                  {
+                    "id": "atFinish",
+                    "visible": false
+                  },
+                  {
+                    "id": "extra",
+                    "visible": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Calculation",
+            "settings": [
+              {
+                "key": "source",
+                "label": "Consumption taken from",
+                "type": "select",
+                "default": "AVERAGE",
+                "options": [
+                  {
+                    "value": "AVERAGE",
+                    "label": "Average of the last 5 clean laps"
+                  },
+                  {
+                    "value": "LAST",
+                    "label": "Last lap"
+                  },
+                  {
+                    "value": "ALL",
+                    "label": "Average of all clean laps"
+                  },
+                  {
+                    "value": "LOWEST",
+                    "label": "Lowest lap"
+                  },
+                  {
+                    "value": "HIGHEST",
+                    "label": "Highest lap"
+                  },
+                  {
+                    "value": "CUSTOM",
+                    "label": "My figure"
+                  }
+                ]
+              },
+              {
+                "key": "customPerLap",
+                "label": "My consumption per lap",
+                "type": "number",
+                "default": 3,
+                "min": 0.1,
+                "max": 100,
+                "step": 0.05,
+                "unit": "L",
+                "visibleIf": {
+                  "source": "CUSTOM"
+                }
+              },
+              {
+                "key": "marginLaps",
+                "label": "Margin",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 10,
+                "step": 0.1,
+                "unit": "laps"
+              },
+              {
+                "key": "extraMode",
+                "label": "Extra fuel is",
+                "type": "select",
+                "default": "spare",
+                "options": [
+                  {
+                    "value": "spare",
+                    "label": "Fuel left at the finish"
+                  },
+                  {
+                    "value": "lapLess",
+                    "label": "Fuel to add, a lap less"
+                  },
+                  {
+                    "value": "lapMore",
+                    "label": "Fuel to add, a lap more"
+                  }
+                ]
+              },
+              {
+                "key": "unit",
+                "label": "Unit",
+                "type": "select",
+                "default": "AUTO",
+                "options": [
+                  {
+                    "value": "AUTO",
+                    "label": "As the game"
+                  },
+                  {
+                    "value": "LITERS",
+                    "label": "Litres"
+                  },
+                  {
+                    "value": "GALLONS",
+                    "label": "US gallons"
+                  }
+                ]
+              },
+              {
+                "key": "warnColors",
+                "label": "Colour the last two laps of fuel",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

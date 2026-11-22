@@ -26,6 +26,7 @@ scripts/              install-builds.mjs, gen-previews.mjs
 | Anime Relatives (new; its code is in `overlays/anime-relatives/src/`) | `anime-relatives` |
 | GT4 Gauges (new; twin speedometer and tachometer, its code is in `overlays/gt4-gauges/src/`) | `gt4-gauges` |
 | Driver Card (new; flag, full name, the helmet and the car with its livery as iRacing draws them, for the driver you watch, with a spinner while they load and nothing when iRacing cannot draw them; iRacing, needs Racelink with Overlay API 2.19; its code is in `overlays/driver-card/src/`) | `driver-card` |
+| Anastasia set (twitch.tv/anastasia_striking; shared code in `racelink/src/renderer/widgets/overlays/anastasia-common/`; the chat overlay needs a built-in Twitch Chat overlay with the same channel and shows Twitch only, see its README) | `anastasia-standings`, `anastasia-relatives`, `anastasia-blind-spot`, `anastasia-input-telemetry`, `anastasia-fuel-calculator`, `anastasia-chat`, `anastasia-pedals` |
 
 Layouts made while these overlays were built in keep them: Racelink turns a
 built-in `r-standings` into the package `local:r-standings` (and so on), so
