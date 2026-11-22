@@ -24,6 +24,10 @@ export interface Settings {
   readonly radius: number;
   /** Accent line on top */
   readonly accentLine: boolean;
+  /** Animations */
+  readonly animations: boolean;
+  /** Hide empty columns */
+  readonly hideEmptyColumns: boolean;
   /** Rows (you in the middle) */
   readonly rows: number;
   /** Hide cars in the pit lane */
@@ -56,6 +60,8 @@ export const defaultSettings: Settings = {
   "opacity": 0.8,
   "radius": 6,
   "accentLine": true,
+  "animations": true,
+  "hideEmptyColumns": true,
   "rows": 7,
   "excludePit": false,
   "loneQualify": true,

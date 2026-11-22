@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "anastasia-standings",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Anastasia Standings",
   "category": "race",
   "description": "The standings as on twitch.tv/anastasia_striking: a header line (session, class, laps, time, temperature, strength of field, cars), then the top of the class and a window round the car you watch. Position, places gained, number, name, car brand, licence and iRating, gap, interval, last lap, pit stop, and how much faster or slower each car was than you on the last laps. The columns and their order are settings, with more to add (country, class colour, iRating change, best lap). Four calm themes.",
@@ -109,6 +109,20 @@
                     "label": "Bottom"
                   }
                 ]
+              },
+              {
+                "key": "animations",
+                "label": "Animations",
+                "type": "boolean",
+                "default": true,
+                "description": "Rows slide to their new place, cars and columns appear and leave smoothly. Off when the system asks for reduced motion."
+              },
+              {
+                "key": "hideEmptyColumns",
+                "label": "Hide empty columns",
+                "type": "boolean",
+                "default": true,
+                "description": "A column with nothing in any row (no iRating offline, no pit stops yet) is left out; it opens when data arrives."
               }
             ]
           }

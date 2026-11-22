@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "warhammer-fuel",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Warhammer Fuel Calculator",
   "category": "strategy",
   "description": "Fuel in the style of Warhammer Racing's stream: fuel in the tank and laps in the race, then rows for the average of your last clean laps, your qualifying lap and your last lap (and a figure you type): fuel per lap, laps the tank lasts, fuel to add and fuel left at the flag. A PIT badge lights in the pit lane.",
@@ -77,6 +77,13 @@
                 "min": 0,
                 "max": 1,
                 "step": 0.05
+              },
+              {
+                "key": "animations",
+                "label": "Animations",
+                "type": "boolean",
+                "default": true,
+                "description": "Rows slide to their new place, cars and columns appear and leave smoothly. Off when the system asks for reduced motion."
               }
             ]
           }

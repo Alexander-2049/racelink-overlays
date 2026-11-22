@@ -22,6 +22,10 @@ export interface Settings {
   readonly opacity: number;
   /** Driver name */
   readonly nameFormat: "initialLast" | "firstLast" | "last" | "lastInitial" | "firstInitial";
+  /** Animations */
+  readonly animations: boolean;
+  /** Hide empty columns */
+  readonly hideEmptyColumns: boolean;
   /** Show the strip */
   readonly showHeader: boolean;
   /** Strip items */
@@ -69,6 +73,8 @@ export const defaultSettings: Settings = {
   "fontSize": 14,
   "opacity": 0.82,
   "nameFormat": "initialLast",
+  "animations": true,
+  "hideEmptyColumns": true,
   "showHeader": true,
   "headerItems": [
     {

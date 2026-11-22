@@ -24,6 +24,10 @@ export interface Settings {
   readonly nameFormat: "initialLast" | "firstLast" | "last" | "lastInitial" | "firstInitial";
   /** Rows */
   readonly rows: number;
+  /** Animations */
+  readonly animations: boolean;
+  /** Hide empty columns */
+  readonly hideEmptyColumns: boolean;
   /** Show the strip */
   readonly showHeader: boolean;
   /** Strip items */
@@ -70,6 +74,8 @@ export const defaultSettings: Settings = {
   "opacity": 0.82,
   "nameFormat": "firstLast",
   "rows": 7,
+  "animations": true,
+  "hideEmptyColumns": true,
   "showHeader": true,
   "headerItems": [
     {

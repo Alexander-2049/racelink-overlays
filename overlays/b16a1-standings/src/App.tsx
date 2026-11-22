@@ -3,7 +3,10 @@ import { useRef, type CSSProperties, type ReactNode } from 'react';
 import type { DriverTelemetry } from '../../../racelink/src/shared/overlay-api/fields/drivers';
 import { carLogoUrl, flagUrl, useAssetTables } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/assets';
 import type { AssetTables } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/assetTables.ts';
-import { FitBox } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/FitBox';
+import { standingsColumnHasData } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/columnData.ts';
+import { alignStyle, fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { ghostStyle, rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
+import type { Box } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/rowPlan.ts';
 import {
   AirIcon,
   CarsIcon,
@@ -247,8 +250,48 @@ function Header({
   return <div className="st-header">{parts}</div>;
 }
 
+/** A row of the table with the group it is in: what motion keeps to draw a row that left. */
+type Entry = Readonly<{ group: StandingsGroupView; row: StandingsRowView; at: number }>;
+
+const entryKey = (entry: Entry): string => String(entry.row.base.driver.carIdx);
+
+function Row({
+  entry,
+  columns,
+  template,
+  ctx,
+  ghost,
+}: Readonly<{ entry: Entry; columns: readonly ColumnId[]; template: string; ctx: Context; ghost?: Box }>) {
+  const { group, row, at } = entry;
+  const { base } = row;
+  const classes = [
+    'st-row',
+    at % 2 === 1 ? 'is-alt' : '',
+    base.isReference ? 'is-ref' : '',
+    ctx.settings.condensed && group.cutBelow[at] === true ? 'is-cut' : '',
+  ]
+    .filter((name) => name !== '')
+    .join(' ');
+  const marks = {
+    [rowKeyAttribute]: entryKey(entry),
+    ...(ghost === undefined ? { [fitRowAttribute]: '' } : { 'data-fx-ghost': '' }),
+  };
+  return (
+    <div
+      className={classes}
+      style={{ gridTemplateColumns: template, ...(ghost === undefined ? undefined : ghostStyle(ghost)) }}
+      {...marks}
+    >
+      {columns.map((id) => (
+        <Cell key={id} id={id} row={row} ctx={ctx} />
+      ))}
+    </div>
+  );
+}
+
 function Group({
   group,
+  entries,
   columns,
   template,
   headerOrder,
@@ -256,6 +299,7 @@ function Group({
   ctx,
 }: Readonly<{
   group: StandingsGroupView;
+  entries: readonly Entry[];
   columns: readonly ColumnId[];
   template: string;
   headerOrder: readonly HeaderId[];
@@ -265,24 +309,9 @@ function Group({
   return (
     <section className="st-group">
       {showHeader && <Header header={group.header} isFirst={group.isFirst} order={headerOrder} ctx={ctx} />}
-      {group.rows.map((row, at) => {
-        const { base } = row;
-        const classes = [
-          'st-row',
-          at % 2 === 1 ? 'is-alt' : '',
-          base.isReference ? 'is-ref' : '',
-          ctx.settings.condensed && group.cutBelow[at] === true ? 'is-cut' : '',
-        ]
-          .filter((name) => name !== '')
-          .join(' ');
-        return (
-          <div key={base.driver.carIdx} className={classes} style={{ gridTemplateColumns: template }}>
-            {columns.map((id) => (
-              <Cell key={id} id={id} row={row} ctx={ctx} />
-            ))}
-          </div>
-        );
-      })}
+      {entries.map((entry) => (
+        <Row key={entryKey(entry)} entry={entry} columns={columns} template={template} ctx={ctx} />
+      ))}
     </section>
   );
 }
@@ -301,15 +330,9 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
     leaderLapsCompleted: leaderLaps,
   });
 
-  const columns = settings.columns.filter((column) => column.visible).map((column) => column.id);
+  const configured = settings.columns.filter((column) => column.visible).map((column) => column.id);
   const historyLaps = Math.max(1, Math.round(settings.historyLaps));
-  const template = columns
-    .map((id) => {
-      if (id === 'name') return `${String(settings.nameWidth)}em`;
-      if (id === 'history') return `${String(historyLaps * 2.6)}em`;
-      return `${String(widths[id])}em`;
-    })
-    .join(' ');
+  const fit = useFitBoard(configured.join(), 10, 1);
   const groups = buildStandingsView({
     drivers,
     session,
@@ -321,6 +344,7 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
       numClasses: settings.numClasses,
       multiclassRows: settings.multiclassRows,
       condensed: settings.condensed,
+      maxRows: fit.capacity,
     },
     lapTimeSource: settings.lapTimeSource,
     historyLimit: historyLaps,
@@ -332,25 +356,56 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
     fahrenheit: settings.temperatureUnit === 'f',
   };
   const headerOrder = settings.headerColumns.filter((column) => column.visible).map((column) => column.id);
+  const pictures = {
+    flag: (id: number | null | undefined) => flagUrl(assets, id) !== null,
+    brand: (id: number | null | undefined) => carLogoUrl(assets, id ?? null) !== null,
+  };
+  const entries: Entry[] = groups.flatMap((group) => group.rows.map((row, at) => ({ group, row, at })));
+  const motion = useTableMotion({
+    items: entries,
+    getKey: entryKey,
+    columns: configured,
+    hasData: (id, entry) => standingsColumnHasData(id, entry.row, pictures),
+    animations: settings.animations,
+    hideEmpty: settings.hideEmptyColumns,
+    ghosts: true,
+  });
+  const columns = motion.columns;
+  const template = columns
+    .map((id) => {
+      if (id === 'name') return `minmax(${String(settings.nameWidth)}em, 1fr)`;
+      if (id === 'history') return motion.track(id, `${String(historyLaps * 2.6)}em`);
+      return motion.track(id, `${String(widths[id])}em`);
+    })
+    .join(' ');
 
   return (
-    <div className="b-root st-root" style={themeVars(settings.theme, settings.opacity) as CSSProperties}>
-      <FitBox anchor={settings.align}>
-        <div className="st-table">
-          {groups.map((group) => (
-            <Group
-              key={group.header.className + String(group.isFirst)}
-              group={group}
-              columns={columns}
-              template={template}
-              headerOrder={headerOrder}
-              showHeader={settings.showHeaders}
-              ctx={ctx}
-            />
-          ))}
-          {groups.length === 0 && editMode && <div className="b-hint b-panel">Standings appear when a session has cars.</div>}
+    <div
+      className="b-root st-root"
+      style={{ ...themeVars(settings.theme, settings.opacity), fontSize: `${String(settings.fontSize)}px` } as CSSProperties}
+    >
+      <div ref={fit.ref} style={{ ...fit.style, ...alignStyle(settings.align) }}>
+        <div {...{ [fitBoardAttribute]: '' }}>
+          <div className="st-table" ref={motion.rootRef}>
+            {groups.map((group) => (
+              <Group
+                key={group.header.className + String(group.isFirst)}
+                group={group}
+                entries={entries.filter((entry) => entry.group === group)}
+                columns={columns}
+                template={template}
+                headerOrder={headerOrder}
+                showHeader={settings.showHeaders}
+                ctx={ctx}
+              />
+            ))}
+            {motion.ghosts.map((ghost) => (
+              <Row key={"gone" + ghost.key} entry={ghost.item} columns={columns} template={template} ctx={ctx} ghost={ghost.box} />
+            ))}
+            {groups.length === 0 && editMode && <div className="b-hint b-panel">Standings appear when a session has cars.</div>}
+          </div>
         </div>
-      </FitBox>
+      </div>
     </div>
   );
 }

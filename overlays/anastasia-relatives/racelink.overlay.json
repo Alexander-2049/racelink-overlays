@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "anastasia-relatives",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Anastasia Relatives",
   "category": "race",
   "description": "The cars round you as on twitch.tv/anastasia_striking: the cars ahead above you, you in gold, the cars behind below. Position, number, name, laps since the pit stop (or PIT), licence, iRating and the time to you. A car a lap ahead of you (lapping you) is red, one a lap behind blue. Header with track and air temperature, strength of field, incidents and a clock. Columns and their order are settings. Four calm themes.",
@@ -93,6 +93,20 @@
                 "label": "Accent line on top",
                 "type": "boolean",
                 "default": true
+              },
+              {
+                "key": "animations",
+                "label": "Animations",
+                "type": "boolean",
+                "default": true,
+                "description": "Rows slide to their new place, cars and columns appear and leave smoothly. Off when the system asks for reduced motion."
+              },
+              {
+                "key": "hideEmptyColumns",
+                "label": "Hide empty columns",
+                "type": "boolean",
+                "default": true,
+                "description": "A column with nothing in any row (no iRating offline, no pit stops yet) is left out; it opens when data arrives."
               }
             ]
           }

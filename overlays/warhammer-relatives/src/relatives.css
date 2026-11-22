@@ -81,3 +81,5 @@
   padding: 0.6em;
   background: var(--wh-surface);
 }
+/* While a column opens or closes its cells are clipped, so the content does not spill. */
+[data-fx-busy] .wh-row > * { min-width: 0; overflow: hidden; }

@@ -20,6 +20,12 @@ export interface Settings {
   readonly opacity: number;
   /** Table sticks to */
   readonly align: "top" | "bottom";
+  /** Text size */
+  readonly fontSize: number;
+  /** Animations */
+  readonly animations: boolean;
+  /** Hide empty columns */
+  readonly hideEmptyColumns: boolean;
   /** Top places */
   readonly topRows: number;
   /** Places around you */
@@ -56,6 +62,9 @@ export const defaultSettings: Settings = {
   "theme": "b16a1",
   "opacity": 78,
   "align": "top",
+  "fontSize": 14,
+  "animations": true,
+  "hideEmptyColumns": true,
   "topRows": 5,
   "bottomRows": 15,
   "condensed": true,

@@ -20,6 +20,12 @@ export interface Settings {
   readonly opacity: number;
   /** Table sticks to */
   readonly align: "top" | "bottom";
+  /** Text size */
+  readonly fontSize: number;
+  /** Animations */
+  readonly animations: boolean;
+  /** Hide empty columns */
+  readonly hideEmptyColumns: boolean;
   /** Rows */
   readonly rows: number;
   /** Leave cars in the pit lane out */
@@ -58,6 +64,9 @@ export const defaultSettings: Settings = {
   "theme": "b16a1",
   "opacity": 80,
   "align": "top",
+  "fontSize": 17,
+  "animations": true,
+  "hideEmptyColumns": true,
   "rows": 7,
   "excludePit": false,
   "loneQualify": true,

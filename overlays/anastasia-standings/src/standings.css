@@ -191,3 +191,9 @@
   color: var(--an-accent);
   font-size: 1.1em;
 }
+
+/* While a column opens or closes its cells are clipped, so the content does not spill. */
+[data-fx-busy] .st-row > * {
+  min-width: 0;
+  overflow: hidden;
+}

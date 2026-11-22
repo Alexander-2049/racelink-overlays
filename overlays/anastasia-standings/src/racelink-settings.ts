@@ -26,6 +26,10 @@ export interface Settings {
   readonly accentLine: boolean;
   /** Stick to */
   readonly align: "TOP" | "BOTTOM";
+  /** Animations */
+  readonly animations: boolean;
+  /** Hide empty columns */
+  readonly hideEmptyColumns: boolean;
   /** Rows from the top */
   readonly topRows: number;
   /** Rows round the watched car */
@@ -65,6 +69,8 @@ export const defaultSettings: Settings = {
   "radius": 6,
   "accentLine": true,
   "align": "TOP",
+  "animations": true,
+  "hideEmptyColumns": true,
   "topRows": 5,
   "bottomRows": 9,
   "numClasses": 3,

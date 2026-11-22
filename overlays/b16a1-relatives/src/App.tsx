@@ -2,7 +2,9 @@ import type { RacelinkOverlay } from '@racelink/overlay';
 import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
 import { carLogoUrl, flagUrl, useAssetTables } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/assets';
 import type { AssetTables } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/assetTables.ts';
-import { FitBox } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/FitBox';
+import { relativesColumnHasData } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/columnData.ts';
+import { alignStyle, fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import {
   AirIcon,
   ChevronDown,
@@ -72,19 +74,35 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
   const referenceIdx = referenceCarIdx(drivers);
   const reference = drivers.find((driver) => driver.carIdx === referenceIdx);
   const player = drivers.find((driver) => driver.isPlayer);
+  const configured = settings.columns.filter((column) => column.visible).map((column) => column.id);
+  const fit = useFitBoard(configured.join(), 10, 1);
+  // Fewer rows when the window is short; the focused car stays in the middle.
+  const rowLimit = Math.max(1, Math.min(Math.round(settings.rows), fit.capacity));
   const rows = buildRelatives({
     drivers,
     referenceCarIdx: referenceIdx,
     sessionType: session.type,
     playerOnTrack: player !== undefined && player.trackSurface === 'onTrack',
     options: {
-      rows: settings.rows,
+      rows: rowLimit,
       excludePit: settings.excludePit,
       loneQualify: settings.loneQualify,
     },
   });
-  const columns = settings.columns.filter((column) => column.visible).map((column) => column.id);
-  const template = columns.map((id) => widths[id]).join(' ');
+  const pictures = {
+    flag: (id: number | null | undefined) => flagUrl(assets, id) !== null,
+    brand: (id: number | null | undefined) => carLogoUrl(assets, id ?? null) !== null,
+  };
+  const motion = useTableMotion({
+    items: rows,
+    getKey: (row) => (row.kind === 'empty' ? `e${String(row.index)}` : String(row.driver.carIdx)),
+    columns: configured,
+    hasData: (id, row) => relativesColumnHasData(id, row.kind === 'car' ? row : null, pictures),
+    animations: settings.animations,
+    hideEmpty: settings.hideEmptyColumns,
+  });
+  const columns = motion.columns;
+  const template = columns.map((id) => motion.track(id, widths[id], id === 'rating' ? '6.6em' : '8em')).join(' ');
   const fahrenheit = settings.temperatureUnit === 'f';
   const referenceClass = reference?.classId ?? null;
   const classInfo = session.classes.find((info) => info.classId === referenceClass);
@@ -142,9 +160,12 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
   const lap = footerLap(session);
 
   return (
-    <div className="b-root rl-root" style={themeVars(settings.theme, settings.opacity) as CSSProperties}>
-      <FitBox anchor={settings.align}>
-        <div className="rl-panel b-panel">
+    <div
+      className="b-root rl-root"
+      style={{ ...themeVars(settings.theme, settings.opacity), fontSize: `${String(settings.fontSize)}px` } as CSSProperties}
+    >
+      <div ref={fit.ref} style={{ ...fit.style, ...alignStyle(settings.align) }}>
+        <div className="rl-panel b-panel" {...{ [fitBoardAttribute]: '' }}>
           {hasHeader && (
             <div className="rl-header">
               <span className="rl-h-item">{left}</span>
@@ -167,10 +188,17 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
               </span>
             </div>
           )}
-          <div className="rl-rows">
+          <div className="rl-rows" ref={motion.rootRef}>
             {rows.length === 0 && editMode && <div className="b-hint">Relatives appear when you drive.</div>}
             {rows.map((row) => {
-              if (row.kind === 'empty') return <div key={`e${String(row.index)}`} className="rl-row is-empty" />;
+              if (row.kind === 'empty')
+                return (
+                  <div
+                    key={`e${String(row.index)}`}
+                    className="rl-row is-empty"
+                    {...{ [rowKeyAttribute]: `e${String(row.index)}`, [fitRowAttribute]: '' }}
+                  />
+                );
               const { driver } = row;
               const tone = rowTone(driver, row.isReference, referenceClass);
               return (
@@ -178,6 +206,7 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
                   key={driver.carIdx}
                   className={`rl-row tone-${tone}${row.inPit && settings.showPitBadge ? ' in-pit' : ''}`}
                   style={{ gridTemplateColumns: template, '--cls': driver.classColor } as CSSProperties}
+                  {...{ [rowKeyAttribute]: String(driver.carIdx), [fitRowAttribute]: '' }}
                 >
                   {columns.map((id) => (
                     <Cell key={id} id={id} row={row} settings={settings} assets={assets} />
@@ -193,7 +222,7 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
             </div>
           )}
         </div>
-      </FitBox>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "warhammer-standings",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Warhammer Standings",
   "category": "race",
   "description": "Standings in the style of Warhammer Racing's stream: a session strip (clock, laps, temperatures, humidity, strength of field, drivers), the top of the class and a window round the car you watch, with places gained, make, safety rating and iRating, gap, interval, last lap, last pit stop and the lap-by-lap gain against you. Columns, rows and four calm themes are in the settings.",
@@ -105,6 +105,20 @@
                     "label": "First L."
                   }
                 ]
+              },
+              {
+                "key": "animations",
+                "label": "Animations",
+                "type": "boolean",
+                "default": true,
+                "description": "Rows slide to their new place, cars and columns appear and leave smoothly. Off when the system asks for reduced motion."
+              },
+              {
+                "key": "hideEmptyColumns",
+                "label": "Hide empty columns",
+                "type": "boolean",
+                "default": true,
+                "description": "A column with nothing in any row (no iRating offline, no pit stops yet) is left out; it opens when data arrives."
               }
             ]
           }

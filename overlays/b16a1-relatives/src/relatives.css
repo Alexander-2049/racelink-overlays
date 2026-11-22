@@ -61,3 +61,5 @@
 .rl-ir .b-good { color: #2b7d36; }
 .rl-ir .b-bad { color: #b8382b; }
 .rl-gap { text-align: right; }
+/* While a column opens or closes its cells are clipped, so the content does not spill. */
+[data-fx-busy] .rl-row > * { overflow: hidden; }
