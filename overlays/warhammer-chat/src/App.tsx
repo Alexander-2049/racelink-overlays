@@ -82,7 +82,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     channel === ''
       ? 'Set the Twitch channel in the settings.'
       : unread
-        ? `Racelink reads ${channel}'s chat only while a built-in Twitch Chat overlay with this channel is in a layout.`
+        ? `Channel: ${channel}`
         : null;
 
   if (ordered.length === 0 && !(editMode && hint !== null)) return null;

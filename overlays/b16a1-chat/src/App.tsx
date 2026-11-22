@@ -127,7 +127,7 @@ export default function App({ overlay }: Readonly<{ overlay: Overlay }>) {
     channel === ''
       ? 'Set the Twitch channel in the overlay settings.'
       : !named
-        ? `Racelink does not read #${channel} yet: add the built-in Twitch Chat overlay with this channel to a layout.`
+        ? `Channel: ${channel}`
         : !chat.connected
           ? 'Connecting to Twitch chat...'
           : '';

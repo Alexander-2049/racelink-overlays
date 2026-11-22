@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "name": "Anastasia Chat",
   "category": "other",
-  "description": "The Twitch chat as a stream panel in the style of twitch.tv/anastasia_striking: a Twitch mark, badges, the name in its colour and the message with emotes. Bots and commands can be hidden, words highlighted and messages faded after a while. The channel is a setting (twitch.tv/anastasia_striking by default). It reads the chat the way the built-in Twitch Chat overlay does, anonymously: Racelink reads a channel only while a built-in Twitch Chat overlay in one of your layouts names it, so add that overlay with the same channel (it can stay hidden). It shows Twitch only; chats of other platforms are not available to overlays.",
+  "description": "The Twitch chat as a stream panel in the style of twitch.tv/anastasia_striking: a Twitch mark, badges, the name in its colour and the message with emotes. Bots and commands can be hidden, words highlighted and messages faded after a while. The channel is a setting (twitch.tv/anastasia_striking by default). It reads the chat anonymously. It shows Twitch only; chats of other platforms are not available to overlays.",
   "entry": "index.html",
   "games": "*",
   "size": {
@@ -140,7 +140,8 @@
                 "label": "Twitch channel",
                 "type": "text",
                 "maxLength": 25,
-                "default": "anastasia_striking"
+                "default": "anastasia_striking",
+                "role": "twitchChannel"
               },
               {
                 "key": "maxMessages",

@@ -6,7 +6,7 @@
   "name": "b16a1 Twitch Chat",
   "author": "Racelink",
   "category": "other",
-  "description": "Twitch chat in the style of the b16a1series stream: no panel, light text with a dark halo, the sender's badges and coloured name, emotes inline; the oldest messages leave at the top as new ones arrive. Racelink reads the chat anonymously, you cannot write in it.\n\nRacelink reads a channel only while a built-in Twitch Chat overlay of any layout names it: add that one with the same channel (it can stay switched off), then this overlay draws it. Messages of bots, commands and old messages can be hidden; words can be highlighted.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
+  "description": "Twitch chat in the style of the b16a1series stream: no panel, light text with a dark halo, the sender's badges and coloured name, emotes inline; the oldest messages leave at the top as new ones arrive. Racelink reads the chat anonymously, you cannot write in it.\n\nMessages of bots, commands and old messages can be hidden; words can be highlighted.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
   "entry": "index.html",
   "games": "*",
   "size": {
@@ -37,7 +37,7 @@
                 "type": "text",
                 "maxLength": 25,
                 "default": "b16a1series",
-                "description": "The built-in Twitch Chat overlay must name the same channel for Racelink to read it."
+                "role": "twitchChannel"
               },
               {
                 "key": "maxMessages",
