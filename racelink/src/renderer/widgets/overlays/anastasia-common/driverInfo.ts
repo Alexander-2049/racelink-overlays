@@ -6,6 +6,22 @@ import { nationalityOfFlair } from '../r-common/driver/helpers';
 import { formatDriverName } from '../r-common/driver/positions';
 import { formatLicence } from './format.ts';
 
+/** The parts of a driver read here: both the API's and the shared models' driver fit. */
+export type DriverLike = Pick<
+  DriverTelemetry,
+  'name' | 'firstName' | 'lastName' | 'teamName' | 'carNumber' | 'carId' | 'carName'
+> &
+  Readonly<{
+    ext: Readonly<{
+      iracing: Readonly<{
+        iRating: number | null;
+        iRatingChange: number | null;
+        flairId: number | null;
+        license: Readonly<{ className: string; safetyRating: number | null; color: string | null }>;
+      }> | null;
+    }>;
+  }>;
+
 export type DriverInfo = Readonly<{
   name: string;
   carNumber: string;
@@ -19,7 +35,7 @@ export type DriverInfo = Readonly<{
 
 /** A driver's name by the format setting; a team race shows the team. */
 export const driverName = (
-  driver: DriverTelemetry,
+  driver: DriverLike,
   nameFormat: string,
   isTeamRacing: boolean | null,
 ): string => {
@@ -29,7 +45,7 @@ export const driverName = (
 };
 
 export const driverInfo = (
-  driver: DriverTelemetry,
+  driver: DriverLike,
   nameFormat: string,
   isTeamRacing: boolean | null,
 ): DriverInfo => {

@@ -1,0 +1,193 @@
+.st-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.st-root[data-align='BOTTOM'] {
+  justify-content: flex-end;
+}
+
+.st-panel {
+  width: 100%;
+}
+
+.st-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.9em;
+  padding: 0.45em 0.7em 0.35em;
+  color: var(--an-dim);
+  font-weight: 700;
+  border-bottom: 1px solid var(--an-line);
+}
+
+.st-h-session {
+  color: var(--an-fg);
+}
+
+.st-classsep {
+  padding: 0.3em 0.7em 0.1em;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.st-row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  align-items: center;
+  column-gap: 0.4em;
+  padding: 0.18em 0.7em;
+  white-space: nowrap;
+}
+
+.st-row.odd {
+  background: var(--an-alt);
+}
+
+.st-row.own {
+  background: var(--an-own-bg);
+}
+
+.st-row.own .st-name,
+.st-row.own .st-num {
+  color: var(--an-own-fg);
+}
+
+.st-row.cut {
+  margin-bottom: 0.45em;
+}
+
+.st-pos {
+  text-align: right;
+  color: var(--an-fg);
+}
+
+.st-stripe {
+  align-self: stretch;
+  border-radius: 2px;
+}
+
+.st-gain {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.15em;
+  font-size: 0.9em;
+}
+
+.st-gain.up {
+  color: var(--an-good);
+}
+
+.st-gain.down {
+  color: var(--an-bad);
+}
+
+.st-chevron {
+  width: 0.8em;
+  height: 0.8em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.st-num {
+  text-align: right;
+  font-style: italic;
+  color: var(--an-dim);
+}
+
+.st-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.st-brand,
+.st-flag {
+  height: 1.3em;
+}
+
+.st-chipcell {
+  display: flex;
+  justify-content: center;
+}
+
+.st-rc.up {
+  color: var(--an-good);
+}
+
+.st-rc.down {
+  color: var(--an-bad);
+}
+
+.st-time {
+  text-align: right;
+}
+
+.st-dim {
+  color: var(--an-dim);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.st-lap.personal {
+  color: var(--an-good);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.st-lap.class {
+  color: var(--an-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.st-pit {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45em;
+}
+
+.st-since {
+  color: var(--an-warn);
+}
+
+.st-ptime {
+  color: var(--an-good);
+}
+
+.st-pitnow {
+  padding: 0 0.35em;
+  border-radius: 0.25em;
+  background: var(--an-warn);
+  color: #1b1400;
+  font-size: 0.85em;
+  font-weight: 800;
+}
+
+.st-hist {
+  text-align: right;
+  font-size: 0.92em;
+}
+
+.st-hist.faster {
+  color: var(--an-bad);
+}
+
+.st-hist.slower {
+  color: var(--an-good);
+}
+
+.st-hist-self {
+  text-align: center;
+  color: var(--an-accent);
+  font-size: 1.1em;
+}
