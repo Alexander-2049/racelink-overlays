@@ -1,0 +1,184 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "overtake-banner",
+  "version": "1.0.0",
+  "name": "Overtake Banner",
+  "category": "race",
+  "description": "A quiet banner for the car you have just passed on the track: the car as iRacing draws it with its livery, the brand and the model, and if you want the driver, number, class and position. Passes are found from the distance along the lap, so they show the moment they happen rather than at the start/finish line; pit stops, lapped cars, cautions and a pass taken straight back show nothing. Several passes in a row wait in a short queue. The pictures of every driver are requested when the session starts, so the banner appears at once.",
+  "entry": "index.html",
+  "games": [
+    "iracing"
+  ],
+  "size": {
+    "default": [
+      420,
+      220
+    ],
+    "min": [
+      210,
+      110
+    ],
+    "max": [
+      1260,
+      660
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "when",
+        "label": "When to show",
+        "groups": [
+          {
+            "label": "Passes",
+            "settings": [
+              {
+                "key": "driver",
+                "label": "Whose passes",
+                "type": "select",
+                "default": "player",
+                "options": [
+                  { "value": "player", "label": "You" },
+                  { "value": "focused", "label": "The car the camera follows" }
+                ]
+              },
+              {
+                "key": "sessions",
+                "label": "Sessions",
+                "type": "select",
+                "default": "race",
+                "options": [
+                  { "value": "race", "label": "Races only" },
+                  { "value": "all", "label": "Every session" }
+                ]
+              },
+              {
+                "key": "otherClasses",
+                "label": "Cars of other classes",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "lapped",
+                "label": "Lapped and lapping cars",
+                "description": "Show passes of cars a lap or more away from you in race distance.",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "ignoreCaution",
+                "label": "Not under caution or red flag",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          },
+          {
+            "label": "Timing",
+            "settings": [
+              {
+                "key": "displaySeconds",
+                "label": "Show for (seconds)",
+                "type": "number",
+                "default": 4.5,
+                "min": 2,
+                "max": 12,
+                "step": 0.5
+              },
+              {
+                "key": "cooldownSeconds",
+                "label": "Same car again after (seconds)",
+                "description": "Passing the same car back and forth shows it once in this time.",
+                "type": "number",
+                "default": 20,
+                "min": 0,
+                "max": 180,
+                "step": 5
+              },
+              {
+                "key": "maxQueue",
+                "label": "Passes waiting",
+                "description": "With several passes in a row, this many wait for their turn; the oldest are dropped.",
+                "type": "number",
+                "default": 3,
+                "min": 1,
+                "max": 8,
+                "step": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "content",
+        "label": "Content",
+        "groups": [
+          {
+            "settings": [
+              { "key": "showCar", "label": "Car picture", "type": "boolean", "default": true },
+              { "key": "showBrand", "label": "Brand", "type": "boolean", "default": true },
+              { "key": "showModel", "label": "Model", "type": "boolean", "default": true },
+              { "key": "showName", "label": "Driver name", "type": "boolean", "default": false },
+              { "key": "showNumber", "label": "Car number", "type": "boolean", "default": false },
+              { "key": "showClass", "label": "Class", "type": "boolean", "default": false },
+              {
+                "key": "showPosition",
+                "label": "Position",
+                "description": "The passed car's position in the race.",
+                "type": "boolean",
+                "default": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "align",
+                "label": "Banner sits",
+                "description": "Which side of the window the banner keeps to. Put the overlay on that side of the screen.",
+                "type": "select",
+                "default": "right",
+                "options": [
+                  { "value": "right", "label": "On the right" },
+                  { "value": "left", "label": "On the left" },
+                  { "value": "center", "label": "In the middle" }
+                ]
+              },
+              {
+                "key": "mirrorCar",
+                "label": "Mirror the car",
+                "description": "iRacing draws cars facing right. Mirrored (default) they face left, to the centre of the screen from a banner on the right. Turn it off for a banner on the left, so the car looks to the centre.",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "classStripe",
+                "label": "Class colour stripe",
+                "type": "boolean",
+                "default": false
+              },
+              { "key": "panelColor", "label": "Panel colour", "type": "color", "default": "#2b2b29" },
+              {
+                "key": "panelOpacity",
+                "label": "Panel opacity",
+                "type": "number",
+                "default": 0.78,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              { "key": "textColor", "label": "Text colour", "type": "color", "default": "#f3f2ee" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
