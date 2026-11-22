@@ -1,0 +1,41 @@
+/* Fonts of the Warhammer overlays, from the R- overlays' folder: Roboto, Roboto Mono and Barlow Condensed (SIL Open Font License 1.1). */
+@font-face {
+  font-family: 'WhText';
+  src: url('../r-common/fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'WhText';
+  src: url('../r-common/fonts/Roboto-Medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'WhText';
+  src: url('../r-common/fonts/Roboto-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'WhMono';
+  src: url('../r-common/fonts/RobotoMono-Regular.ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'WhMono';
+  src: url('../r-common/fonts/RobotoMono-Medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'WhMono';
+  src: url('../r-common/fonts/RobotoMono-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'WhLabel';
+  src: url('../r-common/fonts/BarlowCondensed-SemiBold.ttf');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'WhLabel';
+  src: url('../r-common/fonts/BarlowCondensed-Bold.ttf');
+  font-weight: 700;
+}

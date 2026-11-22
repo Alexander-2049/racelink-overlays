@@ -1,0 +1,45 @@
+/* Warhammer Blind Spot: a bar at each edge; a line in it follows the car alongside. */
+.wh-blind {
+  position: relative;
+  text-shadow: none;
+}
+.wh-bs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--wh-bar);
+  opacity: 0;
+  background: color-mix(in srgb, var(--wh-accent) calc(var(--wh-opacity) * 100%), transparent);
+  transition: opacity 0.18s ease;
+}
+.wh-bs--left {
+  left: 0;
+}
+.wh-bs--right {
+  right: 0;
+}
+.wh-bs--round {
+  border-radius: calc(var(--wh-bar) / 2);
+}
+.wh-bs--idle {
+  opacity: 0.35;
+}
+.wh-bs--lit {
+  opacity: 1;
+}
+.wh-bs-line {
+  position: absolute;
+  left: 50%;
+  width: var(--wh-line);
+  top: var(--wh-top);
+  height: var(--wh-length);
+  transform: translateX(-50%);
+  background: var(--wh-accent);
+  box-shadow: 0 0 0.6em color-mix(in srgb, var(--wh-accent) 55%, transparent);
+}
+.wh-bs--round .wh-bs-line {
+  border-radius: calc(var(--wh-line) / 2);
+}
+.wh-bs--smooth .wh-bs-line {
+  transition: top 0.12s linear, height 0.12s linear;
+}

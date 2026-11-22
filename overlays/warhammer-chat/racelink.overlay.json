@@ -1,0 +1,192 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "warhammer-chat",
+  "version": "1.0.0",
+  "name": "Warhammer Twitch Chat",
+  "category": "other",
+  "description": "Twitch chat of Warhammer Racing's channel on the screen: whole messages only, newest at the bottom, with badges, name colours and emotes. Racelink reads the chat of the channels named by its built-in Twitch Chat overlays: add that overlay to a layout with the same channel (it can be hidden or tiny) and this one shows its messages.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-competizione",
+    "assetto-corsa-evo",
+    "assetto-corsa-rally",
+    "project-motor-racing",
+    "rfactor-2"
+  ],
+  "size": {
+    "default": [
+      420,
+      300
+    ],
+    "min": [
+      160,
+      60
+    ],
+    "max": [
+      1200,
+      1400
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ember",
+                "options": [
+                  {
+                    "value": "ember",
+                    "label": "Ember (Warhammer Racing)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "tide",
+                    "label": "Tide (cool dark)"
+                  },
+                  {
+                    "value": "clear",
+                    "label": "Clear (almost no panel)"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 15,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.6,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chat",
+        "label": "Chat",
+        "groups": [
+          {
+            "label": "Channel",
+            "settings": [
+              {
+                "key": "channel",
+                "label": "Twitch channel",
+                "type": "text",
+                "default": "warhammerracing",
+                "maxLength": 25
+              }
+            ]
+          },
+          {
+            "label": "Messages",
+            "settings": [
+              {
+                "key": "maxMessages",
+                "label": "Messages shown at most",
+                "type": "number",
+                "default": 50,
+                "min": 1,
+                "max": 50,
+                "step": 1
+              },
+              {
+                "key": "hideAfterSeconds",
+                "label": "Hide a message after (0 keeps it)",
+                "type": "number",
+                "default": 0,
+                "min": 0,
+                "max": 3600,
+                "step": 5,
+                "unit": "s"
+              },
+              {
+                "key": "showBadges",
+                "label": "Badges",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showEmotes",
+                "label": "Emotes as pictures",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "boldText",
+                "label": "Bold text",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "align",
+                "label": "New messages",
+                "type": "select",
+                "default": "bottom",
+                "options": [
+                  {
+                    "value": "bottom",
+                    "label": "At the bottom"
+                  },
+                  {
+                    "value": "top",
+                    "label": "At the top"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Filters",
+            "settings": [
+              {
+                "key": "hideCommands",
+                "label": "Hide commands (starting with !)",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "hiddenUsers",
+                "label": "Hide messages of (comma separated logins)",
+                "type": "text",
+                "default": "moobot, nightbot",
+                "maxLength": 200
+              },
+              {
+                "key": "highlightWords",
+                "label": "Highlight messages with (comma separated words)",
+                "type": "text",
+                "default": "",
+                "maxLength": 200
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

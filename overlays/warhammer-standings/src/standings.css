@@ -1,0 +1,103 @@
+/* Warhammer Standings: rows of a grid, one template for every row so columns line up. */
+.wh-standings {
+  display: flex;
+  align-items: flex-start;
+}
+.wh-panel {
+  width: 100%;
+  border-left: 0.18em solid var(--wh-accent);
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+.wh-head {
+  padding: 0.35em 0.6em;
+  background: var(--wh-surface-head);
+  border-bottom: 1px solid var(--wh-faint);
+  font-size: 0.95em;
+}
+.wh-chip-label {
+  color: var(--wh-accent);
+  font-size: 1.05em;
+}
+.wh-chip--first .wh-chip-label {
+  margin-right: 0.15em;
+}
+.wh-group {
+  background: var(--wh-surface);
+}
+.wh-row {
+  display: grid;
+  align-items: center;
+  column-gap: 0.55em;
+  height: 1.6em;
+  padding: 0 0.6em;
+  white-space: nowrap;
+}
+.wh-row:nth-child(even) {
+  background: var(--wh-surface-alt);
+}
+.wh-row--ref,
+.wh-row--ref:nth-child(even) {
+  background: var(--wh-ref);
+}
+.wh-row--ref .wh-name {
+  color: var(--wh-ref-fg);
+}
+/* Rows were left out below this one. */
+.wh-row--cut {
+  margin-bottom: 0.3em;
+  box-shadow: 0 0.18em 0 -0.15em var(--wh-faint);
+}
+.wh-pos {
+  font-weight: 700;
+  text-align: right;
+}
+.wh-name {
+  font-weight: 700;
+  min-width: 0;
+}
+.wh-num {
+  text-align: right;
+}
+.wh-gain {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+  font-weight: 700;
+}
+.wh-gain svg {
+  width: 0.95em;
+  height: 0.95em;
+}
+.wh-stripe {
+  display: block;
+  width: 0.28em;
+  height: 1.1em;
+  border-radius: 0.14em;
+}
+.wh-row .wh-brand {
+  width: 1.25em;
+  height: 1.25em;
+}
+.wh-bestlap {
+  color: var(--wh-best);
+}
+.wh-history {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 2.4em;
+  text-align: right;
+}
+.wh-classhead {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  height: 1.5em;
+  padding: 0 0.6em;
+  background: var(--wh-surface-head);
+  border-top: 1px solid var(--wh-faint);
+}
+.wh-empty {
+  padding: 0.6em;
+  background: var(--wh-surface);
+}

@@ -1,0 +1,493 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "warhammer-standings",
+  "version": "1.0.0",
+  "name": "Warhammer Standings",
+  "category": "race",
+  "description": "Standings in the style of Warhammer Racing's stream: a session strip (clock, laps, temperatures, humidity, strength of field, drivers), the top of the class and a window round the car you watch, with places gained, make, safety rating and iRating, gap, interval, last lap, last pit stop and the lap-by-lap gain against you. Columns, rows and four calm themes are in the settings.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-competizione"
+  ],
+  "size": {
+    "default": [
+      780,
+      232
+    ],
+    "min": [
+      300,
+      80
+    ],
+    "max": [
+      1800,
+      1000
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ember",
+                "options": [
+                  {
+                    "value": "ember",
+                    "label": "Ember (Warhammer Racing)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "tide",
+                    "label": "Tide (cool dark)"
+                  },
+                  {
+                    "value": "clear",
+                    "label": "Clear (almost no panel)"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 14,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.82,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "nameFormat",
+                "label": "Driver name",
+                "type": "select",
+                "default": "initialLast",
+                "options": [
+                  {
+                    "value": "initialLast",
+                    "label": "F. Last"
+                  },
+                  {
+                    "value": "firstLast",
+                    "label": "First Last"
+                  },
+                  {
+                    "value": "last",
+                    "label": "Last"
+                  },
+                  {
+                    "value": "lastInitial",
+                    "label": "Last F."
+                  },
+                  {
+                    "value": "firstInitial",
+                    "label": "First L."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "columns",
+        "label": "Columns",
+        "groups": [
+          {
+            "label": "Strip above the rows",
+            "settings": [
+              {
+                "key": "showHeader",
+                "label": "Show the strip",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "headerItems",
+                "label": "Strip items",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "session",
+                    "label": "Session and clock"
+                  },
+                  {
+                    "value": "laps",
+                    "label": "Laps"
+                  },
+                  {
+                    "value": "airTemp",
+                    "label": "Air temperature"
+                  },
+                  {
+                    "value": "trackTemp",
+                    "label": "Track temperature"
+                  },
+                  {
+                    "value": "humidity",
+                    "label": "Humidity"
+                  },
+                  {
+                    "value": "sof",
+                    "label": "Strength of field"
+                  },
+                  {
+                    "value": "drivers",
+                    "label": "Drivers"
+                  },
+                  {
+                    "value": "incidents",
+                    "label": "Incidents"
+                  }
+                ],
+                "default": [
+                  "session",
+                  "laps",
+                  "airTemp",
+                  "trackTemp",
+                  "humidity",
+                  "sof",
+                  "drivers",
+                  {
+                    "id": "incidents",
+                    "visible": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Columns",
+            "settings": [
+              {
+                "key": "columns",
+                "label": "Columns",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "position",
+                    "label": "Position"
+                  },
+                  {
+                    "value": "gain",
+                    "label": "Places gained"
+                  },
+                  {
+                    "value": "classStripe",
+                    "label": "Class colour"
+                  },
+                  {
+                    "value": "number",
+                    "label": "Car number"
+                  },
+                  {
+                    "value": "name",
+                    "label": "Name"
+                  },
+                  {
+                    "value": "brand",
+                    "label": "Make"
+                  },
+                  {
+                    "value": "ratings",
+                    "label": "Safety rating and iRating"
+                  },
+                  {
+                    "value": "ratingChange",
+                    "label": "iRating change"
+                  },
+                  {
+                    "value": "pitState",
+                    "label": "In the pits"
+                  },
+                  {
+                    "value": "gap",
+                    "label": "Gap to the leader"
+                  },
+                  {
+                    "value": "interval",
+                    "label": "Interval to the car ahead"
+                  },
+                  {
+                    "value": "lapTime",
+                    "label": "Last lap"
+                  },
+                  {
+                    "value": "pitLap",
+                    "label": "Lap of the last stop"
+                  },
+                  {
+                    "value": "pitTime",
+                    "label": "Time of the last stop"
+                  },
+                  {
+                    "value": "gainHistory",
+                    "label": "Laps against you"
+                  }
+                ],
+                "default": [
+                  "position",
+                  "gain",
+                  {
+                    "id": "classStripe",
+                    "visible": false
+                  },
+                  {
+                    "id": "number",
+                    "visible": false
+                  },
+                  "name",
+                  "brand",
+                  "ratings",
+                  {
+                    "id": "ratingChange",
+                    "visible": false
+                  },
+                  {
+                    "id": "pitState",
+                    "visible": false
+                  },
+                  "gap",
+                  "interval",
+                  "lapTime",
+                  "pitLap",
+                  "pitTime",
+                  "gainHistory"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rows",
+        "label": "Rows",
+        "groups": [
+          {
+            "label": "Which cars",
+            "settings": [
+              {
+                "key": "topRows",
+                "label": "Top rows",
+                "type": "number",
+                "default": 3,
+                "min": 0,
+                "max": 20,
+                "step": 1
+              },
+              {
+                "key": "bottomRows",
+                "label": "Rows round the car you watch",
+                "type": "number",
+                "default": 5,
+                "min": 0,
+                "max": 30,
+                "step": 1
+              },
+              {
+                "key": "numClasses",
+                "label": "Classes",
+                "type": "number",
+                "default": 3,
+                "min": 1,
+                "max": 8,
+                "step": 1
+              },
+              {
+                "key": "multiclassRows",
+                "label": "Rows of the other classes",
+                "type": "number",
+                "default": 3,
+                "min": 0,
+                "max": 20,
+                "step": 1
+              },
+              {
+                "key": "condensed",
+                "label": "Mark where rows are left out",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "classHeaders",
+                "label": "Class names when there are several",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "values",
+        "label": "Values",
+        "groups": [
+          {
+            "label": "Times",
+            "settings": [
+              {
+                "key": "clockMode",
+                "label": "Session clock",
+                "type": "select",
+                "default": "remaining",
+                "options": [
+                  {
+                    "value": "remaining",
+                    "label": "Time left"
+                  },
+                  {
+                    "value": "elapsed",
+                    "label": "Time elapsed"
+                  }
+                ]
+              },
+              {
+                "key": "lapDecimals",
+                "label": "Decimals of the estimated laps",
+                "type": "number",
+                "default": 2,
+                "min": 0,
+                "max": 3,
+                "step": 1
+              },
+              {
+                "key": "gapDecimals",
+                "label": "Decimals of gaps",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 3,
+                "step": 1
+              },
+              {
+                "key": "lapTimeDecimals",
+                "label": "Decimals of lap times",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 3,
+                "step": 1
+              },
+              {
+                "key": "gainHistoryLaps",
+                "label": "Laps against you",
+                "type": "number",
+                "default": 3,
+                "min": 1,
+                "max": 6,
+                "step": 1
+              },
+              {
+                "key": "highlightBest",
+                "label": "Colour personal and class best laps",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          },
+          {
+            "label": "Ratings",
+            "settings": [
+              {
+                "key": "showLicence",
+                "label": "Safety rating pill",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showIRating",
+                "label": "iRating pill",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "licenceFormat",
+                "label": "Safety rating format",
+                "type": "select",
+                "default": "classRating",
+                "options": [
+                  {
+                    "value": "classRating",
+                    "label": "A4.4"
+                  },
+                  {
+                    "value": "rating",
+                    "label": "4.4"
+                  },
+                  {
+                    "value": "class",
+                    "label": "A"
+                  }
+                ]
+              },
+              {
+                "key": "iRatingFormat",
+                "label": "iRating format",
+                "type": "select",
+                "default": "k",
+                "options": [
+                  {
+                    "value": "k",
+                    "label": "4.8k"
+                  },
+                  {
+                    "value": "full",
+                    "label": "4812"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Units",
+            "settings": [
+              {
+                "key": "tempUnit",
+                "label": "Temperature",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "label": "As in the game"
+                  },
+                  {
+                    "value": "celsius",
+                    "label": "°C"
+                  },
+                  {
+                    "value": "fahrenheit",
+                    "label": "°F"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
