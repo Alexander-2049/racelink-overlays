@@ -1,0 +1,233 @@
+/*
+ * The look of the Warhammer overlays. Ember: warm graphite panels, a thin
+ * ember accent taken from the flaming W of the avatar, white italic-free text;
+ * quiet next to the game. Graphite, Tide and Clear are calmer variants.
+ * Colours are tokens on .wh-root[data-theme]; overlays use the tokens only.
+ */
+.wh-root {
+  --wh-opacity: 0.82;
+  --wh-font: 15px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-family: 'WhText', 'Roboto', system-ui, sans-serif;
+  font-size: var(--wh-font);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--wh-fg);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  -webkit-font-smoothing: antialiased;
+  /* Panels and rows follow the opacity setting. */
+  --wh-surface: color-mix(in srgb, var(--wh-panel) calc(var(--wh-opacity) * 100%), transparent);
+  --wh-surface-alt: color-mix(in srgb, var(--wh-panel-alt) calc(var(--wh-opacity) * 100%), transparent);
+  --wh-surface-head: color-mix(in srgb, var(--wh-panel-head) calc(var(--wh-opacity) * 100%), transparent);
+  --wh-accent-soft: color-mix(in srgb, var(--wh-accent) 20%, transparent);
+}
+.wh-root *,
+.wh-root *::before,
+.wh-root *::after {
+  box-sizing: border-box;
+}
+
+.wh-root[data-theme='ember'] {
+  --wh-panel: #151110;
+  --wh-panel-alt: #1d1715;
+  --wh-panel-head: #0e0b0a;
+  --wh-fg: #f6efe9;
+  --wh-dim: #b0a39a;
+  --wh-faint: #4a3f39;
+  --wh-accent: #ff7a1a;
+  --wh-accent-2: #e2392f;
+  --wh-ref: rgba(255, 122, 26, 0.2);
+  --wh-ref-fg: #ffc27a;
+  --wh-good: #79d28a;
+  --wh-bad: #ef6f64;
+  --wh-warn: #f2bd55;
+  --wh-lapping: #f07a72;
+  --wh-lapped: #62c6e2;
+  --wh-best: #c79cf0;
+  --wh-pill: #efe9e4;
+  --wh-pill-fg: #1a1412;
+  --wh-src-average: #a9bbe8;
+  --wh-src-qualify: #e0a3c0;
+  --wh-src-last: #dcd592;
+  --wh-src-custom: #9fd8c4;
+}
+.wh-root[data-theme='graphite'] {
+  --wh-panel: #121416;
+  --wh-panel-alt: #191c1f;
+  --wh-panel-head: #0c0e0f;
+  --wh-fg: #eef0f2;
+  --wh-dim: #98a0a7;
+  --wh-faint: #40474d;
+  --wh-accent: #b4c2cf;
+  --wh-accent-2: #7f8f9e;
+  --wh-ref: rgba(180, 194, 207, 0.2);
+  --wh-ref-fg: #ffffff;
+  --wh-good: #7ccf8e;
+  --wh-bad: #e9756b;
+  --wh-warn: #e8c063;
+  --wh-lapping: #ea857d;
+  --wh-lapped: #7cc3dc;
+  --wh-best: #bda4e6;
+  --wh-pill: #e9ecef;
+  --wh-pill-fg: #14171a;
+  --wh-src-average: #a8b9dd;
+  --wh-src-qualify: #d6a6bf;
+  --wh-src-last: #d6d19b;
+  --wh-src-custom: #a1d3c3;
+}
+.wh-root[data-theme='tide'] {
+  --wh-panel: #0e1618;
+  --wh-panel-alt: #142022;
+  --wh-panel-head: #0a1011;
+  --wh-fg: #e9f2f3;
+  --wh-dim: #86a2a7;
+  --wh-faint: #2f4a4e;
+  --wh-accent: #3fb8b2;
+  --wh-accent-2: #2a8f95;
+  --wh-ref: rgba(63, 184, 178, 0.22);
+  --wh-ref-fg: #aef0ea;
+  --wh-good: #7fd39a;
+  --wh-bad: #ee7d6f;
+  --wh-warn: #e9c46a;
+  --wh-lapping: #ee8a7c;
+  --wh-lapped: #78c8e6;
+  --wh-best: #b9a6ec;
+  --wh-pill: #e3efef;
+  --wh-pill-fg: #0f1a1c;
+  --wh-src-average: #9fc0e6;
+  --wh-src-qualify: #dfa6c2;
+  --wh-src-last: #d9d598;
+  --wh-src-custom: #9fdcc9;
+}
+.wh-root[data-theme='clear'] {
+  --wh-panel: #00000073;
+  --wh-panel-alt: #00000073;
+  --wh-panel-head: #00000099;
+  --wh-fg: #ffffff;
+  --wh-dim: #c4c4c4;
+  --wh-faint: rgba(255, 255, 255, 0.3);
+  --wh-accent: #ffffff;
+  --wh-accent-2: #d8d8d8;
+  --wh-ref: rgba(255, 255, 255, 0.2);
+  --wh-ref-fg: #ffffff;
+  --wh-good: #8fe0a0;
+  --wh-bad: #ff8478;
+  --wh-warn: #f6cf6e;
+  --wh-lapping: #ff8f86;
+  --wh-lapped: #86d4ee;
+  --wh-best: #cdb1f5;
+  --wh-pill: #f2f2f2;
+  --wh-pill-fg: #161616;
+  --wh-src-average: #b8c8f0;
+  --wh-src-qualify: #eab0cb;
+  --wh-src-last: #e8e1a0;
+  --wh-src-custom: #aee6d2;
+  /* Barely a panel: the text carries on its shadow. */
+  text-shadow: 0 0 3px #000, 0 1px 3px #000;
+}
+
+.wh-mono {
+  font-family: 'WhMono', 'Roboto Mono', ui-monospace, monospace;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.wh-label {
+  font-family: 'WhLabel', 'WhText', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.wh-dim {
+  color: var(--wh-dim);
+}
+.wh-good {
+  color: var(--wh-good);
+}
+.wh-bad {
+  color: var(--wh-bad);
+}
+.wh-warn {
+  color: var(--wh-warn);
+}
+.wh-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A header strip of small facts: icon and value. */
+.wh-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.wh-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  font-weight: 700;
+}
+.wh-chip svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  color: var(--wh-dim);
+}
+.wh-chip--first {
+  color: var(--wh-accent);
+}
+
+/* The licence and iRating pair: a coloured pill joined to a light one. */
+.wh-pair {
+  display: inline-flex;
+  align-items: stretch;
+  height: 1.3em;
+  border-radius: 0.65em;
+  overflow: hidden;
+  font-weight: 700;
+  text-shadow: none;
+  line-height: 1.3em;
+}
+.wh-pair > span {
+  padding: 0 0.5em;
+  min-width: 2.6em;
+  text-align: center;
+}
+.wh-licence {
+  background: var(--wh-licence, #0153db);
+  color: var(--wh-licence-fg, #fff);
+  filter: saturate(0.88) brightness(0.95);
+}
+.wh-irating {
+  background: color-mix(in srgb, var(--wh-pill) 18%, transparent);
+  color: var(--wh-fg);
+}
+.wh-irating--solo {
+  background: var(--wh-pill);
+  color: var(--wh-pill-fg);
+}
+
+/* A small solid tag: a pit lap, a PIT badge. */
+.wh-tag {
+  display: inline-block;
+  padding: 0 0.42em;
+  border-radius: 0.3em;
+  font-weight: 700;
+  line-height: 1.3em;
+  height: 1.3em;
+  text-shadow: none;
+}
+.wh-tag--lap {
+  background: var(--wh-warn);
+  color: #1b1403;
+}
+.wh-tag--pit {
+  background: var(--wh-accent);
+  color: #1a0d03;
+}
