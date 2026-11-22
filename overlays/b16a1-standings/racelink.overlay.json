@@ -1,0 +1,481 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "b16a1-standings",
+  "version": "1.0.0",
+  "name": "b16a1 Standings",
+  "author": "Racelink",
+  "category": "race",
+  "description": "Standings in the style of the b16a1series stream: a header for each class (session, laps, time left, strength of field, air and track temperature, humidity, cars), then one row per driver with the place, places gained or lost, number, name, car brand, licence, iRating and its projected change, gap, interval, last lap, pit stop, the lap-time difference to you over the last laps and the tyre.\n\nThe focused car's class comes first with its top places and the cars around you, the other classes show their leaders. The columns and the header are the stream's by default; the settings add more (country flag, team, car, best lap, laps, pit stops) and reorder or hide any.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one. iRacing shows everything; other games show the columns they have data for.",
+  "entry": "index.html",
+  "games": "*",
+  "size": {
+    "default": [
+      840,
+      660
+    ],
+    "min": [
+      320,
+      120
+    ],
+    "max": [
+      3040,
+      2160
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "b16a1",
+                "options": [
+                  {
+                    "value": "b16a1",
+                    "label": "b16a1 (softened)"
+                  },
+                  {
+                    "value": "vivid",
+                    "label": "b16a1 vivid (acid lime)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "ocean",
+                    "label": "Ocean (cool dark)"
+                  },
+                  {
+                    "value": "paper",
+                    "label": "Paper (light)"
+                  }
+                ],
+                "description": "b16a1 is the streamer's look turned down so it does not tire the eye over a game; vivid is the same look at full strength."
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 78
+              },
+              {
+                "key": "align",
+                "label": "Table sticks to",
+                "type": "select",
+                "default": "top",
+                "options": [
+                  {
+                    "value": "top",
+                    "label": "The top of the window"
+                  },
+                  {
+                    "value": "bottom",
+                    "label": "The bottom of the window"
+                  }
+                ],
+                "description": "Where the table sits when the window is taller than it."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rows",
+        "label": "Rows",
+        "groups": [
+          {
+            "label": "Your class",
+            "settings": [
+              {
+                "key": "topRows",
+                "label": "Top places",
+                "type": "number",
+                "min": 0,
+                "max": 40,
+                "step": 1,
+                "default": 5,
+                "description": "Always shown from the top of your class."
+              },
+              {
+                "key": "bottomRows",
+                "label": "Places around you",
+                "type": "number",
+                "min": 0,
+                "max": 40,
+                "step": 1,
+                "default": 15,
+                "description": "A window of rows around your car below the top. When your class has no more cars than top plus this, all of them show."
+              },
+              {
+                "key": "condensed",
+                "label": "Separate the top from the window",
+                "type": "boolean",
+                "default": true,
+                "description": "A thin break where places are left out between the top and the window around you."
+              }
+            ]
+          },
+          {
+            "label": "Classes",
+            "settings": [
+              {
+                "key": "numClasses",
+                "label": "Classes shown",
+                "type": "number",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "default": 3
+              },
+              {
+                "key": "multiclassRows",
+                "label": "Rows of each other class",
+                "type": "number",
+                "min": 0,
+                "max": 20,
+                "step": 1,
+                "default": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "columns",
+        "label": "Columns",
+        "groups": [
+          {
+            "label": "Row",
+            "settings": [
+              {
+                "key": "columns",
+                "label": "Columns",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "position",
+                    "label": "Place"
+                  },
+                  {
+                    "value": "gain",
+                    "label": "Places gained or lost"
+                  },
+                  {
+                    "value": "number",
+                    "label": "Car number"
+                  },
+                  {
+                    "value": "flag",
+                    "label": "Country flag"
+                  },
+                  {
+                    "value": "name",
+                    "label": "Name"
+                  },
+                  {
+                    "value": "team",
+                    "label": "Team"
+                  },
+                  {
+                    "value": "brand",
+                    "label": "Car brand"
+                  },
+                  {
+                    "value": "carName",
+                    "label": "Car"
+                  },
+                  {
+                    "value": "licence",
+                    "label": "Licence and safety rating"
+                  },
+                  {
+                    "value": "rating",
+                    "label": "iRating and its change"
+                  },
+                  {
+                    "value": "gap",
+                    "label": "Gap to the leader"
+                  },
+                  {
+                    "value": "interval",
+                    "label": "Interval to the car ahead"
+                  },
+                  {
+                    "value": "lapTime",
+                    "label": "Lap time"
+                  },
+                  {
+                    "value": "bestLap",
+                    "label": "Best lap"
+                  },
+                  {
+                    "value": "laps",
+                    "label": "Laps done"
+                  },
+                  {
+                    "value": "stops",
+                    "label": "Pit stops"
+                  },
+                  {
+                    "value": "pit",
+                    "label": "Pit stop (last or now)"
+                  },
+                  {
+                    "value": "history",
+                    "label": "Lap-time difference to you"
+                  },
+                  {
+                    "value": "tyre",
+                    "label": "Tyre"
+                  }
+                ],
+                "default": [
+                  "position",
+                  "gain",
+                  "number",
+                  {
+                    "id": "flag",
+                    "visible": false
+                  },
+                  "name",
+                  {
+                    "id": "team",
+                    "visible": false
+                  },
+                  "brand",
+                  {
+                    "id": "carName",
+                    "visible": false
+                  },
+                  "licence",
+                  "rating",
+                  "gap",
+                  "interval",
+                  "lapTime",
+                  {
+                    "id": "bestLap",
+                    "visible": false
+                  },
+                  {
+                    "id": "laps",
+                    "visible": false
+                  },
+                  {
+                    "id": "stops",
+                    "visible": false
+                  },
+                  "pit",
+                  "history",
+                  "tyre"
+                ],
+                "description": "Drag to reorder, switch off what you do not need."
+              }
+            ]
+          },
+          {
+            "label": "Details",
+            "settings": [
+              {
+                "key": "nameFormat",
+                "label": "Name",
+                "type": "select",
+                "default": "full",
+                "options": [
+                  {
+                    "value": "full",
+                    "label": "Francesco Mautone"
+                  },
+                  {
+                    "value": "initial",
+                    "label": "F. Mautone"
+                  },
+                  {
+                    "value": "short",
+                    "label": "Mautone F."
+                  },
+                  {
+                    "value": "last",
+                    "label": "Mautone"
+                  }
+                ]
+              },
+              {
+                "key": "nameWidth",
+                "label": "Name column width",
+                "type": "number",
+                "min": 6,
+                "max": 30,
+                "step": 0.5,
+                "default": 12.5,
+                "description": "In letter widths."
+              },
+              {
+                "key": "ratingFormat",
+                "label": "iRating",
+                "type": "select",
+                "default": "full",
+                "options": [
+                  {
+                    "value": "full",
+                    "label": "6204"
+                  },
+                  {
+                    "value": "compact",
+                    "label": "6.2k"
+                  }
+                ]
+              },
+              {
+                "key": "gapDigits",
+                "label": "Gap decimals",
+                "type": "select",
+                "default": "3",
+                "options": [
+                  {
+                    "value": "1",
+                    "label": "1"
+                  },
+                  {
+                    "value": "2",
+                    "label": "2"
+                  },
+                  {
+                    "value": "3",
+                    "label": "3"
+                  }
+                ]
+              },
+              {
+                "key": "lapTimeSource",
+                "label": "Lap time column shows",
+                "type": "select",
+                "default": "last",
+                "options": [
+                  {
+                    "value": "last",
+                    "label": "The last lap"
+                  },
+                  {
+                    "value": "best",
+                    "label": "The best lap"
+                  }
+                ],
+                "description": "The last lap is dimmed while the class leader has run a newer one, green when it is the driver's best, accent coloured when it is the best of the class."
+              },
+              {
+                "key": "historyLaps",
+                "label": "Laps in the difference to you",
+                "type": "number",
+                "min": 1,
+                "max": 6,
+                "step": 1,
+                "default": 3,
+                "description": "Seconds the driver was slower (green) or faster (red) than you on each of the last laps."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "header",
+        "label": "Header",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showHeaders",
+                "label": "Header of each class",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "headerColumns",
+                "label": "Header items",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "session",
+                    "label": "Session letter (first class)"
+                  },
+                  {
+                    "value": "class",
+                    "label": "Class"
+                  },
+                  {
+                    "value": "laps",
+                    "label": "Lap and race length"
+                  },
+                  {
+                    "value": "time",
+                    "label": "Time left and session length (first class)"
+                  },
+                  {
+                    "value": "sof",
+                    "label": "Strength of field"
+                  },
+                  {
+                    "value": "airTemp",
+                    "label": "Air temperature (first class)"
+                  },
+                  {
+                    "value": "trackTemp",
+                    "label": "Track temperature (first class)"
+                  },
+                  {
+                    "value": "humidity",
+                    "label": "Humidity (first class)"
+                  },
+                  {
+                    "value": "drivers",
+                    "label": "Cars in the class"
+                  }
+                ],
+                "default": [
+                  "session",
+                  "class",
+                  "laps",
+                  "time",
+                  "sof",
+                  "airTemp",
+                  "trackTemp",
+                  "humidity",
+                  "drivers"
+                ]
+              },
+              {
+                "key": "temperatureUnit",
+                "label": "Temperature",
+                "type": "select",
+                "default": "c",
+                "options": [
+                  {
+                    "value": "c",
+                    "label": "°C"
+                  },
+                  {
+                    "value": "f",
+                    "label": "°F"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

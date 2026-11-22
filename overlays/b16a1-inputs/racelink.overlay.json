@@ -1,0 +1,226 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "b16a1-inputs",
+  "version": "1.0.0",
+  "name": "b16a1 Input Telemetry",
+  "author": "Racelink",
+  "category": "driving",
+  "description": "Pedals, gear, speed and steering wheel in the style of the b16a1series stream: bars for the clutch, brake and throttle, the gear, the speed and a wheel with a mark at the top. While the ABS works the brake bar is hatched in the ABS colour on top of the brake, and the trace, if you turn it on, draws the ABS as a dotted line over the brake.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
+  "entry": "index.html",
+  "games": "*",
+  "size": {
+    "default": [
+      320,
+      110
+    ],
+    "min": [
+      100,
+      40
+    ],
+    "max": [
+      1280,
+      440
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "b16a1",
+                "options": [
+                  {
+                    "value": "b16a1",
+                    "label": "b16a1 (softened)"
+                  },
+                  {
+                    "value": "vivid",
+                    "label": "b16a1 vivid (acid lime)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "ocean",
+                    "label": "Ocean (cool dark)"
+                  },
+                  {
+                    "value": "paper",
+                    "label": "Paper (light)"
+                  }
+                ],
+                "description": "b16a1 is the streamer's look turned down so it does not tire the eye over a game; vivid is the same look at full strength."
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 80
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pedals",
+        "label": "Pedals",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showClutch",
+                "label": "Clutch",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showBrake",
+                "label": "Brake",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showThrottle",
+                "label": "Throttle",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showAbs",
+                "label": "ABS on the brake",
+                "type": "boolean",
+                "default": true,
+                "description": "The brake bar is hatched while the ABS works. iRacing, Le Mans Ultimate and Assetto Corsa Rally report it."
+              },
+              {
+                "key": "absColor",
+                "label": "ABS colour",
+                "type": "color",
+                "default": "#e3b341",
+                "visibleIf": {
+                  "showAbs": true
+                }
+              },
+              {
+                "key": "showValues",
+                "label": "Percent on the bars",
+                "type": "boolean",
+                "default": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "readout",
+        "label": "Gear, speed, wheel",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showGear",
+                "label": "Gear",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showSpeed",
+                "label": "Speed",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "speedUnit",
+                "label": "Speed unit",
+                "type": "select",
+                "default": "kph",
+                "options": [
+                  {
+                    "value": "kph",
+                    "label": "km/h"
+                  },
+                  {
+                    "value": "mph",
+                    "label": "mph"
+                  }
+                ]
+              },
+              {
+                "key": "showWheel",
+                "label": "Steering wheel",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "wheelDegrees",
+                "label": "Wheel turns up to",
+                "type": "number",
+                "min": 90,
+                "max": 1080,
+                "step": 10,
+                "unit": "°",
+                "default": 540,
+                "description": "Lock to lock, in degrees, for games that report only a ratio.",
+                "visibleIf": {
+                  "showWheel": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "trace",
+        "label": "Trace",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showTrace",
+                "label": "Trace of throttle and brake",
+                "type": "boolean",
+                "default": false,
+                "description": "A strip under the pedals drawing the last seconds; make the overlay taller to see it."
+              },
+              {
+                "key": "traceSeconds",
+                "label": "Seconds shown",
+                "type": "number",
+                "min": 3,
+                "max": 30,
+                "step": 1,
+                "unit": "s",
+                "default": 10,
+                "visibleIf": {
+                  "showTrace": true
+                }
+              },
+              {
+                "key": "traceClutch",
+                "label": "Clutch in the trace",
+                "type": "boolean",
+                "default": false,
+                "visibleIf": {
+                  "showTrace": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+.in-root { display: flex; flex-direction: column; gap: 6px; }
+.in-pedals { flex: 1 1 0; min-height: 0; container-type: size; }
+.in-panel {
+  box-sizing: border-box;
+  height: 100%;
+  width: max-content;
+  max-width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 5cqh;
+  padding: 8cqh 10cqh 8cqh 8cqh;
+  border-radius: 20cqh;
+  font-size: 30cqh;
+}
+.in-bars { display: flex; gap: 6cqh; }
+.in-bar {
+  position: relative;
+  width: 14cqh;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 2cqh;
+  background: rgb(var(--b-alt) / 0.9);
+  overflow: hidden;
+}
+.in-fill { position: relative; width: 100%; }
+.in-bar--clutch .in-fill { background: var(--b-clutch); }
+.in-bar--brake .in-fill { background: var(--b-brake); }
+.in-bar--throttle .in-fill { background: var(--b-throttle); }
+/* The ABS is a hatching in its colour over the filled part of the brake. */
+.in-abs {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, var(--abs) 0 3px, transparent 3px 7px);
+  box-shadow: inset 0 0 0 2px var(--abs);
+}
+.in-value { position: absolute; bottom: 2px; left: 0; right: 0; text-align: center; font-size: 0.45em; text-shadow: 0 0 3px #000; }
+.in-gear { align-self: center; min-width: 0.8em; text-align: center; font-size: 1.9em; font-weight: 800; color: var(--b-warn); line-height: 1; }
+.in-speed { align-self: center; display: flex; flex-direction: column; line-height: 1.05; }
+.in-speed b { font-size: 0.8em; font-weight: 700; }
+.in-speed span { font-size: 0.5em; }
+.in-wheel { align-self: center; height: 75%; aspect-ratio: 1; }
+.in-rim { fill: none; stroke: var(--b-fg); stroke-width: 9; }
+.in-hole { fill: none; }
+.in-spokes { fill: var(--b-fg); }
+.in-mark { fill: var(--b-bad); }
+
+.in-trace { flex: 1 1 0; min-height: 0; width: 100%; border-radius: 6px; }
+.in-grid { stroke: var(--b-dim); stroke-opacity: 0.35; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.in-line { fill: none; stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.in-line--throttle { stroke: var(--b-throttle); }
+.in-line--brake { stroke: var(--b-brake); }
+.in-line--clutch { stroke: var(--b-clutch); }
+.in-line--abs { stroke: var(--abs); stroke-width: 4; stroke-dasharray: 2 5; }

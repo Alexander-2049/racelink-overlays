@@ -1,0 +1,22 @@
+.wd-root { font-size: 20px; }
+.wd-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  padding: 0.5em 0.9em 0.5em 0.6em;
+  border-radius: 1.6em;
+  min-width: 9em;
+}
+.wd-title { font-size: 0.6em; letter-spacing: 0.15em; padding-left: 0.4em; }
+.wd-main { display: flex; align-items: center; gap: 0.6em; }
+.wd-ring { width: 3.6em; height: 3.6em; flex: none; }
+.wd-circle { fill: rgb(var(--b-alt) / 0.9); stroke: var(--b-dim); stroke-width: 2; }
+.wd-nose { fill: var(--b-accent); }
+.wd-read { display: flex; flex-direction: column; line-height: 1.05; }
+.wd-speed { font-size: 1.9em; font-weight: 800; }
+.wd-unit { font-size: 0.7em; }
+.wd-compass { font-size: 0.6em; }
+.wd-rain { display: flex; align-items: center; gap: 0.4em; font-size: 0.75em; padding-left: 0.4em; }
+.wd-wet { display: inline-flex; gap: 2px; margin-left: auto; }
+.wd-wet i { width: 0.35em; height: 0.9em; border-radius: 1px; background: rgb(var(--b-alt)); }
+.wd-wet i.is-on { background: var(--b-accent); }

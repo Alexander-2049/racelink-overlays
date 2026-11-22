@@ -1,0 +1,38 @@
+/* Shared look of the b16a1 overlays. Colours come from the theme tokens
+   (`--b-*`, themes.ts) set on the overlay's root; nothing here blinks or flashes. */
+.b-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--b-fg);
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  font-weight: var(--b-font-weight);
+  font-style: var(--b-font-style);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+
+.b-fit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+}
+.b-fit--top { align-items: flex-start; }
+.b-fit--bottom { align-items: flex-end; }
+.b-fit--center { align-items: center; }
+.b-fit-content { width: max-content; flex: none; }
+
+/* A panel: the theme's colour at the opacity setting. */
+.b-panel {
+  background: rgb(var(--b-bg) / var(--b-alpha));
+}
+.b-dim { color: var(--b-dim); }
+.b-good { color: var(--b-good); }
+.b-bad { color: var(--b-bad); }
+.b-warn { color: var(--b-warn); }
+.b-icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.b-icon--solid { fill: currentColor; stroke: none; }
+.b-hint { padding: 0.5em 0.8em; color: var(--b-dim); font-size: 13px; }

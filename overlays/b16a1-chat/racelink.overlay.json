@@ -1,0 +1,187 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "b16a1-chat",
+  "version": "1.0.0",
+  "name": "b16a1 Twitch Chat",
+  "author": "Racelink",
+  "category": "other",
+  "description": "Twitch chat in the style of the b16a1series stream: no panel, light text with a dark halo, the sender's badges and coloured name, emotes inline; the oldest messages leave at the top as new ones arrive. Racelink reads the chat anonymously, you cannot write in it.\n\nRacelink reads a channel only while a built-in Twitch Chat overlay of any layout names it: add that one with the same channel (it can stay switched off), then this overlay draws it. Messages of bots, commands and old messages can be hidden; words can be highlighted.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
+  "entry": "index.html",
+  "games": "*",
+  "size": {
+    "default": [
+      860,
+      270
+    ],
+    "min": [
+      200,
+      60
+    ],
+    "max": [
+      1800,
+      1400
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "chat",
+        "label": "Chat",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "channel",
+                "label": "Twitch channel",
+                "type": "text",
+                "maxLength": 25,
+                "default": "b16a1series",
+                "description": "The built-in Twitch Chat overlay must name the same channel for Racelink to read it."
+              },
+              {
+                "key": "maxMessages",
+                "label": "Messages shown at most",
+                "type": "number",
+                "min": 1,
+                "max": 50,
+                "step": 1,
+                "default": 20
+              },
+              {
+                "key": "hideAfterSeconds",
+                "label": "Hide a message after",
+                "type": "number",
+                "min": 0,
+                "max": 600,
+                "step": 5,
+                "unit": "s",
+                "default": 0,
+                "description": "0 keeps messages until new ones push them out."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "b16a1",
+                "options": [
+                  {
+                    "value": "b16a1",
+                    "label": "b16a1 (softened)"
+                  },
+                  {
+                    "value": "vivid",
+                    "label": "b16a1 vivid (acid lime)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "ocean",
+                    "label": "Ocean (cool dark)"
+                  },
+                  {
+                    "value": "paper",
+                    "label": "Paper (light)"
+                  }
+                ],
+                "description": "b16a1 is the streamer's look turned down so it does not tire the eye over a game; vivid is the same look at full strength."
+              },
+              {
+                "key": "opacity",
+                "label": "Panel opacity",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 0
+              },
+              {
+                "key": "fontSize",
+                "label": "Text size",
+                "type": "number",
+                "min": 10,
+                "max": 60,
+                "step": 1,
+                "unit": "px",
+                "default": 22
+              },
+              {
+                "key": "showBadges",
+                "label": "Badges",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showEmotes",
+                "label": "Emotes as pictures",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "messagesAt",
+                "label": "Newest message",
+                "type": "select",
+                "default": "bottom",
+                "options": [
+                  {
+                    "value": "bottom",
+                    "label": "At the bottom"
+                  },
+                  {
+                    "value": "top",
+                    "label": "At the top"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "filter",
+        "label": "Filter",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "hiddenUsers",
+                "label": "Hide these users",
+                "type": "text",
+                "maxLength": 200,
+                "default": "",
+                "description": "Logins separated by commas, for example bots: nightbot, streamelements."
+              },
+              {
+                "key": "hideCommands",
+                "label": "Hide commands (!something)",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "highlightWords",
+                "label": "Highlight messages with",
+                "type": "text",
+                "maxLength": 200,
+                "default": "",
+                "description": "Words separated by commas; the message gets an accent bar."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
