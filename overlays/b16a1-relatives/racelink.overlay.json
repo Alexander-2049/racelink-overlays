@@ -1,0 +1,359 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "b16a1-relatives",
+  "version": "1.0.0",
+  "name": "b16a1 Relatives",
+  "author": "Racelink",
+  "category": "race",
+  "description": "Relatives in the style of the b16a1series stream: the cars just ahead of and behind the one you watch, in the order they run on the track, with the place, car number, name, licence, iRating with its projected change and the time to you.\n\nYour own row is highlighted, cars of your class are white and cars of other classes tinted, numbers wear the class colour. A header gives the fuel left, strength of field, incidents and the clock, a footer the lap and the time left. The settings add more rows, pit and lap marks, car brands and flags, and swap the header items.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
+  "entry": "index.html",
+  "games": "*",
+  "size": {
+    "default": [
+      600,
+      360
+    ],
+    "min": [
+      260,
+      120
+    ],
+    "max": [
+      2000,
+      1400
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "b16a1",
+                "options": [
+                  {
+                    "value": "b16a1",
+                    "label": "b16a1 (softened)"
+                  },
+                  {
+                    "value": "vivid",
+                    "label": "b16a1 vivid (acid lime)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "ocean",
+                    "label": "Ocean (cool dark)"
+                  },
+                  {
+                    "value": "paper",
+                    "label": "Paper (light)"
+                  }
+                ],
+                "description": "b16a1 is the streamer's look turned down so it does not tire the eye over a game; vivid is the same look at full strength."
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 80
+              },
+              {
+                "key": "align",
+                "label": "Table sticks to",
+                "type": "select",
+                "default": "top",
+                "options": [
+                  {
+                    "value": "top",
+                    "label": "The top of the window"
+                  },
+                  {
+                    "value": "bottom",
+                    "label": "The bottom of the window"
+                  }
+                ],
+                "description": "Where the table sits when the window is taller than it."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rows",
+        "label": "Rows",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "rows",
+                "label": "Rows",
+                "type": "number",
+                "min": 3,
+                "max": 21,
+                "step": 2,
+                "default": 7,
+                "description": "You are in the middle; with 7 rows there are three cars on each side."
+              },
+              {
+                "key": "excludePit",
+                "label": "Leave cars in the pit lane out",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "loneQualify",
+                "label": "Alone in a lone qualifying",
+                "type": "boolean",
+                "default": true,
+                "description": "Other cars are hidden while you are out alone on a lone qualifying lap."
+              },
+              {
+                "key": "showPitBadge",
+                "label": "PIT mark on cars in the pit lane",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "showLapMarks",
+                "label": "Mark cars a lap ahead or behind (race)",
+                "type": "boolean",
+                "default": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "columns",
+        "label": "Columns",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "columns",
+                "label": "Columns",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "position",
+                    "label": "Place in class"
+                  },
+                  {
+                    "value": "number",
+                    "label": "Car number"
+                  },
+                  {
+                    "value": "flag",
+                    "label": "Country flag"
+                  },
+                  {
+                    "value": "name",
+                    "label": "Name"
+                  },
+                  {
+                    "value": "brand",
+                    "label": "Car brand"
+                  },
+                  {
+                    "value": "licence",
+                    "label": "Licence and safety rating"
+                  },
+                  {
+                    "value": "rating",
+                    "label": "iRating and its change"
+                  },
+                  {
+                    "value": "gap",
+                    "label": "Time to you"
+                  }
+                ],
+                "default": [
+                  "position",
+                  "number",
+                  {
+                    "id": "flag",
+                    "visible": false
+                  },
+                  "name",
+                  {
+                    "id": "brand",
+                    "visible": false
+                  },
+                  "licence",
+                  "rating",
+                  "gap"
+                ]
+              },
+              {
+                "key": "nameFormat",
+                "label": "Name",
+                "type": "select",
+                "default": "full",
+                "options": [
+                  {
+                    "value": "full",
+                    "label": "Francesco Mautone"
+                  },
+                  {
+                    "value": "initial",
+                    "label": "F. Mautone"
+                  },
+                  {
+                    "value": "short",
+                    "label": "Mautone F."
+                  },
+                  {
+                    "value": "last",
+                    "label": "Mautone"
+                  }
+                ]
+              },
+              {
+                "key": "ratingFormat",
+                "label": "iRating",
+                "type": "select",
+                "default": "compact",
+                "options": [
+                  {
+                    "value": "full",
+                    "label": "5800"
+                  },
+                  {
+                    "value": "compact",
+                    "label": "5.8k"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "info",
+        "label": "Header and footer",
+        "groups": [
+          {
+            "label": "Header",
+            "settings": [
+              {
+                "key": "showHeader",
+                "label": "Header",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "headerLeft",
+                "label": "Left",
+                "type": "select",
+                "default": "fuel",
+                "options": [
+                  {
+                    "value": "fuel",
+                    "label": "Fuel left"
+                  },
+                  {
+                    "value": "airTemp",
+                    "label": "Air temperature"
+                  },
+                  {
+                    "value": "trackTemp",
+                    "label": "Track temperature"
+                  },
+                  {
+                    "value": "humidity",
+                    "label": "Humidity"
+                  },
+                  {
+                    "value": "off",
+                    "label": "Nothing"
+                  }
+                ]
+              },
+              {
+                "key": "showSof",
+                "label": "Strength of field",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showIncidents",
+                "label": "Incidents",
+                "type": "boolean",
+                "default": true,
+                "description": "Points, then the limit for a penalty and for disqualification when the series sets them."
+              },
+              {
+                "key": "clock",
+                "label": "Clock",
+                "type": "select",
+                "default": "sim",
+                "options": [
+                  {
+                    "value": "sim",
+                    "label": "Time of day in the game"
+                  },
+                  {
+                    "value": "real",
+                    "label": "The clock of this computer"
+                  },
+                  {
+                    "value": "off",
+                    "label": "Nothing"
+                  }
+                ]
+              },
+              {
+                "key": "clock12",
+                "label": "12-hour clock",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "temperatureUnit",
+                "label": "Temperature",
+                "type": "select",
+                "default": "c",
+                "options": [
+                  {
+                    "value": "c",
+                    "label": "°C"
+                  },
+                  {
+                    "value": "f",
+                    "label": "°F"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Footer",
+            "settings": [
+              {
+                "key": "showFooter",
+                "label": "Footer",
+                "type": "boolean",
+                "default": true,
+                "description": "Your lap and the time left."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

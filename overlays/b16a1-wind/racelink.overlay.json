@@ -1,0 +1,156 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "b16a1-wind",
+  "version": "1.0.0",
+  "name": "b16a1 Wind",
+  "author": "Racelink",
+  "category": "weather",
+  "description": "Wind direction and strength. An arrow in a ring shows where the wind blows to, seen from the car (the nose is at the top) or from the north, and turns from green through yellow to red as the wind grows toward 60 km/h; the speed stands next to it in km/h or mph. Optionally a compass point, the rain and how wet the track is.\n\nNeeds a game that reports the wind (iRacing, Le Mans Ultimate, Assetto Corsa Rally); the overlay shows dashes when there is none.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa-rally"
+  ],
+  "size": {
+    "default": [
+      260,
+      130
+    ],
+    "min": [
+      100,
+      50
+    ],
+    "max": [
+      1040,
+      520
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "b16a1",
+                "options": [
+                  {
+                    "value": "b16a1",
+                    "label": "b16a1 (softened)"
+                  },
+                  {
+                    "value": "vivid",
+                    "label": "b16a1 vivid (acid lime)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "ocean",
+                    "label": "Ocean (cool dark)"
+                  },
+                  {
+                    "value": "paper",
+                    "label": "Paper (light)"
+                  }
+                ],
+                "description": "b16a1 is the streamer's look turned down so it does not tire the eye over a game; vivid is the same look at full strength."
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "min": 0,
+                "max": 100,
+                "step": 5,
+                "unit": "%",
+                "default": 80
+              },
+              {
+                "key": "orientation",
+                "label": "The arrow is drawn",
+                "type": "select",
+                "default": "car",
+                "options": [
+                  {
+                    "value": "car",
+                    "label": "Seen from the car (nose up)"
+                  },
+                  {
+                    "value": "north",
+                    "label": "On the map (north up)"
+                  }
+                ],
+                "description": "Seen from the car, an arrow pointing down is a headwind."
+              },
+              {
+                "key": "unit",
+                "label": "Speed",
+                "type": "select",
+                "default": "kph",
+                "options": [
+                  {
+                    "value": "kph",
+                    "label": "km/h"
+                  },
+                  {
+                    "value": "mph",
+                    "label": "mph"
+                  }
+                ]
+              },
+              {
+                "key": "strongKph",
+                "label": "Red at",
+                "type": "number",
+                "min": 10,
+                "max": 120,
+                "step": 5,
+                "unit": "km/h",
+                "default": 60,
+                "description": "The wind this strong shows in the strongest colour."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "more",
+        "label": "More",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "showTitle",
+                "label": "Title",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "showCompass",
+                "label": "Compass point the wind blows from",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "showRain",
+                "label": "Rain and track wetness",
+                "type": "boolean",
+                "default": false,
+                "description": "Rain intensity, smoothed, with its trend over the last minute, and how wet the track is (iRacing, Le Mans Ultimate)."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+.rl-root { font-size: 17px; }
+.rl-panel {
+  width: 100%;
+  min-width: 24em;
+  padding: 0.5em 0.8em 0.55em;
+  border-radius: 0.9em;
+  box-sizing: border-box;
+}
+.rl-header, .rl-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr 1fr;
+  align-items: center;
+  gap: 0.6em;
+  white-space: nowrap;
+}
+.rl-header { margin-bottom: 0.35em; }
+.rl-header .rl-h-item:nth-child(1) { justify-self: start; }
+.rl-header .rl-h-item:nth-child(3) { justify-self: center; }
+.rl-header .rl-h-item:nth-child(4) { justify-self: end; }
+.rl-h-item { display: inline-flex; align-items: center; gap: 0.3em; }
+.rl-footer { margin-top: 0.4em; grid-template-columns: 1fr 1fr; }
+.rl-footer span:last-child { justify-self: end; }
+.rl-rows { display: flex; flex-direction: column; gap: 0.12em; }
+.rl-row {
+  display: grid;
+  align-items: center;
+  column-gap: 0.5em;
+  min-height: 1.5em;
+  white-space: nowrap;
+}
+.rl-row > * { min-width: 0; }
+.rl-row.is-empty { visibility: hidden; }
+.rl-row.tone-same { color: var(--b-fg); }
+.rl-row.tone-other { color: var(--b-other-text); }
+.rl-row.tone-reference { color: var(--b-ref-text); background: rgb(var(--b-ref) / 0.35); border-radius: 0.3em; }
+.rl-row.in-pit { opacity: 0.6; }
+.rl-pos { text-align: right; }
+.rl-num { text-align: right; color: var(--cls, var(--b-fg)); font-style: italic; }
+.rl-name { overflow: hidden; text-overflow: ellipsis; }
+.rl-pit, .rl-lap { margin-left: 0.5em; font-size: 0.75em; color: var(--b-warn); }
+.rl-flag { height: 0.95em; border-radius: 2px; }
+.rl-brand { height: 1.25em; width: 1.25em; object-fit: contain; }
+.rl-lic {
+  display: inline-block;
+  padding: 0 0.35em;
+  border-radius: 0.3em;
+  background: color-mix(in srgb, var(--lic, var(--b-licence)) 72%, rgb(var(--b-bg)));
+  color: #fff;
+  text-align: center;
+}
+.rl-ir {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 0.4em;
+  padding: 0 0.4em;
+  border-radius: 0.3em;
+  background: rgb(238 238 232 / 0.92);
+  color: #25271f;
+}
+.rl-ir-change { display: inline-flex; align-items: center; }
+.rl-ir .b-good { color: #2b7d36; }
+.rl-ir .b-bad { color: #b8382b; }
+.rl-gap { text-align: right; }
