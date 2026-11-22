@@ -24,26 +24,40 @@ export interface Settings {
   readonly radius: number;
   /** Accent line on top */
   readonly accentLine: boolean;
-  /** Title line */
-  readonly showTitle: boolean;
-  /** Title */
-  readonly title: string;
-  /** Small text next to the title */
-  readonly subtitle: string;
-  /** Rows and their order */
-  readonly rows: readonly Readonly<{ id: "margin" | "add" | "remaining" | "estLaps" | "perLap" | "lapsLeft" | "atFinish" | "extra"; visible: boolean }>[];
-  /** Consumption taken from */
-  readonly source: "AVERAGE" | "LAST" | "ALL" | "LOWEST" | "HIGHEST" | "CUSTOM";
-  /** My consumption per lap */
-  readonly customPerLap: number;
-  /** Margin */
-  readonly marginLaps: number;
-  /** Extra fuel is */
-  readonly extraMode: "spare" | "lapLess" | "lapMore";
+  /** Animations */
+  readonly animations: boolean;
+  /** Text colours */
+  readonly colorMode: "THEME" | "CUSTOM";
+  /** Text colour */
+  readonly textColor: string;
+  /** Accent colour (enough fuel, PIT) */
+  readonly goodColor: string;
+  /** Negative colour (not enough fuel) */
+  readonly badColor: string;
+  /** Fuel level */
+  readonly showLevel: boolean;
+  /** Laps in the race */
+  readonly showLapsInRace: boolean;
+  /** PIT badge */
+  readonly showPitBadge: boolean;
+  /** Average of the last clean laps */
+  readonly showAverage: boolean;
+  /** Qualifying lap */
+  readonly showQualify: boolean;
+  /** Last lap */
+  readonly showLast: boolean;
+  /** My figure */
+  readonly showCustom: boolean;
+  /** My figure: fuel per lap, in the unit shown (0 is off) */
+  readonly myPerLap: number;
   /** Unit */
-  readonly unit: "AUTO" | "LITERS" | "GALLONS";
-  /** Colour the last two laps of fuel */
-  readonly warnColors: boolean;
+  readonly units: "auto" | "liters" | "usGallons" | "imperialGallons" | "kilograms";
+  /** Fuel at the end */
+  readonly extraMode: "spare" | "lapLess" | "lapMore";
+  /** Cushion added to a refuel of one unit or more */
+  readonly cushion: number;
+  /** Colour the level when two laps or less are left */
+  readonly warnLowFuel: boolean;
 }
 
 export const defaultSettings: Settings = {
@@ -52,47 +66,21 @@ export const defaultSettings: Settings = {
   "opacity": 0.8,
   "radius": 6,
   "accentLine": true,
-  "showTitle": true,
-  "title": "FUEL",
-  "subtitle": "Next pit stop",
-  "rows": [
-    {
-      "id": "margin",
-      "visible": true
-    },
-    {
-      "id": "add",
-      "visible": true
-    },
-    {
-      "id": "remaining",
-      "visible": true
-    },
-    {
-      "id": "estLaps",
-      "visible": true
-    },
-    {
-      "id": "perLap",
-      "visible": false
-    },
-    {
-      "id": "lapsLeft",
-      "visible": false
-    },
-    {
-      "id": "atFinish",
-      "visible": false
-    },
-    {
-      "id": "extra",
-      "visible": false
-    }
-  ],
-  "source": "AVERAGE",
-  "customPerLap": 3,
-  "marginLaps": 1,
+  "animations": true,
+  "colorMode": "THEME",
+  "textColor": "#f6f1fd",
+  "goodColor": "#6ee7a8",
+  "badColor": "#fb7185",
+  "showLevel": true,
+  "showLapsInRace": true,
+  "showPitBadge": true,
+  "showAverage": true,
+  "showQualify": true,
+  "showLast": true,
+  "showCustom": false,
+  "myPerLap": 0,
+  "units": "auto",
   "extraMode": "spare",
-  "unit": "AUTO",
-  "warnColors": true
+  "cushion": 0.5,
+  "warnLowFuel": true
 };

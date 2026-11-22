@@ -12,7 +12,7 @@ import {
   trimmedAverage,
   type ExtraMode,
   type FuelUnit,
-} from '../streamer-common/index.ts';
+} from './index.ts';
 
 export type FuelLap = Readonly<{
   usedLiters: number;

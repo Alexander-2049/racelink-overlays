@@ -14,7 +14,7 @@ import {
   wholeLapsToFinish,
   type FuelRow,
   type FuelRowKey,
-} from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/fuelPanel.ts';
+} from '../../../racelink/src/renderer/widgets/overlays/streamer-common/fuelPanel.ts';
 import { Root } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/Root';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/useOverlay';
 import { fitBoardAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
