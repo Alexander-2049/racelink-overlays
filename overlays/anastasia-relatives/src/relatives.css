@@ -1,0 +1,104 @@
+.rl-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.rl-panel {
+  width: 100%;
+}
+
+.rl-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.9em;
+  padding: 0.45em 0.7em 0.35em;
+  color: var(--an-dim);
+  font-weight: 700;
+  border-bottom: 1px solid var(--an-line);
+}
+
+.rl-row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  align-items: center;
+  column-gap: 0.45em;
+  height: 1.85em;
+  padding: 0 0.7em;
+  white-space: nowrap;
+}
+
+.rl-row.own {
+  background: var(--an-own-bg);
+  color: var(--an-own-fg);
+}
+
+.rl-row.lapping {
+  color: var(--an-bad);
+}
+
+.rl-row.lapped {
+  color: var(--an-info);
+}
+
+.rl-row.inpit {
+  opacity: 0.55;
+}
+
+.rl-stripe {
+  align-self: stretch;
+  margin: 0.25em 0;
+  border-radius: 2px;
+}
+
+.rl-pos {
+  text-align: right;
+  opacity: 0.85;
+}
+
+.rl-num {
+  text-align: right;
+}
+
+.rl-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.rl-pic {
+  height: 1.3em;
+}
+
+.rl-pitcell,
+.rl-chipcell {
+  display: flex;
+  justify-content: center;
+}
+
+.rl-chip {
+  min-width: 2.2em;
+  padding: 0.05em 0.35em;
+  border-radius: 0.28em;
+  text-align: center;
+  font-size: 0.88em;
+  font-weight: 800;
+  background: var(--an-warn);
+  color: #1b1400;
+}
+
+.rl-pit {
+  background: var(--an-warn);
+}
+
+.rl-rc.up {
+  color: var(--an-good);
+}
+
+.rl-rc.down {
+  color: var(--an-bad);
+}
+
+.rl-gap {
+  text-align: right;
+  font-weight: 700;
+}

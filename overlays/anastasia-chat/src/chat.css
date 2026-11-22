@@ -1,0 +1,128 @@
+.ch-root {
+  display: flex;
+}
+
+.ch-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.ch-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.45em 0.7em 0.4em;
+  border-bottom: 1px solid var(--an-line);
+}
+
+.ch-header b {
+  font-weight: 700;
+}
+
+.ch-channel {
+  margin-left: auto;
+  color: var(--an-dim);
+  font-size: 0.85em;
+}
+
+.ch-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
+  margin: 0;
+  padding: 0.3em 0.7em 0.5em;
+  overflow: hidden;
+  list-style: none;
+}
+
+.ch-message {
+  flex: none;
+  padding: 0.18em 0;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.ch-message.hl {
+  margin: 0 -0.4em;
+  padding: 0.18em 0.4em;
+  border-radius: 0.3em;
+  background: var(--an-own-bg);
+}
+
+.ch-name {
+  margin-right: 0.35em;
+  font-weight: 700;
+}
+
+.ch-twitch,
+.ch-badge {
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.3em;
+  vertical-align: -0.18em;
+  fill: currentColor;
+}
+
+.ch-twitch {
+  color: #9146ff;
+}
+
+.ch-twitch path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.ch-badge path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ch-badge.moderator {
+  color: #1fa35c;
+}
+
+.ch-badge.broadcaster {
+  color: #d64545;
+}
+
+.ch-badge.vip {
+  color: #d946a8;
+}
+
+.ch-badge.subscriber {
+  color: #8b5cf6;
+}
+
+.ch-badge.vip path,
+.ch-badge.subscriber path {
+  fill: #fff;
+  stroke: none;
+}
+
+.ch-badge.broadcaster circle {
+  fill: #fff;
+}
+
+.ch-emote {
+  height: 1.5em;
+  margin: -0.2em 0.1em;
+  vertical-align: middle;
+}
+
+.ch-hint {
+  margin: 0;
+  padding: 0.6em 0.8em;
+  color: var(--an-dim);
+  font-size: 0.85em;
+  font-weight: 500;
+}

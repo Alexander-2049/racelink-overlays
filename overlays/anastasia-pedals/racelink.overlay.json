@@ -1,0 +1,256 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anastasia-pedals",
+  "version": "1.0.0",
+  "name": "Anastasia Pedals",
+  "category": "driving",
+  "description": "Gear, speed, the slowest and the fastest speed of the last corner and straight (or of the last lap), the clutch, brake and throttle bars and the steering wheel, as on twitch.tv/anastasia_striking. The parts, the speed unit and how the minimum and maximum are found are settings. Four calm themes.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      420,
+      110
+    ],
+    "min": [
+      120,
+      40
+    ],
+    "max": [
+      1400,
+      500
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Look",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ANASTASIA",
+                "options": [
+                  {
+                    "value": "ANASTASIA",
+                    "label": "Anastasia (violet and magenta)"
+                  },
+                  {
+                    "value": "NEUTRAL",
+                    "label": "Neutral dark"
+                  },
+                  {
+                    "value": "MIDNIGHT",
+                    "label": "Midnight blue"
+                  },
+                  {
+                    "value": "ROSE",
+                    "label": "Soft rose"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 15,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "radius",
+                "label": "Corner radius",
+                "type": "number",
+                "default": 6,
+                "min": 0,
+                "max": 24,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "accentLine",
+                "label": "Accent line on top",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "parts",
+        "label": "Parts",
+        "groups": [
+          {
+            "label": "What is shown",
+            "settings": [
+              {
+                "key": "parts",
+                "label": "Parts and their order",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "gear",
+                    "label": "Gear and speed"
+                  },
+                  {
+                    "value": "extremes",
+                    "label": "Slowest and fastest speed"
+                  },
+                  {
+                    "value": "pedals",
+                    "label": "Pedal bars"
+                  },
+                  {
+                    "value": "wheel",
+                    "label": "Steering wheel"
+                  }
+                ],
+                "default": [
+                  "gear",
+                  "extremes",
+                  "pedals",
+                  "wheel"
+                ]
+              },
+              {
+                "key": "speedUnit",
+                "label": "Speed",
+                "type": "select",
+                "default": "AUTO",
+                "options": [
+                  {
+                    "value": "AUTO",
+                    "label": "As the game"
+                  },
+                  {
+                    "value": "KPH",
+                    "label": "km/h"
+                  },
+                  {
+                    "value": "MPH",
+                    "label": "mph"
+                  }
+                ]
+              },
+              {
+                "key": "showUnit",
+                "label": "Unit under the speed",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showClutch",
+                "label": "Clutch bar",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "pedalPercent",
+                "label": "Pedal figures in per cent",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "absMark",
+                "label": "Brighten the brake bar while ABS works",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "wheelRange",
+                "label": "Wheel turn lock to lock (when the game gives no angle)",
+                "type": "number",
+                "default": 900,
+                "min": 180,
+                "max": 1440,
+                "step": 10,
+                "unit": "deg"
+              }
+            ]
+          },
+          {
+            "label": "Slowest and fastest speed",
+            "settings": [
+              {
+                "key": "extremesMode",
+                "label": "Found",
+                "type": "select",
+                "default": "CORNER",
+                "options": [
+                  {
+                    "value": "CORNER",
+                    "label": "Last corner minimum, last straight maximum"
+                  },
+                  {
+                    "value": "LAP",
+                    "label": "Last completed lap"
+                  }
+                ]
+              },
+              {
+                "key": "swing",
+                "label": "Change that counts as a corner or a straight",
+                "type": "number",
+                "default": 15,
+                "min": 5,
+                "max": 60,
+                "step": 1,
+                "unit": "km/h",
+                "visibleIf": {
+                  "extremesMode": "CORNER"
+                }
+              },
+              {
+                "key": "showMax",
+                "label": "Fastest speed",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showMin",
+                "label": "Slowest speed",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "maxColor",
+                "label": "Fastest speed colour",
+                "type": "color",
+                "default": "#a78bfa"
+              },
+              {
+                "key": "minColor",
+                "label": "Slowest speed colour",
+                "type": "color",
+                "default": "#f472b6"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

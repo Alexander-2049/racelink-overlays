@@ -1,0 +1,482 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anastasia-standings",
+  "version": "1.0.0",
+  "name": "Anastasia Standings",
+  "category": "race",
+  "description": "The standings as on twitch.tv/anastasia_striking: a header line (session, class, laps, time, temperature, strength of field, cars), then the top of the class and a window round the car you watch. Position, places gained, number, name, car brand, licence and iRating, gap, interval, last lap, pit stop, and how much faster or slower each car was than you on the last laps. The columns and their order are settings, with more to add (country, class colour, iRating change, best lap). Four calm themes.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      700,
+      400
+    ],
+    "min": [
+      260,
+      60
+    ],
+    "max": [
+      1800,
+      1200
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Look",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ANASTASIA",
+                "options": [
+                  {
+                    "value": "ANASTASIA",
+                    "label": "Anastasia (violet and magenta)"
+                  },
+                  {
+                    "value": "NEUTRAL",
+                    "label": "Neutral dark"
+                  },
+                  {
+                    "value": "MIDNIGHT",
+                    "label": "Midnight blue"
+                  },
+                  {
+                    "value": "ROSE",
+                    "label": "Soft rose"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 15,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.8,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "radius",
+                "label": "Corner radius",
+                "type": "number",
+                "default": 6,
+                "min": 0,
+                "max": 24,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "accentLine",
+                "label": "Accent line on top",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "align",
+                "label": "Stick to",
+                "type": "select",
+                "default": "TOP",
+                "options": [
+                  {
+                    "value": "TOP",
+                    "label": "Top"
+                  },
+                  {
+                    "value": "BOTTOM",
+                    "label": "Bottom"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rows",
+        "label": "Rows",
+        "groups": [
+          {
+            "label": "Which cars",
+            "settings": [
+              {
+                "key": "topRows",
+                "label": "Rows from the top",
+                "type": "number",
+                "default": 5,
+                "min": 0,
+                "max": 30,
+                "step": 1
+              },
+              {
+                "key": "bottomRows",
+                "label": "Rows round the watched car",
+                "type": "number",
+                "default": 9,
+                "min": 0,
+                "max": 30,
+                "step": 1
+              },
+              {
+                "key": "numClasses",
+                "label": "Classes shown",
+                "type": "number",
+                "default": 3,
+                "min": 1,
+                "max": 8,
+                "step": 1
+              },
+              {
+                "key": "multiclassRows",
+                "label": "Rows of each other class",
+                "type": "number",
+                "default": 3,
+                "min": 0,
+                "max": 15,
+                "step": 1
+              },
+              {
+                "key": "condensed",
+                "label": "Mark where rows were left out",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "nameFormat",
+                "label": "Driver name",
+                "type": "select",
+                "default": "0",
+                "options": [
+                  {
+                    "value": "0",
+                    "label": "First Last"
+                  },
+                  {
+                    "value": "2",
+                    "label": "F. Last"
+                  },
+                  {
+                    "value": "3",
+                    "label": "Last F."
+                  },
+                  {
+                    "value": "1",
+                    "label": "Last First"
+                  },
+                  {
+                    "value": "4",
+                    "label": "First L."
+                  },
+                  {
+                    "value": "7",
+                    "label": "Last"
+                  },
+                  {
+                    "value": "10",
+                    "label": "LAS (three letters)"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "columns",
+        "label": "Columns",
+        "groups": [
+          {
+            "label": "Columns and their order",
+            "settings": [
+              {
+                "key": "columns",
+                "label": "Columns",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "position",
+                    "label": "Position"
+                  },
+                  {
+                    "value": "classStripe",
+                    "label": "Class colour stripe"
+                  },
+                  {
+                    "value": "gain",
+                    "label": "Places gained or lost"
+                  },
+                  {
+                    "value": "number",
+                    "label": "Car number"
+                  },
+                  {
+                    "value": "flag",
+                    "label": "Country flag"
+                  },
+                  {
+                    "value": "name",
+                    "label": "Name"
+                  },
+                  {
+                    "value": "brand",
+                    "label": "Car brand"
+                  },
+                  {
+                    "value": "licence",
+                    "label": "Licence"
+                  },
+                  {
+                    "value": "rating",
+                    "label": "iRating"
+                  },
+                  {
+                    "value": "ratingChange",
+                    "label": "iRating change (race)"
+                  },
+                  {
+                    "value": "gap",
+                    "label": "Gap to the leader"
+                  },
+                  {
+                    "value": "int",
+                    "label": "Interval to the car ahead"
+                  },
+                  {
+                    "value": "lastLap",
+                    "label": "Last lap"
+                  },
+                  {
+                    "value": "bestLap",
+                    "label": "Best lap"
+                  },
+                  {
+                    "value": "pit",
+                    "label": "Pit stop"
+                  },
+                  {
+                    "value": "gainHistory",
+                    "label": "Time against you, last laps"
+                  }
+                ],
+                "default": [
+                  "position",
+                  {
+                    "id": "classStripe",
+                    "visible": false
+                  },
+                  "gain",
+                  "number",
+                  {
+                    "id": "flag",
+                    "visible": false
+                  },
+                  "name",
+                  "brand",
+                  "licence",
+                  "rating",
+                  {
+                    "id": "ratingChange",
+                    "visible": false
+                  },
+                  "gap",
+                  "int",
+                  "lastLap",
+                  {
+                    "id": "bestLap",
+                    "visible": false
+                  },
+                  "pit",
+                  "gainHistory"
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Figures",
+            "settings": [
+              {
+                "key": "gapDecimals",
+                "label": "Decimals of gaps",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 3,
+                "step": 1
+              },
+              {
+                "key": "lapDecimals",
+                "label": "Decimals of lap times",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 3,
+                "step": 1
+              },
+              {
+                "key": "gainLaps",
+                "label": "Laps of the time-against-you column",
+                "type": "number",
+                "default": 3,
+                "min": 1,
+                "max": 5,
+                "step": 1
+              },
+              {
+                "key": "markLaps",
+                "label": "Colour personal and class best laps",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "header",
+        "label": "Header",
+        "groups": [
+          {
+            "label": "Header line",
+            "settings": [
+              {
+                "key": "showHeader",
+                "label": "Header",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "headerItems",
+                "label": "Header items",
+                "type": "order",
+                "hideable": true,
+                "visibleIf": {
+                  "showHeader": true
+                },
+                "items": [
+                  {
+                    "value": "session",
+                    "label": "Session letter"
+                  },
+                  {
+                    "value": "class",
+                    "label": "Class"
+                  },
+                  {
+                    "value": "laps",
+                    "label": "Laps"
+                  },
+                  {
+                    "value": "time",
+                    "label": "Time"
+                  },
+                  {
+                    "value": "airTemp",
+                    "label": "Air temperature"
+                  },
+                  {
+                    "value": "trackTemp",
+                    "label": "Track temperature"
+                  },
+                  {
+                    "value": "sof",
+                    "label": "Strength of field"
+                  },
+                  {
+                    "value": "drivers",
+                    "label": "Cars"
+                  },
+                  {
+                    "value": "incidents",
+                    "label": "Incidents"
+                  }
+                ],
+                "default": [
+                  "session",
+                  "class",
+                  "laps",
+                  "time",
+                  "airTemp",
+                  {
+                    "id": "trackTemp",
+                    "visible": false
+                  },
+                  "sof",
+                  "drivers",
+                  {
+                    "id": "incidents",
+                    "visible": false
+                  }
+                ]
+              },
+              {
+                "key": "timeMode",
+                "label": "Time",
+                "type": "select",
+                "default": "ELAPSED",
+                "visibleIf": {
+                  "showHeader": true
+                },
+                "options": [
+                  {
+                    "value": "ELAPSED",
+                    "label": "Elapsed of the total"
+                  },
+                  {
+                    "value": "REMAINING",
+                    "label": "Remaining"
+                  }
+                ]
+              },
+              {
+                "key": "temperatureUnit",
+                "label": "Temperature",
+                "type": "select",
+                "default": "AUTO",
+                "visibleIf": {
+                  "showHeader": true
+                },
+                "options": [
+                  {
+                    "value": "AUTO",
+                    "label": "As the game"
+                  },
+                  {
+                    "value": "C",
+                    "label": "Celsius"
+                  },
+                  {
+                    "value": "F",
+                    "label": "Fahrenheit"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

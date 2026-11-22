@@ -1,0 +1,53 @@
+.fu-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.fu-panel {
+  width: 100%;
+  padding: 0.5em 0.8em 0.6em;
+}
+
+.fu-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  padding-bottom: 0.35em;
+  margin-bottom: 0.3em;
+  border-bottom: 1px solid var(--an-line);
+}
+
+.fu-title b {
+  color: var(--an-accent);
+  font-size: 1.15em;
+  letter-spacing: 0.05em;
+}
+
+.fu-title span {
+  color: var(--an-dim);
+  font-size: 0.8em;
+}
+
+.fu-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.8em;
+  padding: 0.12em 0;
+}
+
+.fu-label {
+  text-align: right;
+  color: var(--an-own-fg);
+}
+
+.fu-value {
+  white-space: nowrap;
+}
+
+.fu-value .warn {
+  color: var(--an-warn);
+}
+
+.fu-value .bad {
+  color: var(--an-bad);
+}

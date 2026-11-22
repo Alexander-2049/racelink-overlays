@@ -1,0 +1,29 @@
+.bs-root {
+  position: relative;
+  background: transparent;
+}
+
+.bs-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.bs-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--an-fg);
+}
+
+.bs-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bs-line.smooth {
+  transition: top 90ms linear;
+}

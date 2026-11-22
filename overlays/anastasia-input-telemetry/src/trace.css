@@ -1,0 +1,14 @@
+.tr-root {
+  display: flex;
+}
+
+.tr-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.tr-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
