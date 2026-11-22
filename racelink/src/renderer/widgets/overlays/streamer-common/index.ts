@@ -9,3 +9,8 @@ export * from './fuelTypes.ts';
 export * from './environmentModel.ts';
 export * from './spotterModel.ts';
 export * from './chatModel.ts';
+export * from './trimRows.ts';
+export * from './motion/columnPresence.ts';
+export * from './motion/columnMotion.ts';
+export * from './motion/rowPlan.ts';
+export * from './motion/fitBoard.ts';

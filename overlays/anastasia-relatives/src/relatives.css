@@ -102,3 +102,9 @@
   text-align: right;
   font-weight: 700;
 }
+
+/* While a column opens or closes its cells are clipped, so the content does not spill. */
+[data-fx-busy] .rl-row > * {
+  min-width: 0;
+  overflow: hidden;
+}

@@ -14,6 +14,9 @@ import {
   buildRelatives,
   type RelativeRow,
 } from '../../../racelink/src/renderer/widgets/overlays/streamer-common';
+import { relativesColumnHasData } from '../../../racelink/src/renderer/widgets/overlays/anastasia-common/columnData.ts';
+import { fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
 
 type ColumnId = Settings['columns'][number]['id'];
@@ -131,6 +134,8 @@ const cell = (column: ColumnId, row: CarRow, settings: Settings, isTeamRacing: b
 export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Settings> }>) {
   const { telemetry, settings } = useOverlay(overlay, renderHz);
   const { session, drivers, weather, car } = telemetry;
+  const configured = settings.columns.filter((column) => column.visible).map((column) => column.id);
+  const fit = useFitBoard(configured.join(), 10, 1);
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -147,10 +152,24 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     referenceCarIdx: refIdx,
     sessionType: session.type,
     playerOnTrack: car.isOnTrack,
-    options: { rows: settings.rows, excludePit: settings.excludePit, loneQualify: settings.loneQualify },
+    options: { rows: Math.max(1, Math.min(Math.round(settings.rows), fit.capacity)), excludePit: settings.excludePit, loneQualify: settings.loneQualify },
   });
-  const columns = settings.columns.filter((column) => column.visible).map((column) => column.id);
-  const template = columns.map((column) => widths[column]).join(' ');
+  const motion = useTableMotion({
+    items: rows,
+    getKey: (row) => (row.kind === 'empty' ? `e${String(row.index)}` : String(row.driver.carIdx)),
+    columns: configured,
+    hasData: (id, row) =>
+      relativesColumnHasData(id, row, {
+        infoOf: (driver) => driverInfo(driver, settings.nameFormat, session.isTeamRacing),
+        showLaps: true,
+        gainLaps: 0,
+        reference: undefined,
+      }),
+    animations: settings.animations,
+    hideEmpty: settings.hideEmptyColumns,
+  });
+  const columns = motion.columns;
+  const template = columns.map((column) => motion.track(column, widths[column], '4em')).join(' ');
   const imperial =
     settings.temperatureUnit === 'AUTO' ? session.displayUnits === 'imperial' : settings.temperatureUnit === 'F';
   const incidents = session.ext.iracing?.incidents;
@@ -192,19 +211,30 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     '--an-size': `${String(settings.fontSize)}px`,
     '--an-opacity': String(settings.opacity),
     '--an-radius': `${String(settings.radius)}px`,
-    '--cols': template,
   } as CSSProperties;
 
   return (
     <div className="an rl-root" data-theme={settings.theme} style={style}>
-      <div className="an-panel rl-panel" data-accent={settings.accentLine ? 'on' : 'off'}>
+      <div ref={fit.ref} style={fit.style}>
+      <div
+        className="an-panel rl-panel"
+        data-accent={settings.accentLine ? 'on' : 'off'}
+        ref={motion.rootRef}
+        style={{ '--cols': template } as CSSProperties}
+        {...{ [fitBoardAttribute]: '' }}
+      >
         {settings.showHeader && <div className="rl-header">{items}</div>}
         {rows.map((row) =>
           row.kind === 'empty' ? (
-            <div key={`empty${String(row.index)}`} className="rl-row rl-empty" />
+            <div
+              key={`empty${String(row.index)}`}
+              className="rl-row rl-empty"
+              {...{ [rowKeyAttribute]: `e${String(row.index)}`, [fitRowAttribute]: '' }}
+            />
           ) : (
             <div
               key={row.driver.carIdx}
+              {...{ [rowKeyAttribute]: String(row.driver.carIdx), [fitRowAttribute]: '' }}
               className={`rl-row ${row.isReference ? 'own' : ''} ${
                 settings.lapColors && row.lapping ? 'lapping' : ''
               } ${settings.lapColors && row.lapped ? 'lapped' : ''} ${row.inPit && !row.isReference ? 'inpit' : ''}`}
@@ -213,6 +243,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
             </div>
           ),
         )}
+      </div>
       </div>
     </div>
   );

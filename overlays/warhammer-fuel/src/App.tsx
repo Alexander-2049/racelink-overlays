@@ -17,6 +17,8 @@ import {
 } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/fuelPanel.ts';
 import { Root } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/Root';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/useOverlay';
+import { fitBoardAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
 
 const renderHz = 8;
@@ -87,13 +89,24 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     rows: keys,
   });
 
+  // The window scales the panel down when it is smaller than the figures need; the rows fade in and out.
+  const fit = useFitBoard(keys.join(), 10, 1);
+  const motion = useTableMotion({
+    items: rows,
+    getKey: (row) => row.key,
+    columns: [] as readonly string[],
+    hasData: () => true,
+    animations: settings.animations,
+    hideEmpty: false,
+  });
   const raceLaps = session.estimatedTotalLaps ?? calculator?.raceLaps ?? null;
   const low = settings.warnLowFuel ? lowFuelState(fuel.levelLiters, sources.average ?? sources.last) : 0;
   const levelTone = low === 2 ? 'wh-bad' : low === 1 ? 'wh-warn' : '';
 
   return (
     <Root theme={settings.theme} opacity={settings.opacity} fontSize={settings.fontSize} className="wh-fuel">
-      <div className="wh-panel">
+      <div ref={fit.ref} style={fit.style}>
+      <div className="wh-panel" {...{ [fitBoardAttribute]: '' }}>
         {(settings.showLevel || settings.showLapsInRace || settings.showPitBadge) && (
           <div className="wh-top">
             {settings.showLevel && (
@@ -119,7 +132,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
             )}
           </div>
         )}
-        <div className="wh-grid">
+        <div className="wh-grid" ref={motion.rootRef}>
           {rows.map((row, rowIndex) => {
             const style = { '--wh-row': `var(--wh-src-${row.key})` } as CSSProperties;
             const cells: readonly (string | null)[] = [
@@ -133,7 +146,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
               fuelFigure(row.atEndLiters === null ? null : toUnit(row.atEndLiters, unit)),
             ];
             return (
-              <div key={row.key} className="wh-fuelrow" style={style}>
+              <div key={row.key} className="wh-fuelrow" style={style} {...{ [rowKeyAttribute]: row.key }}>
                 {values.map((value, column) => (
                   <Pair
                     key={column}
@@ -146,6 +159,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
           })}
         </div>
         <div className="wh-unit wh-dim">{unit.symbol}</div>
+      </div>
       </div>
     </Root>
   );

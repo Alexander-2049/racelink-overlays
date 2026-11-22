@@ -11,6 +11,7 @@ import {
   showsPositionChange,
   type SessionPhase,
 } from './sessionPhase.ts';
+import { limitStandingsRows } from './trimRows.ts';
 
 export type StandingsOptions = Readonly<{
   /** Rows always shown from the top of the focused class. */
@@ -23,6 +24,8 @@ export type StandingsOptions = Readonly<{
   multiclassRows: number;
   /** Mark the start and end of each unbroken run of rows. */
   condensed: boolean;
+  /** Most rows the window has room for; fewer rows are dropped by priority. */
+  maxRows?: number;
 }>;
 
 export const defaultStandingsOptions: StandingsOptions = {
@@ -212,7 +215,7 @@ export const buildStandings = (input: StandingsInput): StandingsGroupModel[] => 
           ...ordered.filter((entry) => entry.classId !== referenceClass),
         ];
 
-  return referenceFirst.slice(0, Math.max(1, whole(options.numClasses))).flatMap((entry) => {
+  const groups = referenceFirst.slice(0, Math.max(1, whole(options.numClasses))).flatMap((entry) => {
     const isReferenceClass = reference !== undefined && entry.classId === referenceClass;
     const referenceAt = isReferenceClass
       ? entry.drivers.findIndex((driver) => driver.carIdx === reference.carIdx)
@@ -276,6 +279,7 @@ export const buildStandings = (input: StandingsInput): StandingsGroupModel[] => 
       },
     ];
   });
+  return options.maxRows === undefined ? groups : limitStandingsRows(groups, options.maxRows);
 };
 
 /**

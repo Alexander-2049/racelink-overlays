@@ -27,10 +27,17 @@ import {
   type GapCell,
   type StandingsRowModel,
 } from '../../../racelink/src/renderer/widgets/overlays/streamer-common';
+import { standingsColumnHasData } from '../../../racelink/src/renderer/widgets/overlays/anastasia-common/columnData.ts';
+import { alignStyle, fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { ghostStyle, rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
+import type { Box } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/rowPlan.ts';
 import type { Settings } from './racelink-settings';
 
 type ColumnId = Settings['columns'][number]['id'];
 type HeaderId = Settings['headerItems'][number]['id'];
+
+/** A row with its place in its class: what motion keeps to draw a row that left. */
+type Entry = Readonly<{ row: StandingsRowModel; at: number }>;
 
 const renderHz = 10;
 const infinity = '∞';
@@ -233,6 +240,8 @@ const cell = (column: ColumnId, row: StandingsRowModel, ctx: Context): ReactNode
 
 export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Settings> }>) {
   const { telemetry, settings } = useOverlay(overlay, renderHz);
+  const configured = settings.columns.filter((column) => column.visible).map((column) => column.id);
+  const fit = useFitBoard(configured.join(), 10, 1);
   const tracker = useRef(new SessionPhaseTracker());
   const { session, drivers, weather } = telemetry;
   const refIdx = referenceCarIdx(session);
@@ -254,6 +263,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
           numClasses: settings.numClasses,
           multiclassRows: settings.multiclassRows,
           condensed: settings.condensed,
+          maxRows: fit.capacity,
         },
       }),
     [
@@ -267,11 +277,10 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
       settings.numClasses,
       settings.multiclassRows,
       settings.condensed,
+      fit.capacity,
     ],
   );
 
-  const columns = settings.columns.filter((column) => column.visible).map((column) => column.id);
-  const template = columns.map((column) => widths[column]).join(' ');
   const imperial =
     settings.temperatureUnit === 'AUTO' ? session.displayUnits === 'imperial' : settings.temperatureUnit === 'F';
   const first = groups[0];
@@ -340,7 +349,6 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     '--an-opacity': String(settings.opacity),
     '--an-radius': `${String(settings.radius)}px`,
     '--gain-laps': String(settings.gainLaps),
-    '--cols': template,
   } as CSSProperties;
   const ctx: Context = {
     settings,
@@ -350,9 +358,58 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     showLaps: phase !== 'grid' || !isRace,
   };
 
+  const entries: Entry[] = groups.flatMap((group) => group.rows.map((row, at) => ({ row, at })));
+  const motion = useTableMotion({
+    items: entries,
+    getKey: (entry) => String(entry.row.driver.carIdx),
+    columns: configured,
+    hasData: (id, entry) =>
+      standingsColumnHasData(id, entry.row, {
+        infoOf: (driver) => driverInfo(driver, settings.nameFormat, session.isTeamRacing),
+        showLaps: ctx.showLaps,
+        gainLaps: settings.gainLaps,
+        reference,
+      }),
+    animations: settings.animations,
+    hideEmpty: settings.hideEmptyColumns,
+    ghosts: true,
+  });
+  const columns = motion.columns;
+  const template = columns
+    .map((column) =>
+      column === 'gainHistory'
+        ? `repeat(var(--gain-laps), ${motion.track(column, '2.5em')})`
+        : motion.track(column, widths[column], '4em'),
+    )
+    .join(' ');
+  const renderRow = (entry: Entry, ghost?: Box) => {
+    const { row, at } = entry;
+    return (
+      <div
+        key={ghost === undefined ? row.driver.carIdx : `gone${String(row.driver.carIdx)}`}
+        className={`st-row ${row.isReference ? 'own' : ''} ${at % 2 === 1 ? 'odd' : ''} ${row.cutBelow ? 'cut' : ''}`}
+        style={ghost === undefined ? undefined : ghostStyle(ghost)}
+        {...{ [rowKeyAttribute]: String(row.driver.carIdx) }}
+        {...(ghost === undefined ? { [fitRowAttribute]: '' } : { 'data-fx-ghost': '' })}
+      >
+        {columns.map((column) => cell(column, row, ctx))}
+      </div>
+    );
+  };
+
   return (
     <div className="an st-root" data-theme={settings.theme} data-align={settings.align} style={style}>
-      <div className="an-panel st-panel" data-accent={settings.accentLine ? 'on' : 'off'}>
+      <div
+        ref={fit.ref}
+        style={{ ...fit.style, ...alignStyle(settings.align === 'BOTTOM' ? 'bottom' : 'top') }}
+      >
+      <div
+        className="an-panel st-panel"
+        data-accent={settings.accentLine ? 'on' : 'off'}
+        ref={motion.rootRef}
+        style={{ '--cols': template } as CSSProperties}
+        {...{ [fitBoardAttribute]: '' }}
+      >
         {settings.showHeader && <div className="st-header">{headerItems}</div>}
         {groups.map((group, groupAt) => (
           <div key={group.classId ?? 'none'} className="st-group">
@@ -361,16 +418,11 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
                 {group.className}
               </div>
             )}
-            {group.rows.map((row, rowAt) => (
-              <div
-                key={row.driver.carIdx}
-                className={`st-row ${row.isReference ? 'own' : ''} ${rowAt % 2 === 1 ? 'odd' : ''} ${row.cutBelow ? 'cut' : ''}`}
-              >
-                {columns.map((column) => cell(column, row, ctx))}
-              </div>
-            ))}
+            {group.rows.map((row, at) => renderRow({ row, at }))}
           </div>
         ))}
+        {motion.ghosts.map((ghost) => renderRow(ghost.item, ghost.box))}
+      </div>
       </div>
     </div>
   );

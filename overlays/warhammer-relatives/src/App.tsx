@@ -27,6 +27,9 @@ import {
   useNow,
   useOverlay,
 } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/useOverlay';
+import { relativesColumnHasData } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/columnData.ts';
+import { fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
 
 type Column = Settings['columns'][number]['id'];
@@ -114,6 +117,8 @@ function Cell({
 export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Settings> }>) {
   const { telemetry, settings, editMode } = useOverlay(overlay, renderHz);
   const now = useNow(1000);
+  const configured = settings.columns.filter((column) => column.visible).map((column) => column.id);
+  const fit = useFitBoard(configured.join(), 10, 1);
   const { session, drivers } = telemetry;
 
   const referenceCarIdx = session.focusedCarIdx ?? session.playerCarIdx;
@@ -123,7 +128,24 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     referenceCarIdx,
     sessionType: session.type,
     playerOnTrack: telemetry.car.isOnTrack,
-    options: { rows: settings.rows, excludePit: settings.excludePit, loneQualify: settings.loneQualify },
+    options: { rows: Math.max(1, Math.min(Math.round(settings.rows), fit.capacity)), excludePit: settings.excludePit, loneQualify: settings.loneQualify },
+  });
+  const columnContext = {
+    showLicence: settings.showLicence,
+    showIRating: settings.showIRating,
+    licenceFormat: settings.licenceFormat,
+    iRatingFormat: settings.iRatingFormat,
+    gainHistoryLaps: 0,
+    isRace: session.type === 'race',
+    reference,
+  } as const;
+  const motion = useTableMotion({
+    items: rows,
+    getKey: (row) => (row.kind === 'empty' ? `e${String(row.index)}` : String(row.driver.carIdx)),
+    columns: configured,
+    hasData: (id, row) => relativesColumnHasData(id, row, columnContext),
+    animations: settings.animations,
+    hideEmpty: settings.hideEmptyColumns,
   });
   if (rows.length === 0)
     return editMode ? (
@@ -132,13 +154,16 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
       </Root>
     ) : null;
 
-  const columns = settings.columns.filter((column) => column.visible).map((column) => column.id);
-  const template = columns.map((column) => widths[column]).join(' ');
+  const columns = motion.columns;
+  const template = columns
+    .map((column) => motion.track(column, widths[column], column === 'ratings' ? '6.5em' : '4em'))
+    .join(' ');
   const competitors = drivers.filter((driver) => !driver.isPaceCar && !driver.isSpectator).length;
 
   return (
     <Root theme={settings.theme} opacity={settings.opacity} fontSize={settings.fontSize} className="wh-relatives">
-      <div className="wh-panel">
+      <div ref={fit.ref} style={fit.style}>
+      <div className="wh-panel" {...{ [fitBoardAttribute]: '' }}>
         {settings.showHeader && (
           <div className="wh-head">
             <InfoStrip
@@ -157,10 +182,16 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
             />
           </div>
         )}
-        <div className="wh-rows">
+        <div className="wh-rows" ref={motion.rootRef}>
           {rows.map((row) => {
             if (row.kind === 'empty')
-              return <div key={`empty-${String(row.index)}`} className="wh-row wh-row--empty" />;
+              return (
+                <div
+                  key={`empty-${String(row.index)}`}
+                  className="wh-row wh-row--empty"
+                  {...{ [rowKeyAttribute]: `e${String(row.index)}`, [fitRowAttribute]: '' }}
+                />
+              );
             const tone = row.isReference
               ? 'wh-row--ref'
               : settings.colorByLap && row.lapping
@@ -174,6 +205,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
                 key={row.driver.carIdx}
                 className={`wh-row ${tone} ${dim}`}
                 style={{ gridTemplateColumns: template }}
+                {...{ [rowKeyAttribute]: String(row.driver.carIdx), [fitRowAttribute]: '' }}
               >
                 {columns.map((column) => (
                   <Cell
@@ -202,6 +234,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
             </span>
           </div>
         )}
+      </div>
       </div>
     </Root>
   );

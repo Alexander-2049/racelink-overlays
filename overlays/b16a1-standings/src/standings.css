@@ -1,6 +1,7 @@
 .st-root { font-size: 14px; }
-.st-table { display: flex; flex-direction: column; gap: 3px; }
-.st-group { display: flex; flex-direction: column; width: max-content; }
+[data-fx-busy] .st-row > * { min-width: 0; overflow: hidden; }
+.st-table { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+.st-group { display: flex; flex-direction: column; width: 100%; }
 
 .st-header {
   display: inline-flex;
@@ -69,3 +70,5 @@
 .st-history { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; text-align: right; }
 .st-history .b-icon { width: 1.1em; }
 .st-tyre { display: inline-flex; justify-content: center; }
+/* While a column opens or closes its cells are clipped, so the content does not spill. */
+[data-fx-busy] .st-row > * { min-width: 0; overflow: hidden; }

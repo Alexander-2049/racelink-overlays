@@ -31,9 +31,16 @@ import {
   historyTone,
 } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/sessionInfo.ts';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/useOverlay';
+import { standingsColumnHasData as columnHasData } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/columnData.ts';
+import { fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { ghostStyle, rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
+import type { Box } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/rowPlan.ts';
 import type { Settings } from './racelink-settings';
 
 type Column = Settings['columns'][number]['id'];
+
+/** A row with the group it is in: what motion keeps to draw a row that left. */
+type Entry = Readonly<{ row: StandingsRowModel; at: number; cut: boolean }>;
 
 const renderHz = 10;
 
@@ -230,6 +237,8 @@ function ClassHeader({ group }: Readonly<{ group: StandingsGroupModel }>) {
 
 export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Settings> }>) {
   const { telemetry, settings, editMode } = useOverlay(overlay, renderHz);
+  const configured = settings.columns.filter((column) => column.visible).map((column) => column.id);
+  const fit = useFitBoard(configured.join(), 10, 1);
   const tracker = useRef(new SessionPhaseTracker());
   const { session, drivers } = telemetry;
 
@@ -253,18 +262,70 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
       numClasses: settings.numClasses,
       multiclassRows: settings.multiclassRows,
       condensed: settings.condensed,
+      maxRows: fit.capacity,
     },
   });
 
-  const columns = settings.columns.filter((column) => column.visible).map((column) => column.id);
-  const template = columns.map((column) => widths[column]).join(' ');
   const isRace = session.type === 'race';
+  const columnContext = {
+    showLicence: settings.showLicence,
+    showIRating: settings.showIRating,
+    licenceFormat: settings.licenceFormat,
+    iRatingFormat: settings.iRatingFormat,
+    gainHistoryLaps: settings.gainHistoryLaps,
+    isRace,
+    reference,
+  } as const;
+  const entries: Entry[] = groups.flatMap((group) =>
+    group.rows.map((row, at) => ({ row, at, cut: row.cutBelow })),
+  );
+  const motion = useTableMotion({
+    items: entries,
+    getKey: (entry) => String(entry.row.driver.carIdx),
+    columns: configured,
+    hasData: (id, entry) => columnHasData(id, entry.row, columnContext),
+    animations: settings.animations,
+    hideEmpty: settings.hideEmptyColumns,
+    ghosts: true,
+  });
+  const columns = motion.columns;
+  const template = columns
+    .map((column) => motion.track(column, widths[column], column === 'ratings' ? '6.5em' : '5em'))
+    .join(' ');
   const leader = competitors.find(
     (driver) =>
       driver.classId === reference?.classId && (driver.classPosition ?? driver.position) === 1,
   );
   const lap = isRace ? (leader?.lap ?? reference?.lap ?? null) : (reference?.lap ?? null);
 
+  const renderRow = (entry: Entry, ghost?: Box) => {
+    const { row } = entry;
+    return (
+      <div
+        key={ghost === undefined ? row.driver.carIdx : `gone${String(row.driver.carIdx)}`}
+        className={[
+          'wh-row',
+          row.isReference ? 'wh-row--ref' : '',
+          row.cutBelow && settings.condensed ? 'wh-row--cut' : '',
+        ].join(' ')}
+        style={{ gridTemplateColumns: template, ...(ghost === undefined ? undefined : ghostStyle(ghost)) }}
+        {...{ [rowKeyAttribute]: String(row.driver.carIdx) }}
+        {...(ghost === undefined ? { [fitRowAttribute]: '' } : { 'data-fx-ghost': '' })}
+      >
+        {columns.map((column) => (
+          <Cell
+            key={column}
+            column={column}
+            row={row}
+            reference={reference}
+            settings={settings}
+            isRace={isRace}
+            isTeam={session.isTeamRacing === true}
+          />
+        ))}
+      </div>
+    );
+  };
   const body =
     groups.length === 0 ? (
       editMode ? <div className="wh-empty wh-dim">Waiting for the session</div> : null
@@ -272,29 +333,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
       groups.map((group) => (
         <section key={group.classId ?? 'none'} className="wh-group">
           {settings.classHeaders && groups.length > 1 && <ClassHeader group={group} />}
-          {group.rows.map((row) => (
-            <div
-              key={row.driver.carIdx}
-              className={[
-                'wh-row',
-                row.isReference ? 'wh-row--ref' : '',
-                row.cutBelow && settings.condensed ? 'wh-row--cut' : '',
-              ].join(' ')}
-              style={{ gridTemplateColumns: template }}
-            >
-              {columns.map((column) => (
-                <Cell
-                  key={column}
-                  column={column}
-                  row={row}
-                  reference={reference}
-                  settings={settings}
-                  isRace={isRace}
-                  isTeam={session.isTeamRacing === true}
-                />
-              ))}
-            </div>
-          ))}
+          {group.rows.map((row, at) => renderRow({ row, at, cut: row.cutBelow }))}
         </section>
       ))
     );
@@ -302,7 +341,8 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
 
   return (
     <Root theme={settings.theme} opacity={settings.opacity} fontSize={settings.fontSize} className="wh-standings">
-      <div className="wh-panel">
+      <div ref={fit.ref} style={fit.style}>
+      <div className="wh-panel" ref={motion.rootRef} {...{ [fitBoardAttribute]: '' }}>
         {settings.showHeader && (
           <div className="wh-head">
             <InfoStrip
@@ -319,6 +359,8 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
           </div>
         )}
         {body}
+        {motion.ghosts.map((ghost) => renderRow(ghost.item, ghost.box))}
+      </div>
       </div>
     </Root>
   );

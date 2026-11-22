@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "warhammer-relatives",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Warhammer Relatives",
   "category": "race",
   "description": "Relatives in the style of Warhammer Racing's stream: the cars round the car you watch with their time to you, coloured by lap (a lap ahead, a lap behind, you), the last pit lap, safety rating and iRating, a strip of coolant and oil temperature, humidity, track temperature, strength of field, incidents and the clock, and a footer with the lap and the session clock.",
@@ -114,6 +114,20 @@
                 "min": 3,
                 "max": 15,
                 "step": 1
+              },
+              {
+                "key": "animations",
+                "label": "Animations",
+                "type": "boolean",
+                "default": true,
+                "description": "Rows slide to their new place, cars and columns appear and leave smoothly. Off when the system asks for reduced motion."
+              },
+              {
+                "key": "hideEmptyColumns",
+                "label": "Hide empty columns",
+                "type": "boolean",
+                "default": true,
+                "description": "A column with nothing in any row (no iRating offline, no pit stops yet) is left out; it opens when data arrives."
               }
             ]
           }

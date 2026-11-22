@@ -20,6 +20,8 @@ export interface Settings {
   readonly fontSize: number;
   /** Background opacity */
   readonly opacity: number;
+  /** Animations */
+  readonly animations: boolean;
   /** Fuel level */
   readonly showLevel: boolean;
   /** Laps in the race */
@@ -50,6 +52,7 @@ export const defaultSettings: Settings = {
   "theme": "ember",
   "fontSize": 16,
   "opacity": 0.7,
+  "animations": true,
   "showLevel": true,
   "showLapsInRace": true,
   "showPitBadge": true,

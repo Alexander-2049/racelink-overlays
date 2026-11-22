@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
   "apiVersion": 2,
   "id": "b16a1-relatives",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "b16a1 Relatives",
   "author": "Racelink",
   "category": "race",
@@ -86,6 +86,31 @@
                   }
                 ],
                 "description": "Where the table sits when the window is taller than it."
+              },
+              {
+                "key": "fontSize",
+                "label": "Text size",
+                "type": "number",
+                "min": 8,
+                "max": 40,
+                "step": 1,
+                "unit": "px",
+                "default": 17,
+                "description": "The largest size of the text; a smaller window shows fewer rows or scales the table down."
+              },
+              {
+                "key": "animations",
+                "label": "Animations",
+                "type": "boolean",
+                "default": true,
+                "description": "Rows slide to their new place, cars and columns appear and leave smoothly. Off when the system asks for reduced motion."
+              },
+              {
+                "key": "hideEmptyColumns",
+                "label": "Hide empty columns",
+                "type": "boolean",
+                "default": true,
+                "description": "A column with nothing in any row (no iRating offline, no pit stops yet) is left out; it opens when data arrives."
               }
             ]
           }
