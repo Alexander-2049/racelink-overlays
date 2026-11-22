@@ -31,7 +31,7 @@ if (ids.length === 0) {
 const side = 1024;
 const fill = 0.86;
 const plate = '#1a1e23';
-const settleMs = 3000;
+const settleMs = Number(process.env.RACELINK_PREVIEW_SETTLE_MS ?? 3000);
 const debugPort = 9351;
 
 const browserPath = [
