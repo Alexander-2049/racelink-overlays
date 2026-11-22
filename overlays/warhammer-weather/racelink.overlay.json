@@ -1,0 +1,206 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "warhammer-weather",
+  "version": "1.0.0",
+  "name": "Warhammer Weather",
+  "category": "weather",
+  "description": "Track wetness, precipitation and wind in one card, as on Warhammer Racing's stream: how wet the track is (with a seven step scale), how hard it rains (smoothed, with a trend) and where the wind blows and how fast. Each block can be switched off and moved.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-competizione"
+  ],
+  "size": {
+    "default": [
+      260,
+      200
+    ],
+    "min": [
+      100,
+      60
+    ],
+    "max": [
+      1200,
+      700
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ember",
+                "options": [
+                  {
+                    "value": "ember",
+                    "label": "Ember (Warhammer Racing)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "tide",
+                    "label": "Tide (cool dark)"
+                  },
+                  {
+                    "value": "clear",
+                    "label": "Clear (almost no panel)"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 15,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.72,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "blocks",
+        "label": "Blocks",
+        "groups": [
+          {
+            "label": "Show",
+            "settings": [
+              {
+                "key": "blocks",
+                "label": "Blocks",
+                "type": "order",
+                "hideable": true,
+                "items": [
+                  {
+                    "value": "wetness",
+                    "label": "Track wetness"
+                  },
+                  {
+                    "value": "precipitation",
+                    "label": "Precipitation"
+                  },
+                  {
+                    "value": "wind",
+                    "label": "Wind"
+                  }
+                ],
+                "default": [
+                  "wetness",
+                  "precipitation",
+                  "wind"
+                ]
+              },
+              {
+                "key": "layout",
+                "label": "Layout",
+                "type": "select",
+                "default": "vertical",
+                "options": [
+                  {
+                    "value": "vertical",
+                    "label": "One under the other"
+                  },
+                  {
+                    "value": "horizontal",
+                    "label": "Side by side"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Wetness and rain",
+            "settings": [
+              {
+                "key": "showWetnessScale",
+                "label": "Seven step scale under the wetness",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showTrend",
+                "label": "Trend of the rain (rising or falling)",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "precipitationDecimals",
+                "label": "Decimals of precipitation",
+                "type": "number",
+                "default": 1,
+                "min": 0,
+                "max": 2,
+                "step": 1
+              }
+            ]
+          },
+          {
+            "label": "Wind",
+            "settings": [
+              {
+                "key": "windFrame",
+                "label": "Arrow points",
+                "type": "select",
+                "default": "north",
+                "options": [
+                  {
+                    "value": "north",
+                    "label": "Relative to north (up is north)"
+                  },
+                  {
+                    "value": "car",
+                    "label": "Relative to the car (up is ahead)"
+                  }
+                ]
+              },
+              {
+                "key": "windUnit",
+                "label": "Speed",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "label": "As in the game"
+                  },
+                  {
+                    "value": "kph",
+                    "label": "km/h"
+                  },
+                  {
+                    "value": "mph",
+                    "label": "mph"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

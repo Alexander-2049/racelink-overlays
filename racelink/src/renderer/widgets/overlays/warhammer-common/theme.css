@@ -179,9 +179,6 @@
   flex: none;
   color: var(--wh-dim);
 }
-.wh-chip--first {
-  color: var(--wh-accent);
-}
 
 /* The licence and iRating pair: a coloured pill joined to a light one. */
 .wh-pair {

@@ -1,0 +1,217 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "warhammer-fuel",
+  "version": "1.0.0",
+  "name": "Warhammer Fuel Calculator",
+  "category": "strategy",
+  "description": "Fuel in the style of Warhammer Racing's stream: fuel in the tank and laps in the race, then rows for the average of your last clean laps, your qualifying lap and your last lap (and a figure you type): fuel per lap, laps the tank lasts, fuel to add and fuel left at the flag. A PIT badge lights in the pit lane.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-competizione"
+  ],
+  "size": {
+    "default": [
+      500,
+      238
+    ],
+    "min": [
+      240,
+      100
+    ],
+    "max": [
+      1400,
+      700
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ember",
+                "options": [
+                  {
+                    "value": "ember",
+                    "label": "Ember (Warhammer Racing)"
+                  },
+                  {
+                    "value": "graphite",
+                    "label": "Graphite (neutral dark)"
+                  },
+                  {
+                    "value": "tide",
+                    "label": "Tide (cool dark)"
+                  },
+                  {
+                    "value": "clear",
+                    "label": "Clear (almost no panel)"
+                  }
+                ]
+              },
+              {
+                "key": "fontSize",
+                "label": "Size",
+                "type": "number",
+                "default": 16,
+                "min": 8,
+                "max": 48,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0.7,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "rows",
+        "label": "Rows",
+        "groups": [
+          {
+            "label": "Show",
+            "settings": [
+              {
+                "key": "showLevel",
+                "label": "Fuel level",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showLapsInRace",
+                "label": "Laps in the race",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showPitBadge",
+                "label": "PIT badge",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showAverage",
+                "label": "Average of the last clean laps",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showQualify",
+                "label": "Qualifying lap",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showLast",
+                "label": "Last lap",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "showCustom",
+                "label": "My figure",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "customPerLap",
+                "label": "My figure: fuel per lap, in the unit shown (0 is off)",
+                "type": "number",
+                "default": 0,
+                "min": 0,
+                "max": 500,
+                "step": 0.01
+              }
+            ]
+          },
+          {
+            "label": "Calculation",
+            "settings": [
+              {
+                "key": "units",
+                "label": "Unit",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                  {
+                    "value": "auto",
+                    "label": "As in the game"
+                  },
+                  {
+                    "value": "liters",
+                    "label": "Litres"
+                  },
+                  {
+                    "value": "usGallons",
+                    "label": "US gallons"
+                  },
+                  {
+                    "value": "imperialGallons",
+                    "label": "Imperial gallons"
+                  },
+                  {
+                    "value": "kilograms",
+                    "label": "Kilograms"
+                  }
+                ]
+              },
+              {
+                "key": "extraMode",
+                "label": "Fuel at the end",
+                "type": "select",
+                "default": "spare",
+                "options": [
+                  {
+                    "value": "spare",
+                    "label": "Fuel left at the flag"
+                  },
+                  {
+                    "value": "lapLess",
+                    "label": "Fuel to add minus one lap"
+                  },
+                  {
+                    "value": "lapMore",
+                    "label": "Fuel to add plus one lap"
+                  }
+                ]
+              },
+              {
+                "key": "cushion",
+                "label": "Cushion added to a refuel of one unit or more",
+                "type": "number",
+                "default": 0.5,
+                "min": 0,
+                "max": 10,
+                "step": 0.1
+              },
+              {
+                "key": "warnLowFuel",
+                "label": "Colour the level when two laps or less are left",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

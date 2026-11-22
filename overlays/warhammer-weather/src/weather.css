@@ -1,0 +1,82 @@
+/* Warhammer Weather: blocks of a label and a large value on one card. */
+.wh-weather {
+  display: flex;
+  align-items: flex-start;
+}
+.wh-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  width: 100%;
+  padding: 0.6em 0.9em 0.7em;
+  border-left: 0.18em solid var(--wh-accent);
+  border-radius: 0.25em;
+  background: var(--wh-surface);
+}
+.wh-card--row {
+  flex-direction: row;
+  gap: 1.6em;
+}
+.wh-slot {
+  min-width: 0;
+}
+.wh-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+.wh-block-label {
+  font-size: 0.8em;
+  color: var(--wh-dim);
+}
+.wh-block-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.wh-block-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+}
+.wh-block-icon {
+  display: inline-flex;
+  width: 1.5em;
+  height: 1.5em;
+  color: var(--wh-fg);
+}
+.wh-block-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.wh-block-trend {
+  display: inline-flex;
+  width: 1.1em;
+  height: 1.1em;
+}
+.wh-block-unit {
+  font-size: 0.85em;
+  font-weight: 700;
+}
+.wh-scale {
+  display: flex;
+  gap: 0.2em;
+  margin-top: 0.3em;
+}
+.wh-pip {
+  width: 0.9em;
+  height: 0.3em;
+  border-radius: 0.15em;
+  background: var(--wh-faint);
+}
+.wh-pip--on {
+  background: var(--wh-accent);
+}
+/* Calm wind in the accent colour, strong wind towards red. */
+.wh-windcolor {
+  color: color-mix(in srgb, var(--wh-bad) calc(var(--wh-strength, 0) * 100%), var(--wh-accent));
+}
+.wh-wind-arrow {
+  transition: transform 0.4s ease;
+}

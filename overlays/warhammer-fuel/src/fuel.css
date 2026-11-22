@@ -1,0 +1,77 @@
+/* Warhammer Fuel Calculator: figures on a panel, a row of colour per source. */
+.wh-fuel {
+  display: flex;
+  align-items: flex-start;
+}
+.wh-panel {
+  position: relative;
+  width: 100%;
+  padding: 0.5em 0.8em 0.6em;
+  border-left: 0.18em solid var(--wh-accent);
+  border-radius: 0.25em;
+  background: var(--wh-surface);
+}
+.wh-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  margin-bottom: 0.7em;
+}
+.wh-grid {
+  display: grid;
+  row-gap: 0.45em;
+}
+.wh-fuelrow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  color: var(--wh-row);
+}
+.wh-cell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.wh-cell-label {
+  font-size: 0.72em;
+  line-height: 1.3;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+.wh-cell-value {
+  font-size: 1.35em;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.wh-cell--big .wh-cell-value {
+  font-size: 1.6em;
+  color: var(--wh-fg);
+}
+.wh-cell--big .wh-cell-value.wh-bad {
+  color: var(--wh-bad);
+}
+.wh-cell--big .wh-cell-value.wh-warn {
+  color: var(--wh-warn);
+}
+.wh-light {
+  color: var(--wh-fg);
+}
+.wh-pitbadge {
+  justify-self: start;
+  padding: 0.05em 0.6em;
+  border: 1px solid var(--wh-faint);
+  border-radius: 0.3em;
+  color: var(--wh-faint);
+  font-size: 1.1em;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+.wh-pitbadge--on {
+  color: #1a0d03;
+  background: var(--wh-accent);
+  border-color: var(--wh-accent);
+}
+.wh-unit {
+  position: absolute;
+  right: 0.6em;
+  bottom: 0.25em;
+  font-size: 0.65em;
+}

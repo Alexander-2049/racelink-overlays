@@ -26,6 +26,7 @@ scripts/              install-builds.mjs, gen-previews.mjs
 | Anime Relatives (new; its code is in `overlays/anime-relatives/src/`) | `anime-relatives` |
 | GT4 Gauges (new; twin speedometer and tachometer, its code is in `overlays/gt4-gauges/src/`) | `gt4-gauges` |
 | Driver Card (new; flag, full name, the helmet and the car with its livery as iRacing draws them, for the driver you watch, with a spinner while they load and nothing when iRacing cannot draw them; iRacing, needs Racelink with Overlay API 2.19; its code is in `overlays/driver-card/src/`) | `driver-card` |
+| Warhammer Racing set (new; made after twitch.tv/warhammerracing, four themes each; the shared look is in `racelink/src/renderer/widgets/overlays/warhammer-common/`): Warhammer Standings, Warhammer Relatives, Warhammer Fuel Calculator, Warhammer Twitch Chat (reads the chat of the built-in Twitch Chat overlay's channel), Warhammer Blind Spot, Warhammer Weather (track wetness, precipitation, wind; each block optional) | `warhammer-standings`, `warhammer-relatives`, `warhammer-fuel`, `warhammer-chat`, `warhammer-blind-spot`, `warhammer-weather` |
 
 Layouts made while these overlays were built in keep them: Racelink turns a
 built-in `r-standings` into the package `local:r-standings` (and so on), so
