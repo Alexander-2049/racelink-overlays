@@ -143,7 +143,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
   const hint = !valid
     ? 'Set the Twitch channel in the settings.'
     : !demo && shown.length === 0 && !read
-      ? 'Add the built-in Twitch Chat overlay with this channel so Racelink reads it.'
+      ? `Channel: ${channel}`
       : !demo && shown.length === 0 && !chat.connected
         ? 'Connecting to Twitch…'
         : null;

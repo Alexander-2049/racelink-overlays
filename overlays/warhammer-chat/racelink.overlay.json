@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "name": "Warhammer Twitch Chat",
   "category": "other",
-  "description": "Twitch chat of Warhammer Racing's channel on the screen: whole messages only, newest at the bottom, with badges, name colours and emotes. Racelink reads the chat of the channels named by its built-in Twitch Chat overlays: add that overlay to a layout with the same channel (it can be hidden or tiny) and this one shows its messages.",
+  "description": "Twitch chat of Warhammer Racing's channel on the screen: whole messages only, newest at the bottom, with badges, name colours and emotes.",
   "entry": "index.html",
   "games": [
     "iracing",
@@ -98,7 +98,8 @@
                 "label": "Twitch channel",
                 "type": "text",
                 "default": "warhammerracing",
-                "maxLength": 25
+                "maxLength": 25,
+                "role": "twitchChannel"
               }
             ]
           },
