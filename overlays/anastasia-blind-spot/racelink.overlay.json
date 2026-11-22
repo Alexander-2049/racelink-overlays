@@ -1,0 +1,236 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anastasia-blind-spot",
+  "version": "1.0.0",
+  "name": "Anastasia Blind Spot",
+  "category": "awareness",
+  "description": "A blind-spot warning for a stream: a bar on the left and on the right edge of the overlay lights up when a car is alongside on that side. One car draws a segment that moves along the bar with the car (ahead is up), two cars fill the bar. Stretch the overlay across the screen to put the bars at its edges. iRacing and Le Mans Ultimate.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate"
+  ],
+  "size": {
+    "default": [
+      900,
+      260
+    ],
+    "min": [
+      120,
+      80
+    ],
+    "max": [
+      3840,
+      1400
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Bars",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ANASTASIA",
+                "options": [
+                  {
+                    "value": "ANASTASIA",
+                    "label": "Anastasia (violet and magenta)"
+                  },
+                  {
+                    "value": "NEUTRAL",
+                    "label": "Neutral dark"
+                  },
+                  {
+                    "value": "MIDNIGHT",
+                    "label": "Midnight blue"
+                  },
+                  {
+                    "value": "ROSE",
+                    "label": "Soft rose"
+                  }
+                ]
+              },
+              {
+                "key": "colorMode",
+                "label": "Line colour",
+                "type": "select",
+                "default": "AMBER",
+                "options": [
+                  {
+                    "value": "AMBER",
+                    "label": "Amber"
+                  },
+                  {
+                    "value": "THEME",
+                    "label": "Accent of the theme"
+                  },
+                  {
+                    "value": "CUSTOM",
+                    "label": "My colour"
+                  }
+                ]
+              },
+              {
+                "key": "customColor",
+                "label": "My colour",
+                "type": "color",
+                "default": "#ffb624",
+                "visibleIf": {
+                  "colorMode": "CUSTOM"
+                }
+              },
+              {
+                "key": "lineWidth",
+                "label": "Line width",
+                "type": "number",
+                "default": 10,
+                "min": 2,
+                "max": 80,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "lineOpacity",
+                "label": "Line opacity",
+                "type": "number",
+                "default": 1,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "roundEnds",
+                "label": "Round ends",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "edgeInset",
+                "label": "Distance from the edge",
+                "type": "number",
+                "default": 0,
+                "min": 0,
+                "max": 400,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "showTrack",
+                "label": "Dim bar behind the line",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "trackWidth",
+                "label": "Dim bar width",
+                "type": "number",
+                "default": 20,
+                "min": 2,
+                "max": 120,
+                "step": 1,
+                "unit": "px",
+                "visibleIf": {
+                  "showTrack": true
+                }
+              },
+              {
+                "key": "trackOpacity",
+                "label": "Dim bar opacity",
+                "type": "number",
+                "default": 0.2,
+                "min": 0,
+                "max": 1,
+                "step": 0.05,
+                "visibleIf": {
+                  "showTrack": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "behaviour",
+        "label": "Behaviour",
+        "groups": [
+          {
+            "label": "The line",
+            "settings": [
+              {
+                "key": "moving",
+                "label": "The line follows the car",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "lineLength",
+                "label": "Length of the line of one car",
+                "type": "number",
+                "default": 30,
+                "min": 5,
+                "max": 100,
+                "step": 1,
+                "unit": "%"
+              },
+              {
+                "key": "distAhead",
+                "label": "Reach ahead",
+                "type": "number",
+                "default": 4,
+                "min": 1,
+                "max": 20,
+                "step": 0.5,
+                "unit": "m",
+                "visibleIf": {
+                  "moving": true
+                }
+              },
+              {
+                "key": "distBehind",
+                "label": "Reach behind",
+                "type": "number",
+                "default": 4,
+                "min": 1,
+                "max": 20,
+                "step": 0.5,
+                "unit": "m",
+                "visibleIf": {
+                  "moving": true
+                }
+              },
+              {
+                "key": "smooth",
+                "label": "Smooth movement",
+                "type": "boolean",
+                "default": true,
+                "visibleIf": {
+                  "moving": true
+                }
+              },
+              {
+                "key": "onlyOnTrack",
+                "label": "Only while you drive on the track",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "preview",
+                "label": "Show a sample to place the overlay",
+                "type": "boolean",
+                "default": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+.pd-root {
+  display: flex;
+  align-items: stretch;
+}
+
+.pd-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1em;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em 0.9em;
+}
+
+.pd-gear {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.pd-gearnum {
+  color: var(--an-gear);
+  font-size: 3.4em;
+  font-weight: 800;
+  line-height: 0.95;
+}
+
+.pd-speed {
+  font-size: 1.15em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pd-speed small {
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.pd-ext {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15em;
+  font-size: 1.9em;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.pd-pedals {
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  gap: 0.3em;
+  padding: 0.1em 0;
+}
+
+.pd-barcell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+}
+
+.pd-bar {
+  position: relative;
+  flex: 1;
+  width: 0.55em;
+  min-height: 2em;
+  overflow: hidden;
+  border-radius: 0.2em;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.pd-fill {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.pd-bar.clutch .pd-fill {
+  background: #5b9dff;
+}
+
+.pd-bar.brake .pd-fill {
+  background: #ef5a6f;
+}
+
+.pd-bar.brake.abs .pd-fill {
+  background: #ffa0ac;
+}
+
+.pd-bar.throttle .pd-fill {
+  background: #4ade80;
+}
+
+.pd-pct {
+  font-size: 0.65em;
+  color: var(--an-dim);
+}
+
+.pd-wheel {
+  flex: none;
+  height: 100%;
+  max-height: 5em;
+  aspect-ratio: 1;
+}
+
+.pd-rim,
+.pd-spoke {
+  fill: none;
+  stroke: var(--an-dim);
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.pd-top {
+  fill: var(--an-warn);
+}

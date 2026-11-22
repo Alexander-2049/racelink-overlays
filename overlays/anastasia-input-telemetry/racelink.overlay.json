@@ -1,0 +1,231 @@
+{
+  "$schema": "./node_modules/@racelink/overlay/racelink-overlay.schema.json",
+  "apiVersion": 2,
+  "id": "anastasia-input-telemetry",
+  "version": "1.0.0",
+  "name": "Anastasia Input Telemetry",
+  "category": "driving",
+  "description": "The throttle (green) and the brake (red) as lines that run across the screen, as on twitch.tv/anastasia_striking, over a faint grid. Optionally the clutch, the steering, a fill under the lines and the value at the line. The history length, line width, grid and colours are settings. Transparent by default.",
+  "entry": "index.html",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
+  "size": {
+    "default": [
+      720,
+      110
+    ],
+    "min": [
+      100,
+      30
+    ],
+    "max": [
+      3840,
+      600
+    ]
+  },
+  "settings": {
+    "pages": [
+      {
+        "id": "look",
+        "label": "Look",
+        "groups": [
+          {
+            "label": "Graph",
+            "settings": [
+              {
+                "key": "theme",
+                "label": "Theme",
+                "type": "select",
+                "default": "ANASTASIA",
+                "options": [
+                  {
+                    "value": "ANASTASIA",
+                    "label": "Anastasia (violet and magenta)"
+                  },
+                  {
+                    "value": "NEUTRAL",
+                    "label": "Neutral dark"
+                  },
+                  {
+                    "value": "MIDNIGHT",
+                    "label": "Midnight blue"
+                  },
+                  {
+                    "value": "ROSE",
+                    "label": "Soft rose"
+                  }
+                ]
+              },
+              {
+                "key": "seconds",
+                "label": "Seconds shown",
+                "type": "number",
+                "default": 8,
+                "min": 2,
+                "max": 60,
+                "step": 1,
+                "unit": "s"
+              },
+              {
+                "key": "thickness",
+                "label": "Line width",
+                "type": "number",
+                "default": 2,
+                "min": 1,
+                "max": 12,
+                "step": 0.5,
+                "unit": "px"
+              },
+              {
+                "key": "fill",
+                "label": "Fill under the lines",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "opacity",
+                "label": "Background opacity",
+                "type": "number",
+                "default": 0,
+                "min": 0,
+                "max": 1,
+                "step": 0.05
+              },
+              {
+                "key": "radius",
+                "label": "Corner radius",
+                "type": "number",
+                "default": 6,
+                "min": 0,
+                "max": 24,
+                "step": 1,
+                "unit": "px"
+              },
+              {
+                "key": "fps",
+                "label": "Draws per second",
+                "type": "number",
+                "default": 30,
+                "min": 10,
+                "max": 60,
+                "step": 5
+              }
+            ]
+          },
+          {
+            "label": "Grid",
+            "settings": [
+              {
+                "key": "gridLines",
+                "label": "Grid lines",
+                "type": "number",
+                "default": 3,
+                "min": 0,
+                "max": 9,
+                "step": 1
+              },
+              {
+                "key": "gridOpacity",
+                "label": "Grid opacity",
+                "type": "number",
+                "default": 0.25,
+                "min": 0,
+                "max": 1,
+                "step": 0.05,
+                "visibleIf": {
+                  "showGrid": true
+                }
+              },
+              {
+                "key": "showGrid",
+                "label": "Show the grid",
+                "type": "boolean",
+                "default": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lines",
+        "label": "Lines",
+        "groups": [
+          {
+            "label": "Lines",
+            "settings": [
+              {
+                "key": "showThrottle",
+                "label": "Throttle",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "throttleColor",
+                "label": "Throttle colour",
+                "type": "color",
+                "default": "#4ade80",
+                "visibleIf": {
+                  "showThrottle": true
+                }
+              },
+              {
+                "key": "showBrake",
+                "label": "Brake",
+                "type": "boolean",
+                "default": true
+              },
+              {
+                "key": "brakeColor",
+                "label": "Brake colour",
+                "type": "color",
+                "default": "#ef5a6f",
+                "visibleIf": {
+                  "showBrake": true
+                }
+              },
+              {
+                "key": "showClutch",
+                "label": "Clutch",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "clutchColor",
+                "label": "Clutch colour",
+                "type": "color",
+                "default": "#5b9dff",
+                "visibleIf": {
+                  "showClutch": true
+                }
+              },
+              {
+                "key": "showSteering",
+                "label": "Steering",
+                "type": "boolean",
+                "default": false
+              },
+              {
+                "key": "steeringColor",
+                "label": "Steering colour",
+                "type": "color",
+                "default": "#e5e7eb",
+                "visibleIf": {
+                  "showSteering": true
+                }
+              },
+              {
+                "key": "showValues",
+                "label": "Value at the end of each line",
+                "type": "boolean",
+                "default": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
