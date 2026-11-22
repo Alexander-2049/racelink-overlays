@@ -1,0 +1,148 @@
+/*
+ * The Anastasia Striking overlays: page, themes and the parts they share.
+ * ANASTASIA is the look of her channel (violet and magenta on near-black,
+ * gold for her own car); the others are quieter. Every colour is a token on
+ * the root element, `data-theme` picks the set. Nothing flashes or pulses.
+ */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.an {
+  --an-size: 15px;
+  --an-opacity: 0.8;
+  --an-radius: 6px;
+
+  /* Colours of the default theme (ANASTASIA). */
+  --an-bg: 16 9 28;
+  --an-alt: rgb(255 255 255 / 0.045);
+  --an-line: rgb(255 255 255 / 0.1);
+  --an-fg: #f6f1fd;
+  --an-dim: #b2a5c8;
+  --an-accent: #d946ef;
+  --an-accent-2: #8b5cf6;
+  --an-own-bg: rgb(217 70 239 / 0.2);
+  --an-own-fg: #ffd166;
+  --an-good: #6ee7a8;
+  --an-bad: #fb7185;
+  --an-warn: #fbbf24;
+  --an-info: #7cb7ff;
+  --an-chip-bg: #f3effa;
+  --an-chip-fg: #1b1030;
+  --an-gear: #f5b82e;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  color: var(--an-fg);
+  font-family: Bahnschrift, 'Segoe UI', Roboto, system-ui, sans-serif;
+  font-size: var(--an-size);
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.an *,
+.an *::before,
+.an *::after {
+  box-sizing: border-box;
+}
+
+.an[data-theme='NEUTRAL'] {
+  --an-bg: 17 19 23;
+  --an-accent: #9aa6b6;
+  --an-accent-2: #6b7686;
+  --an-own-bg: rgb(255 255 255 / 0.14);
+  --an-own-fg: #ffffff;
+  --an-dim: #9ca3af;
+  --an-fg: #eef0f3;
+  --an-chip-bg: #e6e9ee;
+  --an-chip-fg: #14171c;
+  --an-gear: #e5e7eb;
+}
+
+.an[data-theme='MIDNIGHT'] {
+  --an-bg: 9 15 29;
+  --an-accent: #60a5fa;
+  --an-accent-2: #818cf8;
+  --an-own-bg: rgb(96 165 250 / 0.2);
+  --an-own-fg: #fde68a;
+  --an-dim: #93a4c0;
+  --an-fg: #eaf1fb;
+  --an-chip-bg: #e8f0fb;
+  --an-chip-fg: #0d1a2e;
+  --an-gear: #fde68a;
+}
+
+.an[data-theme='ROSE'] {
+  --an-bg: 27 13 21;
+  --an-accent: #f472b6;
+  --an-accent-2: #fb923c;
+  --an-own-bg: rgb(244 114 182 / 0.2);
+  --an-own-fg: #fde2a1;
+  --an-dim: #c4a3b4;
+  --an-fg: #fbeff5;
+  --an-chip-bg: #fbeaf2;
+  --an-chip-fg: #2a1020;
+  --an-gear: #fbbf6a;
+}
+
+/* A panel: translucent, rounded, with a thin accent line on top. */
+.an-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--an-radius);
+  background: rgb(var(--an-bg) / var(--an-opacity));
+}
+
+.an-panel[data-accent='on']::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--an-accent), var(--an-accent-2));
+  opacity: 0.9;
+}
+
+/* Licence and rating chips of a driver. */
+.an-chip {
+  display: inline-block;
+  min-width: 2.4em;
+  padding: 0.08em 0.4em;
+  border-radius: 0.28em;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.an-chip.an-lic {
+  color: #fff;
+}
+
+.an-chip.an-ir {
+  background: var(--an-chip-bg);
+  color: var(--an-chip-fg);
+}
+
+/* A picture served by Racelink (car logo, flag). */
+.an-pic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.an-pic img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
