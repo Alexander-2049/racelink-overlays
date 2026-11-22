@@ -1,108 +1,169 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 import type { RacelinkOverlay } from '@racelink/overlay';
-import { fuelBoard } from '../../../racelink/src/renderer/widgets/overlays/anastasia-common/fuelBoard.ts';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/anastasia-common/useOverlay';
 import {
+  fromUnit,
   fuelUnit,
+  lowFuelState,
   toUnit,
   type FuelUnit,
-} from '../../../racelink/src/renderer/widgets/overlays/streamer-common';
+} from '../../../racelink/src/renderer/widgets/overlays/streamer-common/index.ts';
+import {
+  buildFuelRows,
+  fuelFigure,
+  fuelSources,
+  wholeLapsToFinish,
+  type FuelRow,
+  type FuelRowKey,
+} from '../../../racelink/src/renderer/widgets/overlays/streamer-common/fuelPanel.ts';
+import { fitBoardAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
 
-type RowId = Settings['rows'][number]['id'];
+const renderHz = 8;
 
-const renderHz = 5;
-
-const labels: Readonly<Record<RowId, string>> = {
-  margin: 'Margin (Laps):',
-  add: 'Add:',
-  remaining: 'Remaining:',
-  estLaps: 'Est. Laps:',
-  perLap: 'Per lap:',
-  lapsLeft: 'Laps to go:',
-  atFinish: 'Fuel at end:',
-  extra: 'Extra:',
+const rowLabels: Readonly<Record<FuelRowKey, string>> = {
+  average: 'Average',
+  qualify: 'Qualify',
+  last: 'Last',
+  custom: 'Mine',
 };
 
-const amount = (liters: number | null, unit: FuelUnit): string =>
-  liters === null ? '--' : `${toUnit(liters, unit).toFixed(1)} ${unit.symbol}`;
+const columnLabels = ['Laps Remain', 'Refuel', 'Fuel at End'] as const;
+
+const unitFor = (
+  setting: Settings['units'],
+  fuel: Readonly<{ displayUnit: 'liters' | 'kilograms'; kgPerLiter: number | null }>,
+  imperial: boolean,
+): FuelUnit => {
+  switch (setting) {
+    case 'auto':
+      return fuelUnit(fuel.displayUnit, imperial, fuel.kgPerLiter);
+    case 'liters':
+      return fuelUnit('liters', false, null);
+    case 'usGallons':
+      return fuelUnit('liters', true, null, false);
+    case 'imperialGallons':
+      return fuelUnit('liters', true, null, true);
+    case 'kilograms':
+      return fuelUnit('kilograms', false, fuel.kgPerLiter);
+  }
+};
+
+function Pair({ label, value, tone }: Readonly<{ label: string | null; value: string; tone?: string }>) {
+  return (
+    <div className="fu-cell">
+      <span className="fu-cell-label">{label ?? ' '}</span>
+      <span className={tone === undefined ? 'fu-cell-value' : `fu-cell-value ${tone}`}>{value}</span>
+    </div>
+  );
+}
 
 export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Settings> }>) {
   const { telemetry, settings } = useOverlay(overlay, renderHz);
   const { fuel, session, car } = telemetry;
-  const imperial = session.displayUnits === 'imperial';
-  const unit: FuelUnit =
-    settings.unit === 'LITERS'
-      ? fuelUnit('liters', false, fuel.kgPerLiter)
-      : settings.unit === 'GALLONS'
-        ? fuelUnit('liters', true, fuel.kgPerLiter)
-        : fuelUnit(fuel.displayUnit, imperial, fuel.kgPerLiter);
   const calculator = fuel.calculator;
-  const board = fuelBoard({
+  const unit = unitFor(settings.units, fuel, session.displayUnits === 'imperial');
+
+  const sources = fuelSources(calculator?.history ?? [], session.type, {
+    average: calculator?.strategies.allLaps?.perLapLiters ?? fuel.perLapLiters,
+    last: calculator?.strategies.lastLap?.perLapLiters ?? fuel.lastLapLiters,
+  });
+  const keys: FuelRowKey[] = [
+    ...(settings.showAverage ? (['average'] as const) : []),
+    ...(settings.showQualify ? (['qualify'] as const) : []),
+    ...(settings.showLast ? (['last'] as const) : []),
+    ...(settings.showCustom ? (['custom'] as const) : []),
+  ];
+  const rows: FuelRow[] = buildFuelRows({
     levelLiters: fuel.levelLiters,
+    lapsToFinish: wholeLapsToFinish(calculator?.lapsToFinish ?? null),
     capacityLiters: calculator?.capacityLiters ?? fuel.capacityLiters,
-    history: calculator?.history ?? [],
-    strategies: calculator?.strategies ?? null,
-    modelPerLapLiters: fuel.perLapLiters,
-    lapsToFinish: calculator?.lapsToFinish ?? null,
-    source: settings.source,
-    customPerLapLiters: settings.customPerLap,
-    marginLaps: settings.marginLaps,
+    sources,
+    customPerLapLiters: settings.myPerLap > 0 ? fromUnit(settings.myPerLap, unit) : null,
     extraMode: settings.extraMode,
     onPitRoad: car.isInPitlane,
+    unit,
+    cushion: settings.cushion,
+    rows: keys,
   });
-  const warn = settings.warnColors ? board.warning : 0;
-  const warnClass = warn === 2 ? 'bad' : warn === 1 ? 'warn' : '';
 
-  const value = (id: RowId): ReactNode => {
-    switch (id) {
-      case 'margin':
-        return settings.marginLaps.toFixed(1);
-      case 'add':
-        return amount(board.addLiters, unit);
-      case 'remaining':
-        return <span className={warnClass}>{amount(fuel.levelLiters, unit)}</span>;
-      case 'estLaps':
-        return <span className={warnClass}>{board.lapsOfFuel === null ? '--' : board.lapsOfFuel.toFixed(1)}</span>;
-      case 'perLap':
-        return amount(board.perLapLiters, unit);
-      case 'lapsLeft':
-        return board.lapsLeft === null ? '--' : String(board.lapsLeft);
-      case 'atFinish':
-        return (
-          <span className={board.atFinishLiters !== null && board.atFinishLiters < 0 ? 'bad' : ''}>
-            {amount(board.atFinishLiters, unit)}
-          </span>
-        );
-      case 'extra':
-        return amount(board.extraLiters, unit);
-    }
-  };
+  // The window scales the panel down when it is smaller than the figures need; the rows fade in and out.
+  const fit = useFitBoard(keys.join(), 10, 1);
+  const motion = useTableMotion({
+    items: rows,
+    getKey: (row) => row.key,
+    columns: [] as readonly string[],
+    hasData: () => true,
+    animations: settings.animations,
+    hideEmpty: false,
+  });
+  const raceLaps = session.estimatedTotalLaps ?? calculator?.raceLaps ?? null;
+  const low = settings.warnLowFuel ? lowFuelState(fuel.levelLiters, sources.average ?? sources.last) : 0;
+  const levelTone = low === 2 ? 'bad' : low === 1 ? 'warn' : '';
 
   const style = {
     '--an-size': `${String(settings.fontSize)}px`,
     '--an-opacity': String(settings.opacity),
     '--an-radius': `${String(settings.radius)}px`,
+    ...(settings.colorMode === 'CUSTOM'
+      ? {
+          '--fu-main': settings.textColor,
+          '--fu-good': settings.goodColor,
+          '--fu-bad': settings.badColor,
+        }
+      : {}),
   } as CSSProperties;
 
   return (
-    <div className="an fu-root" data-theme={settings.theme} style={style}>
-      <div className="an-panel fu-panel" data-accent={settings.accentLine ? 'on' : 'off'}>
-        {settings.showTitle && (
-          <div className="fu-title">
-            <b>{settings.title}</b>
-            <span>{settings.subtitle}</span>
+    <div className="an fu-root" data-theme={settings.theme} data-colors={settings.colorMode} style={style}>
+      <div ref={fit.ref} style={fit.style}>
+        <div className="an-panel fu-panel" data-accent={settings.accentLine ? 'on' : 'off'} {...{ [fitBoardAttribute]: '' }}>
+          {(settings.showLevel || settings.showLapsInRace || settings.showPitBadge) && (
+            <div className="fu-top">
+              {settings.showLevel && (
+                <div className="fu-cell fu-cell--big">
+                  <span className="fu-cell-label fu-light">Fuel Level</span>
+                  <span className={`fu-cell-value ${levelTone}`}>{fuelFigure(toUnit(fuel.levelLiters, unit))}</span>
+                </div>
+              )}
+              {settings.showLapsInRace && (
+                <div className="fu-cell fu-cell--big">
+                  <span className="fu-cell-label fu-light">Laps in Race</span>
+                  <span className="fu-cell-value">{raceLaps === null ? '-' : raceLaps.toFixed(1)}</span>
+                </div>
+              )}
+              {settings.showPitBadge && (
+                <span className={car.isInPitlane ? 'fu-pitbadge fu-pitbadge--on' : 'fu-pitbadge'}>PIT</span>
+              )}
+            </div>
+          )}
+          <div className="fu-grid" ref={motion.rootRef}>
+            {rows.map((row, rowIndex) => {
+              const rowStyle = { '--fu-row': `var(--an-fu-${row.key})` } as CSSProperties;
+              const labels: readonly string[] = [rowLabels[row.key], ...columnLabels];
+              const values = [
+                fuelFigure(toUnit(row.perLapLiters, unit)),
+                fuelFigure(row.lapsOfFuel),
+                fuelFigure(row.refuelLiters === null ? null : toUnit(row.refuelLiters, unit)),
+                fuelFigure(row.atEndLiters === null ? null : toUnit(row.atEndLiters, unit)),
+              ];
+              const endTone = row.atEndLiters === null ? undefined : row.atEndLiters < 0 ? 'bad' : 'good';
+              return (
+                <div key={row.key} className="fu-row" style={rowStyle} {...{ [rowKeyAttribute]: row.key }}>
+                  {values.map((value, column) => (
+                    <Pair
+                      key={column}
+                      label={column === 0 || rowIndex === 0 ? (labels[column] ?? null) : null}
+                      value={value}
+                      tone={column === 3 ? endTone : undefined}
+                    />
+                  ))}
+                </div>
+              );
+            })}
           </div>
-        )}
-        <div className="fu-rows">
-          {settings.rows
-            .filter((row) => row.visible)
-            .map((row) => (
-              <div key={row.id} className="fu-row">
-                <span className="fu-label">{labels[row.id]}</span>
-                <span className="fu-value">{value(row.id)}</span>
-              </div>
-            ))}
+          <div className="fu-unit">{unit.symbol}</div>
         </div>
       </div>
     </div>

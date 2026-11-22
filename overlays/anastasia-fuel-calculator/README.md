@@ -2,8 +2,8 @@
 
 Part of the overlays for twitch.tv/anastasia_striking (violet and magenta on near-black; three calmer themes: neutral dark, midnight blue, soft rose). Nothing flashes.
 
-The fuel board of her stream: margin in laps, fuel to add at the next stop, fuel in the tank, laps it lasts; more rows, a choice of the consumption source and units are settings.
+The layout and content of the fuel calculator seen on her stream (fuel level, laps in the race, a PIT badge, then Average / Qualify / Last rows with Laps Remain, Refuel and Fuel at End), in the colours of her set. The text colours follow the theme; "My colours" in the settings changes the main, accent (enough fuel, PIT) and negative ones. A row for your own figure, units, the cushion and the meaning of "Fuel at End" are settings.
 
-It only shows. Her board's pit-stop options (auto fuel, windshield tear-off, fast repair) and the fuel ordered in the pit box are not in the Overlay API.
+It only shows. The fuel ordered in the pit box is not in the Overlay API, so "Fuel at End" does not count it. Version 2 replaced the first guess at this board: the old settings (title, rows list, source, margin, unit, warnColors, customPerLap) are gone; `myPerLap` and `units` replace `customPerLap` and `unit`.
 
-Code: `src/` and `racelink/src/renderer/widgets/overlays/anastasia-common/` (shared). Build with `npm run build`; try it with `?demo=iracing`.
+Code: `src/`, the arithmetic in `racelink/src/renderer/widgets/overlays/streamer-common/fuelPanel.ts` (shared with Warhammer Fuel) and the look in `racelink/src/renderer/widgets/overlays/anastasia-common/`. Build with `npm run build`; try it with `?demo=iracing`.

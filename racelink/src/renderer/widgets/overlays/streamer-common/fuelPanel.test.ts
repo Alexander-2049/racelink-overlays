@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fuelFigure, buildFuelRows, fuelSources, wholeLapsToFinish } from './fuelPanel.ts';
-import { fuelUnit } from '../streamer-common/index.ts';
+import { fuelUnit } from './index.ts';
 
 const lap = (usedLiters: number, isCurrentSession = true, isClean = true) => ({
   usedLiters,
