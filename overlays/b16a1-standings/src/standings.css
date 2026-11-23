@@ -65,7 +65,7 @@
 .st-label { color: var(--b-dim); }
 .st-lap.is-stale { color: var(--b-dim); }
 .st-lap.is-best { color: var(--b-good); }
-.st-lap.is-class-best { color: var(--b-accent); }
+.st-lap.is-class-best { color: #a855f7; font-weight: 700; }
 .st-pit { display: inline-flex; justify-content: space-between; gap: 0.5em; }
 .st-history { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; text-align: right; }
 .st-history .b-icon { width: 1.1em; }
