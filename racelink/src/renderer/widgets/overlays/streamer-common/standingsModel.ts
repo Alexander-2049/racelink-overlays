@@ -12,6 +12,11 @@ import {
   type SessionPhase,
 } from './sessionPhase.ts';
 import { limitStandingsRows } from './trimRows.ts';
+import {
+  classOrOverallPlace,
+  liveClassChange,
+  type LiveFields,
+} from '../model/liveOrder.ts';
 
 export type StandingsOptions = Readonly<{
   /** Rows always shown from the top of the focused class. */
@@ -114,13 +119,17 @@ export const pitIndicator = (
  * a started race or when the grid place is unknown.
  */
 export const positionChange = (
-  driver: Pick<DriverTelemetry, 'startClassPosition' | 'classPosition'>,
+  driver: Pick<DriverTelemetry, 'startClassPosition' | 'classPosition'> & LiveFields,
   sessionType: SessionTelemetry['type'],
   phase: SessionPhase,
 ): number | null => {
   if (!showsPositionChange(sessionType, phase)) return null;
-  if (driver.startClassPosition === null || driver.classPosition === null) return null;
-  return driver.startClassPosition - driver.classPosition;
+  // The live change (Overlay API 2.21) goes first; older apps do not send it.
+  const live = liveClassChange(driver);
+  if (live !== null) return live;
+  const place = driver.live?.classPosition ?? driver.classPosition;
+  if (driver.startClassPosition === null || place === null) return null;
+  return driver.startClassPosition - place;
 };
 
 /**
@@ -178,8 +187,7 @@ export type StandingsInput = Readonly<{
   options?: StandingsOptions;
 }>;
 
-const classPosition = (driver: DriverTelemetry): number | null =>
-  driver.classPosition ?? driver.position;
+const classPosition = (driver: DriverTelemetry): number | null => classOrOverallPlace(driver);
 
 /** Class groups with their rows, the focused car's class first. */
 export const buildStandings = (input: StandingsInput): StandingsGroupModel[] => {

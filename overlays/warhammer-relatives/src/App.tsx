@@ -31,6 +31,7 @@ import { relativesColumnHasData } from '../../../racelink/src/renderer/widgets/o
 import { fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
 import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
+import { classOrOverallPlace } from '../../../racelink/src/renderer/widgets/overlays/model/liveOrder.ts';
 
 type Column = Settings['columns'][number]['id'];
 
@@ -58,7 +59,7 @@ function Cell({
   const iracing = driver.ext.iracing;
   switch (column) {
     case 'position':
-      return <span className="wh-mono wh-pos">{driver.classPosition ?? driver.position ?? ''}</span>;
+      return <span className="wh-mono wh-pos">{classOrOverallPlace(driver) ?? ''}</span>;
     case 'number':
       return <span className="wh-mono wh-num-car">#{driver.carNumber}</span>;
     case 'name':

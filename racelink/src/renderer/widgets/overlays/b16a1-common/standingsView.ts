@@ -14,6 +14,7 @@ import {
   type StandingsOptions,
   type StandingsRowModel,
 } from '../streamer-common/index.ts';
+import { classOrOverallPlace } from '../model/liveOrder.ts';
 import { clockTime, durationShort, sessionLetter } from './format.ts';
 
 /** The car the overlay is about: the one the camera follows, else the player's. */
@@ -91,12 +92,12 @@ const classOf = (drivers: readonly DriverTelemetry[], classId: number | null): D
       driver.classId === classId &&
       !driver.isPaceCar &&
       !driver.isSpectator &&
-      (driver.classPosition ?? driver.position) !== null,
+      classOrOverallPlace(driver) !== null,
   );
 
 const leaderOf = (members: readonly DriverTelemetry[]): DriverTelemetry | undefined =>
   [...members].sort(
-    (a, b) => (a.classPosition ?? a.position ?? 0) - (b.classPosition ?? b.position ?? 0),
+    (a, b) => (classOrOverallPlace(a) ?? 0) - (classOrOverallPlace(b) ?? 0),
   )[0];
 
 /** The time a lap takes the leader: the average of his last laps, else his last or best lap. */

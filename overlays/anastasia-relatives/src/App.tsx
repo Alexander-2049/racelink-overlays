@@ -18,6 +18,7 @@ import { relativesColumnHasData } from '../../../racelink/src/renderer/widgets/o
 import { fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
 import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
+import { classOrOverallPlace } from '../../../racelink/src/renderer/widgets/overlays/model/liveOrder.ts';
 
 type ColumnId = Settings['columns'][number]['id'];
 type HeaderId = Settings['headerItems'][number]['id'];
@@ -57,7 +58,7 @@ const cell = (column: ColumnId, row: CarRow, settings: Settings, isTeamRacing: b
     case 'position':
       return (
         <span key={column} className="rl-pos">
-          {driver.classPosition ?? driver.position ?? ''}
+          {classOrOverallPlace(driver) ?? ''}
         </span>
       );
     case 'number':

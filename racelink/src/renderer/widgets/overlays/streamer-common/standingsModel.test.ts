@@ -60,6 +60,14 @@ test('places gained or lost count in a started race only', () => {
   assert.equal(positionChange({ startClassPosition: null, classPosition: 5 }, 'race', 'running'), null);
 });
 
+test('live place changes win, with the live class place as fallback', () => {
+  const live = { position: 1, classPosition: 2, lapDistanceFraction: null, raceDistanceLaps: null, source: 'track', sinceSeconds: null, isFinished: false };
+  const change = { overall: 0, class: 0, liveOverall: 0, liveClass: 4 };
+  assert.equal(positionChange({ startClassPosition: 8, classPosition: 5, live, positionChange: change }, 'race', 'running'), 4);
+  assert.equal(positionChange({ startClassPosition: 8, classPosition: 5, live }, 'race', 'running'), 6);
+  assert.equal(positionChange({ startClassPosition: 8, classPosition: 5, live, positionChange: change }, 'race', 'grid'), null);
+});
+
 test('pit indicators: lane, box, towing, and none after the flag', () => {
   assert.equal(pitIndicator({ onPitRoad: true, trackSurface: 'approachingPits' }, 'race', 'running'), 'lane');
   assert.equal(pitIndicator({ onPitRoad: true, trackSurface: 'pitStall' }, 'race', 'running'), 'box');
