@@ -15,6 +15,7 @@ import {
   IconTrendDown,
   IconTrendUp,
 } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/Icons';
+import { FitStage } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/FitStage';
 import { Root } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/Root';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/useOverlay';
 import type { Settings } from './racelink-settings';
@@ -126,6 +127,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
 
   return (
     <Root theme={settings.theme} opacity={settings.opacity} fontSize={settings.fontSize} className="wh-weather">
+      <FitStage>
       <div className={settings.layout === 'horizontal' ? 'wh-card wh-card--row' : 'wh-card'}>
         {shown.map((id) => (
           <div key={id} className="wh-slot">
@@ -133,6 +135,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
           </div>
         ))}
       </div>
+      </FitStage>
     </Root>
   );
 }
