@@ -36,6 +36,7 @@ import { themeVars } from '../../../racelink/src/renderer/widgets/overlays/b16a1
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/b16a1-common/useOverlay';
 import { buildRelatives } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/index.ts';
 import type { Settings } from './racelink-settings';
+import { classOrOverallPlace } from '../../../racelink/src/renderer/widgets/overlays/model/liveOrder.ts';
 
 type Overlay = RacelinkOverlay<Settings>;
 type ColumnId = Settings['columns'][number]['id'];
@@ -238,7 +239,7 @@ function Cell({
   const { driver } = row;
   switch (id) {
     case 'position':
-      return <span className="rl-pos">{driver.classPosition ?? driver.position ?? ''}</span>;
+      return <span className="rl-pos">{classOrOverallPlace(driver) ?? ''}</span>;
     case 'number':
       return <span className="rl-num">#{driver.carNumber}</span>;
     case 'flag': {

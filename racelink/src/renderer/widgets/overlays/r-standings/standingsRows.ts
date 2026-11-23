@@ -1,5 +1,6 @@
 import type { DriverTelemetry } from '../../../../shared/overlay-api/fields/drivers';
 import type { RPosition } from '../r-common/driver/model';
+import { classOrOverallPlace, classPlace, liveClassChange, overallPlace } from '../model/liveOrder.ts';
 import { toPosition, type PositionData } from '../r-common/driver/positions';
 
 export type Gap = Readonly<{ gapValue: number | null; gapMetric: 'seconds' | 'laps' }>;
@@ -73,7 +74,7 @@ const visibleIndexes = (count: number, referenceAt: number, options: Options): n
 };
 
 const positionOf = (driver: DriverTelemetry): number =>
-  driver.classPosition ?? driver.position ?? Number.MAX_SAFE_INTEGER;
+  classOrOverallPlace(driver) ?? Number.MAX_SAFE_INTEGER;
 
 /** The class groups the Standings overlay lists, in class order. */
 export const standingsGroups = (
@@ -84,7 +85,7 @@ export const standingsGroups = (
   const { competitors, reference, context } = data;
   const classes = new Map<number, DriverTelemetry[]>();
   for (const driver of competitors) {
-    if (driver.position === null && driver.classPosition === null) continue;
+    if (classOrOverallPlace(driver) === null) continue;
     const key = driver.classId ?? 0;
     classes.set(key, [...(classes.get(key) ?? []), driver]);
   }
@@ -95,7 +96,7 @@ export const standingsGroups = (
       classId,
       drivers: drivers.sort((a, b) => positionOf(a) - positionOf(b)),
     }))
-    .sort((a, b) => (a.drivers[0]?.position ?? 0) - (b.drivers[0]?.position ?? 0));
+    .sort((a, b) => ((a.drivers[0] ? overallPlace(a.drivers[0]) : null) ?? 0) - ((b.drivers[0] ? overallPlace(b.drivers[0]) : null) ?? 0));
   for (const { classId, drivers } of ordered) {
     const isReferenceClass = classId === referenceClass;
     if (!isReferenceClass && !options.multiClass) continue;
@@ -111,10 +112,13 @@ export const standingsGroups = (
       const driver = drivers[index];
       if (driver === undefined) throw new Error('unreachable: index comes from the class list');
       const next = indexes[at + 1];
-      const changed =
-        context.isRace && driver.startClassPosition !== null && driver.classPosition !== null
-          ? driver.startClassPosition - driver.classPosition
-          : null;
+      const livePlace = classPlace(driver);
+      const changed = !context.isRace
+        ? null
+        : (liveClassChange(driver) ??
+          (driver.startClassPosition !== null && livePlace !== null
+            ? driver.startClassPosition - livePlace
+            : null));
       return {
         position: toPosition(driver, context),
         gap: gapOf(driver.gaps.toClassLeaderSeconds, driver.gaps.toClassLeaderLaps),

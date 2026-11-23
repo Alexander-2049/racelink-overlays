@@ -4,6 +4,7 @@ import type {
   SessionType,
 } from '../../../../../shared/overlay-api/fields/session';
 import type { RacingOverlay } from '../../model/useRacingOverlay';
+import { classOrOverallPlace } from '../../model/liveOrder.ts';
 import { carBrandOf } from './carBrands';
 import { adjustColorShade, toFixedDown } from './format';
 import { nationalityOfFlair } from './helpers';
@@ -228,7 +229,7 @@ export const toPosition = (driver: DriverTelemetry, context: Context): RPosition
     driverIdx: driver.carIdx,
     driverNumber: driver.carNumber,
     driverNumberMaxLetters: driver.carNumber.length > 3 ? 4 : undefined,
-    position: driver.classPosition ?? driver.position ?? 0,
+    position: classOrOverallPlace(driver) ?? 0,
     driverName: primary,
     secondaryDriverName: secondary,
     driverLicence: licenceOf(driver),

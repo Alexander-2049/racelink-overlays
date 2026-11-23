@@ -36,6 +36,7 @@ import { fitBoardAttribute, fitRowAttribute, useFitBoard } from '../../../raceli
 import { ghostStyle, rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Box } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/rowPlan.ts';
 import type { Settings } from './racelink-settings';
+import { classOrOverallPlace } from '../../../racelink/src/renderer/widgets/overlays/model/liveOrder.ts';
 
 type Column = Settings['columns'][number]['id'];
 
@@ -294,7 +295,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     .join(' ');
   const leader = competitors.find(
     (driver) =>
-      driver.classId === reference?.classId && (driver.classPosition ?? driver.position) === 1,
+      driver.classId === reference?.classId && classOrOverallPlace(driver) === 1,
   );
   const lap = isRace ? (leader?.lap ?? reference?.lap ?? null) : (reference?.lap ?? null);
 
