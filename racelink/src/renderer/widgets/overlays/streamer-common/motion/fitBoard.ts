@@ -21,9 +21,16 @@ export type FitMeasure = Readonly<{
   freeHeight: number;
   /** Height of the board with the padding, for the last-resort shrink. */
   tallHeight: number;
+  /**
+   * The fewest rows already seen to overflow this window, or null. Dropping a
+   * row can free more than its own height (a class header goes with the last
+   * row of a class), so without it the board would swing between too many
+   * rows and too few.
+   */
+  overflowRows?: number | null;
 }>;
 
-export type FitResult = Readonly<{ scale: number; capacity: number }>;
+export type FitResult = Readonly<{ scale: number; capacity: number; overflowRows: number | null }>;
 
 const floor2 = (value: number): number => Math.floor(value * 100) / 100;
 
@@ -34,7 +41,10 @@ export const fitStep = (m: FitMeasure): FitResult => {
     scale = Math.max(smallestScale, Math.min(m.maxScale, floor2(m.viewportWidth / m.neededWidth)));
 
   let capacity = m.capacity;
+  let overflowRows = m.overflowRows ?? null;
   if (m.rowPitch !== null && m.rowPitch > 0) {
+    if (m.freeHeight < -0.5 && m.rowCount > 0)
+      overflowRows = overflowRows === null ? m.rowCount : Math.min(overflowRows, m.rowCount);
     if (m.freeHeight < -0.5)
       capacity = Math.max(1, m.rowCount + Math.floor(m.freeHeight / m.rowPitch));
     if (m.freeHeight < -0.5 && m.capacity <= 1) {
@@ -43,7 +53,9 @@ export const fitStep = (m: FitMeasure): FitResult => {
     } else if (m.rowCount >= m.capacity) {
       // More rows only when every allowed row is drawn: a short field leaves space free.
       capacity = m.rowCount + Math.floor(m.freeHeight / m.rowPitch);
+      // Never back to a row count that has overflowed.
+      if (overflowRows !== null) capacity = Math.min(capacity, overflowRows - 1);
     }
   }
-  return { scale, capacity: Math.max(1, capacity) };
+  return { scale, capacity: Math.max(1, capacity), overflowRows };
 };

@@ -187,5 +187,10 @@
         ]
       }
     ]
+  },
+  "workshop": {
+    "publishedFileId": "3845467246",
+    "tags": [],
+    "visibility": "public"
   }
 }

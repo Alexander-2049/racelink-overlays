@@ -59,7 +59,7 @@ export const defaultSettings: Settings = {
   "seconds": 8,
   "thickness": 2,
   "fill": false,
-  "opacity": 0,
+  "opacity": 0.05,
   "radius": 6,
   "fps": 30,
   "gridLines": 3,

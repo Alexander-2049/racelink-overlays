@@ -68,13 +68,17 @@ const draw = (
   for (const series of seriesOf(settings)) {
     if (samples.length === 0) break;
     ctx.beginPath();
-    samples.forEach((sample, index) => {
-      const x = xOf(sample.t);
-      const y = yOf(levelOf(sample, series.key));
-      if (index === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
+    // A curve through the midpoints between samples: no corners at the samples
+    // themselves, however far apart they come.
+    let previous: { x: number; y: number } | null = null;
+    for (const sample of samples) {
+      const point = { x: xOf(sample.t), y: yOf(levelOf(sample, series.key)) };
+      if (previous === null) ctx.moveTo(point.x, point.y);
+      else ctx.quadraticCurveTo(previous.x, previous.y, (previous.x + point.x) / 2, (previous.y + point.y) / 2);
+      previous = point;
+    }
     const last = samples[samples.length - 1];
+    if (previous !== null) ctx.lineTo(previous.x, previous.y);
     if (last !== undefined) ctx.lineTo(width, yOf(levelOf(last, series.key)));
     ctx.strokeStyle = series.color;
     ctx.lineWidth = thick;
@@ -120,8 +124,9 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
         steering: data.steering,
       });
     const off = overlay.on('telemetry', ({ car }) => {
+      // When the sample was taken, not when it arrived: frames come unevenly.
       buffer.current.push({
-        t: performance.now(),
+        t: overlay.sampledAt.car ?? performance.now(),
         throttle: car.throttle,
         brake: car.brake,
         clutch: car.clutch,
@@ -132,16 +137,24 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
   }, [overlay, settings.seconds]);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    // Drawn with the screen's frames, at most `fps` times a second: a timer
+    // beside them makes the graph step unevenly.
+    const interval = 1000 / Math.max(10, settings.fps);
+    let frame = 0;
+    let drawnAt = 0;
+    const tick = (now: number): void => {
+      frame = requestAnimationFrame(tick);
+      if (now - drawnAt < interval - 1) return;
+      drawnAt = now;
       const canvas = canvasRef.current;
       if (canvas === null) return;
-      const current = overlay.settings;
-      bufferRef.current.prune(performance.now());
+      bufferRef.current.prune(now);
       const grid = getComputedStyle(canvas).getPropertyValue('--an-fg').trim() || '#ffffff';
-      draw(canvas, bufferRef.current, current, grid);
-    }, 1000 / Math.max(10, settings.fps));
+      draw(canvas, bufferRef.current, overlay.settings, grid);
+    };
+    frame = requestAnimationFrame(tick);
     return () => {
-      window.clearInterval(timer);
+      cancelAnimationFrame(frame);
     };
   }, [overlay, settings.fps]);
 

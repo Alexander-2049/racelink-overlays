@@ -54,7 +54,7 @@ export function useFitBoard(layoutKey: unknown, initialCapacity = 10, maxScale =
   const [element, setElement] = useState<HTMLElement | null>(null);
   const [scale, setScale] = useState(maxScale);
   const [capacity, setCapacity] = useState(initialCapacity);
-  const steps = useRef({ key: undefined as unknown, width: 0, height: 0, count: 0, since: 0 });
+  const steps = useRef({ key: undefined as unknown, width: 0, height: 0, count: 0, since: 0, overflowRows: null as number | null });
 
   useLayoutEffect(() => {
     if (element === null) return;
@@ -66,6 +66,7 @@ export function useFitBoard(layoutKey: unknown, initialCapacity = 10, maxScale =
         height: viewport.height,
         count: 0,
         since: performance.now(),
+        overflowRows: null,
       };
       // A new window or layout may need less scaling: start again from full size.
       if (scale !== maxScale) {
@@ -99,12 +100,16 @@ export function useFitBoard(layoutKey: unknown, initialCapacity = 10, maxScale =
       maxScale,
       viewportWidth: viewport.width,
       viewportHeight: viewport.height,
-      neededWidth: element.offsetWidth,
+      // Columns may overflow the board without widening it (a column that
+      // animates in has no minimum): what overflows is needed width too.
+      neededWidth: Math.max(element.offsetWidth, element.scrollWidth),
       rowCount: rows.length,
       rowPitch,
       freeHeight,
       tallHeight,
+      overflowRows: steps.current.overflowRows,
     });
+    steps.current.overflowRows = next.overflowRows;
     if (next.scale !== scale || next.capacity !== capacity) {
       steps.current.count += 1;
       setScale(next.scale);

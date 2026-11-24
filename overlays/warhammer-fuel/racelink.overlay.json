@@ -11,12 +11,12 @@
     "iracing",
     "le-mans-ultimate",
     "assetto-corsa",
-    "assetto-corsa-competizione"
+    "assetto-corsa-evo"
   ],
   "size": {
     "default": [
       500,
-      238
+      209
     ],
     "min": [
       240,

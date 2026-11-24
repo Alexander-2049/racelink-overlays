@@ -228,3 +228,9 @@
   background: var(--wh-accent);
   color: #1a0d03;
 }
+
+/* A board fitted to the window (useFitBoard) keeps its natural height: rows the
+   window cannot hold are left out by the fit, never cut off by a shrunk panel. */
+[data-fit-board] {
+  flex: none;
+}

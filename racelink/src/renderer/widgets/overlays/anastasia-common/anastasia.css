@@ -146,3 +146,9 @@ body,
   max-height: 100%;
   object-fit: contain;
 }
+
+/* A board fitted to the window (useFitBoard) keeps its natural height: rows the
+   window cannot hold are left out by the fit, never cut off by a shrunk panel. */
+[data-fit-board] {
+  flex: none;
+}

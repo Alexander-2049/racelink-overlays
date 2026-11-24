@@ -2,7 +2,7 @@ import type { DriverTelemetry, PublishedDriverTag, TelemetryTopics } from '@race
 import { carBrandOf } from '../../../racelink/src/renderer/widgets/overlays/r-common/driver/carBrands';
 import { nationalityOfFlair } from '../../../racelink/src/renderer/widgets/overlays/r-common/driver/helpers';
 import { formatDriverName } from '../../../racelink/src/renderer/widgets/overlays/r-common/driver/positions';
-import { classOrOverallPlace } from '../../../racelink/src/renderer/widgets/overlays/model/liveOrder.ts';
+import { classOrOverallPlace } from '../../../racelink/src/renderer/widgets/overlays/model/liveOrder';
 
 /** One line of the board: a car, or an empty slot that keeps the board's height. */
 export type Row = Readonly<{

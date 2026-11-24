@@ -132,6 +132,20 @@ test('rows that overflow the height are dropped; spare height adds rows', () => 
   assert.equal(fitStep(measure({ rowCount: 6, freeHeight: 100 })).capacity, 10);
 });
 
+test('a row count that overflowed is not tried again', () => {
+  // 9 rows overflow; at 7 a class header left with the rows and frees two rows of height.
+  const down = fitStep(measure({ capacity: 9, rowCount: 9, freeHeight: -39, rowPitch: 22 }));
+  assert.equal(down.capacity, 7);
+  assert.equal(down.overflowRows, 9);
+  const up = fitStep(measure({ capacity: 7, rowCount: 7, freeHeight: 48, rowPitch: 22, overflowRows: down.overflowRows }));
+  assert.equal(up.capacity, 8);
+  const again = fitStep(measure({ capacity: 8, rowCount: 8, freeHeight: -10, rowPitch: 22, overflowRows: up.overflowRows }));
+  assert.equal(again.capacity, 7);
+  assert.equal(again.overflowRows, 8);
+  const settled = fitStep(measure({ capacity: 7, rowCount: 7, freeHeight: 48, rowPitch: 22, overflowRows: again.overflowRows }));
+  assert.equal(settled.capacity, 7);
+});
+
 test('with one row left that still does not fit the board scales to the height', () => {
   const result = fitStep(measure({ capacity: 1, rowCount: 1, freeHeight: -50, tallHeight: 800 }));
   assert.equal(result.scale, 0.5);

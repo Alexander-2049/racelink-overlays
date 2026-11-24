@@ -17,7 +17,7 @@ import {
 } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/fuelPanel.ts';
 import { Root } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/Root';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/warhammer-common/useOverlay';
-import { fitBoardAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { FitStage } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/FitStage';
 import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
 
@@ -89,8 +89,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     rows: keys,
   });
 
-  // The window scales the panel down when it is smaller than the figures need; the rows fade in and out.
-  const fit = useFitBoard(keys.join(), 10, 1);
+  // The panel keeps its layout and scales as a whole to the window; the rows fade in and out.
   const motion = useTableMotion({
     items: rows,
     getKey: (row) => row.key,
@@ -105,8 +104,8 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
 
   return (
     <Root theme={settings.theme} opacity={settings.opacity} fontSize={settings.fontSize} className="wh-fuel">
-      <div ref={fit.ref} style={fit.style}>
-      <div className="wh-panel" {...{ [fitBoardAttribute]: '' }}>
+      <FitStage>
+      <div className="wh-panel">
         {(settings.showLevel || settings.showLapsInRace || settings.showPitBadge) && (
           <div className="wh-top">
             {settings.showLevel && (
@@ -160,7 +159,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
         </div>
         <div className="wh-unit wh-dim">{unit.symbol}</div>
       </div>
-      </div>
+      </FitStage>
     </Root>
   );
 }

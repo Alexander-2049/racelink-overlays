@@ -6,6 +6,8 @@
 .wh-panel {
   position: relative;
   width: 100%;
+  /* The width of the default window: the panel scales from there to the window. */
+  min-width: 500px;
   padding: 0.5em 0.8em 0.6em;
   border-left: 0.18em solid var(--wh-accent);
   border-radius: 0.25em;

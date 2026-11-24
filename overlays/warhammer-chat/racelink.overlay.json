@@ -7,16 +7,7 @@
   "category": "other",
   "description": "Twitch chat of Warhammer Racing's channel on the screen: whole messages only, newest at the bottom, with badges, name colours and emotes.",
   "entry": "index.html",
-  "games": [
-    "iracing",
-    "le-mans-ultimate",
-    "assetto-corsa",
-    "assetto-corsa-competizione",
-    "assetto-corsa-evo",
-    "assetto-corsa-rally",
-    "project-motor-racing",
-    "rfactor-2"
-  ],
+  "games": "*",
   "size": {
     "default": [
       420,

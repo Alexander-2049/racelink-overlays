@@ -1,6 +1,6 @@
 import type { DriverTelemetry } from '../../../../shared/overlay-api/fields/drivers';
 import type { RPosition } from '../r-common/driver/model';
-import { classOrOverallPlace, classPlace, liveClassChange, overallPlace } from '../model/liveOrder.ts';
+import { classOrOverallPlace, classPlace, liveClassChange, overallPlace } from '../model/liveOrder';
 import { toPosition, type PositionData } from '../r-common/driver/positions';
 
 export type Gap = Readonly<{ gapValue: number | null; gapMetric: 'seconds' | 'laps' }>;

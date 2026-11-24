@@ -4,7 +4,7 @@ import type {
   SessionType,
 } from '../../../../../shared/overlay-api/fields/session';
 import type { RacingOverlay } from '../../model/useRacingOverlay';
-import { classOrOverallPlace } from '../../model/liveOrder.ts';
+import { classOrOverallPlace } from '../../model/liveOrder';
 import { carBrandOf } from './carBrands';
 import { adjustColorShade, toFixedDown } from './format';
 import { nationalityOfFlair } from './helpers';

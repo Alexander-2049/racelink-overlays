@@ -10,7 +10,9 @@
   "games": [
     "iracing",
     "le-mans-ultimate",
-    "assetto-corsa"
+    "assetto-corsa",
+    "assetto-corsa-evo",
+    "assetto-corsa-rally"
   ],
   "size": {
     "default": [
@@ -252,5 +254,10 @@
         ]
       }
     ]
+  },
+  "workshop": {
+    "publishedFileId": "3845469226",
+    "tags": [],
+    "visibility": "public"
   }
 }

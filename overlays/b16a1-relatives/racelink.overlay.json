@@ -8,11 +8,15 @@
   "category": "race",
   "description": "Relatives in the style of the b16a1series stream: the cars just ahead of and behind the one you watch, in the order they run on the track, with the place, car number, name, licence, iRating with its projected change and the time to you.\n\nYour own row is highlighted, cars of your class are white and cars of other classes tinted, numbers wear the class colour. A header gives the fuel left, strength of field, incidents and the clock, a footer the lap and the time left. The settings add more rows, pit and lap marks, car brands and flags, and swap the header items.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
   "entry": "index.html",
-  "games": "*",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
   "size": {
     "default": [
       600,
-      360
+      266
     ],
     "min": [
       260,
@@ -380,5 +384,10 @@
         ]
       }
     ]
+  },
+  "workshop": {
+    "publishedFileId": "3845470122",
+    "tags": [],
+    "visibility": "public"
   }
 }

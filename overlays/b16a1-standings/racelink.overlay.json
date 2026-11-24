@@ -8,11 +8,15 @@
   "category": "race",
   "description": "Standings in the style of the b16a1series stream: a header for each class (session, laps, time left, strength of field, air and track temperature, humidity, cars), then one row per driver with the place, places gained or lost, number, name, car brand, licence, iRating and its projected change, gap, interval, last lap, pit stop, the lap-time difference to you over the last laps and the tyre.\n\nThe focused car's class comes first with its top places and the cars around you, the other classes show their leaders. The columns and the header are the stream's by default; the settings add more (country flag, team, car, best lap, laps, pit stops) and reorder or hide any.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one. iRacing shows everything; other games show the columns they have data for.",
   "entry": "index.html",
-  "games": "*",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa"
+  ],
   "size": {
     "default": [
       840,
-      660
+      490
     ],
     "min": [
       320,

@@ -8,10 +8,16 @@
   "category": "driving",
   "description": "Pedals, gear, speed and steering wheel in the style of the b16a1series stream: bars for the clutch, brake and throttle, the gear, the speed and a wheel with a mark at the top. While the ABS works the brake bar is hatched in the ABS colour on top of the brake, and the trace, if you turn it on, draws the ABS as a dotted line over the brake.\n\nFive themes: the stream's colours softened for a game, the same at full strength, graphite, ocean and a light one.",
   "entry": "index.html",
-  "games": "*",
+  "games": [
+    "iracing",
+    "le-mans-ultimate",
+    "assetto-corsa",
+    "assetto-corsa-evo",
+    "assetto-corsa-rally"
+  ],
   "size": {
     "default": [
-      320,
+      262,
       110
     ],
     "min": [

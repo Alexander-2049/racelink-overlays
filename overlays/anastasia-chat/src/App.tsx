@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import type { RacelinkOverlay } from '@racelink/overlay';
 import { readableColor, splitList } from '../../../racelink/src/renderer/widgets/overlays/anastasia-common/format.ts';
 import { useOverlay } from '../../../racelink/src/renderer/widgets/overlays/anastasia-common/useOverlay';
@@ -138,6 +138,27 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     Math.max(now, performance.now()),
   );
 
+  // Only whole messages: one the window would cut is hidden, never shown in part.
+  const list = useRef<HTMLUListElement>(null);
+  useLayoutEffect(() => {
+    const element = list.current;
+    if (!element) return;
+    const fit = (): void => {
+      const box = element.getBoundingClientRect();
+      for (const item of element.children) {
+        if (!(item instanceof HTMLElement)) continue;
+        const rect = item.getBoundingClientRect();
+        item.style.visibility = rect.top >= box.top - 0.5 && rect.bottom <= box.bottom + 0.5 ? '' : 'hidden';
+      }
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+    };
+  });
+
   const valid = isValidChannel(channel);
   const read = chat.channels.includes(channel);
   const hint = !valid
@@ -164,7 +185,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
             {valid && <span className="ch-channel">{channel}</span>}
           </div>
         )}
-        <ul className="ch-list">
+        <ul ref={list} className="ch-list">
           {shown.map((message) => (
             <Message
               key={message.id}

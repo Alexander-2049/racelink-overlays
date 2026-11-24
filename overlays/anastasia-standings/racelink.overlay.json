@@ -14,8 +14,8 @@
   ],
   "size": {
     "default": [
-      700,
-      400
+      760,
+      368
     ],
     "min": [
       260,
@@ -492,5 +492,10 @@
         ]
       }
     ]
+  },
+  "workshop": {
+    "publishedFileId": "3845469618",
+    "tags": [],
+    "visibility": "public"
   }
 }

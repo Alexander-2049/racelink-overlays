@@ -16,7 +16,7 @@ import {
   type FuelRow,
   type FuelRowKey,
 } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/fuelPanel.ts';
-import { fitBoardAttribute, useFitBoard } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useFitBoard.ts';
+import { FitStage } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/FitStage';
 import { rowKeyAttribute, useTableMotion } from '../../../racelink/src/renderer/widgets/overlays/streamer-common/motion/useTableMotion.ts';
 import type { Settings } from './racelink-settings';
 
@@ -88,8 +88,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
     rows: keys,
   });
 
-  // The window scales the panel down when it is smaller than the figures need; the rows fade in and out.
-  const fit = useFitBoard(keys.join(), 10, 1);
+  // The panel keeps its layout and scales as a whole to the window; the rows fade in and out.
   const motion = useTableMotion({
     items: rows,
     getKey: (row) => row.key,
@@ -117,8 +116,8 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
 
   return (
     <div className="an fu-root" data-theme={settings.theme} data-colors={settings.colorMode} style={style}>
-      <div ref={fit.ref} style={fit.style}>
-        <div className="an-panel fu-panel" data-accent={settings.accentLine ? 'on' : 'off'} {...{ [fitBoardAttribute]: '' }}>
+      <FitStage>
+        <div className="an-panel fu-panel" data-accent={settings.accentLine ? 'on' : 'off'}>
           {(settings.showLevel || settings.showLapsInRace || settings.showPitBadge) && (
             <div className="fu-top">
               {settings.showLevel && (
@@ -165,7 +164,7 @@ export default function App({ overlay }: Readonly<{ overlay: RacelinkOverlay<Set
           </div>
           <div className="fu-unit">{unit.symbol}</div>
         </div>
-      </div>
+      </FitStage>
     </div>
   );
 }
