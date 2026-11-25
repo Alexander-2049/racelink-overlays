@@ -66,8 +66,6 @@ project folder there).
 
 ## The SDK
 
-The projects use the SDK from the Racelink sources
-(`file:../../../app/packages/overlay`): the npm release
-`@racelink/overlay@2.3.0` predates the `ready` event, `demoHistory` and
-`?demo=<game>` the overlays need. After the next SDK release on npm, set the
-dependency of each project back to `^<version>`.
+The projects use the SDK release from npm (`@racelink/overlay@^2.18.0`). When an
+overlay needs a newer SDK feature, raise the dependency of each project to the
+npm release that has it.
