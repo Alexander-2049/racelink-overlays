@@ -49,6 +49,25 @@ const verticalPadding = (element: HTMLElement): number => {
   return (Number.parseFloat(style.paddingTop) || 0) + (Number.parseFloat(style.paddingBottom) || 0);
 };
 
+/**
+ * Width the rows need, in board pixels: the right edge of each row's last cell
+ * plus the row's right padding. `min-width: min-content` alone is not enough:
+ * Chromium keeps the board's old minimum when columns grow through CSS
+ * variables (a column animating in once the data arrives), so the rows would
+ * overflow into the padding and be cut at the window edge.
+ */
+const rowsWidth = (element: HTMLElement, rows: NodeListOf<HTMLElement>, scale: number): number => {
+  const left = element.getBoundingClientRect().left;
+  let needed = 0;
+  for (const row of rows) {
+    const last = row.lastElementChild;
+    if (last === null) continue;
+    const padding = Number.parseFloat(getComputedStyle(row).paddingRight) || 0;
+    needed = Math.max(needed, (last.getBoundingClientRect().right - left) / scale + padding);
+  }
+  return needed;
+};
+
 export function useFitBoard(layoutKey: unknown, initialCapacity = 10, maxScale = 1): FitBoard {
   const viewport = useViewportSize();
   const [element, setElement] = useState<HTMLElement | null>(null);
@@ -102,7 +121,7 @@ export function useFitBoard(layoutKey: unknown, initialCapacity = 10, maxScale =
       viewportHeight: viewport.height,
       // Columns may overflow the board without widening it (a column that
       // animates in has no minimum): what overflows is needed width too.
-      neededWidth: Math.max(element.offsetWidth, element.scrollWidth),
+      neededWidth: Math.max(element.offsetWidth, element.scrollWidth, rowsWidth(element, rows, scale)),
       rowCount: rows.length,
       rowPitch,
       freeHeight,
